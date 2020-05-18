@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 app.get('/', (request, response) => {
     response.status(200).json({
         status: 'success',
-        message: 'Universal School System API started successfully'
+        message: 'The Universal School System API Has Started Successfully And Is Running Smoothly.'
     });
 });
 
