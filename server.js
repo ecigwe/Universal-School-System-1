@@ -4,6 +4,8 @@ const router = require('./routes/router');
 
 app.use(router);
 
+// function below cathes all thrown error from handleError.js
+
 app.use((err, req, res, next) => {
     res.status(err.statusCode || 500);
     res.json({ status: err.status, message: err.message });
