@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const schools = require('./schools');
-const users = require('./users');
+const student = require('./authentication/student');
 
 const router = Router();
 
@@ -11,16 +11,12 @@ router.get('/', (request, response) => {
     });
 });
 
-router.use('/api/v1', schools);
-
-//router.use('/api/v1', users);
-
-// function below cathes all thrown error from handleError.js
+router.use('/api/v1/schools', schools);
+router.use('/api/v1/student', student);
 
 router.use((err, req, res, next) => {
     res.status(err.statusCode || 500);
     res.json({ status: err.status, message: err.message });
 });
-
 
 module.exports = router;
