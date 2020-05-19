@@ -1,9 +1,9 @@
-const { Router } = require('express');
+const { Router, json } = require('express');
 const schools = require('./schools');
 const users = require('./users');
 
 const router = Router();
-
+router.use(json());
 router.get('/', (request, response) => {
     response.status(200).json({
         status: 'success',
@@ -12,6 +12,7 @@ router.get('/', (request, response) => {
 });
 
 router.use('/api/v1', schools);
+
 
 //router.use('/api/v1', users);
 

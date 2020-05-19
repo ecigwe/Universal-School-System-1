@@ -1,18 +1,26 @@
 const { Router } = require('express');
-const responseHandler = require('../utils/responseHandler');
 const errorHandler = require('../utils/errorHandler');
+const SchoolController = require('../controllers/SchoolController');
+
 
 const router = Router();
 
+router.route('/schools')
+    .post(
+        SchoolController.createSchool
+    )
+    .get(
+        SchoolController.getAllSchools
+    );
 
-router.get('/schools', (req, res, next) => { // callback fn will be replaced with aunthentication and controller methods in main app
-    result = [];
-    return responseHandler(res, result, next, 200, 'success');
-});
 
-router.get('/error', (req, res) => {
+router.route('/schools/:id')
+    .get(
+        SchoolController.getSchool
+    )
+    .patch(
+        SchoolController.updateSchool
+    )
 
-    return errorHandler(404, 'Not found');
-});
 
 module.exports = router;
