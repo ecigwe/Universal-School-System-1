@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const schools = require('./schools');
 const student = require('./authentication/student');
+const parent = require('./authentication/parent');
 
 const router = Router();
 
@@ -13,6 +14,7 @@ router.get('/', (request, response) => {
 
 router.use('/api/v1/schools', schools);
 router.use('/api/v1/student', student);
+router.use('/api/v1/parent', parent);
 
 router.use((err, req, res, next) => {
     res.status(err.statusCode || 500);

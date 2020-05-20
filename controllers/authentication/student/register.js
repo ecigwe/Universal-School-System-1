@@ -9,8 +9,10 @@ const register = async (request, response, next) => {
             phoneNumber: request.body.phoneNumber,
             dateOfBirth: request.body.dateOfBirth,
             schoolName: request.body.schoolName,
+            schoolAddress: request.body.schoolAddress,
+            parentUsername: request.body.parentUsername,
+            //Later, I'll need to make sure that this parent actually already exists on this platform
             class: request.body.class,
-            activeStudent: request.body.activeStudent,
             password: request.body.password,
             confirmPassword: request.body.confirmPassword
         });

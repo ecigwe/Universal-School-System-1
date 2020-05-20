@@ -11,19 +11,19 @@ const studentSchema = mongoose.Schema({
     email: {
         type: String,
         required: [true, 'Please provide us with your email address'],
-        unique: true,
+        unique: [true, 'This email already exists!'],
         validate: [validator.isEmail, 'Please provide us with a valid email address'],
         lowercase: true
     },
     username: {
         type: String,
         required: [true, 'Please enter a username'],
-        unique: true
+        unique: [true, 'This username already exists!'],
     },
     phoneNumber: {
         type: String,
         required: [true, 'Please provide us with your phone number'],
-        unique: true,
+        unique: [true, 'This phone number already exists!'],
         minlength: [11, 'Your phone number must consist of 11 characters'],
         maxlength: [11, 'Your phone number must consist of 11 characters']
     },
@@ -41,6 +41,14 @@ const studentSchema = mongoose.Schema({
     schoolName: {
         type: String,
         required: [true, 'Please tell us the name of your school']
+    },
+    schoolAddress: {
+        type: String,
+        required: [true, 'Please tell us the address of your school']
+    },
+    parentUsername: {
+        type: String,
+        required: [true, 'Please tell us the username of a parent or guardian that is registered on this platform']
     },
     class: {
         type: String,
