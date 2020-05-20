@@ -70,6 +70,7 @@ class SchoolController {
      * @static
      * @param {*} req
      * @param {*} res
+     * @param {*} next
      * @memberof SchoolController
     */
     static async getSchool(req, res, next) {
@@ -90,14 +91,43 @@ class SchoolController {
         }
     }
 
-    static async updateSchool() {
+    /**
+     * @description Updates a specific school
+     * @returns Updated school
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @param {*} next
+     * @memberof SchoolController
+    */
+    static async updateSchool(req, res, next) {
         try {
             if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
                 return errorHandler(400, 'Invalid request parameter');
             }
+
+            const school = await School.findById(req.params.id);
+            if (!school) {
+                return errorHandler(404, 'Not found');
+            }
+
+            const result = await school.set(req.body, { runValidators: true });
+            return responseHandler(res, result, next, 200, 'School updated successfully');
         } catch (error) {
             next(error);
         }
+    }
+
+    static async deleteSchool() {
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return errorHandler(400, 'Invalid request parameter');
+        }
+        const result = await School.findByIdAndRemove(req.params.id);
+        if (!school) {
+            return errorHandler(404, 'Not found');
+        }
+        return responseHandler(res, next, 200, 'School deleted sucessfully');
+
     }
 }
 

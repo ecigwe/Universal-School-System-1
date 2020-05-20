@@ -18,7 +18,7 @@ const schoolSchema = new mongoose.Schema({
     },
 
     admin: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: [true, 'Provide a valid admin id']
     },
 
@@ -57,6 +57,7 @@ const schoolSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a phone number'],
         validate: [validator.isMobilePhone, 'Please provide a valid phone number with country code'],
+        unique: true
     },
 
     imageUrl: {
