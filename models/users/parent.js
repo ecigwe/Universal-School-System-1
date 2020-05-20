@@ -32,10 +32,6 @@ const parentSchema = mongoose.Schema({
         default: 'Parent',
         enum: ['Parent', 'Guardian']
     },
-    numOfRegisteredChildren: {
-        type: Number,
-        required: [true, 'Please tell us the number of children you have that are registered on this platform']
-    },
     active: {
         type: Boolean,
         default: true,

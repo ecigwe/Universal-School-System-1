@@ -8,8 +8,7 @@ const register = async (request, response, next) => {
             username: request.body.username,
             phoneNumber: request.body.phoneNumber,
             password: request.body.password,
-            confirmPassword: request.body.confirmPassword,
-            numOfRegisteredChildren: request.body.numOfRegisteredChildren
+            confirmPassword: request.body.confirmPassword
         });
         request.user = newParent;
         next();
