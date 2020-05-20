@@ -6,6 +6,7 @@ const register = async (request, response, next) => {
             fullname: request.body.fullname,
             email: request.body.email,
             username: request.body.username,
+            role: request.body.role,
             phoneNumber: request.body.phoneNumber,
             password: request.body.password,
             confirmPassword: request.body.confirmPassword
