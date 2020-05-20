@@ -81,7 +81,7 @@ class SchoolController {
             }
 
             const school = await School.findById(req.params.id);
-            if (school.length < 1) {
+            if (!school) {
                 return errorHandler(404, 'School not found');
             }
 
@@ -108,25 +108,39 @@ class SchoolController {
 
             const school = await School.findById(req.params.id);
             if (!school) {
-                return errorHandler(404, 'Not found');
+                return errorHandler(404, 'School not found');
             }
+            const keys = Object.keys(req.body);
+            keys.forEach(key => {
+                school[key] = req.body[key];
+            });
 
-            const result = await school.set(req.body, { runValidators: true });
+            const result = await school.save({ runValidators: true });
+
             return responseHandler(res, result, next, 200, 'School updated successfully');
         } catch (error) {
             next(error);
         }
     }
 
-    static async deleteSchool() {
+    /**
+     * @description Deletes a specified school
+     * @returns Deleted school
+     * @static
+     * @param {*} req
+     * @param {*} res
+     * @param {*} next
+     * @memberof SchoolController
+    */
+    static async deleteSchool(req, res, next) {
         if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
             return errorHandler(400, 'Invalid request parameter');
         }
         const result = await School.findByIdAndRemove(req.params.id);
-        if (!school) {
+        if (!result) {
             return errorHandler(404, 'Not found');
         }
-        return responseHandler(res, next, 200, 'School deleted sucessfully');
+        return responseHandler(res, result, next, 200, 'School deleted sucessfully');
 
     }
 }

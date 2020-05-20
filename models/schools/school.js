@@ -56,7 +56,7 @@ const schoolSchema = new mongoose.Schema({
     phoneNumber: {
         type: String,
         required: [true, 'Please provide a phone number'],
-        validate: [validator.isMobilePhone, 'Please provide a valid phone number with country code'],
+        validate: [validator.isMobilePhone, 'Please provide a valid phone number'],
         unique: true
     },
 

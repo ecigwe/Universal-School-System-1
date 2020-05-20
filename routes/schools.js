@@ -21,6 +21,9 @@ router.route('/schools/:id')
     .patch(
         SchoolController.updateSchool
     )
+    .delete(
+        SchoolController.deleteSchool
+    );
 
 
 module.exports = router;
