@@ -56,6 +56,10 @@ const parentSchema = mongoose.Schema({
             },
             message: 'Passwords do not match'
         }
+    },
+    registrationDate: {
+        type: Date,
+        default: Date.now()
     }
 });
 
