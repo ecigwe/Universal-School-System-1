@@ -19,6 +19,10 @@ router.use('/api/v1', schools);
 // function below cathes all thrown error from handleError.js
 
 router.use((err, req, res, next) => {
+    if (err.name === 'ValidationError') {
+        err.statusCode = 422;
+        err.status = 'error';
+    }
     res.status(err.statusCode || 500);
     res.json({ status: err.status, message: err.message });
 });

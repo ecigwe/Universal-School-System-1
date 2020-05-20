@@ -4,10 +4,6 @@ const School = require('../models/schools/school');
 const mongoose = require('mongoose');
 
 
-
-
-
-
 class SchoolController {
 
     /**
@@ -21,12 +17,12 @@ class SchoolController {
     */
     static async createSchool(req, res, next) {
         try {
-
             const existingSchool = await School.find({
                 name: req.body.name,
-                address: req.body.address
+                address: req.body.address,
+                city: req.body.city
             });
-
+            console.log(existingSchool);
             if (existingSchool.length > 0) {
                 return errorHandler(409, 'School already exists')
             }
@@ -36,7 +32,7 @@ class SchoolController {
             });
             const result = await school.save();
 
-            if (!result.name || !result.location) {
+            if (!result.name || !result.address) {
                 errorHandler(500, 'Internal server error')
             }
             return responseHandler(res, result,
