@@ -1,22 +1,21 @@
-const Student = require('../../../models/users/student');
+const Staff = require('../../../models/users/staff');
 
 const register = async (request, response, next) => {
     try {
-        const newStudent = await Student.create({
+        const newStaff = await Staff.create({
             fullname: request.body.fullname,
             email: request.body.email,
             username: request.body.username,
             phoneNumber: request.body.phoneNumber,
-            dateOfBirth: request.body.dateOfBirth,
             schoolName: request.body.schoolName,
             schoolAddress: request.body.schoolAddress,
-            parentUsername: request.body.parentUsername,
-            //Later, I'll need to make sure that this parent actually already exists on this platform
-            class: request.body.class,
+            classes: request.body.classes,
+            subjects: request.body.subjects,
+            role: request.body.role,
             password: request.body.password,
             confirmPassword: request.body.confirmPassword
         });
-        request.user = newStudent;
+        request.user = newStaff;
         next();
     } catch (error) {
         console.log(error);
