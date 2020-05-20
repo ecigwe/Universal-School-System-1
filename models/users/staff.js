@@ -79,4 +79,8 @@ staffSchema.pre('save', async function (next) {
     next();
 });
 
+staffSchema.methods.crosscheckPassword = async function (enteredPlainPassword, encryptedPasswordInDb) {
+    return await bcrypt.compare(enteredPlainPassword, encryptedPasswordInDb);
+}
+
 module.exports = mongoose.model('Staff', staffSchema);
