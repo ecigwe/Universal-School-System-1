@@ -68,8 +68,7 @@ const staffSchema = mongoose.Schema({
         }
     },
     registrationDate: {
-        type: Date,
-        default: Date.now()
+        type: Date
     }
 });
 

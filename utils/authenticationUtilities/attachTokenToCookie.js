@@ -6,7 +6,7 @@ const attachToToken = (request, response, next) => {
         httpOnly: true,
         expires: new Date(Date.now() + process.env.JWT_EXPIRY_TIME * 1000 * 60 * 60 * 24)
     });
-    return sendResponse(token, 201, request, response);
+    return sendResponse(token, response.statusCode, request, response);
 }
 
 module.exports = attachToToken;

@@ -14,9 +14,11 @@ const register = async (request, response, next) => {
             //Later, I'll need to make sure that this parent actually already exists on this platform
             class: request.body.class,
             password: request.body.password,
-            confirmPassword: request.body.confirmPassword
+            confirmPassword: request.body.confirmPassword,
+            registrationDate: new Date(Date.now())
         });
         request.user = newStudent;
+        response.statusCode = 201;
         next();
     } catch (error) {
         console.log(error);

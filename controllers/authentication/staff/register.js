@@ -13,7 +13,8 @@ const register = async (request, response, next) => {
             subjects: request.body.subjects,
             role: request.body.role,
             password: request.body.password,
-            confirmPassword: request.body.confirmPassword
+            confirmPassword: request.body.confirmPassword,
+            registrationDate: new Date(Date.now())
         });
         request.user = newStaff;
         next();

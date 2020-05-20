@@ -76,8 +76,7 @@ const studentSchema = mongoose.Schema({
         }
     },
     registrationDate: {
-        type: Date,
-        default: Date.now()
+        type: Date
     }
 });
 
@@ -99,5 +98,9 @@ studentSchema.pre('save', function (next) {
     this.age = studentAge;
     next();
 });
+
+studentSchema.methods.crosscheckPassword = async function (enteredPlainPassword, encryptedPasswordInDb) {
+    return await bcrypt.compare(enteredPlainPassword, encryptedPasswordInDb);
+}
 
 module.exports = mongoose.model('Student', studentSchema);
