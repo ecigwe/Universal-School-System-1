@@ -17,24 +17,22 @@ class SchoolController {
     */
     static async createSchool(req, res, next) {
         try {
-            const existingSchool = await School.find({
+            const existingSchool = await School.findOne({
                 name: req.body.name,
                 address: req.body.address,
-                city: req.body.city
             });
-            console.log(existingSchool);
-            if (existingSchool.length > 0) {
+
+            if (existingSchool) {
                 return errorHandler(409, 'School already exists')
             }
 
+            const registeredOn = new Date();
+
             const school = new School({
-                ...req.body
+                ...req.body, registeredOn
             });
             const result = await school.save();
 
-            if (!result.name || !result.address) {
-                errorHandler(500, 'Internal server error')
-            }
             return responseHandler(res, result,
                 next, 201, 'School successfully created');
         } catch (error) {
@@ -54,9 +52,6 @@ class SchoolController {
     static async getAllSchools(req, res, next) {
         try {
             const schools = await School.find();
-            if (schools.length < 1) {
-                return errorHandler(404, 'No school found');
-            }
             responseHandler(res, schools, next, 200, 'Schools retrieved successfully')
         } catch (error) {
             return next(error);
@@ -140,7 +135,7 @@ class SchoolController {
         if (!result) {
             return errorHandler(404, 'Not found');
         }
-        return responseHandler(res, result, next, 200, 'School deleted sucessfully');
+        return responseHandler(res, null, next, 204, 'School deleted sucessfully');
 
     }
 }

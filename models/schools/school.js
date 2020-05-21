@@ -25,11 +25,12 @@ const schoolSchema = new mongoose.Schema({
     population: {
         type: Number,
         required: [true, 'School population is required'],
-        required: [true, 'School population is required'],
         min: 100
     },
 
-    registeredOn: { type: Date, default: Date.now },
+    registeredOn: {
+        type: Date
+    },
 
     address: {
         type: String,
@@ -67,7 +68,10 @@ const schoolSchema = new mongoose.Schema({
 
 });
 
+schoolSchema.index({ name: 1, address: 1 });
+//schoolSchema.set('autoIndex', false);
 
 const School = mongoose.model('School', schoolSchema);
+
 
 module.exports = School;
