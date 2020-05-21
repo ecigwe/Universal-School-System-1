@@ -36,6 +36,7 @@ class SchoolController {
             return responseHandler(res, result,
                 next, 201, 'School successfully created');
         } catch (error) {
+            console.log(error)
             return next(error);
         }
     }
@@ -110,7 +111,7 @@ class SchoolController {
                 school[key] = req.body[key];
             });
 
-            const result = await school.save({ runValidators: true });
+            const result = await school.save({ validateBeforeSave: true });
 
             return responseHandler(res, result, next, 200, 'School updated successfully');
         } catch (error) {

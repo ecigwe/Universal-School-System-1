@@ -14,7 +14,7 @@ const schoolSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Provide a valid email address'],
         validate: [validator.isEmail, 'Provide a valid email address'],
-        unique: true
+        unique: [true, 'Unique does not validate']
     },
 
     admin: {
@@ -43,27 +43,45 @@ const schoolSchema = new mongoose.Schema({
     city: {
         type: String,
         required: [true, 'City is required'],
-        minlength: [2, 'School name must be between 2 and 50 characters'],
+        minlength: [3, 'School name must be between 2 and 50 characters'],
         maxlength: [50, 'School name must be between 2 and 50 characters'],
 
     },
     state: {
         type: String,
         required: [true, 'State is required'],
-        minlength: [2, 'School name must be between 2 and 50 characters'],
+        minlength: [3, 'School name must be between 2 and 50 characters'],
         maxlength: [50, 'School name must be between 2 and 50 characters'],
     },
 
     phoneNumber: {
         type: String,
         required: [true, 'Please provide a phone number'],
-        validate: [validator.isMobilePhone, 'Please provide a valid phone number'],
+        validate: {
+            validator: value => validator.isMobilePhone(value, 'en-NG'),
+            message: 'Please provide a valid phone number'
+        },
+        minlength: [11, 'Phone number should be 11 characters long'],
+        maxlength: [11, 'Phone number should be 11 characters long'],
         unique: true
     },
 
     imageUrl: {
         type: String,
-        validate: [validator.isURL, 'Please provide a valid URL']
+        validate: {
+            validator: value => validator.isURL(value,
+                {
+                    protocols: ['http', 'https', 'ftp'],
+                    require_tld: true, require_protocol: true
+                }),
+            message: 'Please add a Valid URL'
+        }
+    },
+
+    isSubscribed: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 
 });
