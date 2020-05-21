@@ -32,6 +32,10 @@ const adminSchema = mongoose.Schema({
         default: 'admin',
         enum: ['admin', 'backend-developer', 'mobile-developer', 'designer']
     },
+    category: {
+        type: String,
+        default: 'Admin'
+    },
     password: {
         type: String,
         required: [true, 'Please enter a password'],
@@ -47,7 +51,8 @@ const adminSchema = mongoose.Schema({
             },
             message: 'Passwords do not match'
         }
-    }
+    },
+    passwordChangedAt: { type: Date }
 });
 
 adminSchema.pre('save', async function (next) {
@@ -57,9 +62,23 @@ adminSchema.pre('save', async function (next) {
     next();
 });
 
+adminSchema.pre('save', function (next) {
+    if (!this.isModified('password') || this.isNew) return next();
+
+    this.passwordChangedAt = Date.now() - 1500;
+    next();
+});
+
 adminSchema.methods.crosscheckPassword = async function (enteredPlainPassword, encryptedPasswordInDb) {
     return await bcrypt.compare(enteredPlainPassword, encryptedPasswordInDb);
 }
 
+adminSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt) {
+    if (this.passwordChangedAt) {
+        const TimeOfPasswordChange = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+        return TokenIssuedAt < TimeOfPasswordChange;
+    }
+    return false;
+}
 
 module.exports = mongoose.model('Admin', adminSchema);

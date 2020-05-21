@@ -31,6 +31,10 @@ const studentSchema = mongoose.Schema({
         type: String,
         default: 'Student'
     },
+    category: {
+        type: String,
+        default: 'Student'
+    },
     dateOfBirth: {
         type: Date,
         required: [true, 'Please provide us with your date of birth information']
@@ -77,13 +81,21 @@ const studentSchema = mongoose.Schema({
     },
     registrationDate: {
         type: Date
-    }
+    },
+    passwordChangedAt: { type: Date }
 });
 
 studentSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 12);
     this.confirmPassword = undefined;
+    next();
+});
+
+studentSchema.pre('save', function (next) {
+    if (!this.isModified('password') || this.isNew) return next();
+
+    this.passwordChangedAt = Date.now() - 1500;
     next();
 });
 
@@ -101,6 +113,14 @@ studentSchema.pre('save', function (next) {
 
 studentSchema.methods.crosscheckPassword = async function (enteredPlainPassword, encryptedPasswordInDb) {
     return await bcrypt.compare(enteredPlainPassword, encryptedPasswordInDb);
+}
+
+studentSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt) {
+    if (this.passwordChangedAt) {
+        const TimeOfPasswordChange = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+        return TokenIssuedAt < TimeOfPasswordChange;
+    }
+    return false;
 }
 
 module.exports = mongoose.model('Student', studentSchema);

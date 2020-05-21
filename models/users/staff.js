@@ -40,6 +40,10 @@ const staffSchema = mongoose.Schema({
         default: 'Teacher',
         enum: ['Principal', 'Vice-Principal', 'Teacher', 'Bursar', 'Form-Teacher']
     },
+    category: {
+        type: 'String',
+        default: 'Staff'
+    },
     subjects: [
         { type: String }
     ],
@@ -69,7 +73,8 @@ const staffSchema = mongoose.Schema({
     },
     registrationDate: {
         type: Date
-    }
+    },
+    passwordChangedAt: { type: Date }
 });
 
 staffSchema.pre('save', async function (next) {
@@ -79,8 +84,23 @@ staffSchema.pre('save', async function (next) {
     next();
 });
 
+staffSchema.pre('save', function (next) {
+    if (!this.isModified('password') || this.isNew) return next();
+
+    this.passwordChangedAt = Date.now() - 1500;
+    next();
+});
+
 staffSchema.methods.crosscheckPassword = async function (enteredPlainPassword, encryptedPasswordInDb) {
     return await bcrypt.compare(enteredPlainPassword, encryptedPasswordInDb);
+}
+
+staffSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt) {
+    if (this.passwordChangedAt) {
+        const TimeOfPasswordChange = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+        return TokenIssuedAt < TimeOfPasswordChange;
+    }
+    return false;
 }
 
 module.exports = mongoose.model('Staff', staffSchema);

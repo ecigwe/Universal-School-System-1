@@ -32,6 +32,10 @@ const parentSchema = mongoose.Schema({
         default: 'Parent',
         enum: ['Parent', 'Guardian']
     },
+    category: {
+        type: String,
+        default: 'Parent'
+    },
     active: {
         type: Boolean,
         default: true,
@@ -55,7 +59,8 @@ const parentSchema = mongoose.Schema({
     },
     registrationDate: {
         type: Date
-    }
+    },
+    passwordChangedAt: { type: Date }
 });
 
 parentSchema.pre('save', async function (next) {
@@ -65,8 +70,23 @@ parentSchema.pre('save', async function (next) {
     next();
 });
 
+parentSchema.pre('save', function (next) {
+    if (!this.isModified('password') || this.isNew) return next();
+
+    this.passwordChangedAt = Date.now() - 1500;
+    next();
+});
+
 parentSchema.methods.crosscheckPassword = async function (enteredPlainPassword, encryptedPasswordInDb) {
     return await bcrypt.compare(enteredPlainPassword, encryptedPasswordInDb);
+}
+
+parentSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt) {
+    if (this.passwordChangedAt) {
+        const TimeOfPasswordChange = parseInt(this.passwordChangedAt.getTime() / 1000, 10);
+        return TokenIssuedAt < TimeOfPasswordChange;
+    }
+    return false;
 }
 
 module.exports = mongoose.model('Parent', parentSchema);
