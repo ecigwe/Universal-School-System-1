@@ -14,6 +14,8 @@ router.get('/', (request, response) => {
     });
 });
 
+//router.use('/api/v1', users);
+
 router.use('/api/v1/schools', schools);
 router.use('/api/v1/student', student);
 router.use('/api/v1/parent', parent);
@@ -21,6 +23,10 @@ router.use('/api/v1/staff', staff);
 router.use('/api/v1/admin', admin);
 
 router.use((err, req, res, next) => {
+    if (err.name === 'ValidationError') {
+        err.statusCode = 422;
+        err.status = 'error';
+    }
     res.status(err.statusCode || 500);
     res.json({ status: err.status, message: err.message });
 });
