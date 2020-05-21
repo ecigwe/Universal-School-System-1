@@ -14,7 +14,7 @@ const schoolSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Provide a valid email address'],
         validate: [validator.isEmail, 'Provide a valid email address'],
-        unique: [true, 'Unique does not validate']
+        unique: true
     },
 
     admin: {
