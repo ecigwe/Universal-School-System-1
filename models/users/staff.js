@@ -33,7 +33,7 @@ const staffSchema = mongoose.Schema({
     },
     schoolAddress: {
         type: String,
-        required: [true, 'Please tell us the address of your school']
+        required: [true, 'Please tell us the address of your school, including the city and state']
     },
     role: {
         type: String,

@@ -48,7 +48,7 @@ const studentSchema = mongoose.Schema({
     },
     schoolAddress: {
         type: String,
-        required: [true, 'Please tell us the address of your school']
+        required: [true, 'Please tell us the full address of your school, including the city and state']
     },
     parentUsername: {
         type: String,
