@@ -1,6 +1,7 @@
 const Staff = require('../../../models/users/staff');
 const errorHandler = require('../../../utils/errorHandler');
 
+//Later on I will ensure that you can login only when you are currently logged out
 const login = async (request, response, next) => {
     try {
         const { email, password } = request.body;

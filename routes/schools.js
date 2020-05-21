@@ -1,7 +1,6 @@
 const { Router } = require('express');
-const errorHandler = require('../utils/errorHandler');
+const protect = require('../controllers/authentication/protect');
 const SchoolController = require('../controllers/SchoolController');
-
 
 const router = Router();
 
