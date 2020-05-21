@@ -1,4 +1,4 @@
-const { Router, json } = require('express');
+const { Router } = require('express');
 const schools = require('./schools');
 const student = require('./authentication/student');
 const parent = require('./authentication/parent');

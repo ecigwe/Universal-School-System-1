@@ -26,7 +26,7 @@ class SchoolController {
                 return errorHandler(409, 'School already exists')
             }
 
-            const registeredOn = new Date();
+            const registeredOn = Date();
 
             const school = new School({
                 ...req.body, registeredOn
