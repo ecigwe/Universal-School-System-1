@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const protect = require('../controllers/authentication/protect');
+const authHandler = require('../controllers/authentication/authHandler');
 const SchoolController = require('../controllers/SchoolController');
 
 const router = Router();

@@ -6,7 +6,7 @@ const Student = require('../../models/users/student');
 const Staff = require('../../models/users/staff');
 const errorHandler = require('../../utils/errorHandler');
 
-const protect = async (request, response, next) => {
+exports.protect = async (request, response, next) => {
     try {
         let token;
         if (request.headers.authorization && request.headers.authorization.startsWith('Bearer')) {
@@ -36,4 +36,15 @@ const protect = async (request, response, next) => {
     }
 }
 
-module.exports = protect;
+//Later on, I will ensure that you can logout only when you are currently logged in
+exports.logout = (request, response, next) => {
+    response.cookie('jwt', 'logYouOut', {
+        httpOnly: true,
+        expiresIn: new Date(Date.now() + (5 * 1000))
+    });
+    return response.status(200).json({
+        status: 'success',
+        message: 'successfully logged out',
+        token: null
+    });
+}
