@@ -5,7 +5,7 @@ const SchoolController = require('../controllers/SchoolController');
 
 const router = Router();
 
-router.route('/schools')
+router.route('/')
     .post(
         SchoolController.createSchool
     )
@@ -13,8 +13,7 @@ router.route('/schools')
         SchoolController.getAllSchools
     );
 
-
-router.route('/schools/:id')
+router.route('/:id')
     .get(
         SchoolController.getSchool
     )

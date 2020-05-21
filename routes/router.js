@@ -1,9 +1,12 @@
 const { Router, json } = require('express');
 const schools = require('./schools');
-const users = require('./users');
+const student = require('./authentication/student');
+const parent = require('./authentication/parent');
+const staff = require('./authentication/staff');
+const admin = require('./authentication/admin');
 
 const router = Router();
-router.use(json());
+
 router.get('/', (request, response) => {
     response.status(200).json({
         status: 'success',
@@ -11,12 +14,13 @@ router.get('/', (request, response) => {
     });
 });
 
-router.use('/api/v1', schools);
-
-
 //router.use('/api/v1', users);
 
-// function below cathes all thrown error from handleError.js
+router.use('/api/v1/schools', schools);
+router.use('/api/v1/student', student);
+router.use('/api/v1/parent', parent);
+router.use('/api/v1/staff', staff);
+router.use('/api/v1/admin', admin);
 
 router.use((err, req, res, next) => {
     if (err.name === 'ValidationError') {
@@ -26,6 +30,5 @@ router.use((err, req, res, next) => {
     res.status(err.statusCode || 500);
     res.json({ status: err.status, message: err.message });
 });
-
 
 module.exports = router;
