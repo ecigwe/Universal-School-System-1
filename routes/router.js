@@ -4,6 +4,7 @@ const student = require('./authentication/student');
 const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
+const logout = require('../controllers/authentication/logout');
 
 const router = Router();
 
@@ -19,6 +20,7 @@ router.use('/api/v1/student', student);
 router.use('/api/v1/parent', parent);
 router.use('/api/v1/staff', staff);
 router.use('/api/v1/admin', admin);
+router.get('/api/v1/logout', logout);
 
 router.use((err, req, res, next) => {
     res.status(err.statusCode || 500);
