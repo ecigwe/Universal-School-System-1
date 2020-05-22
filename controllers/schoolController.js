@@ -120,15 +120,18 @@ class SchoolController {
      * @memberof SchoolController
     */
     static async deleteSchool(req, res, next) {
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-            return errorHandler(400, 'Invalid request parameter');
+        try {
+            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+                return errorHandler(400, 'Invalid request parameter');
+            }
+            const result = await School.findByIdAndDelete(req.params.id);
+            if (!result) {
+                return errorHandler(404, 'Not found');
+            }
+            return responseHandler(res, null, next, 204, 'School deleted sucessfully', 1);
+        } catch (error) {
+            return next(error);
         }
-        const result = await School.findByIdAndRemove(req.params.id);
-        if (!result) {
-            return errorHandler(404, 'Not found');
-        }
-        return responseHandler(res, null, next, 204, 'School deleted sucessfully', 1);
-
     }
 }
 
