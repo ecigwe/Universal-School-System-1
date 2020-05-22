@@ -6,7 +6,7 @@ function responseHandler(response, result, next, statusCode, message, numOfResul
     return response.status(statusCode).json({
       status: 'success',
       message,
-      results: `${numOfResults} documents`,
+      results: numOfResults,
       data: result
     });
   }
