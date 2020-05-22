@@ -27,6 +27,16 @@ const adminSchema = mongoose.Schema({
         minlength: [11, 'Your phone number must consist of 11 characters'],
         maxlength: [11, 'Your phone number must consist of 11 characters']
     },
+    adminCode: {
+        type: String,
+        required: [true, "Please enter the administrator's code"],
+        validate: {
+            validator: function (value) {
+                return value === process.env.ADMIN_CODE;
+            },
+            message: 'The code you entered is incorrect.'
+        }
+    },
     role: {
         type: String,
         default: 'admin',
