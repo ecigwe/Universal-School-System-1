@@ -25,7 +25,7 @@ class SchoolController {
             const result = await school.save();
 
             return responseHandler(res, result,
-                next, 201, 'School successfully created');
+                next, 201, 'School successfully created', school.length);
         } catch (error) {
             console.log(error)
             return next(error);
@@ -72,7 +72,7 @@ class SchoolController {
                 return errorHandler(404, 'School not found');
             }
 
-            return responseHandler(res, school, next, 200, 'School retrieved successfully');
+            return responseHandler(res, school, next, 200, 'School retrieved successfully', school.length);
         } catch (error) {
             return next(error);
         }
@@ -104,7 +104,7 @@ class SchoolController {
 
             const result = await school.save({ validateBeforeSave: true });
 
-            return responseHandler(res, result, next, 200, 'School updated successfully');
+            return responseHandler(res, result, next, 200, 'School updated successfully', school.length);
         } catch (error) {
             next(error);
         }
@@ -127,7 +127,7 @@ class SchoolController {
         if (!result) {
             return errorHandler(404, 'Not found');
         }
-        return responseHandler(res, null, next, 204, 'School deleted sucessfully');
+        return responseHandler(res, null, next, 204, 'School deleted sucessfully', school.length);
 
     }
 }
