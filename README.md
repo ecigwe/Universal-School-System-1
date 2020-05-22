@@ -2,6 +2,7 @@
 
 ## About The API
 This API is specifically designed for powering the universal school mobile application. The application ensures that schools can hold lectures and carry on other essential school activities in a virtual environment.
+Click the link to see the documentation on [postman](https://documenter.getpostman.com/view/9735977/SzmmUaLA)
 
 ## Local Development
 The universal school system API requires node version 10 and above to run successfully.
