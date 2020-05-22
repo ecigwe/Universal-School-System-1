@@ -13,6 +13,7 @@ exports.register = async (request, response, next) => {
             confirmPassword: request.body.confirmPassword
         });
         request.user = newAdmin;
+        response.statusCode = 201;
         next();
     } catch (error) {
         console.log(error);

@@ -18,6 +18,7 @@ exports.register = async (request, response, next) => {
             registrationDate: new Date(Date.now())
         });
         request.user = newStaff;
+        response.statusCode = 201;
         next();
     } catch (error) {
         console.log(error);
