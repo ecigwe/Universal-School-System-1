@@ -17,15 +17,6 @@ class SchoolController {
     */
     static async createSchool(req, res, next) {
         try {
-            const existingSchool = await School.findOne({
-                name: req.body.name,
-                address: req.body.address,
-            });
-
-            if (existingSchool) {
-                return errorHandler(409, 'School already exists')
-            }
-
             const registeredOn = Date();
 
             const school = new School({

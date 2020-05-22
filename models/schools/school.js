@@ -78,8 +78,7 @@ const schoolSchema = new mongoose.Schema({
 
 });
 
-schoolSchema.index({ name: 1, address: 1 });
-//schoolSchema.set('autoIndex', false);
+schoolSchema.index({ name: 1, address: 1 }, { unique: true });
 
 const School = mongoose.model('School', schoolSchema);
 
