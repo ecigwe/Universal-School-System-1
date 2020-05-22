@@ -44,7 +44,7 @@ class SchoolController {
     static async getAllSchools(req, res, next) {
         try {
             const schools = await School.find();
-            responseHandler(res, schools, next, 200, 'Schools retrieved successfully')
+            return responseHandler(res, schools, next, 200, 'Schools retrieved successfully', schools.length);
         } catch (error) {
             return next(error);
         }
