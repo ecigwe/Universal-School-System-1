@@ -10,7 +10,8 @@ exports.register = async (request, response, next) => {
             role: request.body.role,
             phoneNumber: request.body.phoneNumber,
             password: request.body.password,
-            confirmPassword: request.body.confirmPassword
+            confirmPassword: request.body.confirmPassword,
+            adminCode: request.body.adminCode
         });
         request.user = newAdmin;
         response.statusCode = 201;
