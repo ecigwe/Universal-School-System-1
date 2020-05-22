@@ -35,7 +35,8 @@ const adminSchema = mongoose.Schema({
                 return value === process.env.ADMIN_CODE;
             },
             message: 'The code you entered is incorrect.'
-        }
+        },
+        select: false
     },
     role: {
         type: String,
