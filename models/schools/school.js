@@ -67,14 +67,7 @@ const schoolSchema = new mongoose.Schema({
 
     imageUrl: {
         type: String,
-        validate: {
-            validator: value => validator.isURL(value,
-                {
-                    protocols: ['http', 'https', 'ftp'],
-                    require_tld: true, require_protocol: true
-                }),
-            message: 'Please add a Valid URL'
-        }
+        validate: [validator.isURL, 'Please provide a valid url']
     },
 
     isSubscribed: {
