@@ -17,15 +17,6 @@ class SchoolController {
     */
     static async createSchool(req, res, next) {
         try {
-            const existingSchool = await School.findOne({
-                name: req.body.name,
-                address: req.body.address,
-            });
-
-            if (existingSchool) {
-                return errorHandler(409, 'School already exists')
-            }
-
             const registeredOn = Date();
 
             const school = new School({
@@ -34,7 +25,7 @@ class SchoolController {
             const result = await school.save();
 
             return responseHandler(res, result,
-                next, 201, 'School successfully created');
+                next, 201, 'School successfully created', 1);
         } catch (error) {
             console.log(error)
             return next(error);
@@ -53,7 +44,7 @@ class SchoolController {
     static async getAllSchools(req, res, next) {
         try {
             const schools = await School.find();
-            responseHandler(res, schools, next, 200, 'Schools retrieved successfully')
+            return responseHandler(res, schools, next, 200, 'Schools retrieved successfully', schools.length);
         } catch (error) {
             return next(error);
         }
@@ -81,7 +72,7 @@ class SchoolController {
                 return errorHandler(404, 'School not found');
             }
 
-            return responseHandler(res, school, next, 200, 'School retrieved successfully');
+            return responseHandler(res, school, next, 200, 'School retrieved successfully', 1);
         } catch (error) {
             return next(error);
         }
@@ -113,7 +104,7 @@ class SchoolController {
 
             const result = await school.save({ validateBeforeSave: true });
 
-            return responseHandler(res, result, next, 200, 'School updated successfully');
+            return responseHandler(res, result, next, 200, 'School updated successfully', 1);
         } catch (error) {
             next(error);
         }
@@ -129,15 +120,18 @@ class SchoolController {
      * @memberof SchoolController
     */
     static async deleteSchool(req, res, next) {
-        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-            return errorHandler(400, 'Invalid request parameter');
+        try {
+            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+                return errorHandler(400, 'Invalid request parameter');
+            }
+            const result = await School.findByIdAndDelete(req.params.id);
+            if (!result) {
+                return errorHandler(404, 'Not found');
+            }
+            return responseHandler(res, null, next, 204, 'School deleted sucessfully', 1);
+        } catch (error) {
+            return next(error);
         }
-        const result = await School.findByIdAndRemove(req.params.id);
-        if (!result) {
-            return errorHandler(404, 'Not found');
-        }
-        return responseHandler(res, null, next, 204, 'School deleted sucessfully');
-
     }
 }
 

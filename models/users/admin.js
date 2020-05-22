@@ -27,6 +27,10 @@ const adminSchema = mongoose.Schema({
         minlength: [11, 'Your phone number must consist of 11 characters'],
         maxlength: [11, 'Your phone number must consist of 11 characters']
     },
+    isAnAdmin: {
+        type: Boolean,
+        default: false
+    },
     role: {
         type: String,
         default: 'admin',

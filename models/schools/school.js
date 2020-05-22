@@ -66,14 +66,7 @@ const schoolSchema = new mongoose.Schema({
 
     imageUrl: {
         type: String,
-        validate: {
-            validator: value => validator.isURL(value,
-                {
-                    protocols: ['http', 'https', 'ftp'],
-                    require_tld: true, require_protocol: true
-                }),
-            message: 'Please add a Valid URL'
-        }
+        validate: [validator.isURL, 'Please provide a valid url']
     },
 
     isSubscribed: {
@@ -84,8 +77,7 @@ const schoolSchema = new mongoose.Schema({
 
 });
 
-schoolSchema.index({ name: 1, address: 1 });
-//schoolSchema.set('autoIndex', false);
+schoolSchema.index({ name: 1, address: 1 }, { unique: true });
 
 const School = mongoose.model('School', schoolSchema);
 

@@ -3,17 +3,23 @@ const errorHandler = require('../../utils/errorHandler');
 
 exports.register = async (request, response, next) => {
     try {
-        const newAdmin = await Admin.create({
-            fullname: request.body.fullname,
-            email: request.body.email,
-            username: request.body.username,
-            role: request.body.role,
-            phoneNumber: request.body.phoneNumber,
-            password: request.body.password,
-            confirmPassword: request.body.confirmPassword
-        });
-        request.user = newAdmin;
-        next();
+        if (request.body.adminCode === process.env.ADMIN_CODE) {
+            const newAdmin = await Admin.create({
+                fullname: request.body.fullname,
+                email: request.body.email,
+                username: request.body.username,
+                role: request.body.role,
+                phoneNumber: request.body.phoneNumber,
+                password: request.body.password,
+                confirmPassword: request.body.confirmPassword,
+                isAnAdmin: true
+            });
+            request.user = newAdmin;
+            response.statusCode = 201;
+            next();
+        } else {
+            return errorHandler(400, 'Please enter the correct admin code');
+        }
     } catch (error) {
         console.log(error);
         next(error);
