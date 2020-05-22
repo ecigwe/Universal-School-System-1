@@ -11,7 +11,7 @@ exports.register = async (request, response, next) => {
             phoneNumber: request.body.phoneNumber,
             password: request.body.password,
             confirmPassword: request.body.confirmPassword,
-            adminCode: request.body.adminCode
+            isAnAdmin: request.body.adminCode === process.env.ADMIN_CODE
         });
         request.user = newAdmin;
         response.statusCode = 201;
