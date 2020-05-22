@@ -18,7 +18,6 @@ const schoolSchema = new mongoose.Schema({
 
     admin: {
         type: String,
-        required: [true, 'Provide a valid admin id']
     },
 
     population: {
