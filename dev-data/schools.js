@@ -8,7 +8,7 @@
         "population": 4599,
         "email": "marist@gmail.com",
         "phoneNumber": "08065753440",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     },
     {
         "admin": "amakesolarin63",
@@ -19,7 +19,7 @@
         "population": 2509,
         "email": "community-high@yahoo.com",
         "phoneNumber": "08064745859",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     },
     {
         "admin": "funshoikokwu90",
@@ -30,7 +30,7 @@
         "population": 2756,
         "email": "hopebay@yahoo.com",
         "phoneNumber": "09032745059",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     },
     {
         "admin": "ngozicole43",
@@ -41,7 +41,7 @@
         "population": 7469,
         "email": "atlantic-hall@yahoo.com",
         "phoneNumber": "07037345059",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     },
     {
         "admin": "emekasolarin88",
@@ -52,7 +52,7 @@
         "population": 7644,
         "email": "info@meadowacademy.org",
         "phoneNumber": "08175309861",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     },
     {
         "admin": "imaobongnwankwo13",
@@ -63,7 +63,7 @@
         "population": 3584,
         "email": "higher_achievers@gmail.org",
         "phoneNumber": "08175304561",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     },
     {
         "admin": "echezonaimitiari71",
@@ -74,7 +74,7 @@
         "population": 6545,
         "email": "hello@crescent.net",
         "phoneNumber": "08175665861",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     },
     {
         "admin": "chiamakanwafor80",
@@ -85,7 +85,7 @@
         "population": 8476,
         "email": "ngc@gmail.com",
         "phoneNumber": "07084765431",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     },
     {
         "admin": "emekabbatunde80",
@@ -96,6 +96,6 @@
         "population": 5098,
         "email": "helpdesk@kgc.com",
         "phoneNumber": "09072652148",
-        "imageUrl": "https//:example.com/ex.jpg"
+        "imageUrl": "https://example.com/ex.jpg"
     }
 ]
