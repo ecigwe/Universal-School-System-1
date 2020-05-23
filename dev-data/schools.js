@@ -1,6 +1,6 @@
 [
     {
-        "admin": "bukolaayantola",
+        "admin": "bukolaayantola18",
         "name": "Marist Comprehensive",
         "address": "1057 Agege Road",
         "city": "Agege",
@@ -11,7 +11,7 @@
         "imageUrl": "https//:example.com/ex.jpg"
     },
     {
-        "admin": "amakesolarin",
+        "admin": "amakesolarin63",
         "name": "Community High School Ojo",
         "address": "10 Olanrewaju Street",
         "city": "Satelite Town",
@@ -22,7 +22,7 @@
         "imageUrl": "https//:example.com/ex.jpg"
     },
     {
-        "admin": "funshoikokwu",
+        "admin": "funshoikokwu90",
         "name": "Hopebay College",
         "address": "30 Ezekiel Street",
         "city": "Satelite Town",
@@ -33,18 +33,18 @@
         "imageUrl": "https//:example.com/ex.jpg"
     },
     {
-        "admin": "ngozicole",
+        "admin": "ngozicole43",
         "name": "Atlantic Hall",
         "address": "7 Balogun Street",
         "city": "Lekki",
         "state": "Lagos",
         "population": 7469,
-        "email": "hopebay@yahoo.com",
+        "email": "atlantic-hall@yahoo.com",
         "phoneNumber": "07037345059",
         "imageUrl": "https//:example.com/ex.jpg"
     },
     {
-        "admin": "emekasolarin",
+        "admin": "emekasolarin88",
         "name": "Meadow Academy",
         "address": "7 Falomo Road",
         "city": "Ijaiye",
@@ -55,6 +55,7 @@
         "imageUrl": "https//:example.com/ex.jpg"
     },
     {
+        "admin": "imaobongnwankwo13",
         "name": "Higher Achievers",
         "address": "7 Cole Street Off Ajegunle Bus-Stop ",
         "city": "Ikeja",
@@ -65,6 +66,7 @@
         "imageUrl": "https//:example.com/ex.jpg"
     },
     {
+        "admin": "echezonaimitiari71",
         "name": "Crescent College",
         "address": "6 Morenikeji Street",
         "city": "Maraba",
@@ -75,6 +77,7 @@
         "imageUrl": "https//:example.com/ex.jpg"
     },
     {
+        "admin": "chiamakanwafor80",
         "name": "Notre Girls College",
         "address": "55 Lamido Street Ahmed Musa GRA",
         "city": "Gwagwalada",
@@ -85,6 +88,7 @@
         "imageUrl": "https//:example.com/ex.jpg"
     },
     {
+        "admin": "emekabbatunde80",
         "name": "Kings College",
         "address": "55 Obi Street New Housing Estate",
         "city": "Onitsha",
