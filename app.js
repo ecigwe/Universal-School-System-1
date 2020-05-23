@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const sanitizeNosqlQuery = require('express-mongo-sanitize');
 const preventCrossSiteScripting = require('xss-clean');
 const preventParameterPollution = require('hpp');
+const compression = require('compression');
 const router = require('./routes/router');
 
 const app = express();
@@ -31,6 +32,8 @@ app.use(cookieParser());
 app.use(sanitizeNosqlQuery());
 app.use(preventCrossSiteScripting());
 app.use(preventParameterPollution()); //Later on, some wanted duplicate fields can be whitelisted
+
+app.use(compression());
 
 app.use(router);
 
