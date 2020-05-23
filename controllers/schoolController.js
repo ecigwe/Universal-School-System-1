@@ -1,7 +1,6 @@
 const responseHandler = require('../utils/responseHandler');
-const errorHandler = require('../utils/errorHandler');
+const errorHandler = require('../utils/errorUtils/errorHandler');
 const School = require('../models/schools/school');
-const mongoose = require('mongoose');
 
 
 class SchoolController {
@@ -62,11 +61,6 @@ class SchoolController {
     */
     static async getSchool(req, res, next) {
         try {
-            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-
-                return errorHandler(400, 'Invalid request parameter');
-            }
-
             const school = await School.findById(req.params.id);
             if (!school) {
                 return errorHandler(404, 'School not found');
@@ -89,10 +83,6 @@ class SchoolController {
     */
     static async updateSchool(req, res, next) {
         try {
-            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-                return errorHandler(400, 'Invalid request parameter');
-            }
-
             const school = await School.findById(req.params.id);
             if (!school) {
                 return errorHandler(404, 'School not found');
@@ -121,9 +111,6 @@ class SchoolController {
     */
     static async deleteSchool(req, res, next) {
         try {
-            if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-                return errorHandler(400, 'Invalid request parameter');
-            }
             const result = await School.findByIdAndDelete(req.params.id);
             if (!result) {
                 return errorHandler(404, 'Not found');

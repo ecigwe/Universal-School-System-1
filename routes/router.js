@@ -5,6 +5,7 @@ const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
 const authHandler = require('../controllers/authentication/authHandler');
+const globalErrorHandler = require('../utils/errorUtils/globalErrorHandler');
 
 const router = Router();
 
@@ -24,13 +25,6 @@ router.use('/api/v1/staff', staff);
 router.use('/api/v1/admin', admin);
 router.get('/api/v1/logout', authHandler.logout);
 
-router.use((err, req, res, next) => {
-    if (err.name === 'ValidationError') {
-        err.statusCode = 422;
-        err.status = 'error';
-    }
-    res.status(err.statusCode || 500);
-    res.json({ status: err.status, message: err.message });
-});
+router.use(globalErrorHandler);
 
 module.exports = router;
