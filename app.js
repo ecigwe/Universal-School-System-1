@@ -5,6 +5,7 @@ const rateLimiter = require('express-rate-limit');
 const helmet = require('helmet');
 const sanitizeNosqlQuery = require('express-mongo-sanitize');
 const preventCrossSiteScripting = require('xss-clean');
+const preventParameterPollution = require('hpp');
 const router = require('./routes/router');
 
 const app = express();
@@ -25,11 +26,12 @@ app.use('/api', rateLimiter({
 }));
 
 app.use(express.json({ limit: '20kb' }));
+app.use(cookieParser());
 
 app.use(sanitizeNosqlQuery());
 app.use(preventCrossSiteScripting());
+app.use(preventParameterPollution()); //Later on, some wanted duplicate fields can be whitelisted
 
-app.use(cookieParser());
 app.use(router);
 
 module.exports = app;
