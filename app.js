@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const rateLimiter = require('express-rate-limit');
+const helmet = require('helmet');
 const router = require('./routes/router');
 
 const app = express();
@@ -14,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(con => console.log(`Connected to ${con.connections[0].name} Database successfully`))
     .catch(error => { return console.log(error); });
 
+app.use(helmet());
 app.use('/api', rateLimiter({
     max: 1000,
     windowMs: 1000 * 60 * 60,
