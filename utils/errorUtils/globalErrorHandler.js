@@ -1,14 +1,25 @@
+const AppError = require('./appError');
+
 const handleDuplicateFieldsError = (err) => {
     const value = err.errmsg.match(/(["'])(?:\\.|[^\\])*?\1/)[0];
-    err.message = `${value} already in use. Please use something else.`;
-    err.isOperational = true;
-    return err;
+    return new AppError(`${value} already in use. Please use something else.`, 500);
 }
 
-const handleCastError = (err) => {
-    err.message = `We are unable to find what you are looking for!`;
-    err.isOperational = true;
-    return err;
+const handleCastError = () => {
+    return new AppError(`We are unable to find what you are looking for!`, 500);
+}
+
+const handleValidationError = (err) => {
+    const errors = Object.values(err.errors).map(el => el.message);
+    return new AppError(`Invalid Input Data. ${errors.join('. ')}`, 500);
+}
+
+const handleJwtError = () => {
+    return new AppError('An error occured. Please login again', 401);
+}
+
+const handleTokenExpiredError = () => {
+    return new AppError('You have been logged out of the application, please login again.', 401);
 }
 
 const sendErrorInDevMode = (error, request, response) => {
@@ -43,8 +54,10 @@ const globalErrorHandler = (error, request, response, next) => {
         err.message = error.message;
 
         if (err.code === 11000) err = handleDuplicateFieldsError(err);
-        if (err.name === 'CastError') err = handleCastError(err);
-
+        if (err.name === 'CastError') err = handleCastError();
+        if (err.name === 'ValidationError') err = handleValidationError(err);
+        if (err.name === 'JsonWebTokenError') err = handleJwtError();
+        if (err.name === 'TokenExpiredError') err = handleTokenExpiredError();
         return sendErrorInProdMode(err, request, response); //Send Well Crafted Error To Our Clients
     }
 }

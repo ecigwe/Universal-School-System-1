@@ -4,8 +4,8 @@ const Admin = require('../../models/users/admin');
 const Parent = require('../../models/users/parent');
 const Student = require('../../models/users/student');
 const Staff = require('../../models/users/staff');
-const errorHandler = require('../../utils/errorHandler');
-const catchAsyncError = require('../../utils/catchAsyncError');
+const errorHandler = require('../../utils/errorUtils/errorHandler');
+const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 
 exports.protect = catchAsyncError(async (request, response, next) => {
     let token;

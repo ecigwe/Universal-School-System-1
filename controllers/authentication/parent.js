@@ -1,6 +1,6 @@
 const Parent = require('../../models/users/parent');
-const errorHandler = require('../../utils/errorHandler');
-const catchAsyncError = require('../../utils/catchAsyncError');
+const errorHandler = require('../../utils/errorUtils/errorHandler');
+const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 
 exports.register = catchAsyncError(async (request, response, next) => {
     const newParent = await Parent.create({

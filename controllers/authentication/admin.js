@@ -1,6 +1,6 @@
 const Admin = require('../../models/users/admin');
-const errorHandler = require('../../utils/errorHandler');
-const catchAsyncError = require('../../utils/catchAsyncError');
+const errorHandler = require('../../utils/errorUtils/errorHandler');
+const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 
 exports.register = catchAsyncError(async (request, response, next) => {
     if (request.body.adminCode === process.env.ADMIN_CODE) {

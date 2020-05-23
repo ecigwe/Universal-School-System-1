@@ -1,6 +1,6 @@
 const Student = require('../../models/users/student');
-const errorHandler = require('../../utils/errorHandler');
-const catchAsyncError = require('../../utils/catchAsyncError');
+const errorHandler = require('../../utils/errorUtils/errorHandler');
+const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 
 exports.register = catchAsyncError(async (request, response, next) => {
     const newStudent = await Student.create({

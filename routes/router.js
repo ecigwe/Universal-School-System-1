@@ -5,7 +5,7 @@ const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
 const authHandler = require('../controllers/authentication/authHandler');
-const globalErrorHandler = require('../utils/globalErrorHandler');
+const globalErrorHandler = require('../utils/errorUtils/globalErrorHandler');
 
 const router = Router();
 
