@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
@@ -56,7 +57,9 @@ const adminSchema = mongoose.Schema({
             message: 'Passwords do not match'
         }
     },
-    passwordChangedAt: { type: Date }
+    passwordChangedAt: { type: Date },
+    passwordResetToken: String,
+    passwordResetExpires: Date
 });
 
 adminSchema.pre('save', async function (next) {
@@ -83,6 +86,15 @@ adminSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt
         return TokenIssuedAt < TimeOfPasswordChange;
     }
     return false;
+}
+
+adminSchema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(32).toString('hex');
+
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hext');
+    this.passwordResetExpires = Date.now() + (1000 * 60 * 10); //Reset token expires in 10 minutes
+
+    return resetToken;
 }
 
 module.exports = mongoose.model('Admin', adminSchema);
