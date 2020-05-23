@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const rateLimiter = require('express-rate-limit');
 const helmet = require('helmet');
+const sanitizeNosqlQuery = require('express-mongo-sanitize');
+const preventCrossSiteScripting = require('xss-clean');
 const router = require('./routes/router');
 
 const app = express();
@@ -23,6 +25,10 @@ app.use('/api', rateLimiter({
 }));
 
 app.use(express.json({ limit: '20kb' }));
+
+app.use(sanitizeNosqlQuery());
+app.use(preventCrossSiteScripting());
+
 app.use(cookieParser());
 app.use(router);
 
