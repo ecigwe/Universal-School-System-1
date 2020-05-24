@@ -48,26 +48,38 @@ This API consists of the features indicated below:
 * The information of a registered school can be updated.
 * Registered schools can be deleted from the application.
 
+### Users
+
+### Administrators
+* Information about all the company's administrators can be seen.
+* Information about each administrative officer of the company can be seen.
+* Information about each administrative officer of the company can be updated.
+* Information about each administrative officer of the company can be deleted.* 
+
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 
-| Endpoint                     | Function                                     |
-| ---------------------------- | -------------------------------------------- |
-| GET/                         | Check to ensure that the api can be accessed |
-| GET/api/v1/schools           | Retrieve all the registered schools          |
-| POST/api/v1/schools          | Register a new school                        |
-| GET/api/v1/schools/:id       | Retrieve a specific school                   |
-| PATCH/api/v1/schools/:id     | Update a specific school                     |
-| DELETE/api/v1/schools/:id    | Delete a specific school                     |
-| POST/api/v1/student/register | Register a student                           |
-| POST/api/v1/student/login    | Login a student                              |
-| GET/api/v1/logout            | Logout a user                                |
-| POST/api/v1/parent/register  | Register a parent                            |
-| POST/api/v1/parent/login     | Login a parent                               |
-| POST/api/v1/staff/register   | Register a staff                             |
-| POST/api/v1/staff/login      | Login a staff                                |
-| POST/api/v1/admin/register   | Register an admin                            |
-| POST/api/v1/admin/login      | Login an admin                               |
+| Endpoint                       | Function                                     |
+| ------------------------------ | -------------------------------------------- |
+| GET/                           | Check to ensure that the api can be accessed |
+| GET/api/v1/schools             | Retrieve all the registered schools          |
+| POST/api/v1/schools            | Register a new school                        |
+| GET/api/v1/schools/:id         | Retrieve a specific school                   |
+| PATCH/api/v1/schools/:id       | Update a specific school                     |
+| DELETE/api/v1/schools/:id      | Delete a specific school                     |
+| POST/api/v1/student/register   | Register a student                           |
+| POST/api/v1/student/login      | Login a student                              |
+| GET/api/v1/logout              | Logout a user                                |
+| POST/api/v1/parent/register    | Register a parent                            |
+| POST/api/v1/parent/login       | Login a parent                               |
+| POST/api/v1/staff/register     | Register a staff                             |
+| POST/api/v1/staff/login        | Login a staff                                |
+| POST/api/v1/admin/register     | Register an admin                            |
+| POST/api/v1/admin/login        | Login an admin                               |
+| GET/api/v1/users/admins        | See all the administrators                   |
+| GET/api/v1/users/admins/:id    | See a specific administrator                 |
+| PATCH/api/v1/users/admins/:id  | Update a specific administrator              |
+| DELETE/api/v1/users/admins/:id | Delete an administrator                      |
 
 ### Sample Requests and Responses From The API
 - [Authenticate](#authenticate)
@@ -87,6 +99,12 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Retrieve School](#retrieve-school)
     - [Update School](#update-school)
     - [Delete School](#delete-school)
+
+- [Users](#users)
+    - [Retrieve Admins](#retrieve-admins)
+    - [Retrieve Admin](#retrieve-admin)
+    - [Update Admin](#update-admin)
+    - [Delete Admin](#delete-admin)
 
 ### Authenticate
 
@@ -618,3 +636,111 @@ This API has routes, each of which are dedicated to a single objective. The endp
 * Response
     * Status: 204 - No Content
   
+### Users
+
+### Retrieve Admins
+* Request
+    * Endpoint: GET/api/v1/users/admins
+
+* Response
+    * Status: 200 - success
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Successfully retrieved all the administrators",
+            "results": 2,
+            "data": [
+                {
+                    "isAnAdmin": true,
+                    "role": "backend-developer",
+                    "category": "Admin",
+                    "_id": "5ec92d57d94fa51314fddfbd",
+                    "fullname": "Diai Immanuel Onyeka",
+                    "email": "immanueldiai@gmail.com",
+                    "username": "Immanuel5015",
+                    "phoneNumber": "09064058820",
+                    "__v": 0
+                },
+                {
+                    "isAnAdmin": true,
+                    "role": "backend-developer",
+                    "category": "Admin",
+                    "_id": "5ec92d57d94fa51314fddfbc",
+                    "fullname": "Abuchi Kingsley Ndinigwe",
+                    "email": "abuchikings@hotmail.com",
+                    "username": "abuchikingsley76",
+                    "phoneNumber": "08062158380",
+                    "__v": 0
+                }
+            ]
+        }
+    ```
+
+### Retrieve Admin
+
+* Request:
+    * Endpoint: GET/api/v1/users/admins/5ec92d57d94fa51314fddfbc
+
+* Response:
+    * Status: 200 - success
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Retrieved Administrator Diai Immanuel Onyeka",
+        "results": 1,
+        "data": {
+            "isAnAdmin": true,
+            "role": "backend-developer",
+            "category": "Admin",
+            "_id": "5ec92d57d94fa51314fddfbd",
+            "fullname": "Diai Immanuel Onyeka",
+            "email": "immanueldiai@gmail.com",
+            "username": "Immanuel5015",
+            "phoneNumber": "09064058820",
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Admin
+
+* Request:
+    * Endpoint: PATCH/api/v1/users/admins/5ec92d57d94fa51314fddfbd
+    * Body: (application/json)
+    ```
+    {
+        "username": "Immanuel50"
+    }
+    ```
+
+* Response
+    * Status: 200 - success
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Updated Administrator Diai Immanuel Onyeka",
+        "results": 1,
+        "data": {
+            "isAnAdmin": true,
+            "role": "backend-developer",
+            "category": "Admin",
+            "_id": "5ec92d57d94fa51314fddfbd",
+            "fullname": "Diai Immanuel Onyeka",
+            "email": "immanueldiai@gmail.com",
+            "username": "Immanuel5015",
+            "phoneNumber": "09064058820",
+            "__v": 0
+        }
+    }
+    ```
+
+### Delete Admin
+
+* Request:
+    * Endpoint: DELETE/api/v1/users/admins/5ec92d57d94fa51314fddfbd
+  
+* Response:
+    * Status: 204 - no content
