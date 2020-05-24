@@ -77,10 +77,9 @@ class StudentController {
                 student[key] = updateData[key];
 
             });
-            console.log(student);
+            console.log(keys);
 
             const result = await student.save({ validateBeforeSave: true });
-            console.log(keys);
             return responseHandler(res, result, next, 200, 'Updated successfully', 1);
         } catch (error) {
             next(error);

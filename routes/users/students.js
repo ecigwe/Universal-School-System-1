@@ -4,6 +4,7 @@ const StudentController = require('../../controllers/users/studentsController');
 
 const router = Router();
 
+//Routes will be updated to reflect changes
 router.route('/:school/:address')
     .get(
         StudentController.getAllStudentsOfASchool
