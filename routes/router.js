@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const schools = require('./schools');
 const student = require('./authentication/student');
+const students = require('./students');
 const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
@@ -27,6 +28,7 @@ router.use('/api/v1/parent', parent);
 router.use('/api/v1/staff', staff);
 router.use('/api/v1/admin', admin);
 router.get('/api/v1/logout', authHandler.logout);
+router.use('/api/v1/students', students);
 
 //Plain users stuff
 router.use('/api/v1/users/admins', adminUser);
