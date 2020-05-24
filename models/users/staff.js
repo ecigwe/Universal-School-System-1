@@ -102,6 +102,6 @@ staffSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt
     }
     return false;
 }
-staffSchema.index({ schoolName: 1, schoolAddress: 1 }, { unique: true });
+staffSchema.index({ schoolName: 1, schoolAddress: 1 });
 
 module.exports = mongoose.model('Staff', staffSchema);
