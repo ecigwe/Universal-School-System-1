@@ -5,7 +5,6 @@ const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
 const adminUsers = require('./users/admins');
-const students = require('./users/students');
 const authHandler = require('../controllers/authentication/authHandler');
 const globalErrorHandler = require('../utils/errorUtils/globalErrorHandler');
 const errorHandler = require('../utils/errorUtils/errorHandler');
@@ -31,7 +30,6 @@ router.get('/api/v1/logout', authHandler.logout);
 
 //Plain users stuff
 router.use('/api/v1/users/admins', adminUsers);
-router.use('/api/v1/users/students', students);
 
 router.all('*', (request, response, next) => {
     return errorHandler(404, `Cannot find ${request.originalUrl} On This Server`);

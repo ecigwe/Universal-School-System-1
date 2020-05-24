@@ -1,4 +1,4 @@
-const School = require('../models/schools/school');
+const School = require('../models/school/school');
 const Parent = require('../models/users/parent');
 const catchAsyncError = require('../utils/errorUtils/catchAsyncError');
 const errorHandler = require('../utils/errorUtils/errorHandler');

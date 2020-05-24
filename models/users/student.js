@@ -120,8 +120,8 @@ studentSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssued
     }
     return false;
 }
-studentSchema.index({ schoolName: 1, schoolAddress: 1 });
-studentSchema.index({ parentUsername: 1 });
+studentSchema.index({ school: 1});
+studentSchema.index({ parent: 1 });
 
 
 module.exports = mongoose.model('Student', studentSchema);

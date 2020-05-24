@@ -99,6 +99,6 @@ staffSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt
     }
     return false;
 }
-staffSchema.index({ schoolName: 1, schoolAddress: 1 });
+staffSchema.index({ school: 1 });
 
 module.exports = mongoose.model('Staff', staffSchema);
