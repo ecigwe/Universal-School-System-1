@@ -730,7 +730,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "_id": "5ec92d57d94fa51314fddfbd",
             "fullname": "Diai Immanuel Onyeka",
             "email": "immanueldiai@gmail.com",
-            "username": "Immanuel5015",
+            "username": "Immanuel50",
             "phoneNumber": "09064058820",
             "__v": 0
         }
