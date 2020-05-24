@@ -27,13 +27,10 @@ const staffSchema = mongoose.Schema({
         minlength: [11, 'Your phone number must consist of 11 characters'],
         maxlength: [11, 'Your phone number must consist of 11 characters']
     },
-    schoolName: {
-        type: String,
-        required: [true, 'Please tell us the name of your school']
-    },
-    schoolAddress: {
-        type: String,
-        required: [true, 'Please tell us the address of your school, including the city and state']
+    school: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'School',
+        required: [true, 'Please provide the correct name of your school and the address']
     },
     role: {
         type: String,

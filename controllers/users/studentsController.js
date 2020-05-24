@@ -1,7 +1,7 @@
-const responseHandler = require('../utils/responseHandler');
-const errorHandler = require('../utils/errorUtils/errorHandler');
-const Student = require('../models/users/student');
-const mongoose = require('mongoose');
+const responseHandler = require('../../utils/responseHandler');
+const errorHandler = require('../../utils/errorUtils/errorHandler');
+const Student = require('../../models/users/student');
+//const mongoose = require('mongoose');
 
 
 class StudentController {

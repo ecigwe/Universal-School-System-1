@@ -1,6 +1,6 @@
 const { Router } = require('express');
-const authHandler = require('../controllers/authentication/authHandler');
-const StudentController = require('../controllers/studentsController');
+const authHandler = require('../../controllers/authentication/authHandler');
+const StudentController = require('../../controllers/users/studentsController');
 
 const router = Router();
 
@@ -20,3 +20,4 @@ router.route('/:school/:address/:id')
         StudentController.deleteStudent
     )
 module.exports = router;
+
