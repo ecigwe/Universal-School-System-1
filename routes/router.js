@@ -1,10 +1,10 @@
 const { Router } = require('express');
 const schools = require('./schools');
 const student = require('./authentication/student');
-const students = require('./students');
 const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
+const adminUsers = require('./users/admins');
 const authHandler = require('../controllers/authentication/authHandler');
 const globalErrorHandler = require('../utils/errorUtils/globalErrorHandler');
 const errorHandler = require('../utils/errorUtils/errorHandler');
@@ -20,13 +20,16 @@ router.get('/', (request, response) => {
 
 //router.use('/api/v1', users);
 
+//Authentication
 router.use('/api/v1/schools', schools);
 router.use('/api/v1/student', student);
 router.use('/api/v1/parent', parent);
 router.use('/api/v1/staff', staff);
 router.use('/api/v1/admin', admin);
 router.get('/api/v1/logout', authHandler.logout);
-router.use('/api/v1/students', students);
+
+//Plain users stuff
+router.use('/api/v1/users/admins', adminUsers);
 
 router.all('*', (request, response, next) => {
     return errorHandler(404, `Cannot find ${request.originalUrl} On This Server`);

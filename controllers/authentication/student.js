@@ -9,9 +9,8 @@ exports.register = catchAsyncError(async (request, response, next) => {
         username: request.body.username,
         phoneNumber: request.body.phoneNumber,
         dateOfBirth: request.body.dateOfBirth,
-        schoolName: request.body.schoolName,
-        schoolAddress: request.body.schoolAddress,
-        parentUsername: request.body.parentUsername,
+        school: request.school._id,
+        parent: request.parent._id,
         //Later, I'll need to make sure that this parent actually already exists on this platform
         class: request.body.class,
         password: request.body.password,

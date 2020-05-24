@@ -42,16 +42,14 @@ const studentSchema = mongoose.Schema({
     age: {
         type: Number
     },
-    schoolName: {
-        type: String,
-        required: [true, 'Please tell us the name of your school']
+    school: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'School',
+        required: [true, 'Please provide the correct name of your school and the address']
     },
-    schoolAddress: {
-        type: String,
-        required: [true, 'Please tell us the full address of your school, including the city and state']
-    },
-    parentUsername: {
-        type: String,
+    parent: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Parent',
         required: [true, 'Please tell us the username of a parent or guardian that is registered on this platform']
     },
     class: {
@@ -122,8 +120,8 @@ studentSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssued
     }
     return false;
 }
-studentSchema.index({ schoolName: 1, schoolAddress: 1 });
-studentSchema.index({ parentUsername: 1 });
+studentSchema.index({ school: 1});
+studentSchema.index({ parent: 1 });
 
 
 module.exports = mongoose.model('Student', studentSchema);

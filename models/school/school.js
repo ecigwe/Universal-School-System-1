@@ -32,26 +32,11 @@ const schoolSchema = new mongoose.Schema({
 
     address: {
         type: String,
-        required: [true, 'School address is required'],
-        minlength: [5, 'School name must be between 5 and 100 characters'],
-        maxlength: [100, 'School name must be between 5 and 100 characters'],
+        required: [true, 'School address is required in full, including the city and state.'],
+        minlength: [5, 'School name must be between 5 and 150 characters'],
+        maxlength: [150, 'School name must be between 5 and 150 characters'],
 
     },
-
-    city: {
-        type: String,
-        required: [true, 'City is required'],
-        minlength: [3, 'School name must be between 2 and 50 characters'],
-        maxlength: [50, 'School name must be between 2 and 50 characters'],
-
-    },
-    state: {
-        type: String,
-        required: [true, 'State is required'],
-        minlength: [3, 'School name must be between 2 and 50 characters'],
-        maxlength: [50, 'School name must be between 2 and 50 characters'],
-    },
-
     phoneNumber: {
         type: String,
         required: [true, 'Please provide a phone number'],

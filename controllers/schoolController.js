@@ -1,6 +1,6 @@
 const responseHandler = require('../utils/responseHandler');
 const errorHandler = require('../utils/errorUtils/errorHandler');
-const School = require('../models/schools/school');
+const School = require('../models/school/school');
 
 
 class SchoolController {
