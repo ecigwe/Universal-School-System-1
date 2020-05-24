@@ -1,6 +1,6 @@
-const responseHandler = require('../utils/responseHandler');
-const errorHandler = require('../utils/errorUtils/errorHandler');
-const Staff = require('../models/users/staff');
+const responseHandler = require('../../utils/responseHandler');
+const errorHandler = require('../../utils/errorUtils/errorHandler');
+const Staff = require('../../models/users/staff');
 const mongoose = require('mongoose');
 
 
