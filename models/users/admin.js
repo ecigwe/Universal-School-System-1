@@ -88,13 +88,13 @@ adminSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt
     return false;
 }
 
-adminSchema.methods.createPasswordResetToken = function () {
-    const resetToken = crypto.randomBytes(32).toString('hex');
+// adminSchema.methods.createPasswordResetToken = function () {
+//     const resetToken = crypto.randomBytes(32).toString('hex');
 
-    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hext');
-    this.passwordResetExpires = Date.now() + (1000 * 60 * 10); //Reset token expires in 10 minutes
+//     this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hext');
+//     this.passwordResetExpires = Date.now() + (1000 * 60 * 10); //Reset token expires in 10 minutes
 
-    return resetToken;
-}
+//     return resetToken;
+// }
 
 module.exports = mongoose.model('Admin', adminSchema);
