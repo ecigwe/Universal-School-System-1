@@ -9,3 +9,8 @@ exports.getAllAdminUsers = catchAsyncError(async (request, response, next) => {
     return responseHandler(response, allAdminUsers, next, 200, 'Successfully retrieved all the administrators', allAdminUsers.length);
 });
 
+exports.getAdmin = catchAsyncError(async (request, response, next) => {
+    const adminUser = await Admin.findById(request.params.id);
+    if (!adminUser) return errorHandler(404, 'This person is not an administrator or does not exist.');
+    return responseHandler(response, adminUser, next, 200, `Retrieved Administrator ${adminUser.fullname}`, 1);
+});
