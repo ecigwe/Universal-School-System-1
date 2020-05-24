@@ -14,3 +14,12 @@ exports.getAdmin = catchAsyncError(async (request, response, next) => {
     if (!adminUser) return errorHandler(404, 'This person is not an administrator or does not exist.');
     return responseHandler(response, adminUser, next, 200, `Retrieved Administrator ${adminUser.fullname}`, 1);
 });
+
+exports.updateAdmin = catchAsyncError(async (request, response, next) => {
+    const updatedAdmin = await Admin.findByIdAndUpdate(request.params.id, request.body, {
+        new: true,
+        runValidators: true
+    });
+    if (!updatedAdmin) return errorHandler(404, 'This person is not an administrator or does not exist.');
+    return responseHandler(response, updatedAdmin, next, 200, `Updated Administrator ${updatedAdmin.fullname}`, 1);
+});
