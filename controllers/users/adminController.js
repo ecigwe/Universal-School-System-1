@@ -23,3 +23,9 @@ exports.updateAdmin = catchAsyncError(async (request, response, next) => {
     if (!updatedAdmin) return errorHandler(404, 'This person is not an administrator or does not exist.');
     return responseHandler(response, updatedAdmin, next, 200, `Updated Administrator ${updatedAdmin.fullname}`, 1);
 });
+
+exports.deleteAdmin = catchAsyncError(async (request, response, next) => {
+    const deletedAdmin = await Admin.findByIdAndDelete(request.params.id);
+    if (!deletedAdmin) return errorHandler(404, 'This person is not an administrator or does not exist.');
+    return responseHandler(response, null, next, 204, `Deleted Administrator ${deletedAdmin.fullname}`, 1);
+});
