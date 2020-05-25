@@ -11,7 +11,7 @@ const adminSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: [true, 'Please provide us with your email address'],
+        //required: [true, 'Please provide us with your email address'],
         unique: [true, 'This email already exists!'],
         validate: [validator.isEmail, 'Please provide us with a valid email address'],
         lowercase: true
