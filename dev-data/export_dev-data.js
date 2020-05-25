@@ -15,15 +15,15 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(con => console.log(`Connected to ${con.connections[0].name} database.`));
 
 const admins = JSON.parse(fs.readFileSync(`${__dirname}/admins.js`, 'utf-8'));
-const schools = JSON.parse(fs.readFileSync(`${__dirname}/school.json`, 'utf-8'));
+const schools = JSON.parse(fs.readFileSync(`${__dirname}/schools.json`, 'utf-8'));
 const parents = JSON.parse(fs.readFileSync(`${__dirname}/parents.json`, 'utf-8'));
-const staffs = JSON.parse(fs.readFileSync(`${__dirname}/staff.json`, 'utf-8'));
+const staffs = JSON.parse(fs.readFileSync(`${__dirname}/staffs.json`, 'utf-8'));
 const students = JSON.parse(fs.readFileSync(`${__dirname}/students.json`, 'utf-8'));
 
 const exportData = async () => {
     try {
         //await School.create(schools);
-        await Admin.create(admins);
+        //await Admin.create(admins);
         await Staff.create(staffs);
         //await Parent.create(parents);
         await Student.create(students);
