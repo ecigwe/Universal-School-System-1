@@ -158,7 +158,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     * Body: (application/json)
     ```
         {
-            "email": "abuchikingsley76@gmail.com",
+            "email": "Abuchi76",
             "password": "{{PASSWORD}}"
         }
     ```
@@ -232,7 +232,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     * Body: (application/json)
     ```
         {
-            "email":"patiencedibiagwu@gmail.com",
+            "email":"Patience20",
             "password": "{{PASSWORD}}"
         }
     ```
@@ -274,7 +274,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "dateOfBirth": "2004-10-22",
             "schoolName": "Shalom Academy",
             "schoolAddress": "No 16, Otedola Street, Ikorodu, Lagos State",
-            "parentUsername": "leo20",
+            "parentPhoneNumber": "09064058820",
             "class": "SS3",
             "password": "{{PASSWORD}}",
             "confirmPassword": "{{PASSWORD}}"
@@ -317,7 +317,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     * Body: (application/json)
     ```
         {
-            "email": "ephraimjunior@gmail.com",
+            "email": "Ephraim32",
             "password": "{{PASSWORD}}"
         }
     ```
@@ -339,9 +339,8 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "username": "Ephraim32",
                 "phoneNumber": "09067202271",
                 "dateOfBirth": "2004-10-22T00:00:00.000Z",
-                "schoolName": "Shalom Academy",
-                "schoolAddress": "No 16, Otedola Street, Ikorodu, Lagos State",
-                "parentUsername": "leo20",
+                "school": "5ec9d41615e2a217c87a9c94",
+                "parent": "5ec9d53015e2a217c87a9cf1",
                 "class": "SS3",
                 "password": "$2a$12$RQzD7I1VtYc0JkKSIlDnIuXJJmxhxhuYp6exh5xHltucdfR8SFs.m",
                 "registrationDate": "2020-05-22T03:28:52.273Z",
