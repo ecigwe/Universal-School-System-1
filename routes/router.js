@@ -5,6 +5,7 @@ const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
 const adminUsers = require('./users/admins');
+const users = require('./users/users');
 const authHandler = require('../controllers/authentication/authHandler');
 const globalErrorHandler = require('../utils/errorUtils/globalErrorHandler');
 const errorHandler = require('../utils/errorUtils/errorHandler');
@@ -37,6 +38,8 @@ router.patch('/api/v1/update_my_password',
 
 //Plain users stuff
 router.use('/api/v1/users/admins', adminUsers);
+router.use('/api/v1/school', users);
+
 
 router.all('*', (request, response, next) => {
     return errorHandler(404, `Cannot find ${request.originalUrl} On This Server`);

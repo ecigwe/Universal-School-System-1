@@ -16,7 +16,7 @@ class StaffController {
     */
     static async getAllStaffOfASpecificSchool(req, res, next) {
         try {
-            let query = { 'schoolName': req.params.school, 'schoolAddress': req.params.address };
+            let query = { 'school': req.params.id, '_id': req.params.staff_id };
             let exclude = { 'confirmPassword': 0, 'passwordChangedAt': 0 };
             const staff = await Student.find(query).select(exclude).lean();
             return responseHandler(res, staff, next, 200, 'Students retrieved successfully', staff.length);
@@ -24,7 +24,7 @@ class StaffController {
             return next(error);
         }
 
-    }   
+    }
 
 }
 
