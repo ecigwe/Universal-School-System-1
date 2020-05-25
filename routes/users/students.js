@@ -5,12 +5,12 @@ const StudentController = require('../../controllers/users/studentsController');
 const router = Router();
 
 //Routes will be updated to reflect changes
-router.route('/:school/:address')
+router.route('/:id/users/students')
     .get(
         StudentController.getAllStudentsOfASchool
     )
 
-router.route('/:school/:address/:id')
+router.route('/:id/users/students/:student_id')
     .get(
         StudentController.getStudentOfASpecificSchool
     )

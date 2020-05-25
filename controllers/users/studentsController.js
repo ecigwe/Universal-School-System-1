@@ -17,7 +17,7 @@ class StudentController {
     static async getAllStudentsOfASchool(req, res, next) {
         try {
             console.time('_time');
-            let query = { 'schoolName': req.params.school, 'schoolAddress': req.params.address };
+            let query = { 'school': req.params.id };
             let exclude = { 'confirmPassword': 0, 'passwordChangedAt': 0 };
             const students = await Student.find(query).select(exclude).lean();
             console.timeEnd('_time');
@@ -40,8 +40,10 @@ class StudentController {
     static async getStudentOfASpecificSchool(req, res, next) {
         try {
             console.time('_time');
+            let query = { 'school': req.params.id, '_id':req.params.student_id };
+
             let exclude = { 'confirmPassword': 0, 'passwordChangedAt': 0 };
-            const student = await Student.findById(req.params.id).select(exclude).lean();
+            const student = await Student.findOne(query).select(exclude).lean();
 
             if (!student) {
                 return errorHandler(404, 'Student not found');
@@ -65,7 +67,7 @@ class StudentController {
     */
     static async updateASpecificStudent(req, res, next) {
         try {
-            const student = await Student.findById(req.params.id);
+            const student = await Student.findById(req.params.student_id);
             if (!student) {
                 return errorHandler(404, 'Student not found');
             }
@@ -97,7 +99,7 @@ class StudentController {
     */
     static async deleteStudent(req, res, next) {
         try {
-            const result = await Student.findOneAndDelete({ '_id': req.params.id });
+            const result = await Student.findOneAndDelete({ '_id': req.params.student_id });
             if (!result) {
                 return errorHandler(404, 'Not found');
             }
