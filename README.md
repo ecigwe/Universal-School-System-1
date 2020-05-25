@@ -158,7 +158,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     * Body: (application/json)
     ```
         {
-            "email": "Abuchi76",
+            "username": "Abuchi76",
             "password": "{{PASSWORD}}"
         }
     ```
@@ -232,7 +232,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     * Body: (application/json)
     ```
         {
-            "email":"Patience20",
+            "username":"Patience20",
             "password": "{{PASSWORD}}"
         }
     ```
@@ -317,7 +317,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     * Body: (application/json)
     ```
         {
-            "email": "Ephraim32",
+            "username": "Ephraim32",
             "password": "{{PASSWORD}}"
         }
     ```
@@ -414,7 +414,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     * Body: (application/json)
     ```
         {
-            "email": "panpeter@gmail.com",
+            "username": "Pan10",
             "password": "{{PASSWORD}}"
         }
     ```
