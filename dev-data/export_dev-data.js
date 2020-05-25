@@ -5,7 +5,7 @@ const Admin = require('../models/users/admin');
 const Parent = require('../models/users/parent');
 const Staff = require('../models/users/staff');
 const Student = require('../models/users/student');
-const School = require('../models/schools/school');
+const School = require('../models/school/school');
 
 mongoose.connect(process.env.MONGODB_URI, {
     useCreateIndex: true,
@@ -15,17 +15,17 @@ mongoose.connect(process.env.MONGODB_URI, {
 }).then(con => console.log(`Connected to ${con.connections[0].name} database.`));
 
 const admins = JSON.parse(fs.readFileSync(`${__dirname}/admins.js`, 'utf-8'));
-const schools = JSON.parse(fs.readFileSync(`${__dirname}/schools.js`, 'utf-8'));
-const parents = JSON.parse(fs.readFileSync(`${__dirname}/totalParents.js`, 'utf-8'));
-const staffs = JSON.parse(fs.readFileSync(`${__dirname}/totalStaff.js`, 'utf-8'));
-const students = JSON.parse(fs.readFileSync(`${__dirname}/totalStudents.js`, 'utf-8'));
+const schools = JSON.parse(fs.readFileSync(`${__dirname}/school.json`, 'utf-8'));
+const parents = JSON.parse(fs.readFileSync(`${__dirname}/parents.json`, 'utf-8'));
+const staffs = JSON.parse(fs.readFileSync(`${__dirname}/staff.json`, 'utf-8'));
+const students = JSON.parse(fs.readFileSync(`${__dirname}/students.json`, 'utf-8'));
 
 const exportData = async () => {
     try {
-        await School.create(schools);
+        //await School.create(schools);
         await Admin.create(admins);
         await Staff.create(staffs);
-        await Parent.create(parents);
+        //await Parent.create(parents);
         await Student.create(students);
         console.log('All exported.');
     } catch (error) {
@@ -48,12 +48,37 @@ const removeData = async () => {
     process.exit(1);
 }
 
+async function writeData() {
+    try {
+        let parents = await Parent.find().select({ '__v': 0 }).lean();
+        let school = await School.find().select({ '__v': 0 }).lean();
+        school = JSON.stringify(school, null, 2);
+        parents = JSON.stringify(parents, null, 2);
+        fs.writeFileSync(`${__dirname}/school.json`, school, 'utf8', (err) => {
+            if (err)
+                console.log(err);
+        });
+        fs.writeFileSync(`${__dirname}/parents.json`, parents, 'utf8', (err) => {
+            if (err)
+                console.log(err);
+        });
+
+
+    } catch (error) {
+        console.log(error);
+    }
+    process.exit(1);
+}
+
 if (process.argv[2] === '--remove') {
     removeData();
 }
 
 if (process.argv[2] === '--export') {
     exportData();
+}
+if (process.argv[2] === '--write') {
+    writeData();
 }
 
 //To remove everything in the currently in the database, run this command: node dev-data/export_dev-data.js --remove
