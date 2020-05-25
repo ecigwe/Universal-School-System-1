@@ -45,3 +45,22 @@ exports.logout = (request, response, next) => {
         token: null
     });
 }
+
+exports.updateMyPassword = catchAsyncError(async (request, response, next) => {
+    const { currentPassword, newPassword, confirmNewPassword } = request.body;
+    if (!currentPassword || !newPassword || !confirmNewPassword) return errorHandler(400, 'Please provide us with your old password, your new password, and confirm your new password');
+
+    let user;
+    if (request.user.category === 'Admin') user = await Admin.findById(request.user._id).select('+password');
+    if (request.user.category === 'Parent') user = await Parent.findById(request.user._id).select('+password');
+    if (request.user.category === 'Staff') user = await Staff.findById(request.user._id).select('+password');
+    if (request.user.category === 'Student') user = await Student.findById(request.user._id).select('+password');
+
+    if (!(await user.crosscheckPassword(currentPassword, user.password))) return errorHandler(401, 'Your current password is not correct.');
+
+    user.password = newPassword;
+    user.confirmPassword = confirmNewPassword;
+    await user.save();
+
+    return next();
+});
