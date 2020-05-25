@@ -19,14 +19,14 @@ exports.register = catchAsyncError(async (request, response, next) => {
 
 //Later on I will ensure that you can login only when you are currently logged out
 exports.login = catchAsyncError(async (request, response, next) => {
-    const { email, password } = request.body;
-    if (!email || !password) {
-        return errorHandler(400, 'Please provide your email address and password');
+    const { username, password } = request.body;
+    if (!username || !password) {
+        return errorHandler(400, 'Please provide your username address and password');
     }
 
-    const parent = await Parent.findOne({ email }).select('+password');
+    const parent = await Parent.findOne({ username }).select('+password');
     if (!parent || !(await parent.crosscheckPassword(password, parent.password))) {
-        return errorHandler(401, 'Incorrect email or password');
+        return errorHandler(401, 'Incorrect username or password');
     }
     request.user = parent;
     response.statusCode = 200;

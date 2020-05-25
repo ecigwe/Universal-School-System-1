@@ -15,10 +15,10 @@ exports.checkIfSchoolExists = catchAsyncError(async (request, response, next) =>
 });
 
 exports.checkIfParentIsRegistered = catchAsyncError(async (request, response, next) => {
-    const { parentUsername } = request.body;
-    if (!parentUsername) return errorHandler(400, 'Please tell us the username of a parent or guardian that is registered on this platform');
-    const parent = await Parent.findOne({ username: parentUsername });
-    if (!parent) return errorHandler(400, 'Please tell us the username of a parent or guardian that is registered on this platform');
+    const { parentPhoneNumber } = request.body;
+    if (!parentPhoneNumber) return errorHandler(400, 'Please give us the phone number of a parent or guardian that is registered on this platform');
+    const parent = await Parent.findOne({ phoneNumber: parentPhoneNumber });
+    if (!parent) return errorHandler(400, 'Please give us the phone number of a parent or guardian that is registered on this platform');
     request.parent = parent;
     return next();
 });
