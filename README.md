@@ -36,7 +36,8 @@ This API consists of the features indicated below:
 * When clients make a request to the logout endpoint a **null token** is returned in the json response.
 * Administrators, students, staff and parents have different authentication handlers.
 * A single person cannot be registered twice for one collection. For instance, a teacher who is already registered, cannot register again as a teacher, but can register as a parent.
-
+* Logged in Users can update their password, anytime they like, especially if their current password is compromised.
+  
 ### Staff Roles
 * A school staff can either be a principal or a vice-principal or a teacher or a form-teacher or a bursar.
 * If you do not specify your role, the default is teacher. 
@@ -59,27 +60,28 @@ This API consists of the features indicated below:
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 
-| Endpoint                       | Function                                     |
-| ------------------------------ | -------------------------------------------- |
-| GET/                           | Check to ensure that the api can be accessed |
-| GET/api/v1/schools             | Retrieve all the registered schools          |
-| POST/api/v1/schools            | Register a new school                        |
-| GET/api/v1/schools/:id         | Retrieve a specific school                   |
-| PATCH/api/v1/schools/:id       | Update a specific school                     |
-| DELETE/api/v1/schools/:id      | Delete a specific school                     |
-| POST/api/v1/student/register   | Register a student                           |
-| POST/api/v1/student/login      | Login a student                              |
-| GET/api/v1/logout              | Logout a user                                |
-| POST/api/v1/parent/register    | Register a parent                            |
-| POST/api/v1/parent/login       | Login a parent                               |
-| POST/api/v1/staff/register     | Register a staff                             |
-| POST/api/v1/staff/login        | Login a staff                                |
-| POST/api/v1/admin/register     | Register an admin                            |
-| POST/api/v1/admin/login        | Login an admin                               |
-| GET/api/v1/users/admins        | See all the administrators                   |
-| GET/api/v1/users/admins/:id    | See a specific administrator                 |
-| PATCH/api/v1/users/admins/:id  | Update a specific administrator              |
-| DELETE/api/v1/users/admins/:id | Delete an administrator                      |
+| Endpoint                        | Function                                     |
+| ------------------------------- | -------------------------------------------- |
+| GET/                            | Check to ensure that the api can be accessed |
+| GET/api/v1/schools              | Retrieve all the registered schools          |
+| POST/api/v1/schools             | Register a new school                        |
+| GET/api/v1/schools/:id          | Retrieve a specific school                   |
+| PATCH/api/v1/schools/:id        | Update a specific school                     |
+| DELETE/api/v1/schools/:id       | Delete a specific school                     |
+| POST/api/v1/student/register    | Register a student                           |
+| POST/api/v1/student/login       | Login a student                              |
+| GET/api/v1/logout               | Logout a user                                |
+| POST/api/v1/parent/register     | Register a parent                            |
+| POST/api/v1/parent/login        | Login a parent                               |
+| POST/api/v1/staff/register      | Register a staff                             |
+| POST/api/v1/staff/login         | Login a staff                                |
+| POST/api/v1/admin/register      | Register an admin                            |
+| POST/api/v1/admin/login         | Login an admin                               |
+| GET/api/v1/users/admins         | See all the administrators                   |
+| GET/api/v1/users/admins/:id     | See a specific administrator                 |
+| PATCH/api/v1/users/admins/:id   | Update a specific administrator              |
+| DELETE/api/v1/users/admins/:id  | Delete an administrator                      |
+| PATCH/api/v1/update_my_password | Update logged in user's password             |
 
 ### Sample Requests and Responses From The API
 - [Authenticate](#authenticate)
@@ -92,6 +94,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Register Staff](#register-staff)
     - [Login Staff](#login-staff)
     - [Logout](#logout)
+    - [Update Password](#update-password)
 
 - [School](#school)
     - [Register School](#register-school)
@@ -468,6 +471,44 @@ This API has routes, each of which are dedicated to a single objective. The endp
     }
     ```
 
+### Update Password
+
+Only for users who are logged in.
+
+* Request:
+    * Endpoint: PATCH/api/v1/update_my_password
+    * Body: (application/json)
+    ```
+    {
+        "currentPassword": "test12345",
+        "newPassword": "test1234",
+        "confirmNewPassword": "test1234"
+    }
+    ```
+
+* Response:
+    * Status: 200 - success
+    * Body: (application/json)
+    ```
+    {
+    "status": "success",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlY2IwNTZlMmIwZGZlMTc0NDQ3NTI4ZCIsImNhdGVnb3J5IjoiUGFyZW50IiwiaWF0IjoxNTkwMzY2MjgwLCJleHAiOjE1OTgxNDIyODB9.xMYH5xcrd7jJYeynpIoIYNDWOiEHZ_jdj0ErEwPU5Aw",
+    "data": {
+            "user": {
+                "role": "Parent",
+                "category": "Parent",
+                "_id": "5ecb056e2b0dfe174447528d",
+                "fullname": "Patience Dibiagwu",
+                "email": "patiencedibiagwu@gmail.com",
+                "username": "Patience20",
+                "phoneNumber": "09052923471",
+                "registrationDate": "2020-05-24T23:38:22.883Z",
+                "__v": 0,
+                "passwordChangedAt": "2020-05-25T00:23:23.918Z"
+            }
+        }
+    }
+    ```
 
 ### School
 
@@ -479,9 +520,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     { 
       "admin": "Boawada15",
       "name": "Hilltop Academy",
-      "address": "1032 Canning Street",
-      "city": "London",
-      "state": "England",
+      "address": "1032 Canning Street, London, England",
       "population": 5532,
       "email": "hilltopacademy@gmail.com",
       "phoneNumber": "08062142380",
@@ -501,9 +540,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "_id": "5ec75054350903001742747e",
             "admin": "Boawada15",
             "name": "Hilltop Academy",
-            "address": "1032 Canning Street",
-            "city": "London",
-            "state": "England",
+            "address": "1032 Canning Street, London, England",
             "population": 5532,
             "email": "hilltopacademy@gmail.com",
             "phoneNumber": "08062142380",
@@ -532,9 +569,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "_id": "5ec74f55350903001742747d",
                 "admin": "Rapu55",
                 "name": "Marist Academy",
-                "address": "1057 DT",
-                "city": "London",
-                "state": "England",
+                "address": "1057 DT, London, England",
                 "population": 4599,
                 "email": "marist@email.com",
                 "phoneNumber": "08062158380",
@@ -547,9 +582,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "_id": "5ec75054350903001742747e",
                 "admin": "Boawada15",
                 "name": "Hilltop Academy",
-                "address": "1032 Canning Street",
-                "city": "London",
-                "state": "England",
+                "address": "1032 Canning Street, London, England",
                 "population": 5532,
                 "email": "hilltopacademy@gmail.com",
                 "phoneNumber": "08062142380",
@@ -578,9 +611,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "_id": "5ec74f55350903001742747d",
             "admin": "Rapu55",
             "name": "Marist Academy",
-            "address": "1057 DT",
-            "city": "London",
-            "state": "England",
+            "address": "1057 DT, London, England",
             "population": 4599,
             "email": "marist@email.com",
             "phoneNumber": "08062158380",
@@ -614,9 +645,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "_id": "5ec74f55350903001742747d",
             "admin": "Rapu55",
             "name": "Marist Academy",
-            "address": "1057 DT",
-            "city": "London",
-            "state": "England",
+            "address": "1057 DT, London, England",
             "population": 4407,
             "email": "marist@email.com",
             "phoneNumber": "08062158380",

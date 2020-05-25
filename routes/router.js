@@ -8,6 +8,8 @@ const adminUsers = require('./users/admins');
 const authHandler = require('../controllers/authentication/authHandler');
 const globalErrorHandler = require('../utils/errorUtils/globalErrorHandler');
 const errorHandler = require('../utils/errorUtils/errorHandler');
+const signToken = require('../utils/authenticationUtilities/signToken');
+const attachTokenToCookie = require('../utils/authenticationUtilities/attachTokenToCookie');
 
 const router = Router();
 
@@ -27,6 +29,11 @@ router.use('/api/v1/parent', parent);
 router.use('/api/v1/staff', staff);
 router.use('/api/v1/admin', admin);
 router.get('/api/v1/logout', authHandler.logout);
+router.patch('/api/v1/update_my_password',
+    authHandler.protect,
+    authHandler.updateMyPassword,
+    signToken,
+    attachTokenToCookie);
 
 //Plain users stuff
 router.use('/api/v1/users/admins', adminUsers);

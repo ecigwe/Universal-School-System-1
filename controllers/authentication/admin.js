@@ -38,13 +38,13 @@ exports.login = catchAsyncError(async (request, response, next) => {
     return next();
 });
 
-exports.forgotPassword = catchAsyncError(async (request, response, next) => {
-    const { email } = request.body;
-    if (!email) return errorHandler(400, 'Please provide the email address that you used when signing up.');
+// exports.forgotPassword = catchAsyncError(async (request, response, next) => {
+//     const { email } = request.body;
+//     if (!email) return errorHandler(400, 'Please provide the email address that you used when signing up.');
 
-    const admin = await Admin.findOne({ email });
-    if (!admin) return errorHandler(404, 'There is no admin with that email address.');
+//     const admin = await Admin.findOne({ email });
+//     if (!admin) return errorHandler(404, 'There is no admin with that email address.');
 
-    const resetToken = admin.createPasswordResetToken();
-    await admin.save({ validateBeforeSave: false });
-});
+//     const resetToken = admin.createPasswordResetToken();
+//     await admin.save({ validateBeforeSave: false });
+// });
