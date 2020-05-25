@@ -444,8 +444,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "email": "panpeter@gmail.com",
             "username": "Pan10",
             "phoneNumber": "09029202271",
-            "schoolName": "Orient Academy",
-            "schoolAddress": "No 160, Gbenga Street, Ikorodu, Lagos State",
+            "school: "5ec75054350903001742747e",
             "password": "$2a$12$lFe6V.GIsS/yFfFCDCvjZOTlrfB3zXit6DWMAbHh5Imss8YErVc52",
             "registrationDate": "2020-05-22T03:47:04.707Z",
             "__v": 0
@@ -479,9 +478,9 @@ Only for users who are logged in.
     * Body: (application/json)
     ```
     {
-        "currentPassword": "test12345",
-        "newPassword": "test1234",
-        "confirmNewPassword": "test1234"
+        "currentPassword": "{{CURRENTPASSWORD}},
+        "newPassword": "{{NEWPASSWORD}}",
+        "confirmNewPassword": "{{NEWPASSWORD}}"
     }
     ```
 
