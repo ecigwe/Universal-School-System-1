@@ -1,8 +1,11 @@
 const { Router } = require('express');
 const authHandler = require('../controllers/authentication/authHandler');
 const SchoolController = require('../controllers/schoolController');
+const students = require('../routes/users/students');
 
 const router = Router();
+
+router.use('/:id/students', students);
 
 router.route('/')
     .post(
@@ -22,6 +25,7 @@ router.route('/:id')
     .delete(
         SchoolController.deleteSchool
     );
+
 
 
 module.exports = router;
