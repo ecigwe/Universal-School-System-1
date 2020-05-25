@@ -5,7 +5,7 @@ const Admin = require('../models/users/admin');
 const Parent = require('../models/users/parent');
 const Staff = require('../models/users/staff');
 const Student = require('../models/users/student');
-const School = require('../models/schools/school');
+const School = require('../models/school/school');
 
 mongoose.connect(process.env.MONGODB_URI, {
     useCreateIndex: true,
