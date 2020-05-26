@@ -19,25 +19,20 @@ const bookSchema = mongoose.Schema({
     class: {
         type: String,
         required: [true, 'Please provide a recommended class for this book'],
-        default: 'None',
-        enum: ['Basic 1', 'Basic 2', '  Basic 3', 'SS 1', 'SS 2', 'SS 2', 'Senior Secondary', 'Junior Secondary', 'None']
+        default: 'Any',
+        enum: ['Basic 1', 'Basic 2', 'Basic 3', 'SS 1', 'SS 2', 'SS 3', 'Senior Secondary', 'Junior Secondary', 'Any']
     },
     category: {
         type: String,
         required: [true, 'Please provide a category for this book'],
         minlength: [3, 'Category name must be between 3 and 100 characters'],
-        maxlength: [100, 'Category name must be between 3 and 100 characters'],
+        maxlength: [30, 'Category name must be between 3 and 30 characters'],
         trim: true
     },
     price: {
         type: Number,
         default: 0.00,
-        validate: {
-            validator: function (value) {
-                return !isNaN(parseFloat(value, 10));
-            },
-            message: 'Please provide a valid price for this book'
-        }
+
     },
     school: {
         type: mongoose.Schema.Types.ObjectId,
@@ -50,17 +45,25 @@ const bookSchema = mongoose.Schema({
 
     bookUrl: {
         type: String,
-        validate: [validator.isURL, 'Please provide a valid url']
+        validate: {
+            validator: value => validator.isURL(value, {}),
+            message: 'Please provide a valid url for book'
+        }
     },
 
     imageUrl: {
         type: String,
-        validate: [validator.isURL, 'Please provide a valid url']
+        validate: {
+            validator: value => validator.isURL(value, {}),
+            message: 'Please provide a valid url for book image'
+        }
     }
 });
 // bookSchema.pre('save',  function (next) {
 //     next();
 // });
+bookSchema.index({ school: 1 });
+
 
 const Book = mongoose.model('Book', bookSchema);
 module.exports = Book;
