@@ -18,7 +18,7 @@ class StaffController {
         try {
             let query = { 'school': req.params.id, '_id': req.params.staff_id };
             let exclude = { 'confirmPassword': 0, 'passwordChangedAt': 0 };
-            const staff = await Student.find(query).select(exclude).lean();
+            const staff = await School.find(query).select(exclude).lean();
             return responseHandler(res, staff, next, 200, 'Students retrieved successfully', staff.length);
         } catch (error) {
             return next(error);
