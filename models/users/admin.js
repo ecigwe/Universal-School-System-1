@@ -39,7 +39,8 @@ const adminSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        default: 'Admin'
+        default: 'Admin',
+        enum: 'Admin'
     },
     password: {
         type: String,

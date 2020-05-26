@@ -33,7 +33,8 @@ const studentSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        default: 'Student'
+        default: 'Student',
+        enum: 'Student'
     },
     dateOfBirth: {
         type: Date,
@@ -120,7 +121,7 @@ studentSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssued
     }
     return false;
 }
-studentSchema.index({ school: 1});
+studentSchema.index({ school: 1 });
 studentSchema.index({ parent: 1 });
 
 

@@ -34,7 +34,8 @@ const parentSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        default: 'Parent'
+        default: 'Parent',
+        enum: 'Parent'
     },
     active: {
         type: Boolean,
