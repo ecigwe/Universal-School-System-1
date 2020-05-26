@@ -30,8 +30,14 @@ const bookSchema = mongoose.Schema({
         trim: true
     },
     price: {
-        type: String,
-        default: 'Free'
+        type: Number,
+        default: 0.00,
+        validate: {
+            validator: function (value) {
+                return !isNaN(parseFloat(value, 10));
+            },
+            message: 'Please provide a valid price for this book'
+        }
     },
     school: {
         type: mongoose.Schema.Types.ObjectId,
@@ -52,6 +58,9 @@ const bookSchema = mongoose.Schema({
         validate: [validator.isURL, 'Please provide a valid url']
     }
 });
+// bookSchema.pre('save',  function (next) {
+//     next();
+// });
 
 const Book = mongoose.model('Book', bookSchema);
 module.exports = Book;

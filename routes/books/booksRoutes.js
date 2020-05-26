@@ -3,7 +3,7 @@ const router = express.Router();
 const bookController = require('../../controllers/books/bookController')
 
 
-router.route('/')
+router.route('/:id/books')
     .get(bookController.getAllBooksForASpecificSchool);
 
 

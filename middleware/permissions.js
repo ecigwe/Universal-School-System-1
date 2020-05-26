@@ -10,4 +10,13 @@ const staffOnly = (req, res, next) => {
     next();
 };
 
-module.exports = { staffOnly };
+const checkUserCanAccessSchoolRoute = (req, res, next) => {
+    const { school } = req.user;
+    if (req.params.id !== school) {
+        errorHandler(403, 'Unauthorized Access.');
+        return;
+    }
+    next();
+}
+
+module.exports = { staffOnly, checkUserCanAccessSchoolRoute };

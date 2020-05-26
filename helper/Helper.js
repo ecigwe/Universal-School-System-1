@@ -33,10 +33,22 @@ class Helper {
         }
     }
 
+    async findOne(req, res, next, name = '', query = {}, exclude = {}, limit = null) {
+        try {
+            const result = await this.collection.findOne(query).select(exclude).lean();
+            if (!result) {
+                errorHandler(404, `${name} not found`)
+            }
+            return responseHandler(res, result, next, 200, `${name} retrieved successfully`, 1);
+        } catch (error) {
+            next(error);
+        }
+    }
+
     async findById(req, res, next, name = '') {
         try {
-            const result = await this.collection.findById(id).lean(); //should add condition for school id or create another
-            if (!result) {                                            // helper method findByIdWhere
+            const result = await this.collection.findById(id).lean();
+            if (!result) {
                 errorHandler(404, `${name} not found`)
             }
             return responseHandler(res, result, next, 200, `${name} retrieved successfully`, 1);
@@ -47,13 +59,15 @@ class Helper {
 
     async update() { }
 
-    async delete(req, res, next, name = '') {
+    static async deleteOne(req, res, next, name = '', query = {}) {
         try {
-            const result = await this.collection.findByIdAndDelete(req.params.id);
-            if (!deletedAdmin) return errorHandler(404, `${name} not found`);
+            const result = await this.collection.findOneAndDelete(query);
+            if (!result) {
+                return errorHandler(404, `${name} not found`);
+            }
             return responseHandler(res, null, next, 204, `${name} deleted successfully`, 1);
         } catch (error) {
-            next(error)
+            return next(error);
         }
     }
 }
