@@ -11,9 +11,9 @@ router.use(middlewares.checkIfSchoolStillExists);
 router.get('/', middlewares.checkCategory('Staff'), middlewares.checkConnectionWithSchool, studentsController.getAllStudentsOfSchool);
 
 router.route('/:student_id')
-    .get(studentsController.getStudentOfSchool)
-    .patch(studentsController.updateStudentOfSchool)
-    .delete(studentsController.deleteStudentOfSchool);
+    .get(middlewares.restrictStudentData, studentsController.getStudentOfSchool)
+    .patch(middlewares.restrictStudentData, studentsController.updateStudentOfSchool)
+    .delete(middlewares.restrictStudentData, studentsController.deleteStudentOfSchool);
 
 module.exports = router;
 

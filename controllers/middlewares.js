@@ -1,5 +1,6 @@
 const School = require('../models/school/school');
 const Parent = require('../models/users/parent');
+const Student = require('../models/users/student');
 const catchAsyncError = require('../utils/errorUtils/catchAsyncError');
 const errorHandler = require('../utils/errorUtils/errorHandler');
 
@@ -32,19 +33,38 @@ exports.checkIfSchoolStillExists = catchAsyncError(async (request, response, nex
 
 exports.checkUserRole = (...roles) => {
     return (request, response, next) => {
-        if (!roles.includes(request.user.role)) return errorHandler(403, 'You are forbidden from accessing this resource.');
+        if (!roles.includes(request.user.role)) {
+            return errorHandler(403, 'You are forbidden from accessing this resource.');
+        }
         return next();
     }
 }
 
 exports.checkConnectionWithSchool = (request, response, next) => {
-    if (!request.user.school.equals(request.params.id)) return errorHandler(403, 'You are forbidden from accessing this resource.');
+    if (!request.user.school.equals(request.params.id)) {
+        return errorHandler(403, 'You are forbidden from accessing this resource.');
+    }
     return next();
 }
 
 exports.checkCategory = (...category) => {
     return (request, response, next) => {
-        if (!category.includes(request.user.category)) return errorHandler(403, 'You are forbidden from accessing this resource.');
+        if (!category.includes(request.user.category)) {
+            return errorHandler(403, 'You are forbidden from accessing this resource.');
+        }
         return next();
     }
 }
+
+exports.restrictStudentData = catchAsyncError(async (request, response, next) => {
+    //Restricts the information of a student to the student, his or her parent and staff of the student school
+    const student = await Student.findById(request.params.student_id);
+    if (
+        (request.user.category === 'Staff' && request.user.school.equals(request.params.id)) ||
+        (request.user.category === 'Parent' && request.user._id.equals(student.parent)) ||
+        (request.user.category === 'Student' && request.user._id.equals(student._id))) {
+        request.student = student;
+        return next();
+    }
+    return errorHandler(403, 'You are forbidden from accessing this resource');
+});
