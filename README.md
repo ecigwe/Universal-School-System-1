@@ -55,7 +55,8 @@ This API consists of the features indicated below:
 * Information about all the company's administrators can be seen.
 * Information about each administrative officer of the company can be seen.
 * Information about each administrative officer of the company can be updated.
-* Information about each administrative officer of the company can be deleted.* 
+* Information about each administrative officer of the company can be deleted.
+* Please note the administrators in this case refers to the people involved in the running of the company. The admin of a school is an entirely different administrator whose admin role is restricted to his school.
 
 ### Students
 * Every school can see the data of all of it's students
@@ -76,44 +77,58 @@ This API consists of the features indicated below:
 * The details of a parent can be updated
 * The details of a parent can be deleted
 
+### Resetting User Passwords
+* The user must first make a post request to the forgot password route with their phone number.
+* They will recieve a code in a text message.
+* They must send that code, their new password and a confirmation of that new password in a patch request to the reset password route.
+* If the code is vaild and it's time limit has not expired, the user's password will be successfully reset and the user will be logged in automatically.
+* There are different reset password endpoints for the application's administrators, school's staff officials, students and parents
 
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 
-| Endpoint                                       | Function                                                           |
-| ---------------------------------------------- | ------------------------------------------------------------------ |
-| GET/                                           | Check to ensure that the api can be accessed                       |
-| GET/api/v1/schools                             | Retrieve all the registered schools                                |
-| POST/api/v1/schools                            | Register a new school                                              |
-| GET/api/v1/schools/:id                         | Retrieve a specific school                                         |
-| PATCH/api/v1/schools/:id                       | Update a specific school                                           |
-| DELETE/api/v1/schools/:id                      | Delete a specific school                                           |
-| POST/api/v1/student/register                   | Register a student                                                 |
-| POST/api/v1/student/login                      | Login a student                                                    |
-| GET/api/v1/logout                              | Logout a user                                                      |
-| POST/api/v1/parent/register                    | Register a parent                                                  |
-| POST/api/v1/parent/login                       | Login a parent                                                     |
-| POST/api/v1/staff/register                     | Register a staff                                                   |
-| POST/api/v1/staff/login                        | Login a staff                                                      |
-| POST/api/v1/admin/register                     | Register an admin                                                  |
-| POST/api/v1/admin/login                        | Login an admin                                                     |
-| GET/api/v1/users/admins                        | See all the administrators                                         |
-| GET/api/v1/users/admins/:id                    | See a specific administrator                                       |
-| PATCH/api/v1/users/admins/:id                  | Update a specific administrator                                    |
-| DELETE/api/v1/users/admins/:id                 | Delete an administrator                                            |
-| PATCH/api/v1/update_my_password                | Update logged in user's password                                   |
-| GET/api/v1/schools/:id/students                | See all the students of a school                                   |
-| GET/api/v1/schools/:id/students/:student_id    | See a single school's student's data                               |
-| PATCH/api/v1/schools/:id/students/:student_id  | Update a single school's student's data                            |
-| DELETE/api/v1/schools/:id/students/:student_id | Delete a single school's student's data                            |
-| GET/api/v1/schools/:id/staff                   | See all the staff of a school                                      |
-| GET/api/v1/schools/:id/staff/:staff_id         | See a single school's staff official's data                        |
-| PATCH/api/v1/schools/:id/staff/:staff_id       | Update a single school's staff official's data                     |
-| DELETE/api/v1/schools/:id/staff/:staff_id      | Delete a single school's staff official's data                     |
-| GET/api/v1/schools/:id/parents                 | Retrieve all the parents whose children are students of the school |
-| GET/api/v1/users/parents/:id                   | Retrieve the details of a single parent                            |
-| PATCH/api/v1/users/parents/:id                 | Update a specific parent                                           |
-| DELETE/api/v1/users/parents/:id                | Delete a parent from the platform                                  |
+| Endpoint                                       | Function                                                                   |
+| ---------------------------------------------- | -------------------------------------------------------------------------- |
+| GET/                                           | Check to ensure that the api can be accessed                               |
+| GET/api/v1/schools                             | Retrieve all the registered schools                                        |
+| POST/api/v1/schools                            | Register a new school                                                      |
+| GET/api/v1/schools/:id                         | Retrieve a specific school                                                 |
+| PATCH/api/v1/schools/:id                       | Update a specific school                                                   |
+| DELETE/api/v1/schools/:id                      | Delete a specific school                                                   |
+| POST/api/v1/student/register                   | Register a student                                                         |
+| POST/api/v1/student/login                      | Login a student                                                            |
+| GET/api/v1/logout                              | Logout a user                                                              |
+| POST/api/v1/parent/register                    | Register a parent                                                          |
+| POST/api/v1/parent/login                       | Login a parent                                                             |
+| POST/api/v1/staff/register                     | Register a staff                                                           |
+| POST/api/v1/staff/login                        | Login a staff                                                              |
+| POST/api/v1/admin/register                     | Register an admin                                                          |
+| POST/api/v1/admin/login                        | Login an admin                                                             |
+| GET/api/v1/users/admins                        | See all the administrators                                                 |
+| GET/api/v1/users/admins/:id                    | See a specific administrator                                               |
+| PATCH/api/v1/users/admins/:id                  | Update a specific administrator                                            |
+| DELETE/api/v1/users/admins/:id                 | Delete an administrator                                                    |
+| PATCH/api/v1/update_my_password                | Update logged in user's password                                           |
+| GET/api/v1/schools/:id/students                | See all the students of a school                                           |
+| GET/api/v1/schools/:id/students/:student_id    | See a single school's student's data                                       |
+| PATCH/api/v1/schools/:id/students/:student_id  | Update a single school's student's data                                    |
+| DELETE/api/v1/schools/:id/students/:student_id | Delete a single school's student's data                                    |
+| GET/api/v1/schools/:id/staff                   | See all the staff of a school                                              |
+| GET/api/v1/schools/:id/staff/:staff_id         | See a single school's staff official's data                                |
+| PATCH/api/v1/schools/:id/staff/:staff_id       | Update a single school's staff official's data                             |
+| DELETE/api/v1/schools/:id/staff/:staff_id      | Delete a single school's staff official's data                             |
+| GET/api/v1/schools/:id/parents                 | Retrieve all the parents whose children are students of the school         |
+| GET/api/v1/users/parents/:id                   | Retrieve the details of a single parent                                    |
+| PATCH/api/v1/users/parents/:id                 | Update a specific parent                                                   |
+| DELETE/api/v1/users/parents/:id                | Delete a parent from the platform                                          |
+| POST/api/v1/admin/forgot_password              | An Admin user forgets his password and recieves a reset code               |
+| PATCH/api/v1/admin/reset_password              | An Admin user is finally able to reset his password                        |
+| POST/api/v1/staff/forgot_password              | An Staff of a school forgets his or her password and recieves a reset code |
+| PATCH/api/v1/staff/reset_password              | A Staff official is finally able to reset his or her password              |
+| POST/api/v1/student/forgot_password            | A Student forgets his or her password and recieves a reset code            |
+| PATCH/api/v1/student/reset_password            | A Student is finally able to reset his or her password                     |
+| POST/api/v1/parent/forgot_password             | A Parent forgets his or her password and recieves a reset code             |
+| PATCH/api/v1/parent/reset_password             | A Parent is finally able to reset his or her password                      |
 
 
 
@@ -157,6 +172,11 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Update Parent](#update-parent)
     - [Delete Parent](#delete-parent)
 
+ - [Resetting Passwords](#resetting-passwords)
+    - [Forgot Password](#forgot-password)
+    - [Reset Password](#reset-password)
+
+
 ### Authenticate
 
 ### Register Admin
@@ -168,7 +188,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
         "fullname": "Femi Aghe",
         "email": "olufemiaghe@gmail.com",
         "username": "Femi90",
-        "phoneNumber": "09014058821",
+        "phoneNumber": "+2349014058821",
         "role": "manager",
         "password": "{{PASSWORD}}",
         "confirmPassword": "{{PASSWORD}}",
@@ -192,7 +212,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "fullname": "Femi Aghe",
                 "email": "olufemiaghe@gmail.com",
                 "username": "Femi90",
-                "phoneNumber": "09014058821",
+                "phoneNumber": "+2349014058821",
                 "password": "$2a$12$u/YNuXkH9jUANTS.CSVPHe1tuFK1rdKFbJy7JonOwJEBM/le35oxK",
                 "__v": 0
             }
@@ -226,7 +246,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "fullname": "Abuchi Kingsley",
                 "email": "abuchikingsley76@gmail.com",
                 "username": "Abuchi76",
-                "phoneNumber": "09064058821",
+                "phoneNumber": "+2349064058821",
                 "password": "$2a$12$SLz8YK7AeE2uhH7iRiJdl.vFGZ02INM4UTxQik5Dd5o7dRRefa3CC",
                 "__v": 0
             }
@@ -243,7 +263,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "fullname": "Patience Dibiagwu",
             "email": "patiencedibiagwu@gmail.com",
             "username": "Patience20",
-            "phoneNumber": "09052923471",
+            "phoneNumber": "+2349052923471",
             "password": "{{PASSWORD}}",
             "confirmPassword": "{{PASSWORD}}"
         }
@@ -265,7 +285,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "fullname": "Patience Dibiagwu",
                 "email": "patiencedibiagwu@gmail.com",
                 "username": "Patience20",
-                "phoneNumber": "09052923471",
+                "phoneNumber": "+2349052923471",
                 "password": "$2a$12$5PTodyTWO1jD/zGXEWLWoOzlwZtG8iyNYiGvu28ylPFLvGJYU4SpG",
                 "registrationDate": "2020-05-22T03:41:15.237Z",
                 "__v": 0
@@ -300,7 +320,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "fullname": "Patience Dibiagwu",
                 "email": "patiencedibiagwu@gmail.com",
                 "username": "Patience20",
-                "phoneNumber": "09052923471",
+                "phoneNumber": "+2349052923471",
                 "password": "$2a$12$5PTodyTWO1jD/zGXEWLWoOzlwZtG8iyNYiGvu28ylPFLvGJYU4SpG",
                 "registrationDate": "2020-05-22T03:41:15.237Z",
                 "__v": 0
@@ -318,11 +338,11 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "fullname": "Ephraim Junior",
             "email": "ephraimjunior@gmail.com",
             "username": "Ephraim32",
-            "phoneNumber": "09067202271",
+            "phoneNumber": "+2349067202271",
             "dateOfBirth": "2004-10-22",
             "schoolName": "Shalom Academy",
             "schoolAddress": "No 16, Otedola Street, Ikorodu, Lagos State",
-            "parentPhoneNumber": "09064058820",
+            "parentPhoneNumber": "+2349064058820",
             "class": "SS3",
             "password": "{{PASSWORD}}",
             "confirmPassword": "{{PASSWORD}}"
@@ -345,7 +365,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "fullname": "Ephraim Junior",
                 "email": "ephraimjunior@gmail.com",
                 "username": "Ephraim32",
-                "phoneNumber": "09067202271",
+                "phoneNumber": "+2349067202271",
                 "dateOfBirth": "2004-10-22T00:00:00.000Z",
                 "school": "5ec9d41615e2a217c87a9c94",
                 "parent": "5ec9d53015e2a217c87a9cf1",
@@ -385,7 +405,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "fullname": "Ephraim Junior",
                 "email": "ephraimjunior@gmail.com",
                 "username": "Ephraim32",
-                "phoneNumber": "09067202271",
+                "phoneNumber": "+2349067202271",
                 "dateOfBirth": "2004-10-22T00:00:00.000Z",
                 "school": "5ec9d41615e2a217c87a9c94",
                 "parent": "5ec9d53015e2a217c87a9cf1",
@@ -411,7 +431,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "fullname": "Pan Peter",
             "email": "panpeter@gmail.com",
             "username": "Pan10",
-            "phoneNumber": "09029202271",
+            "phoneNumber": "+2349029202271",
             "schoolName": "Orient Academy",
             "schoolAddress": "No 160, Gbenga Street, Ikorodu, Lagos State",
             "subjects": ["History", "Government"],
@@ -446,7 +466,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                     "fullname": "Pan Peter",
                     "email": "panpeter@gmail.com",
                     "username": "Pan10",
-                    "phoneNumber": "09029202271",
+                    "phoneNumber": "+2349029202271",
                     "school": "5ec9d41615e2a217c87a9c94",
                     "password": "$2a$12$lFe6V.GIsS/yFfFCDCvjZOTlrfB3zXit6DWMAbHh5Imss8YErVc52",
                     "registrationDate": "2020-05-22T03:47:04.707Z",
@@ -491,7 +511,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "fullname": "Pan Peter",
             "email": "panpeter@gmail.com",
             "username": "Pan10",
-            "phoneNumber": "09029202271",
+            "phoneNumber": "+2349029202271",
             "school: "5ec75054350903001742747e",
             "password": "$2a$12$lFe6V.GIsS/yFfFCDCvjZOTlrfB3zXit6DWMAbHh5Imss8YErVc52",
             "registrationDate": "2020-05-22T03:47:04.707Z",
@@ -547,7 +567,7 @@ Only for users who are logged in.
                 "fullname": "Patience Dibiagwu",
                 "email": "patiencedibiagwu@gmail.com",
                 "username": "Patience20",
-                "phoneNumber": "09052923471",
+                "phoneNumber": "+2349052923471",
                 "registrationDate": "2020-05-24T23:38:22.883Z",
                 "__v": 0,
                 "passwordChangedAt": "2020-05-25T00:23:23.918Z"
@@ -569,7 +589,7 @@ Only for users who are logged in.
       "address": "1032 Canning Street, London, England",
       "population": 5532,
       "email": "hilltopacademy@gmail.com",
-      "phoneNumber": "08062142380",
+      "phoneNumber": "+2348062142380",
       "imageUrl": "wwww.schoolimage.com/schimg.jpg"
     }
     ```
@@ -589,7 +609,7 @@ Only for users who are logged in.
             "address": "1032 Canning Street, London, England",
             "population": 5532,
             "email": "hilltopacademy@gmail.com",
-            "phoneNumber": "08062142380",
+            "phoneNumber": "+2348062142380",
             "imageUrl": "wwww.schoolimage.com/schimg.jpg",
             "registeredOn": "2020-05-22T04:08:52.000Z",
             "__v": 0
@@ -618,7 +638,7 @@ Only for users who are logged in.
                 "address": "1057 DT, London, England",
                 "population": 4599,
                 "email": "marist@email.com",
-                "phoneNumber": "08062158380",
+                "phoneNumber": "+2348062158380",
                 "imageUrl": "wwww.example.com/ex.jpg",
                 "registeredOn": "2020-05-22T04:04:37.000Z",
                 "__v": 0
@@ -631,7 +651,7 @@ Only for users who are logged in.
                 "address": "1032 Canning Street, London, England",
                 "population": 5532,
                 "email": "hilltopacademy@gmail.com",
-                "phoneNumber": "08062142380",
+                "phoneNumber": "+2348062142380",
                 "imageUrl": "wwww.schoolimage.com/schimg.jpg",
                 "registeredOn": "2020-05-22T04:08:52.000Z",
                 "__v": 0
@@ -660,7 +680,7 @@ Only for users who are logged in.
             "address": "1057 DT, London, England",
             "population": 4599,
             "email": "marist@email.com",
-            "phoneNumber": "08062158380",
+            "phoneNumber": "+2348062158380",
             "imageUrl": "wwww.example.com/ex.jpg",
             "registeredOn": "2020-05-22T04:04:37.000Z",
             "__v": 0
@@ -694,7 +714,7 @@ Only for users who are logged in.
             "address": "1057 DT, London, England",
             "population": 4407,
             "email": "marist@email.com",
-            "phoneNumber": "08062158380",
+            "phoneNumber": "+2348062158380",
             "imageUrl": "wwww.example.com/ex.jpg",
             "registeredOn": "2020-05-22T04:04:37.000Z",
             "__v": 0
@@ -732,7 +752,7 @@ Only for users who are logged in.
                     "fullname": "Diai Immanuel Onyeka",
                     "email": "immanueldiai@gmail.com",
                     "username": "Immanuel5015",
-                    "phoneNumber": "09064058820",
+                    "phoneNumber": "+2349064058820",
                     "__v": 0
                 },
                 {
@@ -743,7 +763,7 @@ Only for users who are logged in.
                     "fullname": "Abuchi Kingsley Ndinigwe",
                     "email": "abuchikings@hotmail.com",
                     "username": "abuchikingsley76",
-                    "phoneNumber": "08062158380",
+                    "phoneNumber": "+2348062158380",
                     "__v": 0
                 }
             ]
@@ -771,7 +791,7 @@ Only for users who are logged in.
             "fullname": "Diai Immanuel Onyeka",
             "email": "immanueldiai@gmail.com",
             "username": "Immanuel5015",
-            "phoneNumber": "09064058820",
+            "phoneNumber": "+2349064058820",
             "__v": 0
         }
     }
@@ -804,7 +824,7 @@ Only for users who are logged in.
             "fullname": "Diai Immanuel Onyeka",
             "email": "immanueldiai@gmail.com",
             "username": "Immanuel50",
-            "phoneNumber": "09064058820",
+            "phoneNumber": "+2349064058820",
             "__v": 0
         }
     }
@@ -838,7 +858,7 @@ Only for users who are logged in.
                 "fullname": "Musa Ogechi Doyle",
                 "email": "musageorge@gmail.com",
                 "username": "musageorge72",
-                "phoneNumber": "08170217049",
+                "phoneNumber": "+2348170217049",
                 "dateOfBirth": "2006-02-16T23:00:00.000Z",
                 "class": "SS 3",
                 "parent": "5ecb08e3d2595416f0dc9988",
@@ -853,7 +873,7 @@ Only for users who are logged in.
                 "fullname": "Amara Chikaodili Mohammed",
                 "email": "amaraatanda@outlook.com",
                 "username": "amaraatanda14",
-                "phoneNumber": "07069816913",
+                "phoneNumber": "+2347069816913",
                 "dateOfBirth": "2006-05-07T23:00:00.000Z",
                 "class": "Basic 2",
                 "parent": "5ecb08e3d2595416f0dc9984",
@@ -868,7 +888,7 @@ Only for users who are logged in.
                 "fullname": "Ngozi Chikaodili Edet",
                 "email": "ngoziobiwuru@gmail.com",
                 "username": "ngoziobiwuru77",
-                "phoneNumber": "07069916947",
+                "phoneNumber": "+2347069916947",
                 "dateOfBirth": "2002-10-08T23:00:00.000Z",
                 "class": "Basic 3",
                 "parent": "5ecb08e3d2595416f0dc9985",
@@ -883,7 +903,7 @@ Only for users who are logged in.
                 "fullname": "Amake Habbeeb George",
                 "email": "amakemohammed@aol.com",
                 "username": "amakemohammed72",
-                "phoneNumber": "07070016981",
+                "phoneNumber": "+2347070016981",
                 "dateOfBirth": "2003-07-07T23:00:00.000Z",
                 "class": "Basic 2",
                 "parent": "5ecb08e3d2595416f0dc9986",
@@ -898,7 +918,7 @@ Only for users who are logged in.
                 "fullname": "Wasiu Ngozi Obi",
                 "email": "wasiuedet@outlook.com",
                 "username": "wasiuedet9",
-                "phoneNumber": "07070117015",
+                "phoneNumber": "+2347070117015",
                 "dateOfBirth": "2008-07-06T23:00:00.000Z",
                 "class": "SS 2",
                 "parent": "5ecb08e3d2595416f0dc9987",
@@ -913,7 +933,7 @@ Only for users who are logged in.
                 "fullname": "Amanda Gboyega Babatunde",
                 "email": "amandababatunde@hotmail.com",
                 "username": "amandababatunde68",
-                "phoneNumber": "07069416777",
+                "phoneNumber": "+2347069416777",
                 "dateOfBirth": "2008-10-31T23:00:00.000Z",
                 "class": "Basic 3",
                 "parent": "5ecb08e3d2595416f0dc997e",
@@ -928,7 +948,7 @@ Only for users who are logged in.
                 "fullname": "Esther Eketi Atanda",
                 "email": "esthermonday@hotmail.com",
                 "username": "esthermonday5",
-                "phoneNumber": "08169616845",
+                "phoneNumber": "+2348169616845",
                 "dateOfBirth": "2006-08-17T23:00:00.000Z",
                 "class": "SS 3",
                 "parent": "5ecb08e3d2595416f0dc9982",
@@ -943,7 +963,7 @@ Only for users who are logged in.
                 "fullname": "Iniobong Aisha Obiwuru",
                 "email": "iniobongokeke@aol.com",
                 "username": "iniobongokeke1",
-                "phoneNumber": "09069716879",
+                "phoneNumber": "+2349069716879",
                 "dateOfBirth": "2003-03-27T23:00:00.000Z",
                 "class": "Basic 3",
                 "parent": "5ecb08e3d2595416f0dc9983",
@@ -958,7 +978,7 @@ Only for users who are logged in.
                 "fullname": "Eketi Folake Okeke",
                 "email": "eketiayantola@gmail.com",
                 "username": "eketiayantola53",
-                "phoneNumber": "09069516811",
+                "phoneNumber": "+2349069516811",
                 "dateOfBirth": "2007-04-06T23:00:00.000Z",
                 "class": "Basic 2",
                 "parent": "5ecb08e3d2595416f0dc9981",
@@ -989,7 +1009,7 @@ Only for users who are logged in.
             "fullname": "Musa Ogechi Doyle",
             "email": "musageorge@gmail.com",
             "username": "musageorge72",
-            "phoneNumber": "08170217049",
+            "phoneNumber": "+2348170217049",
             "dateOfBirth": "2006-02-16T23:00:00.000Z",
             "class": "SS 3",
             "parent": "5ecb08e3d2595416f0dc9988",
@@ -1025,7 +1045,7 @@ Only for users who are logged in.
             "fullname": "Musa Ogechi Doyle",
             "email": "musageorge@gmail.com",
             "username": "musageorge",
-            "phoneNumber": "08170217049",
+            "phoneNumber": "+2348170217049",
             "dateOfBirth": "2006-02-16T23:00:00.000Z",
             "class": "SS 3",
             "parent": "5ecb08e3d2595416f0dc9988",
@@ -1072,7 +1092,7 @@ Only for users who are logged in.
                 "fullname": "Amake Yemi Solarin",
                 "email": "amakesolarin@outlook.com",
                 "username": "amakesolarin63",
-                "phoneNumber": "08170417117",
+                "phoneNumber": "+2348170417117",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             },
@@ -1091,7 +1111,7 @@ Only for users who are logged in.
                 "fullname": "Azeez Moses Obasola",
                 "email": "azeezobasola@outlook.com",
                 "username": "azeezobasola27",
-                "phoneNumber": "07070517151",
+                "phoneNumber": "+2347070517151",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             },
@@ -1110,7 +1130,7 @@ Only for users who are logged in.
                 "fullname": "Bunmi Mary Obasola",
                 "email": "bunmiobasola@gmail.com",
                 "username": "bunmiobasola21",
-                "phoneNumber": "09070717219",
+                "phoneNumber": "+2349070717219",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             },
@@ -1129,7 +1149,7 @@ Only for users who are logged in.
                 "fullname": "Mary Chioma Lawnson",
                 "email": "marylawnson@aol.com",
                 "username": "marylawnson50",
-                "phoneNumber": "09070817253",
+                "phoneNumber": "+2349070817253",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             },
@@ -1148,7 +1168,7 @@ Only for users who are logged in.
                 "fullname": "Sunday Chiamaka Eze",
                 "email": "sundayeze@hotmail.com",
                 "username": "sundayeze10",
-                "phoneNumber": "08170917287",
+                "phoneNumber": "+2348170917287",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             },
@@ -1167,7 +1187,7 @@ Only for users who are logged in.
                 "fullname": "Eketi Habbeeb Abdul",
                 "email": "eketiabdul@gmail.com",
                 "username": "eketiabdul38",
-                "phoneNumber": "07071017321",
+                "phoneNumber": "+2347071017321",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             },
@@ -1186,7 +1206,7 @@ Only for users who are logged in.
                 "fullname": "Folake Funsho Awolowo",
                 "email": "folakeawolowo@gmail.com",
                 "username": "folakeawolowo3",
-                "phoneNumber": "07071117355",
+                "phoneNumber": "+2347071117355",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             },
@@ -1205,7 +1225,7 @@ Only for users who are logged in.
                 "fullname": "John Habbeeb Olanrewaju",
                 "email": "johnolanrewaju@aol.com",
                 "username": "johnolanrewaju68",
-                "phoneNumber": "09071217389",
+                "phoneNumber": "+2349071217389",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             },
@@ -1224,7 +1244,7 @@ Only for users who are logged in.
                 "fullname": "Musa Emeka Doyle",
                 "email": "musadoyle@aol.com",
                 "username": "musadoyle77",
-                "phoneNumber": "07071317423",
+                "phoneNumber": "+2347071317423",
                 "school": "5ecb08dfd2595416f0dc9976",
                 "__v": 0
             }
@@ -1259,7 +1279,7 @@ Only for users who are logged in.
             "fullname": "Amake Yemi Solarin",
             "email": "amakesolarin@outlook.com",
             "username": "amakesolarin63",
-            "phoneNumber": "08170417117",
+            "phoneNumber": "+2348170417117",
             "school": "5ecb08dfd2595416f0dc9976",
             "__v": 0
         }
@@ -1304,7 +1324,7 @@ Only for users who are logged in.
             "fullname": "Amake Yemi Solarin",
             "email": "amakesolarin@outlook.com",
             "username": "amakesolarin63",
-            "phoneNumber": "08170417117",
+            "phoneNumber": "+2348170417117",
             "school": "5ecb08dfd2595416f0dc9976",
             "__v": 0
         }
@@ -1341,7 +1361,7 @@ Find all the parents whose children are students in a particular school.
                 "fullname": "Jumoke Kevin Mohammed",
                 "email": "jumokemohammed@aol.com",
                 "username": "jumokemohammed",
-                "phoneNumber": "07070016981",
+                "phoneNumber": "+2347070016981",
                 "__v": 0
             },
             {
@@ -1351,7 +1371,7 @@ Find all the parents whose children are students in a particular school.
                 "fullname": "Yemi Echezona Edet",
                 "email": "yemiedet@aol.com",
                 "username": "yemiedet",
-                "phoneNumber": "07070117015",
+                "phoneNumber": "+2347070117015",
                 "__v": 0
             },
             {
@@ -1361,7 +1381,7 @@ Find all the parents whose children are students in a particular school.
                 "fullname": "Esther Teslim George",
                 "email": "esthergeorge@aol.com",
                 "username": "esthergeorge",
-                "phoneNumber": "08170217049",
+                "phoneNumber": "+2348170217049",
                 "__v": 0
             },
             {
@@ -1371,7 +1391,7 @@ Find all the parents whose children are students in a particular school.
                 "fullname": "Chinyere Toyin Obi",
                 "email": "chinyereobi@aol.com",
                 "username": "chinyereobi",
-                "phoneNumber": "08170317083",
+                "phoneNumber": "+2348170317083",
                 "__v": 0
             },
             {
@@ -1381,7 +1401,7 @@ Find all the parents whose children are students in a particular school.
                 "fullname": "Chinyere Teslim Babatunde",
                 "email": "chinyerebabatunde@gmail.com",
                 "username": "chinyerebabatunde",
-                "phoneNumber": "07069416777",
+                "phoneNumber": "+2347069416777",
                 "__v": 0
             },
             {
@@ -1391,7 +1411,7 @@ Find all the parents whose children are students in a particular school.
                 "fullname": "Musa Grace Atanda",
                 "email": "musaatanda@aol.com",
                 "username": "musaatanda",
-                "phoneNumber": "09069816913",
+                "phoneNumber": "+2349069816913",
                 "__v": 0
             },
             {
@@ -1401,7 +1421,7 @@ Find all the parents whose children are students in a particular school.
                 "fullname": "Amake Aisha Obiwuru",
                 "email": "amakeobiwuru@hotmail.com",
                 "username": "amakeobiwuru",
-                "phoneNumber": "08169916947",
+                "phoneNumber": "+2348169916947",
                 "__v": 0
             },
             {
@@ -1411,7 +1431,7 @@ Find all the parents whose children are students in a particular school.
                 "fullname": "Ibukun Eketi Okeke",
                 "email": "ibukunokeke@hotmail.com",
                 "username": "ibukunokeke",
-                "phoneNumber": "07069716879",
+                "phoneNumber": "+2347069716879",
                 "__v": 0
             }
         ]
@@ -1437,7 +1457,7 @@ Find all the parents whose children are students in a particular school.
             "fullname": "Jumoke Kevin Mohammed",
             "email": "jumokemohammed@aol.com",
             "username": "jumokemohammed",
-            "phoneNumber": "07070016981",
+            "phoneNumber": "+2347070016981",
             "__v": 0
         }
     }
@@ -1469,7 +1489,7 @@ Find all the parents whose children are students in a particular school.
             "fullname": "Jumoke Kevin",
             "email": "jumokemohammed@aol.com",
             "username": "jumokekevin",
-            "phoneNumber": "07070016981",
+            "phoneNumber": "+2347070016981",
             "__v": 0
         }
     }
@@ -1481,3 +1501,83 @@ Find all the parents whose children are students in a particular school.
   
 * Response:
     * Status: 204 -  no content
+
+### Resetting Passwords
+The different category of users have different endpoints for resetting their passwords.
+
+However, they must all follow two main steps:
+
+* They make a post request with their phone number to their forgot_password route.
+* They send their reset code along with their new password and a confirmation of the new password in a patch request to their reset_password route
+  
+  This how the forgot_password route of each category of user looks like:
+  * For ADMIN: /api/v1/admin/forgot_password
+  * For STUDENT: /api/v1/student/forgot_password
+  * For PARENT: /api/v1/parent/forgot_password
+  * For STAFF: /api/v1/staff/forgot_password
+
+This how the reset_password route of each category of user looks like:
+  * For ADMIN: /api/v1/admin/reset_password
+  * For STUDENT: /api/v1/student/eset_password
+  * For PARENT: /api/v1/parent/eset_password
+  * For STAFF: /api/v1/staff/eset_password
+
+For demonstration purposes I will work wth only an admin. 
+
+Rest assured, the other category of users follow thesame pattern, with the exception of having seperate endpoints, which have been explained above.
+
+### Forgot Password
+* Request:
+    * Endpoint: POST/api/v1/admin/forgot_password
+    * Body: (application/json)
+    ```
+    {
+        "phoneNumber": "9064058821"
+    }
+    ```
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "Success",
+        "message": "Your password reset token has been sent to your mobile phone as a text message",
+        "resetCode": "{{resetToken}}"
+    }
+    ```
+
+### Reset Password
+* Request:
+    * Endpoint: PATCH/api/v1/admin/reset_password
+    * Body: (application/json)
+    ```
+    {
+        "resetCode": "{{RESETCODE}}",
+        "newPassword": "{{NEWPASSWORD}}",
+        "confirmNewPassword": "{{NEWPASSWORD}}"
+    }
+    ```
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlYzRkMmE3MTllODMwMWYwODk3ZDZjYSIsImNhdGVnb3J5IjoiQWRtaW4iLCJpYXQiOjE1OTAxMTk1MDgsImV4cCI6MTU5Nzg5NTUwOH0.VT1pwjaLQOENcInEuWxyzYiXPDL4ZcW3sivb1UvLdyc",
+        "data": {
+            "user": {
+                "role": "backend-developer",
+                "category": "Admin",
+                "_id": "5ec4d2a719e8301f0897d6ca",
+                "fullname": "Abuchi Kingsley",
+                "email": "abuchikingsley76@gmail.com",
+                "username": "Abuchi76",
+                "phoneNumber": "+2349064058821",
+                "password": "$2a$12$SLz8YK7AeE2uhH7iRiJdl.vFGZ02INM4UTxQik5Dd5o7dRRefa3CC",
+                "passwordChangedAt": "2020-05-25T00:23:23.918Z",
+                "__v": 0
+            }
+        }
+    }
+    ```

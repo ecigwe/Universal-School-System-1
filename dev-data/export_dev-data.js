@@ -1,10 +1,11 @@
+require('dotenv').config();
 const fs = require('fs');
 const mongoose = require('mongoose');
-require('dotenv').config();
 const Admin = require('../models/users/admin');
 const Parent = require('../models/users/parent');
 const Staff = require('../models/users/staff');
 const Student = require('../models/users/student');
+//const User = require('../models/users/user');
 const School = require('../models/school/school');
 
 mongoose.connect(process.env.MONGODB_URI, {
@@ -12,21 +13,27 @@ mongoose.connect(process.env.MONGODB_URI, {
     useFindAndModify: false,
     useNewUrlParser: true,
     useUnifiedTopology: true
-}).then(con => console.log(`Connected to ${con.connections[0].name} database.`));
+}).then(con => console.log(`Connected to ${con.connections[0].name} database.`))
+    .catch(err => console.log(err.name, err.message));
 
-const admins = JSON.parse(fs.readFileSync(`${__dirname}/admins.js`, 'utf-8'));
 const schools = JSON.parse(fs.readFileSync(`${__dirname}/schools.json`, 'utf-8'));
+const admins = JSON.parse(fs.readFileSync(`${__dirname}/admins.js`, 'utf-8'));
 const parents = JSON.parse(fs.readFileSync(`${__dirname}/parents.json`, 'utf-8'));
 const staffs = JSON.parse(fs.readFileSync(`${__dirname}/staffs.json`, 'utf-8'));
+const staffsTwo = JSON.parse(fs.readFileSync(`${__dirname}/staffsTwo.json`, 'utf-8'));
 const students = JSON.parse(fs.readFileSync(`${__dirname}/students.json`, 'utf-8'));
+const studentsTwo = JSON.parse(fs.readFileSync(`${__dirname}/studentsTwo.json`, 'utf-8'));
+
 
 const exportData = async () => {
     try {
-        //await School.create(schools);
-        //await Admin.create(admins);
+        await School.create(schools);
+        await Admin.create(admins);
+        await Parent.create(parents);
         await Staff.create(staffs);
-        //await Parent.create(parents);
+        await Staff.create(staffsTwo);
         await Student.create(students);
+        await Student.create(studentsTwo);
         console.log('All exported.');
     } catch (error) {
         console.log(error);
@@ -41,6 +48,7 @@ const removeData = async () => {
         await School.deleteMany({});
         await Staff.deleteMany({});
         await Student.deleteMany({});
+        //await User.deleteMany({});
         console.log('All Deleted!');
     } catch (error) {
         console.log(error);

@@ -7,7 +7,7 @@ exports.register = catchAsyncError(async (request, response, next) => {
         fullname: request.body.fullname,
         email: request.body.email,
         username: request.body.username,
-        phoneNumber: request.body.phoneNumber,
+        phoneNumber: "+234" + request.body.phoneNumber,
         school: request.school._id,
         classes: request.body.classes,
         subjects: request.body.subjects,
@@ -32,6 +32,51 @@ exports.login = catchAsyncError(async (request, response, next) => {
     if (!staff || !(await staff.crosscheckPassword(password, staff.password))) {
         return errorHandler(401, 'Incorrect username or password');
     }
+    request.user = staff;
+    response.statusCode = 200;
+    return next();
+});
+
+exports.forgotPassword = catchAsyncError(async (request, response, next) => {
+    const { phoneNumber } = request.body;
+    if (!phoneNumber) return errorHandler(400, 'Please provide the phone number you used when signing up.');
+
+    const staff = await Staff.findOne({ phoneNumber: "+234" + phoneNumber });
+    if (!staff) return errorHandler(404, 'There is no staff with that phone number.');
+
+    const resetToken = staff.createPasswordResetToken();
+    await staff.save({ validateBeforeSave: false });
+
+    await client.messages.create({
+        to: staff.phoneNumber,
+        from: process.env.TWILIO_PHONE_NUMBER,
+        body: `Your password reset code is ${resetToken}. Expires in 5 minutes.`
+    });
+
+    return response.status(200).json({
+        status: 'Success',
+        message: 'Your password reset token has been sent to your mobile phone as a text message',
+        resetCode: resetToken
+    });
+});
+
+exports.resetPassword = catchAsyncError(async (request, response, next) => {
+    const { resetCode, newPassword, confirmNewPassword } = request.body;
+    if (!resetCode || !newPassword || !confirmNewPassword) return errorHandler(400, 'Please provide the reset code sent to your phone number as well as your new password and a confirmation of the new password.');
+
+    const hashedResetCode = crypto.createHash('sha256').update(resetCode).digest('hex');
+
+    const staff = await Staff.findOne({
+        passwordResetToken: hashedResetCode,
+        passwordResetExpires: { $gt: Date.now() }
+    });
+    if (!staff) return errorHandler(400, 'Your Reset Code Is Either Invailid Or Has Expired!');
+
+    staff.password = newPassword;
+    staff.confirmPassword = confirmNewPassword;
+    staff.passwordResetToken = undefined;
+    staff.passwordResetExpires = undefined;
+    await staff.save();
     request.user = staff;
     response.statusCode = 200;
     return next();

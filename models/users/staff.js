@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+//const User = require('./user');
 
 const staffSchema = mongoose.Schema({
     fullname: {
@@ -24,8 +25,8 @@ const staffSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide us with your phone number'],
         unique: [true, 'This phone number already exists!'],
-        minlength: [11, 'Your phone number must consist of 11 characters'],
-        maxlength: [11, 'Your phone number must consist of 11 characters']
+        minlength: [14, 'Your phone number must consist of 14 characters'],
+        maxlength: [14, 'Your phone number must consist of 14 characters']
     },
     school: {
         type: mongoose.Schema.Types.ObjectId,
@@ -75,6 +76,30 @@ const staffSchema = mongoose.Schema({
     passwordChangedAt: { type: Date }
 });
 
+// staffSchema.pre('save', async function (next) {
+//     const username = this.username;
+//     const category = this.category;
+//     const phoneNumber = this.phoneNumber;
+//     const passwordResetToken = this.passwordResetToken;
+//     const passwordResetExpires = this.passwordResetExpires;
+//     const email = this.email;
+//     const _id = this._id;
+//     const role = this.role;
+//     if (this.isNew) {
+//         await User.create({
+//             username,
+//             category,
+//             _id,
+//             phoneNumber,
+//             passwordResetToken,
+//             passwordResetExpires,
+//             email,
+//             role
+//         });
+//     }
+//     next();
+// });
+
 staffSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
     this.password = await bcrypt.hash(this.password, 12);
@@ -100,6 +125,16 @@ staffSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt
     }
     return false;
 }
+
+staffSchema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(3).toString('hex');
+
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.passwordResetExpires = Date.now() + (1000 * 60 * 5); //Reset token expires in 5 minutes
+
+    return resetToken;
+}
+
 staffSchema.index({ school: 1 });
 
 module.exports = mongoose.model('Staff', staffSchema);

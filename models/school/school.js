@@ -44,8 +44,8 @@ const schoolSchema = new mongoose.Schema({
             validator: value => validator.isMobilePhone(value, 'en-NG'),
             message: 'Please provide a valid phone number'
         },
-        minlength: [11, 'Phone number should be 11 characters long'],
-        maxlength: [11, 'Phone number should be 11 characters long'],
+        minlength: [14, 'Phone number should be 14 characters long'],
+        maxlength: [14, 'Phone number should be 14 characters long'],
         unique: true
     },
 
