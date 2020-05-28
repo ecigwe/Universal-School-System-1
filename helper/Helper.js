@@ -82,6 +82,24 @@ class Helper {
             next(error);
         }
     }
+
+    async deleteArrayItem(req, res, next, message1, message2, query, field) {
+        try {
+            const document = await this.collection.findById(query);
+            if (!document) return errorHandler(404, message1);
+
+            let num = document[field].indexOf(req.query[field]);
+            if (num < 0) return errorHandler(404, message2);
+            document[field].splice(num, 1);
+
+            await document.save();
+            
+            responseHandler(res, null, next, 204, 'Deleted successfuly', 1)
+        } catch (error) {
+            console.log(error)
+            next(error);
+        }
+    }
 }
 
 module.exports = Helper;

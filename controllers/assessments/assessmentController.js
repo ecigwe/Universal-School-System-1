@@ -34,16 +34,27 @@ class assessmentController {
     static async updateAssessmentOfASpecificSchool(req, res, next) {
         const message1 = 'Assessment not found';
         const message2 = 'Assessment was updated successfully';
+
         const query = { '_id': req.params.assessment_id, 'school': req.params.id };
         let { createdOn, ...updateData } = req.body;
+        if (req.body.questions) {
+            let { questions } = updateData;
+            questions = { $push: { questions: [...questions] } };
+            updateData = { updateData, ...questions };
+        }
         req.body = updateData;
         return assessment.update(req, res, next, message1, message2, query);
     }
 
     static async deleteAssessmentOfASpecificSchool(req, res, next) {
-        const message1 = 'Assessment not found';
-        const message2 = 'Assessment was deleted successfully';
-        const query = { '_id': req.params.assessment_id, 'school': req.params.id };
+        let message1 = 'Assessment not found';
+        let message2 = 'Assessment was deleted successfully';
+        let query = { '_id': req.params.assessment_id, 'school': req.params.id };
+        if (req.query.questions) {
+            let field = 'questions' // name of field from which item is to be deleted
+             message2 = 'Question not found in current assessment';
+            return assessment.deleteArrayItem(req, res, next, message1, message2, query, field);
+        }
         return assessment.deleteOne(req, res, next, message1, message2, query);
     }
 }
