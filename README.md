@@ -25,6 +25,7 @@ The following steps must be undertaken in order for the code of this project to 
 * Node (JavaScript Runtime)
 * Express (Node Framework)
 * MongoDB (Database)
+* TWILIO (Sending Text Messages)
 
 ## API Features
 This API consists of the features indicated below:
@@ -50,6 +51,9 @@ This API consists of the features indicated below:
 * Registered schools can be deleted from the application.
 
 ### Users
+* Any logged in user can see their own information
+* Any logged in user can update their own information
+* Any logged in user can delete their own information 
 
 ### Administrators
 * Information about all the company's administrators can be seen.
@@ -129,6 +133,9 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | PATCH/api/v1/student/reset_password            | A Student is finally able to reset his or her password                     |
 | POST/api/v1/parent/forgot_password             | A Parent forgets his or her password and recieves a reset code             |
 | PATCH/api/v1/parent/reset_password             | A Parent is finally able to reset his or her password                      |
+| GET/api/v1/users/me                            | A logged in user can see their information                                 |
+| PATCH/api/v1/users/me                          | A logged in user can update their data                                     |
+| DELETE/api/v1/users/me                         | A logged in user can delete their data                                     |
 
 
 
@@ -171,6 +178,9 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Retrieve Parent](#retrieve-parent)
     - [Update Parent](#update-parent)
     - [Delete Parent](#delete-parent)
+    - [Get Me](#get-me)
+    - [Update Me](#update-me)
+    - [Delete Me](#delete-me) 
 
  - [Resetting Passwords](#resetting-passwords)
     - [Forgot Password](#forgot-password)
@@ -1501,6 +1511,83 @@ Find all the parents whose children are students in a particular school.
   
 * Response:
     * Status: 204 -  no content
+
+### Get Me
+
+You must be logged in to see your information
+
+* Request:
+    * Endpoint: GET/api/v1/users/me
+
+* Response
+    * Status - ok
+    * Body: (application/json)
+     ```
+     {
+        "status": "success",
+        "message": "Successfully retrieved your details",
+        "results": 1,
+        "data": {
+            "role": "Student",
+            "category": "Student",
+            "_id": "5ecf95f436601f194c3ede77",
+            "fullname": "Lawrence Yemi Okeke",
+            "email": "lawrenceayantola@gmail.com",
+            "username": "lawrenceayantola84",
+            "phoneNumber": "+2349074018341",
+            "dateOfBirth": "2003-09-22T23:00:00.000Z",
+            "class": "Basic 2",
+            "parent": "5ecb08e3d2595416f0dc9981",
+            "school": "5ecb08dfd2595416f0dc9978",
+            "age": 16,
+            "__v": 0
+        }
+    }
+     ```
+
+### Update Me
+
+You must be logged in to be able to update your information
+
+* Request:
+    * Endpoint: PATCH/api/v1/users/me
+    * Body: (application/json)
+     ```
+     {
+        "fullname": "Chinyere Teslim Babatunde",
+        "email": "chinyerebabatunde@gmail.com"
+    }
+     ```
+* Response: 
+    * Status: 200 - ok
+    * Body: (application/json)
+     ```
+     {
+        "status": "success",
+        "message": "Successfully updated your details",
+        "results": 1,
+        "data": {
+            "role": "Parent",
+            "category": "Parent",
+            "_id": "5ecb08e3d2595416f0dc997e",
+            "fullname": "Chinyere Teslim Babatunde",
+            "email": "chinyerebabatunde@gmail.com",
+            "username": "chinyerebabatunde",
+            "phoneNumber": "+2347069416777",
+            "__v": 0
+        }
+    }
+     ```
+
+### Delete Me
+
+You must be logged in to delete your information
+
+* Request:
+    * Endpoint: DELETE/api/v1/users/me
+  
+* Response:
+    * Status: 204 - no content
 
 ### Resetting Passwords
 The different category of users have different endpoints for resetting their passwords.

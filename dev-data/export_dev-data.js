@@ -27,13 +27,13 @@ const studentsTwo = JSON.parse(fs.readFileSync(`${__dirname}/studentsTwo.json`, 
 
 const exportData = async () => {
     try {
-        await School.create(schools);
+        //await School.create(schools);
         await Admin.create(admins);
-        await Parent.create(parents);
-        await Staff.create(staffs);
-        await Staff.create(staffsTwo);
-        await Student.create(students);
-        await Student.create(studentsTwo);
+        //await Parent.create(parents);
+        //await Staff.create(staffs);
+        //await Staff.create(staffsTwo);
+        //await Student.create(students);
+        //await Student.create(studentsTwo);
         console.log('All exported.');
     } catch (error) {
         console.log(error);
