@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post('/register',
     middlewares.checkIfSchoolExists,
-    middlewares.checkIfParentIsRegistered,
+    //middlewares.checkIfParentIsRegistered,
     student.register,
     signToken,
     attachTokenToCookie);
