@@ -22,3 +22,29 @@ exports.checkIfParentIsRegistered = catchAsyncError(async (request, response, ne
     request.parent = parent;
     return next();
 });
+
+exports.checkIfSchoolStillExists = catchAsyncError(async (request, response, next) => {
+    //check if school exists and return an error if it does not exist
+    const school = await School.findById(request.params.id);
+    if (!school) return errorHandler(404, 'We could not find the information you requested.');
+    return next();
+});
+
+exports.checkUserRole = (...roles) => {
+    return (request, response, next) => {
+        if (!roles.includes(request.user.role)) return errorHandler(403, 'You are forbidden from accessing this resource.');
+        return next();
+    }
+}
+
+exports.checkConnectionWithSchool = (request, response, next) => {
+    if (!request.user.school.equals(request.params.id)) return errorHandler(403, 'You are forbidden from accessing this resource.');
+    return next();
+}
+
+exports.checkCategory = (...category) => {
+    return (request, response, next) => {
+        if (!category.includes(request.user.category)) return errorHandler(403, 'You are forbidden from accessing this resource.');
+        return next();
+    }
+}

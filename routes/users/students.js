@@ -1,9 +1,14 @@
 const express = require('express');
+const authHandler = require('../../controllers/authentication/authHandler');
 const studentsController = require('../../controllers/users/studentsController');
+const middlewares = require('../../controllers/middlewares');
 
 const router = express.Router({ mergeParams: true });
 
-router.get('/', studentsController.getAllStudentsOfSchool);
+router.use(authHandler.protect);
+router.use(middlewares.checkIfSchoolStillExists);
+
+router.get('/', middlewares.checkCategory('Staff'), middlewares.checkConnectionWithSchool, studentsController.getAllStudentsOfSchool);
 
 router.route('/:student_id')
     .get(studentsController.getStudentOfSchool)
