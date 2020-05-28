@@ -25,7 +25,6 @@ router.get('/', (request, response) => {
 //router.use('/api/v1', users);
 
 //Authentication
-router.use('/api/v1/schools', schools);
 router.use('/api/v1/student', student);
 router.use('/api/v1/parent', parent);
 router.use('/api/v1/staff', staff);
@@ -39,7 +38,9 @@ router.patch('/api/v1/update_my_password',
 
 //Plain users stuff
 router.use('/api/v1/users/admins', adminUsers);
+router.use('/api/v1/schools', schools);
 router.use('/api/v1/school', school);
+
 
 
 

@@ -19,7 +19,6 @@ const bookSchema = mongoose.Schema({
     class: {
         type: String,
         required: [true, 'Please provide a recommended class for this book'],
-        default: 'Any',
         enum: ['Basic 1', 'Basic 2', 'Basic 3', 'SS 1', 'SS 2', 'SS 3', 'Senior Secondary', 'Junior Secondary', 'Any']
     },
     category: {

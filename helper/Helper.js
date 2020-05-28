@@ -8,7 +8,6 @@ class Helper {
     constructor(collection) {
         this.collection = collection;
     }
-    // name parameter might be changed to message to give more custom messages
 
     async create(req, res, next, message = 'Crated successfuly') {
         try {
@@ -25,7 +24,7 @@ class Helper {
         }
     }
 
-    async findAll(req, res, next, message, query = {}, exclude = {}, limit = null) {
+    async findAll(req, res, next, message, query = {}, exclude = {}, limit = null, offset = null) {
         try {
             const result = await this.collection.find(query).select(exclude).lean();
             return responseHandler(res, result, next, 200, message, result.length);
