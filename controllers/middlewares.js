@@ -68,3 +68,8 @@ exports.restrictStudentData = catchAsyncError(async (request, response, next) =>
     }
     return errorHandler(403, 'You are forbidden from accessing this resource');
 });
+
+exports.confirmOwnership = (request, response, next) => {
+    if (request.user._id.equals(request.params.id)) return next();
+    return errorHandler(403, 'You are forbidden from interacting with this resource.');
+}
