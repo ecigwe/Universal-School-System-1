@@ -61,9 +61,7 @@ const questionSchema = mongoose.Schema({
         required: [true, 'Please provide a school that owns this question']
     },
     createdOn: {
-        type: Date,
-        default: Date()              // remove later
-        
+        type: Date        
     }
 });
 
