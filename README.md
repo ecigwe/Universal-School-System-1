@@ -145,6 +145,27 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Update Admin](#update-admin)
     - [Delete Admin](#delete-admin)
 
+- [Books](#books)
+    - [Retrieve Books](#retrieve-books)
+    - [Retrieve Book](#retrieve-book)
+    - [Create Book](#create-book)
+    - [Update Book](#update-book)
+    - [Delete Book](#delete-book)
+
+- [Questions](#questions)
+    - [Retrieve questions](#retrieve-questions)
+    - [Retrieve question](#retrieve-question)
+    - [Create question](#create-question)
+    - [Update question](#update-question)
+    - [Delete question](#delete-question)
+
+- [Assessments](#assessments)
+    - [Retrieve assessments](#retrieve-assessments)
+    - [Retrieve assessment](#retrieve-assessment)
+    - [Create assessment](#create-assessment)
+    - [Update assessment](#update-assessment)
+    - [Delete assessment](#delete-assessment)
+
 ### Authenticate
 
 ### Register Admin
@@ -805,3 +826,116 @@ Only for users who are logged in.
   
 * Response:
     * Status: 204 - no content
+
+### Retrieve Books
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/books
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Books retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ecd2a995f77980c30fcdee1",
+                    "class": "Senior Secondary",
+                    "price": 2500,
+                    "title": "New School Physics",
+                    "author": "M Anyakoha",
+                    "category": "Textbook",
+                    "bookUrl": "www.example.com",
+                    "imageUrl": "www.books",
+                    "createdOn": "2020-05-26T14:41:29.000Z",
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ecd77f766a24726186138e2",
+                    "class": "SS 3",
+                    "price": 3000,
+                    "title": "New School Chemistry",
+                    "author": "Osei Yaw Ababio",
+                    "category": "Textbook",
+                    "bookUrl": "www.example.com",
+                    "imageUrl": "www.books.com",
+                    "createdOn": "2020-05-26T20:11:35.000Z",
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                }
+                ...
+            ]
+        }
+    ```
+
+### Retrieve Book
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/books/5ecd2a995f77980c30fcdee1
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Book retrieved successfully",
+            "results": 1,
+            "data": {
+                    "_id": "5ecd2a995f77980c30fcdee1",
+                    "class": "Senior Secondary",
+                    "price": 2500,
+                    "title": "New School Physics",
+                    "author": "M Anyakoha",
+                    "category": "Textbook",
+                    "bookUrl": "www.example.com",
+                    "imageUrl": "www.books",
+                    "createdOn": "2020-05-26T14:41:29.000Z",
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                }
+        }
+    ```
+
+### Create Book
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/books
+    * Body: (application/json)
+    ```
+    { 
+        "title":"The Enchanted Wood",
+        "author":"Enyd Blyton",
+        "class":"Any",
+        "category": "Novel",
+        "price": 1200,
+        "bookUrl":"www.example.com/books",
+        "imageUrl": "www.books.com/the-enchanted-wood.jpg"
+    }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+    {
+       "status": "success",
+        "message": "Book created successfully",
+        "results": 1,
+        "data": {
+            "price": 1200,
+            "_id": "5ed0dbb8a9c89b2410fddb62",
+            "title": "The Enchanted Wood",
+            "author": "Enyd Blyton",
+            "class": "Any",
+            "category": "Novel",
+            "bookUrl": "www.example.com/books",
+            "imageUrl": "www.books.com/the-enchanted-wood.jpg",
+            "createdOn": "2020-05-29T09:54:00.000Z",
+            "school": "5ecb08dfd2595416f0dc9975",
+            "__v": 0
+        }
+    }
+    ```
+  
