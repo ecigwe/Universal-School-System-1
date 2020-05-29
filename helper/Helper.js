@@ -9,7 +9,7 @@ class Helper {
         this.collection = collection;
     }
 
-    async create(req, res, next, message = 'Crated successfuly') {
+    async create(req, res, next, message = 'Created successfuly') {
         try {
 
             const data = new this.collection({
@@ -93,10 +93,9 @@ class Helper {
             document[field].splice(num, 1);
 
             await document.save();
-            
+
             responseHandler(res, null, next, 204, 'Deleted successfuly', 1)
         } catch (error) {
-            console.log(error)
             next(error);
         }
     }
