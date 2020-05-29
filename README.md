@@ -1174,3 +1174,200 @@ Only for users who are logged in.
   
 * Response:
     * Status: 204 - No Content
+
+### Assessments
+
+### Retrieve Assessments
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/assessments
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessments retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ecfef8920381a1ed88108a8",
+                    "questions": [
+                        "5ecf7b9a525ab2125c2b96fc",
+                        "5ecf7b9a525ab2125c2b9708",
+                        "5ecf7b9a525ab2125c2b970c"
+                    ],
+                    "subject": "Chemistry",
+                    "title": "Third Term Examination",
+                    "class": "SS2",
+                    "category": "Exam",
+                    "term": 1,
+                    "year": "2025",
+                    "percentage": 75,
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "createdOn": "2020-05-28T17:06:17.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ecff0e920381a1ed88108a9",
+                    "questions": [
+                        "5ecf7b9a525ab2125c2b97a1",
+                        "5ecfd2c904602111208fa6d8"
+                    ],
+                    "subject": "Economics",
+                    "title": "Classwork",
+                    "class": "SS2",
+                    "category": "Classwork",
+                    "term": 1,
+                    "year": "2025",
+                    "percentage": 0,
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "createdOn": "2020-05-28T17:12:09.000Z",
+                    "__v": 3
+                }
+            ]
+        }
+    ```    
+### Retrieve Assessment
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/assessments/5ecff0e920381a1ed88108a9
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment retrieved successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ecff0e920381a1ed88108a9",
+                "questions": [
+                    "5ecf7b9a525ab2125c2b97a1",
+                    "5ecfd2c904602111208fa6d8"
+                ],
+                "subject": "Economics",
+                "title": "Classwork",
+                "class": "SS2",
+                "category": "Classwork",
+                "term": 1,
+                "year": "2025",
+                "percentage": 0,
+                "school": "5ecb08dfd2595416f0dc9975",
+                "createdOn": "2020-05-28T17:12:09.000Z",
+                "__v": 3
+            }
+        }
+    ```    
+
+### Create Assessment
+* Request
+    * Endpoint: POST/api/v1/school/5ecb08dfd2595416f0dc9975/assessments
+    * Body: (application/json)
+    ```
+    {
+       "subject": "Chemistry",
+        "title": "Quiz",
+        "class": "SS1",
+        "category": "Quiz",
+        "questions": ["5ecf7b9a525ab2125c2b96fc", 
+            "5ecf7b9a525ab2125c2b9708", "5ecf7b9a525ab2125c2b970c",
+            "5ecf7b9a525ab2125c2b970e", "5ecf7b9a525ab2125c2b9719", 
+            "5ecf7b9a525ab2125c2b971b", 5ecf7b9a525ab2125c2b971e" 
+        ],
+        "term": "1",
+        "year": "2020",
+        "percentage": "10",
+        "school": "5ecb08dfd2595416f0dc9975"
+     }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment created successfully",
+            "results": 1,
+            "data": {
+                "questions": [
+                    "5ecf7b9a525ab2125c2b96fc",
+                    "5ecf7b9a525ab2125c2b9708",
+                    "5ecf7b9a525ab2125c2b970c",
+                    "5ecf7b9a525ab2125c2b970e",
+                    "5ecf7b9a525ab2125c2b9719",
+                    "5ecf7b9a525ab2125c2b971b",
+                    "5ecf7b9a525ab2125c2b971e"
+                ],
+                "_id": "5ed116aaaa3e3e21acf51f89",
+                "subject": "Chemistry",
+                "title": "Quiz",
+                "class": "SS1",
+                "category": "Quiz",
+                "term": 1,
+                "year": "2020",
+                "percentage": 10,
+                "school": "5ecb08dfd2595416f0dc9975",
+                "createdOn": "2020-05-29T14:05:30.000Z",
+                "__v": 0
+            }
+        }
+    ```
+
+### Update Assessment
+* Request
+    * Endpoint: PATCH/api/v1/school/5ecb08dfd2595416f0dc9975/assessments/5ed116aaaa3e3e21acf51f89
+    * Body: (application/json)
+    ```
+    {
+ "      questions": [
+            "5ecf7b9a525ab2125c2b9726",
+            "5ecf7b9a525ab2125c2b9729"
+        ],
+        "category": "Exam"
+    }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed116aaaa3e3e21acf51f89",
+                "questions": [
+                    "5ecf7b9a525ab2125c2b96fc",
+                    "5ecf7b9a525ab2125c2b9708",
+                    "5ecf7b9a525ab2125c2b970c",
+                    "5ecf7b9a525ab2125c2b970e",
+                    "5ecf7b9a525ab2125c2b9719",
+                    "5ecf7b9a525ab2125c2b971b",
+                    "5ecf7b9a525ab2125c2b971e",
+                    "5ecf7b9a525ab2125c2b9726",
+                    "5ecf7b9a525ab2125c2b9729"
+                ],
+                "subject": "Chemistry",
+                "title": "Quiz",
+                "class": "SS1",
+                "category": "Exam",
+                "term": 1,
+                "year": "2020",
+                "percentage": 10,
+                "school": "5ecb08dfd2595416f0dc9975",
+                "createdOn": "2020-05-29T14:05:30.000Z",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Question
+
+* Request:
+    * Endpoint: DELETE/api/v1/school/5ecb08dfd2595416f0dc9975/assessments/5ed116aaaa3e3e21acf51f89
+  
+* Response:
+    * Status: 204 - No Content
