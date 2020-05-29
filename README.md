@@ -57,31 +57,67 @@ This API consists of the features indicated below:
 * Information about each administrative officer of the company can be updated.
 * Information about each administrative officer of the company can be deleted.* 
 
+### Books
+* Books can be added by individual schools.
+* Books added by a school can only be seen by the staff and students of the school.
+* Each school can update the details of any book which they added.
+* Each school could delete a specific book they created.
+
+### Questions
+* Questions can be addedd by staff of individual schools.
+* Questions added by a school can only be seen by the satff of the school.
+* Studnents' access to questions are controlled.
+* Each question added by a school can be edited by the staff of the school.
+* Questions added by a school can be deleted by the staff of the school.
+
+### Assessments
+* Assessments (Exams, Classwork, Quiz, Assignment) can be added by staff of individual schools.
+* Assessments added by a school can only be seen by staff or students of the school.
+* Students' access to assessments are limited.
+* Assessments added by a school can only be edited by the staff of the school.
+* Assessments added by a school can be deleted by staff of the school.
+
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 
-| Endpoint                        | Function                                     |
-| ------------------------------- | -------------------------------------------- |
-| GET/                            | Check to ensure that the api can be accessed |
-| GET/api/v1/schools              | Retrieve all the registered schools          |
-| POST/api/v1/schools             | Register a new school                        |
-| GET/api/v1/schools/:id          | Retrieve a specific school                   |
-| PATCH/api/v1/schools/:id        | Update a specific school                     |
-| DELETE/api/v1/schools/:id       | Delete a specific school                     |
-| POST/api/v1/student/register    | Register a student                           |
-| POST/api/v1/student/login       | Login a student                              |
-| GET/api/v1/logout               | Logout a user                                |
-| POST/api/v1/parent/register     | Register a parent                            |
-| POST/api/v1/parent/login        | Login a parent                               |
-| POST/api/v1/staff/register      | Register a staff                             |
-| POST/api/v1/staff/login         | Login a staff                                |
-| POST/api/v1/admin/register      | Register an admin                            |
-| POST/api/v1/admin/login         | Login an admin                               |
-| GET/api/v1/users/admins         | See all the administrators                   |
-| GET/api/v1/users/admins/:id     | See a specific administrator                 |
-| PATCH/api/v1/users/admins/:id   | Update a specific administrator              |
-| DELETE/api/v1/users/admins/:id  | Delete an administrator                      |
-| PATCH/api/v1/update_my_password | Update logged in user's password             |
+| Endpoint                                              | Function                                          |
+| ----------------------------------------------------- | ------------------------------------------------- |
+| GET/                                                  | Check to ensure that the api can be accessed      |
+| GET/api/v1/schools                                    | Retrieve all the registered schools               |
+| POST/api/v1/schools                                   | Register a new school                             |
+| GET/api/v1/schools/:id                                | Retrieve a specific school                        |
+| PATCH/api/v1/schools/:id                              | Update a specific school                          |
+| DELETE/api/v1/schools/:id                             | Delete a specific school                          |
+| POST/api/v1/student/register                          | Register a student                                |
+| POST/api/v1/student/login                             | Login a student                                   |
+| GET/api/v1/logout                                     | Logout a user                                     |
+| POST/api/v1/parent/register                           | Register a parent                                 |
+| POST/api/v1/parent/login                              | Login a parent                                    |
+| POST/api/v1/staff/register                            | Register a staff                                  |
+| POST/api/v1/staff/login                               | Login a staff                                     |
+| POST/api/v1/admin/register                            | Register an admin                                 |
+| POST/api/v1/admin/login                               | Login an admin                                    |
+| GET/api/v1/users/admins                               | See all the administrators                        |
+| GET/api/v1/users/admins/:id                           | See a specific administrator                      |
+| PATCH/api/v1/users/admins/:id                         | Update a specific administrator                   |
+| DELETE/api/v1/users/admins/:id                        | Delete an administrator                           |
+| PATCH/api/v1/update_my_password                       | Update logged in user's password                  |
+| GET/api/v1/school/:id/books                           | Retrieves all the books for a school              |
+| GET/api/vi/school/:id/books/:book_id                  | Retrieves a single book for a school              |
+| POST/api/v1/school/:id/books                          | Creates a new book for a school                   |
+| PATCH/api/vi/school/:id/books/:book_id                | Updates the details of a book for a school        |
+| DELETE/api/vi/school/:id/books/:book_id               | Deltes a specific book for a school               |
+| GET/api/vi/school/:id/questions                       | Retrieves all the questions for a school          |
+| GET/api/vi/school/:id/questions/:question_id          | Retrieves a single question fro a school          |
+| POST/api/vi/school/:id/questions                      | Creates a new question for a school               |
+| PATCH/api/vi/school/:id/questions/:question_id        | Updates a specific question for a school          |
+| DELETE/api/vi/school/:id/questions/:question_id       | Deltes a specific question for a school           |
+| GET/api/vi/school/:id/assessments                     | Retrieves all assessments for a school            |
+| GET/api/vi/school/:id/assessments/:assessment_id      | Retrieves a specifc assessment for a school       |
+| POST/api/vi/school/:id/assessments                    | Creates a new assessment for a school             |
+| PATCH/api/vi/school/:id/assessments/:assessment_id    | Updates a specific assessment for a school        |
+| DELETE/api/vi/school/:id/assessments/:assessment_id   | Deletes a specific assessment for a school        |
+
 
 ### Sample Requests and Responses From The API
 - [Authenticate](#authenticate)
