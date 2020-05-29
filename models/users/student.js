@@ -51,8 +51,8 @@ const studentSchema = mongoose.Schema({
     },
     parent: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Parent',
-        required: [true, 'Please tell us the phone number of a parent or guardian that is registered on this platform']
+        ref: 'Parent'
+        //required: [true, 'Please tell us the phone number of a parent or guardian that is registered on this platform']
     },
     class: {
         type: String,

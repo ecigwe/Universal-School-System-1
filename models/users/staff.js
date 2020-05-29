@@ -30,13 +30,13 @@ const staffSchema = mongoose.Schema({
     },
     school: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'School',
-        required: [true, 'Please provide the correct name of your school and the address']
+        ref: 'School'
+        //required: [true, 'Please provide the correct name of your school and the address']
     },
     role: {
         type: String,
         default: 'Teacher',
-        enum: ['Principal', 'Vice-Principal', 'Teacher', 'Bursar', 'Form-Teacher']
+        enum: ['School-Administrator', 'Principal', 'Vice-Principal', 'Teacher', 'Bursar', 'Form-Teacher']
     },
     category: {
         type: 'String',

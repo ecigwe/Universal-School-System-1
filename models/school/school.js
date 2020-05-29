@@ -18,6 +18,8 @@ const schoolSchema = new mongoose.Schema({
 
     admin: {
         type: String,
+        required: [true, 'Every school must have an administrator.'],
+        unique: true
     },
 
     population: {
