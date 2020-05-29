@@ -153,18 +153,18 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Delete Book](#delete-book)
 
 - [Questions](#questions)
-    - [Retrieve questions](#retrieve-questions)
-    - [Retrieve question](#retrieve-question)
-    - [Create question](#create-question)
-    - [Update question](#update-question)
+    - [Retrieve Questions](#retrieve-questions)
+    - [Retrieve Question](#retrieve-question)
+    - [Create Question](#create-question)
+    - [Update Question](#update-question)
     - [Delete question](#delete-question)
 
 - [Assessments](#assessments)
-    - [Retrieve assessments](#retrieve-assessments)
-    - [Retrieve assessment](#retrieve-assessment)
-    - [Create assessment](#create-assessment)
-    - [Update assessment](#update-assessment)
-    - [Delete assessment](#delete-assessment)
+    - [Retrieve Assessments](#retrieve-assessments)
+    - [Retrieve Assessment](#retrieve-assessment)
+    - [Create Assessment](#create-assessment)
+    - [Update Assessment](#update-assessment)
+    - [Delete Assessment](#delete-assessment)
 
 ### Authenticate
 
@@ -983,3 +983,58 @@ Only for users who are logged in.
   
 * Response:
     * Status: 204 - No Content  
+
+### Questions
+
+### Retrieve Questions
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/questions
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Questions retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ecf7b9a525ab2125c2b9789",
+                    "createdOn": "2020-05-28T08:51:38.000Z",
+                    "subject": "Economics",
+                    "class": "Basic3",
+                    "category": "Assignment",
+                    "question": "In which of the following situations do we have a free good?  ",
+                    "options": {
+                                "a": "At zero price, more is demanded than supplied  ",
+                                "b": "At zero price, quantity supplied exceeds quantity demanded  ",
+                                "c": "At equilibrium price, quantity supply is equal to quantity demanded. ",
+                                "d": "Any quantity can be obtained when the price is low "
+                            },
+                    "answer": "b",
+                    "points": 4,
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ecf7b9a525ab2125c2b97a1",
+                    "createdOn": "2020-05-28T08:51:38.000Z",
+                    "subject": "Government",
+                    "class": "Basic3",
+                    "category": "Classwork",
+                    "question": "The reason behind Nigeria’s suspension from the Commonwealth in 1995 was",
+                    "options": {
+                        "a": "legal",
+                        "b": "political",
+                        "c": "economic",
+                        "d": "socio-cultural"
+                    },
+                    "answer": "b",
+                    "points": 4,
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                }
+            ]
+        }
+    ```
