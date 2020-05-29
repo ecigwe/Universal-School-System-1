@@ -88,6 +88,24 @@ This API consists of the features indicated below:
 * If the code is vaild and it's time limit has not expired, the user's password will be successfully reset and the user will be logged in automatically.
 * There are different reset password endpoints for the application's administrators, school's staff officials, students and parents
 
+### Permissions For Accesssing Resources
+
+### Accessing Students Information
+* A student can access (read update and delete) his or her own information but cannot access the information of other students
+* Staff can access (read update and delete) the information of a student if that student belongs to their school.
+* A parent can access (read update and delete) the information of a student, if that student is his or her child.
+* Staff can see all the students of their school. 
+
+### Accessing Administrators Information
+* The public has access to the information of all the administrators of the universal school system project.
+* Each admin can update and delete only their own data.
+
+### Accessing Parents Information
+* Every parent can see update and delete their own information.
+* Every staff can see (not update and delete) the data of a parent whose child is a student in his or her school.
+* Every student can see (not update and delete ) the information of their parent.
+* Every staff can see the information of all the parents that have at least a child in their school.
+
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 

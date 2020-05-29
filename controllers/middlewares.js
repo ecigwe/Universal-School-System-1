@@ -73,3 +73,21 @@ exports.confirmOwnership = (request, response, next) => {
     if (request.user._id.equals(request.params.id)) return next();
     return errorHandler(403, 'You are forbidden from interacting with this resource.');
 }
+
+exports.restrictParentData = catchAsyncError(async (request, response, next) => {
+    const parentChildren = await Student.find({ parent: request.params.id });
+    let childrenSchools = [];
+
+    for (i = 0; i < parentChildren.length; i++) {
+        childrenSchools.push(JSON.stringify(parentChildren[i].school));
+    }
+
+    if (
+        (request.user.category === 'Parent' && request.user._id.equals(request.params.id)) ||
+        (request.user.category === 'Student' && request.user.parent.equals(request.params.id)) ||
+        (request.user.category === 'Staff' && childrenSchools.includes(JSON.stringify(request.user.school)))
+    ) {
+        return next();
+    }
+    return errorHandler(403, 'You are forbidden from interacting with this resource.');
+});
