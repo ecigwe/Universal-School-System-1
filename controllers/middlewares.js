@@ -33,6 +33,8 @@ exports.checkIfSchoolStillExists = catchAsyncError(async (request, response, nex
 
 exports.checkUserRole = (...roles) => {
     return (request, response, next) => {
+        if (request.user.category === 'Admin') return next();
+
         if (!roles.includes(request.user.role)) {
             return errorHandler(403, 'You are forbidden from accessing this resource.');
         }
@@ -41,6 +43,8 @@ exports.checkUserRole = (...roles) => {
 }
 
 exports.checkConnectionWithSchool = (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+
     if (!request.user.school.equals(request.params.id)) {
         return errorHandler(403, 'You are forbidden from accessing this resource.');
     }
@@ -49,6 +53,8 @@ exports.checkConnectionWithSchool = (request, response, next) => {
 
 exports.checkCategory = (...category) => {
     return (request, response, next) => {
+        if (request.user.category === 'Admin') return next();
+
         if (!category.includes(request.user.category)) {
             return errorHandler(403, 'You are forbidden from accessing this resource.');
         }
@@ -59,7 +65,7 @@ exports.checkCategory = (...category) => {
 exports.restrictStudentData = catchAsyncError(async (request, response, next) => {
     //Restricts the information of a student to the student, his or her parent and staff of the student school
     const student = await Student.findById(request.params.student_id);
-    if (
+    if (request.user.category === 'Admin' ||
         (request.user.category === 'Staff' && request.user.school.equals(request.params.id)) ||
         (request.user.category === 'Parent' && request.user._id.equals(student.parent)) ||
         (request.user.category === 'Student' && request.user._id.equals(student._id))) {
@@ -70,6 +76,8 @@ exports.restrictStudentData = catchAsyncError(async (request, response, next) =>
 });
 
 exports.confirmOwnership = (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+
     if (request.user._id.equals(request.params.id)) return next();
     return errorHandler(403, 'You are forbidden from interacting with this resource.');
 }
@@ -82,7 +90,7 @@ exports.restrictParentData = catchAsyncError(async (request, response, next) => 
         childrenSchools.push(JSON.stringify(parentChildren[i].school));
     }
 
-    if (
+    if (request.user.category === 'Admin' ||
         (request.user.category === 'Parent' && request.user._id.equals(request.params.id)) ||
         (request.user.category === 'Student' && request.user.parent.equals(request.params.id)) ||
         (request.user.category === 'Staff' && childrenSchools.includes(JSON.stringify(request.user.school)))
@@ -103,7 +111,7 @@ exports.restrictStaffInformation = catchAsyncError(async (request, response, nex
         }
     }
 
-    if (
+    if (request.user.category === 'Admin' ||
         (request.user.category === 'Staff' && request.user.school.equals(request.params.id)) ||
         (request.user.category === 'Student' && request.user.school.equals(request.params.id)) ||
         (request.user.category === 'Parent' && childrenSchools.includes(JSON.stringify(request.params.id)))
@@ -114,7 +122,32 @@ exports.restrictStaffInformation = catchAsyncError(async (request, response, nex
 });
 
 exports.restrictModificationOfStaffData = (request, response, next) => {
-    console.log(request.user._id);
+    if (request.user.category === 'Admin') return next();
+
     if (request.user._id.equals(request.params.staff_id)) return next();
     return errorHandler(403, 'You are forbidden from interacting with this resource.');
 }
+
+exports.restrictSchoolInformation = catchAsyncError(async (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+
+    let parentChildren;
+    let childrenSchools = [];
+
+    if (request.user.category === 'Parent') {
+        parentChildren = await Student.find({ parent: request.user._id });
+        for (i = 0; i < parentChildren.length; i++) {
+            childrenSchools.push(JSON.stringify(parentChildren[i].school));
+        }
+    }
+
+    if (
+        (request.user.category === 'Student' && request.user.school.equals(request.params.id)) ||
+        (request.user.category === 'Staff' && request.user.school.equals(request.params.id)) ||
+        (request.user.category === 'Parent' && childrenSchools.includes(JSON.stringify(request.params.id)))
+    ) {
+        return next();
+    }
+
+    return errorHandler(403, 'You are forbidden from accessing this resource.');
+});
