@@ -57,6 +57,25 @@ This API consists of the features indicated below:
 * Information about each administrative officer of the company can be updated.
 * Information about each administrative officer of the company can be deleted.* 
 
+### Students
+* Every school can see the data of all of it's students
+* Each school can see the data of a single student
+* The details of a school's student can be updated
+* The details of a school's student can be deleted
+
+### Staff
+* Every school can see the data of all of it's staff
+* Each school can see the data of a single staff official
+* The details of a school's staff can be updated
+* The details of a school's staff can be deleted
+
+
+### Parents
+* Every school can see the data of all the parents who have children as students in that school.
+* The details of a parent can be retrieved
+* The details of a parent can be updated
+* The details of a parent can be deleted
+
 ### Books
 * Books can be added by individual schools.
 * Books added by a school can only be seen by the staff and students of the school.
@@ -80,43 +99,55 @@ This API consists of the features indicated below:
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 
-| Endpoint                                              | Function                                          |
-| ----------------------------------------------------- | ------------------------------------------------- |
-| GET/                                                  | Check to ensure that the api can be accessed      |
-| GET/api/v1/schools                                    | Retrieve all the registered schools               |
-| POST/api/v1/schools                                   | Register a new school                             |
-| GET/api/v1/schools/:id                                | Retrieve a specific school                        |
-| PATCH/api/v1/schools/:id                              | Update a specific school                          |
-| DELETE/api/v1/schools/:id                             | Delete a specific school                          |
-| POST/api/v1/student/register                          | Register a student                                |
-| POST/api/v1/student/login                             | Login a student                                   |
-| GET/api/v1/logout                                     | Logout a user                                     |
-| POST/api/v1/parent/register                           | Register a parent                                 |
-| POST/api/v1/parent/login                              | Login a parent                                    |
-| POST/api/v1/staff/register                            | Register a staff                                  |
-| POST/api/v1/staff/login                               | Login a staff                                     |
-| POST/api/v1/admin/register                            | Register an admin                                 |
-| POST/api/v1/admin/login                               | Login an admin                                    |
-| GET/api/v1/users/admins                               | See all the administrators                        |
-| GET/api/v1/users/admins/:id                           | See a specific administrator                      |
-| PATCH/api/v1/users/admins/:id                         | Update a specific administrator                   |
-| DELETE/api/v1/users/admins/:id                        | Delete an administrator                           |
-| PATCH/api/v1/update_my_password                       | Update logged in user's password                  |
-| GET/api/v1/school/:id/books                           | Retrieves all the books for a school              |
-| GET/api/vi/school/:id/books/:book_id                  | Retrieves a single book for a school              |
-| POST/api/v1/school/:id/books                          | Creates a new book for a school                   |
-| PATCH/api/vi/school/:id/books/:book_id                | Updates the details of a book for a school        |
-| DELETE/api/vi/school/:id/books/:book_id               | Deltes a specific book for a school               |
-| GET/api/vi/school/:id/questions                       | Retrieves all the questions for a school          |
-| GET/api/vi/school/:id/questions/:question_id          | Retrieves a single question fro a school          |
-| POST/api/vi/school/:id/questions                      | Creates a new question for a school               |
-| PATCH/api/vi/school/:id/questions/:question_id        | Updates a specific question for a school          |
-| DELETE/api/vi/school/:id/questions/:question_id       | Deltes a specific question for a school           |
-| GET/api/vi/school/:id/assessments                     | Retrieves all assessments for a school            |
-| GET/api/vi/school/:id/assessments/:assessment_id      | Retrieves a specifc assessment for a school       |
-| POST/api/vi/school/:id/assessments                    | Creates a new assessment for a school             |
-| PATCH/api/vi/school/:id/assessments/:assessment_id    | Updates a specific assessment for a school        |
-| DELETE/api/vi/school/:id/assessments/:assessment_id   | Deletes a specific assessment for a school        |
+| Endpoint                                              | Function                                                           |
+| ----------------------------------------------------- | ------------------------------------------------------------------ |
+| GET/                                                  | Check to ensure that the api can be accessed                       |
+| GET/api/v1/schools                                    | Retrieve all the registered schools                                |
+| POST/api/v1/schools                                   | Register a new school                                              |
+| GET/api/v1/schools/:id                                | Retrieve a specific school                                         |
+| PATCH/api/v1/schools/:id                              | Update a specific school                                           |
+| DELETE/api/v1/schools/:id                             | Delete a specific school                                           |
+| POST/api/v1/student/register                          | Register a student                                                 |
+| POST/api/v1/student/login                             | Login a student                                                    |
+| GET/api/v1/logout                                     | Logout a user                                                      |
+| POST/api/v1/parent/register                           | Register a parent                                                  |
+| POST/api/v1/parent/login                              | Login a parent                                                     |
+| POST/api/v1/staff/register                            | Register a staff                                                   |
+| POST/api/v1/staff/login                               | Login a staff                                                      |
+| POST/api/v1/admin/register                            | Register an admin                                                  |
+| POST/api/v1/admin/login                               | Login an admin                                                     |
+| GET/api/v1/users/admins                               | See all the administrators                                         |
+| GET/api/v1/users/admins/:id                           | See a specific administrator                                       |
+| PATCH/api/v1/users/admins/:id                         | Update a specific administrator                                    |
+| DELETE/api/v1/users/admins/:id                        | Delete an administrator                                            |
+| PATCH/api/v1/update_my_password                       | Update logged in user's password                                   |
+| GET/api/v1/schools/:id/students                       | See all the students of a school                                   |
+| GET/api/v1/schools/:id/students/:student_id           | See a single school's student's data                               |
+| PATCH/api/v1/schools/:id/students/:student_id         | Update a single school's student's data                            |
+| DELETE/api/v1/schools/:id/students/:student_id        | Delete a single school's student's data                            |
+| GET/api/v1/schools/:id/staff                          | See all the staff of a school                                      |
+| GET/api/v1/schools/:id/staff/:staff_id                | See a single school's staff official's data                        |
+| PATCH/api/v1/schools/:id/staff/:staff_id              | Update a single school's staff official's data                     |
+| DELETE/api/v1/schools/:id/staff/:staff_id             | Delete a single school's staff official's data                     |
+| GET/api/v1/schools/:id/parents                        | Retrieve all the parents whose children are students of the school |
+| GET/api/v1/users/parents/:id                          | Retrieve the details of a single parent                            |
+| PATCH/api/v1/users/parents/:id                        | Update a specific parent                                           |
+| DELETE/api/v1/users/parents/:id                       | Delete a parent from the platform                                  |
+| GET/api/v1/school/:id/books                           | Retrieves all the books for a school                               |
+| GET/api/vi/school/:id/books/:book_id                  | Retrieves a single book for a school                               |
+| POST/api/v1/school/:id/books                          | Creates a new book for a school                                    |
+| PATCH/api/vi/school/:id/books/:book_id                | Updates the details of a book for a school                         |
+| DELETE/api/vi/school/:id/books/:book_id               | Deltes a specific book for a school                                |
+| GET/api/vi/school/:id/questions                       | Retrieves all the questions for a school                           |
+| GET/api/vi/school/:id/questions/:question_id          | Retrieves a single question fro a school                           |
+| POST/api/vi/school/:id/questions                      | Creates a new question for a school                                |
+| PATCH/api/vi/school/:id/questions/:question_id        | Updates a specific question for a school                           |
+| DELETE/api/vi/school/:id/questions/:question_id       | Deltes a specific question for a school                            |
+| GET/api/vi/school/:id/assessments                     | Retrieves all assessments for a school                             |
+| GET/api/vi/school/:id/assessments/:assessment_id      | Retrieves a specifc assessment for a school                        |
+| POST/api/vi/school/:id/assessments                    | Creates a new assessment for a school                              |
+| PATCH/api/vi/school/:id/assessments/:assessment_id    | Updates a specific assessment for a school                         |
+| DELETE/api/vi/school/:id/assessments/:assessment_id   | Deletes a specific assessment for a school                         |
 
 
 ### Sample Requests and Responses From The API
@@ -144,6 +175,18 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Retrieve Admin](#retrieve-admin)
     - [Update Admin](#update-admin)
     - [Delete Admin](#delete-admin)
+    - [Retrieve Students](#retrieve-students)
+    - [Retrieve Student](#retrieve-student)
+    - [Update Student](#update-student)
+    - [Delete Student](#delete-student)
+    - [Retrieve Officials](#retrieve-officials)
+    - [Retrieve Staff](#retrieve-staff)
+    - [Update Staff](#update-staff)
+    - [Delete Staff](#delete-staff)
+    - [Retrieve Parents](#retrieve-parents)
+    - [Retrieve Parent](#retrieve-parent)
+    - [Update Parent](#update-parent)
+    - [Delete Parent](#delete-parent)
 
 - [Books](#books)
     - [Retrieve Books](#retrieve-books)
@@ -827,6 +870,220 @@ Only for users who are logged in.
 * Response:
     * Status: 204 - no content
 
+### Retrieve Students
+* Request: 
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/students/
+
+* Response:
+    * Status: 200 - ok
+    * Body:(application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved all the students",
+        "results": 9,
+        "data": [
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef823a",
+                "fullname": "Musa Ogechi Doyle",
+                "email": "musageorge@gmail.com",
+                "username": "musageorge72",
+                "phoneNumber": "08170217049",
+                "dateOfBirth": "2006-02-16T23:00:00.000Z",
+                "class": "SS 3",
+                "parent": "5ecb08e3d2595416f0dc9988",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 14,
+                "__v": 0
+            },
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef8236",
+                "fullname": "Amara Chikaodili Mohammed",
+                "email": "amaraatanda@outlook.com",
+                "username": "amaraatanda14",
+                "phoneNumber": "07069816913",
+                "dateOfBirth": "2006-05-07T23:00:00.000Z",
+                "class": "Basic 2",
+                "parent": "5ecb08e3d2595416f0dc9984",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 14,
+                "__v": 0
+            },
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef8237",
+                "fullname": "Ngozi Chikaodili Edet",
+                "email": "ngoziobiwuru@gmail.com",
+                "username": "ngoziobiwuru77",
+                "phoneNumber": "07069916947",
+                "dateOfBirth": "2002-10-08T23:00:00.000Z",
+                "class": "Basic 3",
+                "parent": "5ecb08e3d2595416f0dc9985",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 17,
+                "__v": 0
+            },
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef8238",
+                "fullname": "Amake Habbeeb George",
+                "email": "amakemohammed@aol.com",
+                "username": "amakemohammed72",
+                "phoneNumber": "07070016981",
+                "dateOfBirth": "2003-07-07T23:00:00.000Z",
+                "class": "Basic 2",
+                "parent": "5ecb08e3d2595416f0dc9986",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 16,
+                "__v": 0
+            },
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef8239",
+                "fullname": "Wasiu Ngozi Obi",
+                "email": "wasiuedet@outlook.com",
+                "username": "wasiuedet9",
+                "phoneNumber": "07070117015",
+                "dateOfBirth": "2008-07-06T23:00:00.000Z",
+                "class": "SS 2",
+                "parent": "5ecb08e3d2595416f0dc9987",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 11,
+                "__v": 0
+            },
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef8232",
+                "fullname": "Amanda Gboyega Babatunde",
+                "email": "amandababatunde@hotmail.com",
+                "username": "amandababatunde68",
+                "phoneNumber": "07069416777",
+                "dateOfBirth": "2008-10-31T23:00:00.000Z",
+                "class": "Basic 3",
+                "parent": "5ecb08e3d2595416f0dc997e",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 11,
+                "__v": 0
+            },
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef8234",
+                "fullname": "Esther Eketi Atanda",
+                "email": "esthermonday@hotmail.com",
+                "username": "esthermonday5",
+                "phoneNumber": "08169616845",
+                "dateOfBirth": "2006-08-17T23:00:00.000Z",
+                "class": "SS 3",
+                "parent": "5ecb08e3d2595416f0dc9982",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 13,
+                "__v": 0
+            },
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef8235",
+                "fullname": "Iniobong Aisha Obiwuru",
+                "email": "iniobongokeke@aol.com",
+                "username": "iniobongokeke1",
+                "phoneNumber": "09069716879",
+                "dateOfBirth": "2003-03-27T23:00:00.000Z",
+                "class": "Basic 3",
+                "parent": "5ecb08e3d2595416f0dc9983",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 17,
+                "__v": 0
+            },
+            {
+                "role": "Student",
+                "category": "Student",
+                "_id": "5ecc155fdd53ff1604ef8233",
+                "fullname": "Eketi Folake Okeke",
+                "email": "eketiayantola@gmail.com",
+                "username": "eketiayantola53",
+                "phoneNumber": "09069516811",
+                "dateOfBirth": "2007-04-06T23:00:00.000Z",
+                "class": "Basic 2",
+                "parent": "5ecb08e3d2595416f0dc9981",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "age": 13,
+                "__v": 0
+            }
+        ]
+    }
+    ```
+
+### Retrieve Student
+* Request: 
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/students/5ecc155fdd53ff1604ef823a
+  
+* Response:
+    * Status: 200 - ok
+    * Body(application/json):
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved the student's details",
+        "results": 1,
+        "data": {
+            "role": "Student",
+            "category": "Student",
+            "_id": "5ecc155fdd53ff1604ef823a",
+            "fullname": "Musa Ogechi Doyle",
+            "email": "musageorge@gmail.com",
+            "username": "musageorge72",
+            "phoneNumber": "08170217049",
+            "dateOfBirth": "2006-02-16T23:00:00.000Z",
+            "class": "SS 3",
+            "parent": "5ecb08e3d2595416f0dc9988",
+            "school": "5ecb08dfd2595416f0dc9977",
+            "age": 14,
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Student
+* Request: 
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/students/5ecc155fdd53ff1604ef823a
+    * Body: (application/json):
+    ```
+    {
+        "username": "musageorge"
+    }
+    ```
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully updated student's details",
+        "results": 1,
+        "data": {
+            "role": "Student",
+            "category": "Student",
+            "_id": "5ecc155fdd53ff1604ef823a",
+            "fullname": "Musa Ogechi Doyle",
+            "email": "musageorge@gmail.com",
+            "username": "musageorge",
+            "phoneNumber": "08170217049",
+            "dateOfBirth": "2006-02-16T23:00:00.000Z",
+            "class": "SS 3",
+            "parent": "5ecb08e3d2595416f0dc9988",
+            "school": "5ecb08dfd2595416f0dc9977",
+            "age": 14,
+=======
 ### Books
 
 ### Retrieve Books
@@ -940,6 +1197,279 @@ Only for users who are logged in.
         }
     }
     ```
+
+### Delete Student
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/students/5ecc155fdd53ff1604ef823a
+
+* Response: 
+    * Status: 204 - no content
+
+
+### Retrieve Officials
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9976/staff
+  
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved all the staff officials",
+        "results": 9,
+        "data": [
+            {
+                "role": "Principal",
+                "category": "Staff",
+                "subjects": [
+                    "Accounting",
+                    "Biology"
+                ],
+                "classes": [
+                    "Basic 1",
+                    "SS 2"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81e2",
+                "fullname": "Amake Yemi Solarin",
+                "email": "amakesolarin@outlook.com",
+                "username": "amakesolarin63",
+                "phoneNumber": "08170417117",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            },
+            {
+                "role": "Vice-Principal",
+                "category": "Staff",
+                "subjects": [
+                    "Geography",
+                    "Geography"
+                ],
+                "classes": [
+                    "SS 3",
+                    "Basic 2"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81e3",
+                "fullname": "Azeez Moses Obasola",
+                "email": "azeezobasola@outlook.com",
+                "username": "azeezobasola27",
+                "phoneNumber": "07070517151",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            },
+            {
+                "role": "Bursar",
+                "category": "Staff",
+                "subjects": [
+                    "Mathematics",
+                    "Accounting"
+                ],
+                "classes": [
+                    "Basic 3",
+                    "Basic 3"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81e5",
+                "fullname": "Bunmi Mary Obasola",
+                "email": "bunmiobasola@gmail.com",
+                "username": "bunmiobasola21",
+                "phoneNumber": "09070717219",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            },
+            {
+                "role": "Form-Teacher",
+                "category": "Staff",
+                "subjects": [
+                    "Basic science",
+                    "Geography"
+                ],
+                "classes": [
+                    "SS 3",
+                    "SS 3"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81e6",
+                "fullname": "Mary Chioma Lawnson",
+                "email": "marylawnson@aol.com",
+                "username": "marylawnson50",
+                "phoneNumber": "09070817253",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            },
+            {
+                "role": "Form-Teacher",
+                "category": "Staff",
+                "subjects": [
+                    "Accounting",
+                    "Biology"
+                ],
+                "classes": [
+                    "SS 3",
+                    "SS 1"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81e7",
+                "fullname": "Sunday Chiamaka Eze",
+                "email": "sundayeze@hotmail.com",
+                "username": "sundayeze10",
+                "phoneNumber": "08170917287",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            },
+            {
+                "role": "Form-Teacher",
+                "category": "Staff",
+                "subjects": [
+                    "Basic science",
+                    "Mathematics"
+                ],
+                "classes": [
+                    "Basic 3",
+                    "SS 3"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81e8",
+                "fullname": "Eketi Habbeeb Abdul",
+                "email": "eketiabdul@gmail.com",
+                "username": "eketiabdul38",
+                "phoneNumber": "07071017321",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            },
+            {
+                "role": "Teacher",
+                "category": "Staff",
+                "subjects": [
+                    "Hausa Language",
+                    "Hausa Language"
+                ],
+                "classes": [
+                    "Basic 3",
+                    "Basic 1"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81e9",
+                "fullname": "Folake Funsho Awolowo",
+                "email": "folakeawolowo@gmail.com",
+                "username": "folakeawolowo3",
+                "phoneNumber": "07071117355",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            },
+            {
+                "role": "Teacher",
+                "category": "Staff",
+                "subjects": [
+                    "Mathematics",
+                    "Basic science"
+                ],
+                "classes": [
+                    "Basic 2",
+                    "Basic 3"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81ea",
+                "fullname": "John Habbeeb Olanrewaju",
+                "email": "johnolanrewaju@aol.com",
+                "username": "johnolanrewaju68",
+                "phoneNumber": "09071217389",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            },
+            {
+                "role": "Teacher",
+                "category": "Staff",
+                "subjects": [
+                    "Physics",
+                    "Accounting"
+                ],
+                "classes": [
+                    "SS 3",
+                    "SS 1"
+                ],
+                "_id": "5ecc14f1dd53ff1604ef81eb",
+                "fullname": "Musa Emeka Doyle",
+                "email": "musadoyle@aol.com",
+                "username": "musadoyle77",
+                "phoneNumber": "07071317423",
+                "school": "5ecb08dfd2595416f0dc9976",
+                "__v": 0
+            }
+        ]
+    }
+    ```
+
+### Retrieve Staff
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9976/staff/5ecc14f1dd53ff1604ef81e2
+    
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+        {
+        "status": "success",
+        "message": "Successfully retrieved the official's details",
+        "results": 1,
+        "data": {
+            "role": "Principal",
+            "category": "Staff",
+            "subjects": [
+                "Accounting",
+                "Biology"
+            ],
+            "classes": [
+                "Basic 1",
+                "SS 2"
+            ],
+            "_id": "5ecc14f1dd53ff1604ef81e2",
+            "fullname": "Amake Yemi Solarin",
+            "email": "amakesolarin@outlook.com",
+            "username": "amakesolarin63",
+            "phoneNumber": "08170417117",
+            "school": "5ecb08dfd2595416f0dc9976",
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Staff
+* Request:
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9976/staff/5ecc14f1dd53ff1604ef81e2
+    * Body: (application/json)
+    ```
+    {
+        "subjects": [
+            "Mathematics",
+            "Hausa Language",
+            "English Language"
+            ]
+    }
+    ```
+    
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+```
+{
+  "status": "success",
+  "message": "Successfully updated staff information",
+  "results": 1,
+  "data": {
+      "role": "Principal",
+      "category": "Staff",
+      "subjects": [
+          "Mathematics",
+          "Hausa Language",
+          "English Language"
+      ],
+      "classes": [
+          "Basic 1",
+          "SS 2"
+      ],
+      "_id": "5ecc14f1dd53ff1604ef81e2",
+      "fullname": "Amake Yemi Solarin",
+      "email": "amakesolarin@outlook.com",
+      "username": "amakesolarin63",
+      "phoneNumber": "08170417117",
+      "school": "5ecb08dfd2595416f0dc997"message": "Question created successfully",
+ }
+```
   
   ### Update Book
 * Request
@@ -1099,7 +1629,6 @@ Only for users who are logged in.
     ```
     {
         "status": "success",
-        "message": "Question created successfully",
         "results": 1,
         "data": {
             "_id": "5ed10b84aa3e3e21acf51f88",
@@ -1121,6 +1650,177 @@ Only for users who are logged in.
         }
     }
     ```
+
+### Delete Staff
+
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9976/staff/5ecc14f1dd53ff1604ef81e2
+
+* Response:
+    * Status: 204 - no content
+
+
+### Retrieve Parents
+Find all the parents whose children are students in a particular school.
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/parents
+    
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved all parents",
+        "results": 8,
+        "data": [
+            {
+                "role": "Parent",
+                "category": "Parent",
+                "_id": "5ecb08e3d2595416f0dc9984",
+                "fullname": "Jumoke Kevin Mohammed",
+                "email": "jumokemohammed@aol.com",
+                "username": "jumokemohammed",
+                "phoneNumber": "07070016981",
+                "__v": 0
+            },
+            {
+                "role": "Guardian",
+                "category": "Parent",
+                "_id": "5ecb08e3d2595416f0dc9985",
+                "fullname": "Yemi Echezona Edet",
+                "email": "yemiedet@aol.com",
+                "username": "yemiedet",
+                "phoneNumber": "07070117015",
+                "__v": 0
+            },
+            {
+                "role": "Parent",
+                "category": "Parent",
+                "_id": "5ecb08e3d2595416f0dc9986",
+                "fullname": "Esther Teslim George",
+                "email": "esthergeorge@aol.com",
+                "username": "esthergeorge",
+                "phoneNumber": "08170217049",
+                "__v": 0
+            },
+            {
+                "role": "Parent",
+                "category": "Parent",
+                "_id": "5ecb08e3d2595416f0dc9987",
+                "fullname": "Chinyere Toyin Obi",
+                "email": "chinyereobi@aol.com",
+                "username": "chinyereobi",
+                "phoneNumber": "08170317083",
+                "__v": 0
+            },
+            {
+                "role": "Parent",
+                "category": "Parent",
+                "_id": "5ecb08e3d2595416f0dc997e",
+                "fullname": "Chinyere Teslim Babatunde",
+                "email": "chinyerebabatunde@gmail.com",
+                "username": "chinyerebabatunde",
+                "phoneNumber": "07069416777",
+                "__v": 0
+            },
+            {
+                "role": "Parent",
+                "category": "Parent",
+                "_id": "5ecb08e3d2595416f0dc9982",
+                "fullname": "Musa Grace Atanda",
+                "email": "musaatanda@aol.com",
+                "username": "musaatanda",
+                "phoneNumber": "09069816913",
+                "__v": 0
+            },
+            {
+                "role": "Parent",
+                "category": "Parent",
+                "_id": "5ecb08e3d2595416f0dc9983",
+                "fullname": "Amake Aisha Obiwuru",
+                "email": "amakeobiwuru@hotmail.com",
+                "username": "amakeobiwuru",
+                "phoneNumber": "08169916947",
+                "__v": 0
+            },
+            {
+                "role": "Guardian",
+                "category": "Parent",
+                "_id": "5ecb08e3d2595416f0dc9981",
+                "fullname": "Ibukun Eketi Okeke",
+                "email": "ibukunokeke@hotmail.com",
+                "username": "ibukunokeke",
+                "phoneNumber": "07069716879",
+                "__v": 0
+            }
+        ]
+    }
+    ```
+
+### Retrieve Parent
+* Request:
+    * Endpoint: GET/api/v1/users/parents/5ecb08e3d2595416f0dc9984
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved the requested information",
+        "results": 1,
+        "data": {
+            "role": "Parent",
+            "category": "Parent",
+            "_id": "5ecb08e3d2595416f0dc9984",
+            "fullname": "Jumoke Kevin Mohammed",
+            "email": "jumokemohammed@aol.com",
+            "username": "jumokemohammed",
+            "phoneNumber": "07070016981",
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Parent
+* Request:
+    * Endpoint: PATCH/api/v1/users/parents/5ecb08e3d2595416f0dc9984
+    * Body: (application/json)
+    ```
+    {
+        "fullname": "Jumoke Kevin",
+        "username":"jumokekevin"
+    }
+    ```
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully updated",
+        "results": 1,
+        "data": {
+            "role": "Parent",
+            "category": "Parent",
+            "_id": "5ecb08e3d2595416f0dc9984",
+            "fullname": "Jumoke Kevin",
+            "email": "jumokemohammed@aol.com",
+            "username": "jumokekevin",
+            "phoneNumber": "07070016981",
+            "__v": 0
+        }
+    }
+    ```
+
+### Delete Parent
+* Request:  
+    * Endpoint: DELETE/api/v1/users/parents/5ecb08e3d2595416f0dc9984
+  
+* Response:
+    * Status: 204 -  no content
 
 ### Update Question
 * Request

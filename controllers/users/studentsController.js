@@ -1,114 +1,37 @@
 const responseHandler = require('../../utils/responseHandler');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const Student = require('../../models/users/student');
+const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 //const mongoose = require('mongoose');
 
+exports.getAllStudentsOfSchool = catchAsyncError(async (request, response, next) => {
+    const studentsOfSchool = await Student.find({ school: request.params.id });
+    return responseHandler(response, studentsOfSchool, next, 200, 'Successfully retrieved all the students', studentsOfSchool.length);
+});
 
-class StudentController {
-    /**
-     * @description Fetches all students of a specific school
-     * @returns All students of a specific school
-     * @static
-     * @param {*} req
-     * @param {*} res
-     * @param {*} next
-     * @memberof StudentController
-    */
-    static async getAllStudentsOfASchool(req, res, next) {
-        try {
-            console.time('_time');
-            let query = { 'school': req.params.id };
-            let exclude = { 'confirmPassword': 0, 'passwordChangedAt': 0 };
-            const students = await Student.find(query).select(exclude).lean();
-            console.timeEnd('_time');
-            return responseHandler(res, students, next, 200, 'Students retrieved successfully', students.length);
-        } catch (error) {
-            return next(error);
-        }
+exports.getStudentOfSchool = catchAsyncError(async (request, response, next) => {
+    const studentOfSchool = await Student.findById(request.params.student_id);
+    if (!studentOfSchool) return errorHandler(404, 'We were unable to find the information you are looking for.');
+    if (!studentOfSchool.school.equals(request.params.id)) return errorHandler(400, 'This student does not belong to this school!');
+    return responseHandler(response, studentOfSchool, next, 200, 'Successfully retrieved the student\'s details', 1);
+});
 
-    }
+exports.updateStudentOfSchool = catchAsyncError(async (request, response, next) => {
+    let studentOfSchool = await Student.findById(request.params.student_id);
+    if (!studentOfSchool) return errorHandler(404, 'We were unable to find the information you are looking for.');
+    if (!studentOfSchool.school.equals(request.params.id)) return errorHandler(400, 'This student does not belong to this school!');
+    studentOfSchool = await Student.findByIdAndUpdate(request.params.student_id, request.body, {
+        new: true,
+        runValidators: true
+    });
+    return responseHandler(response, studentOfSchool, next, 200, 'Successfully updated student\'s details', 1);
+});
 
-    /**
-     * @description Gets a student from a specific School
-     * @returns A single Student
-     * @static
-     * @param {*} req
-     * @param {*} res
-     * @param {*} next
-     * @memberof StudentController
-    */
-    static async getStudentOfASpecificSchool(req, res, next) {
-        try {
-            console.time('_time');
-            let query = { 'school': req.params.id, '_id': req.params.student_id };
-
-            let exclude = { 'confirmPassword': 0, 'passwordChangedAt': 0 };
-            const student = await Student.findOne(query).select(exclude).lean();
-
-            if (!student) {
-                return errorHandler(404, 'Student not found');
-            }
-            console.timeEnd('_time');
-            return responseHandler(res, student, next, 200, 'Student retrieved successfully', 1);
-        } catch (error) {
-            console.log(error)
-            return next(error);
-        }
-    }
-
-    /**
-     * @description Updates a specific student
-     * @returns Updated student
-     * @static
-     * @param {*} req
-     * @param {*} res
-     * @param {*} next
-     * @memberof StudentConroller
-    */
-    static async updateASpecificStudent(req, res, next) {
-        try {
-            const student = await Student.findById(req.params.student_id);
-            if (!student) {
-                return errorHandler(404, 'Student not found');
-            }
-
-            const { passwordChangedAt, confirmPassword, registrationDate, password, ...updateData } = { ...req.body };
-            const keys = Object.keys(updateData);
-
-            keys.forEach(key => {
-                student[key] = updateData[key];
-
-            });
-            console.log(keys);
-
-            const result = await student.save({ validateBeforeSave: true });
-            return responseHandler(res, result, next, 200, 'Updated successfully', 1);
-        } catch (error) {
-            next(error);
-        }
-    }
-
-    /**
-     * @description Deletes a specific student
-     * @returns null
-     * @static
-     * @param {*} req
-     * @param {*} res
-     * @param {*} next
-     * @memberof StudentController
-    */
-    static async deleteStudent(req, res, next) {
-        try {
-            const result = await Student.findOneAndDelete({ '_id': req.params.student_id, 'school': req.params.id });
-            if (!result) {
-                return errorHandler(404, 'Not found');
-            }
-            return responseHandler(res, null, next, 204, 'Student deleted sucessfully', 1);
-        } catch (error) {
-            return next(error);
-        }
-    }
-
-}
-
+exports.deleteStudentOfSchool = catchAsyncError(async (request, response, next) => {
+    let studentOfSchool = await Student.findById(request.params.student_id);
+    if (!studentOfSchool) return errorHandler(404, 'We were unable to find the information you are looking for.');
+    if (!studentOfSchool.school.equals(request.params.id)) return errorHandler(400, 'This student does not belong to this school!');
+    studentOfSchool = await Student.findByIdAndDelete(request.params.student_id);
+    return responseHandler(response, studentOfSchool, next, 204, 'Successfully deleted student\'s details', 1);
+});
 module.exports = StudentController;

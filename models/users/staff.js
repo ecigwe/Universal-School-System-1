@@ -39,7 +39,8 @@ const staffSchema = mongoose.Schema({
     },
     category: {
         type: 'String',
-        default: 'Staff'
+        default: 'Staff',
+        enum: 'Staff'
     },
     subjects: [
         { type: String }

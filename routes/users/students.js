@@ -1,24 +1,14 @@
-const { Router } = require('express');
-const authHandler = require('../../controllers/authentication/authHandler');
-const StudentController = require('../../controllers/users/studentsController');
+const express = require('express');
+const studentsController = require('../../controllers/users/studentsController');
 
-const router = Router();
+const router = express.Router({ mergeParams: true });
 
-//Routes will be updated to reflect changes
-router.route('/:id/users/students')
-    .get(
-        StudentController.getAllStudentsOfASchool
-    )
+router.get('/', studentsController.getAllStudentsOfSchool);
 
-router.route('/:id/users/students/:student_id')
-    .get(
-        StudentController.getStudentOfASpecificSchool
-    )
-    .patch(
-        StudentController.updateASpecificStudent
-    )
-    .delete(
-        StudentController.deleteStudent
-    )
+router.route('/:student_id')
+    .get(studentsController.getStudentOfSchool)
+    .patch(studentsController.updateStudentOfSchool)
+    .delete(studentsController.deleteStudentOfSchool);
+
 module.exports = router;
 

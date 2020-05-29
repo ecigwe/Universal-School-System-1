@@ -33,7 +33,8 @@ const studentSchema = mongoose.Schema({
     },
     category: {
         type: String,
-        default: 'Student'
+        default: 'Student',
+        enum: 'Student'
     },
     dateOfBirth: {
         type: Date,
