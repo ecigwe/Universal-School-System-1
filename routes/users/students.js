@@ -8,7 +8,9 @@ const router = express.Router({ mergeParams: true });
 router.use(authHandler.protect);
 router.use(middlewares.checkIfSchoolStillExists);
 
-router.get('/', middlewares.checkCategory('Staff'), middlewares.checkConnectionWithSchool, studentsController.getAllStudentsOfSchool);
+router.get('/', middlewares.checkCategory('Staff'),
+    middlewares.checkConnectionWithSchool,
+    studentsController.getAllStudentsOfSchool);
 
 router.route('/:student_id')
     .get(middlewares.restrictStudentData, studentsController.getStudentOfSchool)

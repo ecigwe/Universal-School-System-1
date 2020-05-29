@@ -1,13 +1,22 @@
 const express = require('express');
 const staffController = require('../../controllers/users/staffController');
+const authHandler = require('../../controllers/authentication/authHandler');
+const middlewares = require('../../controllers/middlewares');
 
 const router = express.Router({ mergeParams: true });
 
-router.get('/', staffController.getAllStaffOfSchool);
+router.use(authHandler.protect);
+router.use(middlewares.checkIfSchoolStillExists);
+
+router.get('/',
+    middlewares.restrictStaffInformation,
+    staffController.getAllStaffOfSchool);
 
 router.route('/:staff_id')
-    .get(staffController.getStaffOfSchool)
-    .patch(staffController.updateStaffOfSchool)
-    .delete(staffController.deleteStaffOfSchool);
+    .get(middlewares.restrictStaffInformation, staffController.getStaffOfSchool)
+    .patch(middlewares.restrictModificationOfStaffData,
+        staffController.updateStaffOfSchool)
+    .delete(middlewares.restrictModificationOfStaffData,
+        staffController.deleteStaffOfSchool);
 
 module.exports = router;

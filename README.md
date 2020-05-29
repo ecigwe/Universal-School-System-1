@@ -106,6 +106,12 @@ This API consists of the features indicated below:
 * Every student can see (not update and delete ) the information of their parent.
 * Every staff can see the information of all the parents that have at least a child in their school.
 
+### Accessing Staff Information
+* Every staff of a school can see the information of other staff officials of thesame school.
+* Every student of a school can see the details of their staff officials.
+* Every parent can see the details of any staff official whose school is attended by their children.
+* A staff official can update and delete their information.
+
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 
