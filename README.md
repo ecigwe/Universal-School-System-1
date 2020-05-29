@@ -1320,13 +1320,13 @@ Only for users who are logged in.
     * Endpoint: PATCH/api/v1/school/5ecb08dfd2595416f0dc9975/assessments/5ed116aaaa3e3e21acf51f89
     * Body: (application/json)
     ```
-    {
- "      questions": [
-            "5ecf7b9a525ab2125c2b9726",
-            "5ecf7b9a525ab2125c2b9729"
-        ],
-        "category": "Exam"
-    }
+        {
+            "questions": [
+                "5ecf7b9a525ab2125c2b9726",
+                "5ecf7b9a525ab2125c2b9729"
+            ],
+            "category": "Exam"
+        }
     ```
 
 * Response
