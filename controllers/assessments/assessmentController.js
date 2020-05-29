@@ -36,11 +36,10 @@ class assessmentController {
         const message2 = 'Assessment was updated successfully';
 
         const query = { '_id': req.params.assessment_id, 'school': req.params.id };
-        let { createdOn, ...updateData } = req.body;
-        if (req.body.questions) {
-            let { questions } = updateData;
+        let { createdOn, questions, ...updateData } = req.body;
+        if (questions) {
             questions = { $push: { questions: [...questions] } };
-            updateData = { updateData, ...questions };
+            updateData = { ...updateData, ...questions };
         }
         req.body = updateData;
         return assessment.update(req, res, next, message1, message2, query);
