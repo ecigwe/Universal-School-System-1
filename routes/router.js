@@ -5,7 +5,8 @@ const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
 const adminUsers = require('./users/admins');
-const users = require('./users/users');
+const school = require('./school');
+const books = require('./books/booksRoutes');
 const authHandler = require('../controllers/authentication/authHandler');
 const globalErrorHandler = require('../utils/errorUtils/globalErrorHandler');
 const errorHandler = require('../utils/errorUtils/errorHandler');
@@ -24,7 +25,6 @@ router.get('/', (request, response) => {
 //router.use('/api/v1', users);
 
 //Authentication
-router.use('/api/v1/schools', schools);
 router.use('/api/v1/student', student);
 router.use('/api/v1/parent', parent);
 router.use('/api/v1/staff', staff);
@@ -38,7 +38,10 @@ router.patch('/api/v1/update_my_password',
 
 //Plain users stuff
 router.use('/api/v1/users/admins', adminUsers);
-router.use('/api/v1/school', users);
+router.use('/api/v1/schools', schools);
+router.use('/api/v1/school', school);
+
+
 
 
 router.all('*', (request, response, next) => {
