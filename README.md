@@ -90,6 +90,8 @@ This API consists of the features indicated below:
 
 ### Permissions For Accesssing Resources
 
+The administrators of the application have access to all the resources in the system.
+
 ### Accessing Students Information
 * A student can access (read update and delete) his or her own information but cannot access the information of other students
 * Staff can access (read update and delete) the information of a student if that student belongs to their school.
@@ -113,11 +115,11 @@ This API consists of the features indicated below:
 * A staff official can update and delete their information.
 
 ### Accessing School Information
-* Only a registered School-Administrator can add a new school to the platform.
-* Only a registered School-Administrator can get the details of his school.
-* Only a registered School-Administrator can update the details of his school.
-* Only a registered School-Administrator can delete the details of his school.
-* Only the app's administrator can see all the schools that are registered on the application.
+* A registered School-Administrator can add a new school to the platform.
+* All staff officials and students can see the details of their school. Moreso, parents who have a child as a student in a school can see that school's information.
+* A registered School-Administrator can update the details of his school.
+* A registered School-Administrator can delete the details of his school.
+* Only the application's administrators can see all the schools that are registered on the application.
 
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
