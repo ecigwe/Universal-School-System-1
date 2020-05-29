@@ -1038,3 +1038,139 @@ Only for users who are logged in.
             ]
         }
     ```
+    
+### Retrieve Question
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/questions/5ecf7b9a525ab2125c2b96fc
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Question retrieved successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ecf7b9a525ab2125c2b96fc",
+                "createdOn": "2020-05-28T08:51:38.000Z",
+                "subject": "Physics",
+                "class": "SS1",
+                "category": "Exam",
+                "question": "The postulate of Dalton’s atomic theory which still holds is that",
+                "options": {
+                    "a": "Atoms can neither be created nor destroyed",
+                    "c": "Atoms are the tiniest known elements",
+                    "b": "The particles of the same element are exactly alike",
+                    "d": "All atoms are of the same weight"
+                },
+                "answer": "a",
+                "points": 2,
+                "school": "5ecb08dfd2595416f0dc9975",
+                "__v": 0
+            }   
+        }
+    ```
+
+### Create Question
+* Request
+    * Endpoint: POST/api/v1/school/5ecb08dfd2595416f0dc9975/questions
+    * Body: (application/json)
+    ```
+    {
+        "subject": "History",
+        "class": "SS2",
+        "category": "Exam",
+     	"question": "The introduction of indirect rule in eastern Nigeria led to the Aba Women Riots of  ",
+     	"options": {
+         	"a": "1914",
+         	"b": "1929",
+         	"c": "1935",
+         	"d": "1916"
+     	},
+     	"answer": "b",
+     	"points": 2
+     }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Question created successfully",
+        "results": 1,
+        "data": {
+            "_id": "5ed10b84aa3e3e21acf51f88",
+            "subject": "History",
+            "class": "SS2",
+            "category": "Exam",
+            "question": "The introduction of indirect rule in eastern Nigeria led to the Aba Women Riots of  ",
+            "options": {
+                "a": "1914",
+                "b": "1929",
+                "c": "1935",
+                "d": "1916"
+            },
+            "answer": "b",
+            "points": 2,
+            "createdOn": "2020-05-29T13:17:56.000Z",
+            "school": "5ecb08dfd2595416f0dc9975",
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Question
+* Request
+    * Endpoint: PATCH/api/v1/school/5ecb08dfd2595416f0dc9975/questions/5ed10b84aa3e3e21acf51f88
+    * Body: (application/json)
+    ```
+    {
+        "options": {
+            "a": "1929",
+            "b": "1914",
+            "c": "1916",
+            "d": "None of the above"
+        },
+        "answer": "a"
+    }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Question was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed10b84aa3e3e21acf51f88",
+                "subject": "History",
+                "class": "SS2",
+                "category": "Exam",
+                "question": "The introduction of indirect rule in eastern Nigeria led to the Aba Women Riots of  ",
+                "options": {
+                    "a": "1929",
+                    "b": "1914",
+                    "c": "1916",
+                    "d": "None of the above"
+                },
+                "answer": "a",
+                "points": 3,
+                "createdOn": "2020-05-29T13:17:56.000Z",
+                "school": "5ecb08dfd2595416f0dc9975",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Question
+
+* Request:
+    * Endpoint: DELETE/api/v1/school/5ecb08dfd2595416f0dc9975/questions/5ed10b84aa3e3e21acf51f88
+  
+* Response:
+    * Status: 204 - No Content
