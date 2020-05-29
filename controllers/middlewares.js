@@ -6,21 +6,21 @@ const errorHandler = require('../utils/errorUtils/errorHandler');
 
 exports.checkIfSchoolExists = catchAsyncError(async (request, response, next) => {
     const { schoolName, schoolAddress } = request.body;
-    if (!schoolName || !schoolAddress) return errorHandler(400, 'Please provide the correct name and address of your school');
+    if (!schoolName || !schoolAddress) return next(); /* return errorHandler(400, 'Please provide the correct name and address of your school');*/
 
     const school = await School.findOne({ name: schoolName, address: schoolAddress });
-    if (!school) return next();/*return errorHandler(400, 'Your school is not yet registered on this platform.');*/
+    if (!school) return errorHandler(400, 'Your school is not yet registered on this platform.');
 
-    request.school = school;
+    request.body.school = school._id;
     return next();
 });
 
 exports.checkIfParentIsRegistered = catchAsyncError(async (request, response, next) => {
     const { parentPhoneNumber } = request.body;
-    if (!parentPhoneNumber) return errorHandler(400, 'Please give us the phone number of a parent or guardian that is registered on this platform');
+    if (!parentPhoneNumber) return next(); /*return errorHandler(400, 'Please give us the phone number of a parent or guardian that is registered on this platform');*/
     const parent = await Parent.findOne({ phoneNumber: "+234" + parentPhoneNumber });
-    if (!parent) return next(); /* return errorHandler(400, 'Please give us the phone number of a parent or guardian that is registered on this platform');*/
-    request.parent = parent;
+    if (!parent) return errorHandler(400, 'Please give us the phone number of a parent or guardian that is registered on this platform');
+    request.body.parent = parent._id;
     return next();
 });
 
@@ -114,6 +114,7 @@ exports.restrictStaffInformation = catchAsyncError(async (request, response, nex
 });
 
 exports.restrictModificationOfStaffData = (request, response, next) => {
+    console.log(request.user._id);
     if (request.user._id.equals(request.params.staff_id)) return next();
     return errorHandler(403, 'You are forbidden from interacting with this resource.');
 }

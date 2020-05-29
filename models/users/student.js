@@ -46,8 +46,8 @@ const studentSchema = mongoose.Schema({
     },
     school: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'School',
-        required: [true, 'Please provide the correct name of your school and the address']
+        ref: 'School'
+        //required: [true, 'Please provide the correct name of your school and the address']
     },
     parent: {
         type: mongoose.Schema.Types.ObjectId,

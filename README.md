@@ -364,6 +364,15 @@ This API has routes, each of which are dedicated to a single objective. The endp
     ```
 
 ### Register Student
+
+If your parent is already registered on the platform, it is recommended that you provide their phone number. However, this is not required.
+
+When the parent has registered on the platform, the student can update his or her account details to include his or her parent's phoneNumber, using the **updateMe** endpoint.
+
+If the student puts in the wrong parent phone number, when updating his or her account an error will be returned.
+
+A student cannot be connected to any parent whose phone number they do not provide.
+
 * Request
     * Endpoint: POST/api/v1/student/register
     * Body: (application/json)
@@ -377,6 +386,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
             "schoolName": "Shalom Academy",
             "schoolAddress": "No 16, Otedola Street, Ikorodu, Lagos State",
             "class": "SS3",
+            "parentPhoneNumber": "8170517151",
             "password": "{{PASSWORD}}",
             "confirmPassword": "{{PASSWORD}}"
         }
@@ -401,6 +411,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
                 "phoneNumber": "+2349067202271",
                 "dateOfBirth": "2004-10-22T00:00:00.000Z",
                 "school": "5ec9d41615e2a217c87a9c94",
+                "parent": "5ecb08e3d2595416f0dc9989",
                 "class": "SS3",
                 "password": "$2a$12$RQzD7I1VtYc0JkKSIlDnIuXJJmxhxhuYp6exh5xHltucdfR8SFs.m",
                 "registrationDate": "2020-05-22T03:28:52.273Z",
@@ -452,8 +463,17 @@ This API has routes, each of which are dedicated to a single objective. The endp
     ```
 
 ### Register Staff
-* A school staff can either be a principal or a vice-principal or a teacher or a form-teacher or a bursar.
+* A school staff can either be a school-administrator or a principal or a vice-principal or a teacher or a form-teacher or a bursar.
 * If you do not specify your role, the default is teacher. 
+
+The School-Administrator does not have to specify the school name and address, when signing up, because the school may not be in existence yet,
+since it is the School-Administrator who registers a school with the platform after creating his or her account.
+
+When the school has been registered, the School-Administrator can update his account details to include the school name and address, using the **updateMe** endpoint
+
+If the School-Administrator puts in the wrong school name and address, when updating his or her account an error will be returned. 
+
+A staff cannot be connected to a school when they do not provide the school name and address.
 
 * Request
     * Endpoint: POST/api/v1/staff/register

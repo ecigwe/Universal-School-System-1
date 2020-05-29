@@ -3,16 +3,12 @@ const errorHandler = require('../../utils/errorUtils/errorHandler');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 
 exports.register = catchAsyncError(async (request, response, next) => {
-    let schoolId;
-
-    if (request.school) schoolId = request.school._id;
-
     const newStaff = await Staff.create({
         fullname: request.body.fullname,
         email: request.body.email,
         username: request.body.username,
         phoneNumber: "+234" + request.body.phoneNumber,
-        school: schoolId,
+        school: request.body.school,
         classes: request.body.classes,
         subjects: request.body.subjects,
         role: request.body.role,

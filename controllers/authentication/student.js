@@ -3,18 +3,14 @@ const errorHandler = require('../../utils/errorUtils/errorHandler');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 
 exports.register = catchAsyncError(async (request, response, next) => {
-    let parentId;
-
-    if (request.parent) parentId = request.parent._id;
-
     const newStudent = await Student.create({
         fullname: request.body.fullname,
         email: request.body.email,
         username: request.body.username,
         phoneNumber: "+234" + request.body.phoneNumber,
         dateOfBirth: request.body.dateOfBirth,
-        school: request.school._id,
-        parent: parentId,
+        school: request.body.school,
+        parent: request.body.parent,
         //Later, I'll need to make sure that this parent actually already exists on this platform
         class: request.body.class,
         password: request.body.password,
