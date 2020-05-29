@@ -827,6 +827,8 @@ Only for users who are logged in.
 * Response:
     * Status: 204 - no content
 
+### Books
+
 ### Retrieve Books
 * Request
     * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/books
@@ -838,7 +840,7 @@ Only for users who are logged in.
         {
             "status": "success",
             "message": "Books retrieved successfully",
-            "results": 2,
+            "results": 10,
             "data": [
                 {
                     "_id": "5ecd2a995f77980c30fcdee1",
@@ -901,7 +903,7 @@ Only for users who are logged in.
 
 ### Create Book
 * Request
-    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/books
+    * Endpoint: POST/api/v1/school/5ecb08dfd2595416f0dc9975/books
     * Body: (application/json)
     ```
     { 
@@ -939,3 +941,45 @@ Only for users who are logged in.
     }
     ```
   
+  ### Update Book
+* Request
+    * Endpoint: PATCH/api/v1/school/5ecb08dfd2595416f0dc9975/books/5ed0dbb8a9c89b2410fddb62
+    * Body: (application/json)
+    ```
+    {
+        "author": "E. Blyton",
+        "price": 1000
+    }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Book was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed0dbb8a9c89b2410fddb62",
+                "price": 1000,
+                "title": "The Enchanted Wood",
+                "author": "E. Blyton",
+                "class": "Any",
+                "category": "Novel",
+                "bookUrl": "www.example.com/books",
+                "imageUrl": "www.books.com/the-enchanted-wood.jpg",
+                "createdOn": "2020-05-29T09:54:00.000Z",
+                "school": "5ecb08dfd2595416f0dc9975",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Book
+
+* Request:
+    * Endpoint: DELETE/api/v1/school/5ecb08dfd2595416f0dc9975/books/5ed0dbb8a9c89b2410fddb62
+  
+* Response:
+    * Status: 204 - No Content  
