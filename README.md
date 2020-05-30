@@ -17,7 +17,18 @@ The following steps must be undertaken in order for the code of this project to 
 2. Using the terminal, navigate to the cloned directory **cd Universal-School-System**
 3. Install all the project's dependencies and devDependencies using the **npm install -d** command.
 4. Create a mongoDB database on mongodb atlas and insert your connection string in your own local .env file
-5. Start the server, using the command **npm start**.
+5. Create environment variables for the following:
+     NODE_ENV
+     PORT
+     MONGODB_URI
+     JWT_EXPIRATION_TIMEFRAME
+     JWT_EXPIRY_TIME
+     SECRET
+     ADMIN_CODE
+     TWILIO_ACCOUNT_SID
+     TWILIO_AUTH_TOKEN
+     TWILIO_PHONE_NUMBER
+6. Start the server, using the command **npm start**.
 7. Congratulations, your api should be up and running.
 ```
 
@@ -108,6 +119,13 @@ This API consists of the features indicated below:
 * Assessments added by a school can only be edited by the staff of the school.
 * Assessments added by a school can be deleted by staff of the school.
 
+### Classrooms
+* Every school is can create classes.
+* The different classes that make up a school can be retrieved.
+* The details of a sepcific class can be seen.
+* The details of a specific class can be updated.
+* The details of a specific class can be deleted. 
+
 ### Permissions For Accesssing Resources
 
 The administrators of the application have access to all the resources in the system.
@@ -157,7 +175,13 @@ The administrators of the application have access to all the resources in the sy
 * Only A Staff Of A School Can Add Assessments For That School.
 * Only A Staff Of A School Can Update An Assessment For That School.
 * Only A Staff Of A School Can Delete An Assessment For That School. 
-* Questions For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent. 
+* Assessments For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent. 
+
+### Accessing Classrooms
+* Only A Staff Of A School Can Add Classrooms For That School.
+* Only A Staff Of A School Can Update A Classroom For That School.
+* Only A Staff Of A School Can Delete A Classroom For That School. 
+* Classrooms For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent.
 
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
