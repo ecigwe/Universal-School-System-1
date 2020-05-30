@@ -14,7 +14,9 @@ router.get('/', middlewares.checkCategory('Staff'),
 
 router.route('/:student_id')
     .get(middlewares.restrictStudentData, studentsController.getStudentOfSchool)
-    .patch(middlewares.restrictStudentData, studentsController.updateStudentOfSchool)
+    .patch(middlewares.restrictStudentData,
+        middlewares.preventPasswordUpdate,
+        studentsController.updateStudentOfSchool)
     .delete(middlewares.restrictStudentData, studentsController.deleteStudentOfSchool);
 
 module.exports = router;

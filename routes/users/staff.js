@@ -15,6 +15,7 @@ router.get('/',
 router.route('/:staff_id')
     .get(middlewares.restrictStaffInformation, staffController.getStaffOfSchool)
     .patch(middlewares.restrictModificationOfStaffData,
+        middlewares.preventPasswordUpdate,
         staffController.updateStaffOfSchool)
     .delete(middlewares.restrictModificationOfStaffData,
         staffController.deleteStaffOfSchool);

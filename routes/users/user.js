@@ -10,6 +10,7 @@ router.route('/me')
     .get(meController.getMe)
     .patch(middlewares.checkIfSchoolExists,
         middlewares.checkIfParentIsRegistered,
+        middlewares.preventPasswordUpdate,
         meController.updateMe)
     .delete(meController.deleteMe);
 

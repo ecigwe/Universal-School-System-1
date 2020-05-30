@@ -151,3 +151,10 @@ exports.restrictSchoolInformation = catchAsyncError(async (request, response, ne
 
     return errorHandler(403, 'You are forbidden from performing this action.');
 });
+
+exports.preventPasswordUpdate = (request, response, next) => {
+    if (request.body.password || request.body.confirmPassword) {
+        return errorHandler('400', 'You can\'t update a password here. Please go to the section designated for updating passwords.');
+    }
+    next();
+}
