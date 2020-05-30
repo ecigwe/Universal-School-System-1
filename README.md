@@ -967,6 +967,8 @@ Only for users who are logged in.
 
 ### Update Admin
 
+An admin cannot update his or her password using this endpoint. He or she must use the update_my_password endpoint.
+
 * Request:
     * Endpoint: PATCH/api/v1/users/admins/5ec92d57d94fa51314fddfbd
     * Body: (application/json)
@@ -1189,6 +1191,9 @@ Only for users who are logged in.
     ```
 
 ### Update Student
+
+A student cannot update his or her password using this endpoint. He or she must use the update_my_password endpoint.
+
 * Request: 
     * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/students/5ecc155fdd53ff1604ef823a
     * Body: (application/json):
@@ -1574,6 +1579,7 @@ Only for users who are logged in.
     ```
 
 ### Retrieve Staff
+
 * Request:
     * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9976/staff/5ecc14f1dd53ff1604ef81e2
     
@@ -1608,6 +1614,9 @@ Only for users who are logged in.
     ```
 
 ### Update Staff
+
+A staff cannot update his or her password using this endpoint. He or she must use the update_my_password endpoint.
+
 * Request:
     * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9976/staff/5ecc14f1dd53ff1604ef81e2
     * Body: (application/json)
@@ -1972,6 +1981,9 @@ Find all the parents whose children are students in a particular school.
     ```
 
 ### Update Parent
+
+A parent cannot update his or her password using this endpoint. He or she  must use the update_my_password endpoint.
+
 * Request:
     * Endpoint: PATCH/api/v1/users/parents/5ecb08e3d2595416f0dc9984
     * Body: (application/json)
@@ -2046,6 +2058,9 @@ You must be logged in to see your information
 ### Update Me
 
 You must be logged in to be able to update your information
+
+Logged in users cannot update their password using this endpoint. They must use the update_my_password endpoint.
+
 
 * Request:
     * Endpoint: PATCH/api/v1/users/me
