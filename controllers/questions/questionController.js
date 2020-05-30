@@ -51,4 +51,4 @@ class questionController {
     }
 }
 
-module.exports = questionController
+module.exports = questionController;
