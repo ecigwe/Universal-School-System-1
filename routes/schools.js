@@ -15,8 +15,9 @@ const router = Router();
 router.use('/:id/students', students);
 router.use('/:id/staff', staff);
 router.use('/:id/parents', parents);
-router.use('/:id/classes', classes);
 
+
+router.use(classes);
 router.use(books);
 router.use(questions);
 router.use(assessments);

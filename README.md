@@ -2339,3 +2339,215 @@ Rest assured, the other category of users follow thesame pattern, with the excep
   
 * Response:
     * Status: 204 - No Content
+
+
+### Classes
+
+### Retrieve Classes
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/classes
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+           "status": "success",
+            "message": "Classes retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ed2330cfc427e1f740cfba2",
+                    "students": [
+                        "5ecf9935dca4071ddc002088",
+                        "5ecf9935dca4071ddc002089",
+                        "5ecf9935dca4071ddc00208b",
+                        "5ecf9935dca4071ddc00208e",
+                        "5ecf9935dca4071ddc00208d"
+                    ],
+                    "title": "SS2C",
+                    "formTeacher": "5ecf9935dca4071ddc002089",
+                    "prefect": "5ecf9935dca4071ddc002088",
+                    "term": 1,
+                    "numOfBoys": 14,
+                    "numOfGirls": 23,
+                    "year": "2020",
+                    "population": 37,
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-30T10:18:52.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed233aafc427e1f740cfba3",
+                    "students": [
+                        "5ecf9935dca4071ddc002088",
+                        "5ecf9935dca4071ddc002089",
+                        "5ecf9935dca4071ddc00208b",
+                        "5ecf9935dca4071ddc00208e",
+                        "5ecf9935dca4071ddc00208d"
+                    ],
+                    "title": "Basic1A",
+                    "formTeacher": "5ecf9935dca4071ddc002089",
+                    "prefect": "5ecf9935dca4071ddc002088",
+                    "term": 1,
+                    "numOfBoys": 12,
+                    "numOfGirls": 23,
+                    "year": "2020",
+                    "population": 35,
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-30T10:21:30.000Z",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Retrieve Class
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed2330cfc427e1f740cfba2
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Class retrieved successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed2330cfc427e1f740cfba2",
+                "students": [
+                    "5ecf9935dca4071ddc002088",
+                    "5ecf9935dca4071ddc002089",
+                    "5ecf9935dca4071ddc00208b",
+                    "5ecf9935dca4071ddc00208e",
+                    "5ecf9935dca4071ddc00208d"
+                ],
+                "title": "Basic1A",
+                "formTeacher": "5ecf9935dca4071ddc002089",
+                "prefect": "5ecf9935dca4071ddc002088",
+                "term": 1,
+                "numOfBoys": 12,
+                "numOfGirls": 23,
+                "year": "2020",
+                "population": 35,
+                "school": "5ecb08dfd2595416f0dc9977",
+                "createdOn": "2020-05-30T10:18:52.000Z",
+                "__v": 0
+            }
+        }
+    ```    
+
+### Create Class
+* Request
+    * Endpoint: POST/api/v1/schools/5ecb08dfd2595416f0dc9977/classes
+    * Body: (application/json)
+    ```
+        {
+            "title":"SS2B",
+            "formTeacher":"5ecf9935dca4071ddc002089",
+            "prefect":"5ecf9935dca4071ddc002088",
+            "term": 1,
+            "students": [
+              "5ecf9935dca4071ddc002088",
+              "5ecf9935dca4071ddc002089",
+              "5ecf9935dca4071ddc00208b",
+              "5ecf9935dca4071ddc00208e",
+              "5ecf9935dca4071ddc00208d"
+              ],
+            "numOfBoys": 12,
+            "numOfGirls": 23,
+            "year": "2020",
+            "population": 35,
+            "school": "5ecb08dfd2595416f0dc997c"
+        }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Class created successfully",
+            "results": 1,
+            "data": {
+                "students": [
+                    "5ecf9935dca4071ddc002088",
+                    "5ecf9935dca4071ddc002089",
+                    "5ecf9935dca4071ddc00208b",
+                    "5ecf9935dca4071ddc00208e",
+                    "5ecf9935dca4071ddc00208d"
+                ],
+                "_id": "5ed233bafc427e1f740cfba4",
+                "title": "SS2B",
+                "formTeacher": "5ecf9935dca4071ddc002089",
+                "prefect": "5ecf9935dca4071ddc002088",
+                "term": 1,
+                "numOfBoys": 12,
+                "numOfGirls": 23,
+                "year": "2020",
+                "population": 35,
+                "school": "5ecb08dfd2595416f0dc9977",
+                "createdOn": "2020-05-30T10:21:46.000Z",
+                "__v": 0
+            }
+        }
+    ```    
+
+### Update Class
+* Request
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed2330cfc427e1f740cfba2
+    * Body: (application/json)
+    ```
+       {
+	        "students": [
+                "5ecf9935dca4071ddc00208c",
+                "5ecf9935dca4071ddc00208f"
+            ],
+            "title": "Basic3A",
+            "term": 3
+        }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Class was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed2330cfc427e1f740cfba2",
+                "students": [
+                    "5ecf9935dca4071ddc002088",
+                    "5ecf9935dca4071ddc002089",
+                    "5ecf9935dca4071ddc00208b",
+                    "5ecf9935dca4071ddc00208e",
+                    "5ecf9935dca4071ddc00208d",
+                    "5ecf9935dca4071ddc00208c",
+                    "5ecf9935dca4071ddc00208f"
+                ],
+                "title": "Basic3A",
+                "formTeacher": "5ecf9935dca4071ddc002089",
+                "prefect": "5ecf9935dca4071ddc002088",
+                "term": 3,
+                "numOfBoys": 12,
+                "numOfGirls": 23,
+                "year": "2020",
+                "population": 35,
+                "school": "5ecb08dfd2595416f0dc9977",
+                "createdOn": "2020-05-30T10:18:52.000Z",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Class
+
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed2330cfc427e1f740cfba2
+  
+* Response:
+    * Status: 204 - No Content
