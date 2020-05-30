@@ -7,7 +7,7 @@
         "address": "30 Ezekiel Street, Satelite Town, Rivers",
         "population": 2756,
         "email": "hopebay@yahoo.com",
-        "phoneNumber": "09032745059",
+        "phoneNumber": "+2349032745059",
         "imageUrl": "https://example.com/ex.jpg"
     },
     {
@@ -18,7 +18,7 @@
         "address": "10 Olanrewaju Street, Satelite Town, Lagos",
         "population": 2509,
         "email": "community-high@yahoo.com",
-        "phoneNumber": "08064745859",
+        "phoneNumber": "+2348064745859",
         "imageUrl": "https://example.com/ex.jpg"
     },
     {
@@ -29,7 +29,7 @@
         "address": "7 Falomo Road, Ijaiye, Ogun",
         "population": 7644,
         "email": "info@meadowacademy.org",
-        "phoneNumber": "08175309861",
+        "phoneNumber": "+2348175309861",
         "imageUrl": "https://example.com/ex.jpg"
     },
     {
@@ -40,7 +40,7 @@
         "address": "1057 Agege Road, Agege, Lagos",
         "population": 4599,
         "email": "marist@gmail.com",
-        "phoneNumber": "08065753440",
+        "phoneNumber": "+2348065753440",
         "imageUrl": "https://example.com/ex.jpg"
     },
     {
@@ -51,7 +51,7 @@
         "address": "7 Balogun Street, Lekki, Lagos",
         "population": 7469,
         "email": "atlantic-hall@yahoo.com",
-        "phoneNumber": "07037345059",
+        "phoneNumber": "+2347037345059",
         "imageUrl": "https://example.com/ex.jpg"
     },
     {
@@ -62,7 +62,7 @@
         "address": "7 Cole Street Off Ajegunle Bus-Stop , Ikeja, Lagos",
         "population": 3584,
         "email": "higher_achievers@gmail.org",
-        "phoneNumber": "08175304561",
+        "phoneNumber": "+2348175304561",
         "imageUrl": "https://example.com/ex.jpg"
     },
     {
@@ -73,7 +73,7 @@
         "address": "6 Morenikeji Street, Maraba, Kwara",
         "population": 6545,
         "email": "hello@crescent.net",
-        "phoneNumber": "08175665861",
+        "phoneNumber": "+2348175665861",
         "imageUrl": "https://example.com/ex.jpg"
     },
     {
@@ -84,7 +84,7 @@
         "address": "55 Obi Street New Housing Estate, Onitsha, Anambra",
         "population": 5098,
         "email": "helpdesk@kgc.com",
-        "phoneNumber": "09072652148",
+        "phoneNumber": "+2349072652148",
         "imageUrl": "https://example.com/ex.jpg"
     },
     {
@@ -95,7 +95,7 @@
         "address": "55 Lamido Street Ahmed Musa GRA, Gwagwalada, Abuja",
         "population": 8476,
         "email": "ngc@gmail.com",
-        "phoneNumber": "07084765431",
+        "phoneNumber": "+2347084765431",
         "imageUrl": "https://example.com/ex.jpg"
     }
 ]

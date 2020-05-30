@@ -18,4 +18,7 @@ router.post('/login',
     signToken,
     attachTokenToCookie);
 
+router.post('/forgot_password', student.forgotPassword);
+router.patch('/reset_password', student.resetPassword, signToken, attachTokenToCookie)
+
 module.exports = router;

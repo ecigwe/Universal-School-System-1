@@ -8,6 +8,7 @@ const adminUsers = require('./users/admins');
 const parentRoutes = require('./users/parent');
 const books = require('./books/booksRoutes');
 const authHandler = require('../controllers/authentication/authHandler');
+const userRoutes = require('./users/user');
 const globalErrorHandler = require('../utils/errorUtils/globalErrorHandler');
 const errorHandler = require('../utils/errorUtils/errorHandler');
 const signToken = require('../utils/authenticationUtilities/signToken');
@@ -39,6 +40,7 @@ router.patch('/api/v1/update_my_password',
 //Plain users stuff
 router.use('/api/v1/users/admins', adminUsers);
 router.use('/api/v1/users/parents', parentRoutes);
+router.use('/api/v1/users', userRoutes);
 router.use('/api/v1/schools', schools);
 
 router.all('*', (request, response, next) => {

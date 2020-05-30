@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+//const User = require('./user');
 
 const studentSchema = mongoose.Schema({
     fullname: {
@@ -24,8 +25,8 @@ const studentSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide us with your phone number'],
         unique: [true, 'This phone number already exists!'],
-        minlength: [11, 'Your phone number must consist of 11 characters'],
-        maxlength: [11, 'Your phone number must consist of 11 characters']
+        minlength: [14, 'Your phone number must consist of 14 characters'],
+        maxlength: [14, 'Your phone number must consist of 14 characters']
     },
     role: {
         type: String,
@@ -45,13 +46,13 @@ const studentSchema = mongoose.Schema({
     },
     school: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'School',
-        required: [true, 'Please provide the correct name of your school and the address']
+        ref: 'School'
+        //required: [true, 'Please provide the correct name of your school and the address']
     },
     parent: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Parent'
-        //required: [true, 'Please tell us the username of a parent or guardian that is registered on this platform']
+        //required: [true, 'Please tell us the phone number of a parent or guardian that is registered on this platform']
     },
     class: {
         type: String,
@@ -83,6 +84,30 @@ const studentSchema = mongoose.Schema({
     },
     passwordChangedAt: { type: Date }
 });
+
+// studentSchema.pre('save', async function (next) {
+//     const username = this.username;
+//     const category = this.category;
+//     const phoneNumber = this.phoneNumber;
+//     const passwordResetToken = this.passwordResetToken;
+//     const passwordResetExpires = this.passwordResetExpires;
+//     const email = this.email;
+//     const role = this.role;
+//     const _id = this._id;
+//     if (this.isNew) {
+//         await User.create({
+//             username,
+//             category,
+//             _id,
+//             phoneNumber,
+//             passwordResetToken,
+//             passwordResetExpires,
+//             email,
+//             role
+//         });
+//     }
+//     next();
+// });
 
 studentSchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next();
@@ -121,6 +146,16 @@ studentSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssued
     }
     return false;
 }
+
+studentSchema.methods.createPasswordResetToken = function () {
+    const resetToken = crypto.randomBytes(3).toString('hex');
+
+    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.passwordResetExpires = Date.now() + (1000 * 60 * 5); //Reset token expires in 5 minutes
+
+    return resetToken;
+}
+
 studentSchema.index({ school: 1 });
 studentSchema.index({ parent: 1 });
 

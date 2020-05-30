@@ -1,6 +1,11 @@
+const crypto = require('crypto');
 const Admin = require('../../models/users/admin');
+//const User = require('../../models/users/user');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
+const twilio = require('twilio');
+const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+//const responseHandler = require('../../utils/responseHandler');
 
 exports.register = catchAsyncError(async (request, response, next) => {
     if (request.body.adminCode === process.env.ADMIN_CODE) {
@@ -9,7 +14,7 @@ exports.register = catchAsyncError(async (request, response, next) => {
             email: request.body.email,
             username: request.body.username,
             role: request.body.role,
-            phoneNumber: request.body.phoneNumber,
+            phoneNumber: "+234" + request.body.phoneNumber,
             password: request.body.password,
             confirmPassword: request.body.confirmPassword,
             isAnAdmin: true
@@ -38,13 +43,47 @@ exports.login = catchAsyncError(async (request, response, next) => {
     return next();
 });
 
-// exports.forgotPassword = catchAsyncError(async (request, response, next) => {
-//     const { email } = request.body;
-//     if (!email) return errorHandler(400, 'Please provide the email address that you used when signing up.');
+exports.forgotPassword = catchAsyncError(async (request, response, next) => {
+    const { phoneNumber } = request.body;
+    if (!phoneNumber) return errorHandler(400, 'Please provide the phone number you used when signing up.');
 
-//     const admin = await Admin.findOne({ email });
-//     if (!admin) return errorHandler(404, 'There is no admin with that email address.');
+    const admin = await Admin.findOne({ phoneNumber: "+234" + phoneNumber });
+    if (!admin) return errorHandler(404, 'There is no admin with that phone number.');
 
-//     const resetToken = admin.createPasswordResetToken();
-//     await admin.save({ validateBeforeSave: false });
-// });
+    const resetToken = admin.createPasswordResetToken();
+    await admin.save({ validateBeforeSave: false });
+
+    await client.messages.create({
+        to: admin.phoneNumber,
+        from: process.env.TWILIO_PHONE_NUMBER,
+        body: `Your password reset code is ${resetToken}. Expires in 5 minutes.`
+    });
+
+    return response.status(200).json({
+        status: 'Success',
+        message: 'Your password reset token has been sent to your mobile phone as a text message',
+        resetCode: resetToken
+    });
+});
+
+exports.resetPassword = catchAsyncError(async (request, response, next) => {
+    const { resetCode, newPassword, confirmNewPassword } = request.body;
+    if (!resetCode || !newPassword || !confirmNewPassword) return errorHandler(400, 'Please provide the reset code sent to your phone number as well as your new password and a confirmation of the new password.');
+
+    const hashedResetCode = crypto.createHash('sha256').update(resetCode).digest('hex');
+
+    const admin = await Admin.findOne({
+        passwordResetToken: hashedResetCode,
+        passwordResetExpires: { $gt: Date.now() }
+    });
+    if (!admin) return errorHandler(400, 'Your Reset Code Is Either Invailid Or Has Expired!');
+
+    admin.password = newPassword;
+    admin.confirmPassword = confirmNewPassword;
+    admin.passwordResetToken = undefined;
+    admin.passwordResetExpires = undefined;
+    await admin.save();
+    request.user = admin;
+    response.statusCode = 200;
+    return next();
+});

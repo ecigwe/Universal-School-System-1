@@ -1,10 +1,14 @@
 const { Router } = require('express');
 const parentController = require('../../controllers/users/parentsController');
+const authHandler = require('../../controllers/authentication/authHandler');
+const middlewares = require('../../controllers/middlewares');
 const router = Router();
 
+router.use(authHandler.protect);
+
 router.route('/:id')
-    .get(parentController.getParent)
-    .patch(parentController.updateParent)
-    .delete(parentController.deleteParent);
+    .get(middlewares.restrictParentData, parentController.getParent)
+    .patch(middlewares.confirmOwnership, parentController.updateParent)
+    .delete(middlewares.confirmOwnership, parentController.deleteParent);
 
 module.exports = router;
