@@ -26,16 +26,18 @@ router.route('/')
 
 router.route('/:id')
     .get(
-        middlewares.checkUserRole('School-Administrator'),
-        middlewares.checkConnectionWithSchool,
+        middlewares.checkIfSchoolStillExists,
+        middlewares.restrictSchoolInformation,
         SchoolController.getSchool
     )
     .patch(
+        middlewares.checkIfSchoolStillExists,
         middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
         SchoolController.updateSchool
     )
     .delete(
+        middlewares.checkIfSchoolStillExists,
         middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
         SchoolController.deleteSchool
