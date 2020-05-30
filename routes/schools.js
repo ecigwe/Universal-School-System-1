@@ -8,12 +8,14 @@ const parents = require('../routes/users/parents');
 const books = require('./books/booksRoutes');
 const questions = require('./questions/questionsRoutes');
 const assessments = require('./assessments/assessmentsRoutes');
+const classes = require('./classes/classRoutes');
 
 const router = Router();
 
 router.use('/:id/students', students);
 router.use('/:id/staff', staff);
 router.use('/:id/parents', parents);
+router.use('/:id/classes', classes);
 
 router.use(books);
 router.use(questions);

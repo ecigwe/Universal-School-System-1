@@ -222,6 +222,11 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | POST/api/vi/schools/:id/assessments                  | Creates a new assessment for a school                                      |
 | PATCH/api/vi/schools/:id/assessments/:assessment_id  | Updates a specific assessment for a school                                 |
 | DELETE/api/vi/schools/:id/assessments/:assessment_id | Deletes a specific assessment for a school                                 |
+| GET/api/v1/schools/:id/classes                       | Retrieves all classes for a school                                         |
+| GET/api/vi/schools/:id/classes/:class_id             | Retrieves a specifc class for a school                                     |
+| POST/api/vi/schools/:id/classes                      | Creates a new class for a school                                           |
+| PATCH/api/vi/schools/:id/classes/:class_id           | Updates a specific class for a school                                      |
+| DELETE/api/vi/schools/:id/classes/:class_id          | Deletes a specific class for a school                                      |
 
 
 ### Sample Requests and Responses From The API
@@ -290,6 +295,13 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Create Assessment](#create-assessment)
     - [Update Assessment](#update-assessment)
     - [Delete Assessment](#delete-assessment)
+
+- [Classes](#classes)
+    - [Retrieve Classes](#retrieve-classes)
+    - [Retrieve Class](#retrieve-class)
+    - [Create Class](#create-class)
+    - [Update Class](#update-class)
+    - [Delete Class](#delete-class)
 
 ### Authenticate
 
