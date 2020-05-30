@@ -1,8 +1,11 @@
+const crypto = require('crypto');
 const School = require('../models/school/school');
 const Parent = require('../models/users/parent');
 const Student = require('../models/users/student');
+const Admin = require('../models/users/admin');
 const catchAsyncError = require('../utils/errorUtils/catchAsyncError');
 const errorHandler = require('../utils/errorUtils/errorHandler');
+const sendVerificationCode = require('../utils/authenticationUtilities/sendVerificationCode');
 
 exports.checkIfSchoolExists = catchAsyncError(async (request, response, next) => {
     const { schoolName, schoolAddress } = request.body;
@@ -23,6 +26,11 @@ exports.checkIfParentIsRegistered = catchAsyncError(async (request, response, ne
     request.body.parent = parent._id;
     return next();
 });
+
+exports.checkIfUserHasVerifiedAcct = (request, response, next) => {
+    if (!request.user.verified) return errorHandler(403, 'You have not verified your account. Please verify your phone number.');
+    next();
+}
 
 exports.checkIfSchoolStillExists = catchAsyncError(async (request, response, next) => {
     //check if school exists and return an error if it does not exist
@@ -158,3 +166,40 @@ exports.preventPasswordUpdate = (request, response, next) => {
     }
     next();
 }
+
+exports.sendCodeToverifyAccount = catchAsyncError(async (request, response, next) => {
+    let user = request.user;
+    const verificationCode = user.createResetToken();
+    await user.save({ validateBeforeSave: false });
+    await sendVerificationCode(user, verificationCode);
+    return response.status(200).json({
+        status: 'Success',
+        message: 'Your verification code has been sent to your mobile phone as a text message',
+        verificationCode
+    });
+});
+
+exports.verifyAccount = catchAsyncError(async (request, response, next) => {
+    let user;
+
+    const verificationCode = request.body.verificationCode;
+    if (!verificationCode) return errorHandler(400, 'Please provide the verification code sent to your phone number.');
+
+    const hashedVerificationCode = crypto.createHash('sha256').update(verificationCode).digest('hex');
+
+    if (request.user.category === 'Admin') user = await Admin.findOne({ ResetToken: hashedVerificationCode, ResetExpires: { $gt: Date.now() } });
+    if (request.user.category === 'Staff') user = await Staff.findOne({ ResetToken: hashedVerificationCode, ResetExpires: { $gt: Date.now() } });
+    if (request.user.category === 'Parent') user = await Parent.findOne({ ResetToken: hashedVerificationCode, ResetExpires: { $gt: Date.now() } });
+    if (request.user.category === 'Student') user = await Student.findOne({ ResetToken: hashedVerificationCode, ResetExpires: { $gt: Date.now() } });
+
+    if (!user) return errorHandler(400, 'Your verification Code Is Either Invalid Or Has Expired!');
+
+    user.ResetToken = undefined;
+    user.ResetExpires = undefined;
+    user.verified = true;
+    await user.save({ validateBeforeSave: false });
+    return response.status(200).json({
+        status: 'Success',
+        message: 'Your account has been successfully verified.'
+    });
+});

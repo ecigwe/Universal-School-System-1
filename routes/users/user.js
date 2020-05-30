@@ -6,7 +6,12 @@ const router = Router();
 
 router.use(authHandler.protect);
 
-router.route('/me')
+router.get('/verification_code', middlewares.sendCodeToverifyAccount);
+router.post('/verify_my_account', middlewares.verifyAccount);
+
+router.use(middlewares.checkIfUserHasVerifiedAcct);
+
+router.route('/')
     .get(meController.getMe)
     .patch(middlewares.checkIfSchoolExists,
         middlewares.checkIfParentIsRegistered,

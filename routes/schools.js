@@ -23,6 +23,7 @@ router.use(questions);
 router.use(assessments);
 
 router.use(authHandler.protect);
+router.use(middlewares.checkIfUserHasVerifiedAcct);
 
 router.route('/')
     .post(

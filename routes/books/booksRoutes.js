@@ -5,6 +5,7 @@ const authHandler = require('../../controllers/authentication/authHandler');
 const middlewares = require('../../controllers/middlewares');
 
 router.use(authHandler.protect);
+router.use(middlewares.checkIfUserHasVerifiedAcct);
 
 router.route('/:id/books')
     .post(middlewares.checkIfSchoolStillExists,

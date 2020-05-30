@@ -50,6 +50,16 @@ This API consists of the features indicated below:
 * A single person cannot be registered twice for one collection. For instance, a teacher who is already registered, cannot register again as a teacher, but can register as a parent.
 * Logged in Users can update their password, anytime they like, especially if their current password is compromised.
   
+### Notice
+
+When a user registers with the platform, the user must verify the phone number that was used in the creation of the account.
+
+To achieve this, the logged in user must make a get request to the */api/v1/users/me/verification_code/* endpoint to get a verification code.
+
+The logged in user, then makes a post request with the verification code to the */api/v1/users/me/verify_my_account/* endpoint to verify his or her account.
+
+From then on, the user can have access to any resource on the platform that is accessible to users with verified accounts.
+
 ### Staff Roles
 * A school staff can either be a principal or a vice-principal or a teacher or a form-teacher or a bursar.
 * If you do not specify your role, the default is teacher. 
@@ -203,6 +213,8 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | POST/api/v1/staff/login                              | Login a staff                                                              |
 | POST/api/v1/admin/register                           | Register an admin                                                          |
 | POST/api/v1/admin/login                              | Login an admin                                                             |
+| GET/api/v1/users/me/verification_code                | Get Verification Code                                                      |
+| POST/api/v1/users/me/verify_my_account               | Verification Of Account With Verification Code                             |
 | GET/api/v1/users/admins                              | See all the administrators                                                 |
 | GET/api/v1/users/admins/:id                          | See a specific administrator                                               |
 | PATCH/api/v1/users/admins/:id                        | Update a specific administrator                                            |
@@ -263,6 +275,8 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Login Student](#login-student)
     - [Register Staff](#register-staff)
     - [Login Staff](#login-staff)
+    - [Verification Code](#verification-code)
+    - [Verify Account](#verify-account)
     - [Logout](#logout)
     - [Update Password](#update-password)
 
@@ -687,6 +701,46 @@ A staff cannot be connected to a school when they do not provide the school name
         }
     }
     ```
+
+### Verification Code
+
+Only for registered users who are logged in and have not verified their accounts.
+
+* Request:
+    * Endpoint: GET/api/v1/users/me/verification_code
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+     ```
+     {
+        "status": "Success",
+        "message": "Your verification code has been sent to your mobile phone as a text message",
+        "verificationCode": "e33b8d"
+    }
+     ```
+
+### Verify Account
+
+Only for registered and logged in users who have not yet verified their phone numbers and have recieved a verification code on their mobile phone in a text message.
+
+* Request:
+    * Endpoint: POST/api/v1/users/me/verify_my_account
+    * Body: (application/json)
+     ```
+     {
+        "verificationCode": "e33b8d"
+    }
+     ```
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+     ```
+     {
+        "status": "Success",
+        "message": "Your account has been successfully verified."
+    }
+     ```
 
 ### Logout
 * Request

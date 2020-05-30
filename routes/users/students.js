@@ -6,6 +6,7 @@ const middlewares = require('../../controllers/middlewares');
 const router = express.Router({ mergeParams: true });
 
 router.use(authHandler.protect);
+router.use(middlewares.checkIfUserHasVerifiedAcct);
 router.use(middlewares.checkIfSchoolStillExists);
 
 router.get('/', middlewares.checkCategory('Staff'),

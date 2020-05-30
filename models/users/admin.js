@@ -60,8 +60,12 @@ const adminSchema = mongoose.Schema({
         }
     },
     passwordChangedAt: { type: Date },
-    passwordResetToken: String,
-    passwordResetExpires: Date
+    ResetToken: String,
+    ResetExpires: Date,
+    verified: {
+        type: Boolean,
+        default: false
+    }
 });
 
 adminSchema.pre('save', async function (next) {
@@ -114,11 +118,11 @@ adminSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt
     return false;
 }
 
-adminSchema.methods.createPasswordResetToken = function () {
+adminSchema.methods.createResetToken = function () {
     const resetToken = crypto.randomBytes(3).toString('hex');
 
-    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-    this.passwordResetExpires = Date.now() + (1000 * 60 * 5); //Reset token expires in 5 minutes
+    this.ResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.ResetExpires = Date.now() + (1000 * 60 * 5); //Reset token expires in 5 minutes
 
     return resetToken;
 }

@@ -5,6 +5,7 @@ const middlewares = require('../../controllers/middlewares');
 const router = Router();
 
 router.use(authHandler.protect);
+router.use(middlewares.checkIfUserHasVerifiedAcct);
 
 router.route('/:id')
     .get(middlewares.restrictParentData, parentController.getParent)
