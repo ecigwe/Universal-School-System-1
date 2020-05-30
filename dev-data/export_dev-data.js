@@ -7,6 +7,7 @@ const Staff = require('../models/users/staff');
 const Student = require('../models/users/student');
 //const User = require('../models/users/user');
 const School = require('../models/school/school');
+const Question = require('../models/questions/question');
 
 mongoose.connect(process.env.MONGODB_URI, {
     useCreateIndex: true,
@@ -23,6 +24,7 @@ const staffs = JSON.parse(fs.readFileSync(`${__dirname}/staffs.json`, 'utf-8'));
 const staffsTwo = JSON.parse(fs.readFileSync(`${__dirname}/staffsTwo.json`, 'utf-8'));
 const students = JSON.parse(fs.readFileSync(`${__dirname}/students.json`, 'utf-8'));
 const studentsTwo = JSON.parse(fs.readFileSync(`${__dirname}/studentsTwo.json`, 'utf-8'));
+const questions = JSON.parse(fs.readFileSync(`${__dirname}/questions.json`, 'utf-8'));
 
 
 const exportData = async () => {
@@ -33,7 +35,8 @@ const exportData = async () => {
         //await Staff.create(staffs);
         //await Staff.create(staffsTwo);
         //await Student.create(students);
-        //await Student.create(studentsTwo);
+        //await Student.create(studentsTwo)
+        //await Question.create(questions);
         console.log('All exported.');
     } catch (error) {
         console.log(error);

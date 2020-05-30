@@ -119,57 +119,89 @@ This API consists of the features indicated below:
 * Only a registered School-Administrator can delete the details of his school.
 * Only the app's administrator can see all the schools that are registered on the application.
 
+### Books
+* Books can be added by individual schools.
+* Books added by a school can only be seen by the staff and students of the school.
+* Each school can update the details of any book which they added.
+* Each school could delete a specific book they created.
+
+### Questions
+* Questions can be addedd by staff of individual schools.
+* Questions added by a school can only be seen by the satff of the school.
+* Studnents' access to questions are controlled.
+* Each question added by a school can be edited by the staff of the school.
+* Questions added by a school can be deleted by the staff of the school.
+
+### Assessments
+* Assessments (Exams, Classwork, Quiz, Assignment) can be added by staff of individual schools.
+* Assessments added by a school can only be seen by staff or students of the school.
+* Students' access to assessments are limited.
+* Assessments added by a school can only be edited by the staff of the school.
+* Assessments added by a school can be deleted by staff of the school.
+
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 
-| Endpoint                                       | Function                                                                   |
-| ---------------------------------------------- | -------------------------------------------------------------------------- |
-| GET/                                           | Check to ensure that the api can be accessed                               |
-| GET/api/v1/schools                             | Retrieve all the registered schools                                        |
-| POST/api/v1/schools                            | Register a new school                                                      |
-| GET/api/v1/schools/:id                         | Retrieve a specific school                                                 |
-| PATCH/api/v1/schools/:id                       | Update a specific school                                                   |
-| DELETE/api/v1/schools/:id                      | Delete a specific school                                                   |
-| POST/api/v1/student/register                   | Register a student                                                         |
-| POST/api/v1/student/login                      | Login a student                                                            |
-| GET/api/v1/logout                              | Logout a user                                                              |
-| POST/api/v1/parent/register                    | Register a parent                                                          |
-| POST/api/v1/parent/login                       | Login a parent                                                             |
-| POST/api/v1/staff/register                     | Register a staff                                                           |
-| POST/api/v1/staff/login                        | Login a staff                                                              |
-| POST/api/v1/admin/register                     | Register an admin                                                          |
-| POST/api/v1/admin/login                        | Login an admin                                                             |
-| GET/api/v1/users/admins                        | See all the administrators                                                 |
-| GET/api/v1/users/admins/:id                    | See a specific administrator                                               |
-| PATCH/api/v1/users/admins/:id                  | Update a specific administrator                                            |
-| DELETE/api/v1/users/admins/:id                 | Delete an administrator                                                    |
-| PATCH/api/v1/update_my_password                | Update logged in user's password                                           |
-| GET/api/v1/schools/:id/students                | See all the students of a school                                           |
-| GET/api/v1/schools/:id/students/:student_id    | See a single school's student's data                                       |
-| PATCH/api/v1/schools/:id/students/:student_id  | Update a single school's student's data                                    |
-| DELETE/api/v1/schools/:id/students/:student_id | Delete a single school's student's data                                    |
-| GET/api/v1/schools/:id/staff                   | See all the staff of a school                                              |
-| GET/api/v1/schools/:id/staff/:staff_id         | See a single school's staff official's data                                |
-| PATCH/api/v1/schools/:id/staff/:staff_id       | Update a single school's staff official's data                             |
-| DELETE/api/v1/schools/:id/staff/:staff_id      | Delete a single school's staff official's data                             |
-| GET/api/v1/schools/:id/parents                 | Retrieve all the parents whose children are students of the school         |
-| GET/api/v1/users/parents/:id                   | Retrieve the details of a single parent                                    |
-| PATCH/api/v1/users/parents/:id                 | Update a specific parent                                                   |
-| DELETE/api/v1/users/parents/:id                | Delete a parent from the platform                                          |
-| POST/api/v1/admin/forgot_password              | An Admin user forgets his password and recieves a reset code               |
-| PATCH/api/v1/admin/reset_password              | An Admin user is finally able to reset his password                        |
-| POST/api/v1/staff/forgot_password              | An Staff of a school forgets his or her password and recieves a reset code |
-| PATCH/api/v1/staff/reset_password              | A Staff official is finally able to reset his or her password              |
-| POST/api/v1/student/forgot_password            | A Student forgets his or her password and recieves a reset code            |
-| PATCH/api/v1/student/reset_password            | A Student is finally able to reset his or her password                     |
-| POST/api/v1/parent/forgot_password             | A Parent forgets his or her password and recieves a reset code             |
-| PATCH/api/v1/parent/reset_password             | A Parent is finally able to reset his or her password                      |
-| GET/api/v1/users/me                            | A logged in user can see their information                                 |
-| PATCH/api/v1/users/me                          | A logged in user can update their data                                     |
-| DELETE/api/v1/users/me                         | A logged in user can delete their data                                     |
-
-
-
+| Endpoint                                                     | Function                                                                   |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| GET/                                                         | Check to ensure that the api can be accessed                               |
+| GET/api/v1/schools                                           | Retrieve all the registered schools                                        |
+| POST/api/v1/schools                                          | Register a new school                                                      |
+| GET/api/v1/schools/:id                                       | Retrieve a specific school                                                 |
+| PATCH/api/v1/schools/:id                                     | Update a specific school                                                   |
+| DELETE/api/v1/schools/:id                                    | Delete a specific school                                                   |
+| POST/api/v1/student/register                                 | Register a student                                                         |
+| POST/api/v1/student/login                                    | Login a student                                                            |
+| GET/api/v1/logout                                            | Logout a user                                                              |
+| POST/api/v1/parent/register                                  | Register a parent                                                          |
+| POST/api/v1/parent/login                                     | Login a parent                                                             |
+| POST/api/v1/staff/register                                   | Register a staff                                                           |
+| POST/api/v1/staff/login                                      | Login a staff                                                              |
+| POST/api/v1/admin/register                                   | Register an admin                                                          |
+| POST/api/v1/admin/login                                      | Login an admin                                                             |
+| GET/api/v1/users/admins                                      | See all the administrators                                                 |
+| GET/api/v1/users/admins/:id                                  | See a specific administrator                                               |
+| PATCH/api/v1/users/admins/:id                                | Update a specific administrator                                            |
+| DELETE/api/v1/users/admins/:id                               | Delete an administrator                                                    |
+| PATCH/api/v1/update_my_password                              | Update logged in user's password                                           |
+| GET/api/v1/schools/:id/students                              | See all the students of a school                                           |
+| GET/api/v1/schools/:id/students/:student_id                  | See a single school's student's data                                       |
+| PATCH/api/v1/schools/:id/students/:student_id                | Update a single school's student's data                                    |
+| DELETE/api/v1/schools/:id/students/:student_id               | Delete a single school's student's data                                    |
+| GET/api/v1/schools/:id/staff                                 | See all the staff of a school                                              |
+| GET/api/v1/schools/:id/staff/:staff_id                       | See a single school's staff official's data                                |
+| PATCH/api/v1/schools/:id/staff/:staff_id                     | Update a single school's staff official's data                             |
+| DELETE/api/v1/schools/:id/staff/:staff_id                    | Delete a single school's staff official's data                             |
+| GET/api/v1/schools/:id/parents                               | Retrieve all the parents whose children are students of the school         |
+| GET/api/v1/users/parents/:id                                 | Retrieve the details of a single parent                                    |
+| PATCH/api/v1/users/parents/:id                               | Update a specific parent                                                   |
+| DELETE/api/v1/users/parents/:id                              | Delete a parent from the platform                                          |
+| POST/api/v1/admin/forgot_password                            | An Admin user forgets his password and recieves a reset code               |
+| PATCH/api/v1/admin/reset_password                            | An Admin user is finally able to reset his password                        |
+| POST/api/v1/staff/forgot_password                            | An Staff of a school forgets his or her password and recieves a reset code |
+| PATCH/api/v1/staff/reset_password                            | A Staff official is finally able to reset his or her password              |
+| POST/api/v1/student/forgot_password                          | A Student forgets his or her password and recieves a reset code            |
+| PATCH/api/v1/student/reset_password                          | A Student is finally able to reset his or her password                     |
+| POST/api/v1/parent/forgot_password                           | A Parent forgets his or her password and recieves a reset code             |
+| PATCH/api/v1/parent/reset_password                           | A Parent is finally able to reset his or her password                      |
+| GET/api/v1/users/me                                          | A logged in user can see their information                                 |
+| PATCH/api/v1/users/me                                        | A logged in user can update their data                                     |
+| DELETE/api/v1/users/me                                       | A logged in user can delete their data                                     |
+| GET/api/v1/school/:id/books                                  | Retrieves all the books for a school                                       |
+| GET/api/vi/school/:id/books/:book_id                         | Retrieves a single book for a school                                       |
+| POST/api/v1/school/:id/books                                 | Creates a new book for a school                                            |
+| PATCH/api/vi/school/:id/books/:book_id                       | Updates the details of a book for a school                                 |
+| DELETE/api/vi/school/:id/books/:book_id                      | Deltes a specific book for a school                                        |
+| GET/api/vi/school/:id/questions                              | Retrieves all the questions for a school                                   |
+| GET/api/vi/school/:id/questions/:question_id                 | Retrieves a single question fro a school                                   |
+| POST/api/vi/school/:id/questions                             | Creates a new question for a school                                        |
+| PATCH/api/vi/school/:id/questions/:question_id               | Updates a specific question for a school                                   |
+| DELETE/api/vi/school/:id/questions/:question_id              | Deltes a specific question for a school                                    |
+| GET/api/vi/school/:id/assessments                            | Retrieves all assessments for a school                                     |
+| GET/api/vi/school/:id/assessments/:assessment_id             | Retrieves a specifc assessment for a school                                |
+| POST/api/vi/school/:id/assessments                           | Creates a new assessment for a school                                      |
+| PATCH/api/vi/school/:id/assessments/:assessment_id           | Updates a specific assessment for a school                                 |
+| DELETE/api/vi/school/:id/assessments/:assessment_id          | Deletes a specific assessment for a school                                 |
 
 
 ### Sample Requests and Responses From The API
@@ -217,6 +249,27 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Forgot Password](#forgot-password)
     - [Reset Password](#reset-password)
 
+
+- [Books](#books)
+    - [Retrieve Books](#retrieve-books)
+    - [Retrieve Book](#retrieve-book)
+    - [Create Book](#create-book)
+    - [Update Book](#update-book)
+    - [Delete Book](#delete-book)
+
+- [Questions](#questions)
+    - [Retrieve Questions](#retrieve-questions)
+    - [Retrieve Question](#retrieve-question)
+    - [Create Question](#create-question)
+    - [Update Question](#update-question)
+    - [Delete question](#delete-question)
+
+- [Assessments](#assessments)
+    - [Retrieve Assessments](#retrieve-assessments)
+    - [Retrieve Assessment](#retrieve-assessment)
+    - [Create Assessment](#create-assessment)
+    - [Update Assessment](#update-assessment)
+    - [Delete Assessment](#delete-assessment)
 
 ### Authenticate
 
@@ -1110,18 +1163,171 @@ Only for users who are logged in.
             "parent": "5ecb08e3d2595416f0dc9988",
             "school": "5ecb08dfd2595416f0dc9977",
             "age": 14,
-            "__v": 0
-        }
-    }
-    ```
-
+     }
+   ```  
 ### Delete Student
 * Request:
     * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/students/5ecc155fdd53ff1604ef823a
 
 * Response: 
     * Status: 204 - no content
+    
+### Books
 
+### Retrieve Books
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/books
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Books retrieved successfully",
+            "results": 10,
+            "data": [
+                {
+                    "_id": "5ecd2a995f77980c30fcdee1",
+                    "class": "Senior Secondary",
+                    "price": 2500,
+                    "title": "New School Physics",
+                    "author": "M Anyakoha",
+                    "category": "Textbook",
+                    "bookUrl": "www.example.com",
+                    "imageUrl": "www.books",
+                    "createdOn": "2020-05-26T14:41:29.000Z",
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ecd77f766a24726186138e2",
+                    "class": "SS 3",
+                    "price": 3000,
+                    "title": "New School Chemistry",
+                    "author": "Osei Yaw Ababio",
+                    "category": "Textbook",
+                    "bookUrl": "www.example.com",
+                    "imageUrl": "www.books.com",
+                    "createdOn": "2020-05-26T20:11:35.000Z",
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                }
+                ...
+            ]
+        }
+    ```
+
+### Retrieve Book
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/books/5ecd2a995f77980c30fcdee1
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Book retrieved successfully",
+            "results": 1,
+            "data": {
+                    "_id": "5ecd2a995f77980c30fcdee1",
+                    "class": "Senior Secondary",
+                    "price": 2500,
+                    "title": "New School Physics",
+                    "author": "M Anyakoha",
+                    "category": "Textbook",
+                    "bookUrl": "www.example.com",
+                    "imageUrl": "www.books",
+                    "createdOn": "2020-05-26T14:41:29.000Z",
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                }
+        }
+    ```
+
+### Create Book
+* Request
+    * Endpoint: POST/api/v1/school/5ecb08dfd2595416f0dc9975/books
+    * Body: (application/json)
+    ```
+    { 
+        "title":"The Enchanted Wood",
+        "author":"Enyd Blyton",
+        "class":"Any",
+        "category": "Novel",
+        "price": 1200,
+        "bookUrl":"www.example.com/books",
+        "imageUrl": "www.books.com/the-enchanted-wood.jpg"
+    }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+    {
+       "status": "success",
+        "message": "Book created successfully",
+        "results": 1,
+        "data": {
+            "price": 1200,
+            "_id": "5ed0dbb8a9c89b2410fddb62",
+            "title": "The Enchanted Wood",
+            "author": "Enyd Blyton",
+            "class": "Any",
+            "category": "Novel",
+            "bookUrl": "www.example.com/books",
+            "imageUrl": "www.books.com/the-enchanted-wood.jpg",
+            "createdOn": "2020-05-29T09:54:00.000Z",
+            "school": "5ecb08dfd2595416f0dc9975",
+            "__v": 0
+        }
+    }
+    ```
+
+ ### Update Book
+* Request
+    * Endpoint: PATCH/api/v1/school/5ecb08dfd2595416f0dc9975/books/5ed0dbb8a9c89b2410fddb62
+    * Body: (application/json)
+    ```
+    {
+        "author": "E. Blyton",
+        "price": 1000
+    }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Book was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed0dbb8a9c89b2410fddb62",
+                "price": 1000,
+                "title": "The Enchanted Wood",
+                "author": "E. Blyton",
+                "class": "Any",
+                "category": "Novel",
+                "bookUrl": "www.example.com/books",
+                "imageUrl": "www.books.com/the-enchanted-wood.jpg",
+                "createdOn": "2020-05-29T09:54:00.000Z",
+                "school": "5ecb08dfd2595416f0dc9975",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Book
+
+* Request:
+    * Endpoint: DELETE/api/v1/school/5ecb08dfd2595416f0dc9975/books/5ed0dbb8a9c89b2410fddb62
+  
+* Response:
+    * Status: 204 - No Content
 
 ### Retrieve Officials
 * Request:
@@ -1362,42 +1568,229 @@ Only for users who are logged in.
 * Response:
     * Status: 200 - ok
     * Body: (application/json)
-    ```
-    {
-        "status": "success",
-        "message": "Successfully updated staff information",
-        "results": 1,
-        "data": {
-            "role": "Principal",
-            "category": "Staff",
-            "subjects": [
-                "Mathematics",
-                "Hausa Language",
-                "English Language"
-            ],
-            "classes": [
-                "Basic 1",
-                "SS 2"
-            ],
-            "_id": "5ecc14f1dd53ff1604ef81e2",
-            "fullname": "Amake Yemi Solarin",
-            "email": "amakesolarin@outlook.com",
-            "username": "amakesolarin63",
-            "phoneNumber": "+2348170417117",
-            "school": "5ecb08dfd2595416f0dc9976",
-            "__v": 0
-        }
-    }
-    ```
-
-### Delete Staff
+```
+{
+  "status": "success",
+  "message": "Successfully updated staff information",
+  "results": 1,
+  "data": {
+      "role": "Principal",
+      "category": "Staff",
+      "subjects": [
+          "Mathematics",
+          "Hausa Language",
+          "English Language"
+      ],
+      "classes": [
+          "Basic 1",
+          "SS 2"
+      ],
+      "_id": "5ecc14f1dd53ff1604ef81e2",
+      "fullname": "Amake Yemi Solarin",
+      "email": "amakesolarin@outlook.com",
+      "username": "amakesolarin63",
+      "phoneNumber": "08170417117",
+      "school": "5ecb08dfd2595416f0dc997"
+ }
+```
+ ### Delete Staff
 
 * Request:
     * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9976/staff/5ecc14f1dd53ff1604ef81e2
 
 * Response:
-    * Status: 204 - no content
+    * Status: 204 - no content  
 
+### Questions
+
+### Retrieve Questions
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/questions
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Questions retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ecf7b9a525ab2125c2b9789",
+                    "createdOn": "2020-05-28T08:51:38.000Z",
+                    "subject": "Economics",
+                    "class": "Basic3",
+                    "category": "Assignment",
+                    "question": "In which of the following situations do we have a free good?  ",
+                    "options": {
+                                "a": "At zero price, more is demanded than supplied  ",
+                                "b": "At zero price, quantity supplied exceeds quantity demanded  ",
+                                "c": "At equilibrium price, quantity supply is equal to quantity demanded. ",
+                                "d": "Any quantity can be obtained when the price is low "
+                            },
+                    "answer": "b",
+                    "points": 4,
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ecf7b9a525ab2125c2b97a1",
+                    "createdOn": "2020-05-28T08:51:38.000Z",
+                    "subject": "Government",
+                    "class": "Basic3",
+                    "category": "Classwork",
+                    "question": "The reason behind Nigeria’s suspension from the Commonwealth in 1995 was",
+                    "options": {
+                        "a": "legal",
+                        "b": "political",
+                        "c": "economic",
+                        "d": "socio-cultural"
+                    },
+                    "answer": "b",
+                    "points": 4,
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "__v": 0
+                }
+            ]
+        }
+    ```
+    
+### Retrieve Question
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/questions/5ecf7b9a525ab2125c2b96fc
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Question retrieved successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ecf7b9a525ab2125c2b96fc",
+                "createdOn": "2020-05-28T08:51:38.000Z",
+                "subject": "Physics",
+                "class": "SS1",
+                "category": "Exam",
+                "question": "The postulate of Dalton’s atomic theory which still holds is that",
+                "options": {
+                    "a": "Atoms can neither be created nor destroyed",
+                    "c": "Atoms are the tiniest known elements",
+                    "b": "The particles of the same element are exactly alike",
+                    "d": "All atoms are of the same weight"
+                },
+                "answer": "a",
+                "points": 2,
+                "school": "5ecb08dfd2595416f0dc9975",
+                "__v": 0
+            }   
+        }
+    ```
+
+### Create Question
+* Request
+    * Endpoint: POST/api/v1/school/5ecb08dfd2595416f0dc9975/questions
+    * Body: (application/json)
+    ```
+    {
+        "subject": "History",
+        "class": "SS2",
+        "category": "Exam",
+     	"question": "The introduction of indirect rule in eastern Nigeria led to the Aba Women Riots of  ",
+     	"options": {
+         	"a": "1914",
+         	"b": "1929",
+         	"c": "1935",
+         	"d": "1916"
+     	},
+     	"answer": "b",
+     	"points": 2
+     }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        message": "Question created successfully",
+        "results": 1,
+        "data": {
+            "_id": "5ed10b84aa3e3e21acf51f88",
+            "subject": "History",
+            "class": "SS2",
+            "category": "Exam",
+            "question": "The introduction of indirect rule in eastern Nigeria led to the Aba Women Riots of  ",
+            "options": {
+                "a": "1914",
+                "b": "1929",
+                "c": "1935",
+                "d": "1916"
+            },
+            "answer": "b",
+            "points": 2,
+            "createdOn": "2020-05-29T13:17:56.000Z",
+            "school": "5ecb08dfd2595416f0dc9975",
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Question
+* Request
+    * Endpoint: PATCH/api/v1/school/5ecb08dfd2595416f0dc9975/questions/5ed10b84aa3e3e21acf51f88
+    * Body: (application/json)
+    ```
+    {
+        "options": {
+            "a": "1929",
+            "b": "1914",
+            "c": "1916",
+            "d": "None of the above"
+        },
+        "answer": "a"
+    }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Question was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed10b84aa3e3e21acf51f88",
+                "subject": "History",
+                "class": "SS2",
+                "category": "Exam",
+                "question": "The introduction of indirect rule in eastern Nigeria led to the Aba Women Riots of  ",
+                "options": {
+                    "a": "1929",
+                    "b": "1914",
+                    "c": "1916",
+                    "d": "None of the above"
+                },
+                "answer": "a",
+                "points": 3,
+                "createdOn": "2020-05-29T13:17:56.000Z",
+                "school": "5ecb08dfd2595416f0dc9975",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Question
+
+* Request:
+    * Endpoint: DELETE/api/v1/school/5ecb08dfd2595416f0dc9975/questions/5ed10b84aa3e3e21acf51f88
+  
+* Response:
+    * Status: 204 - No Content
 
 ### Retrieve Parents
 Find all the parents whose children are students in a particular school.
@@ -1717,3 +2110,200 @@ Rest assured, the other category of users follow thesame pattern, with the excep
         }
     }
     ```
+
+### Assessments
+
+### Retrieve Assessments
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/assessments
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessments retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ecfef8920381a1ed88108a8",
+                    "questions": [
+                        "5ecf7b9a525ab2125c2b96fc",
+                        "5ecf7b9a525ab2125c2b9708",
+                        "5ecf7b9a525ab2125c2b970c"
+                    ],
+                    "subject": "Chemistry",
+                    "title": "Third Term Examination",
+                    "class": "SS2",
+                    "category": "Exam",
+                    "term": 1,
+                    "year": "2025",
+                    "percentage": 75,
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "createdOn": "2020-05-28T17:06:17.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ecff0e920381a1ed88108a9",
+                    "questions": [
+                        "5ecf7b9a525ab2125c2b97a1",
+                        "5ecfd2c904602111208fa6d8"
+                    ],
+                    "subject": "Economics",
+                    "title": "Classwork",
+                    "class": "SS2",
+                    "category": "Classwork",
+                    "term": 1,
+                    "year": "2025",
+                    "percentage": 0,
+                    "school": "5ecb08dfd2595416f0dc9975",
+                    "createdOn": "2020-05-28T17:12:09.000Z",
+                    "__v": 3
+                }
+            ]
+        }
+    ```    
+### Retrieve Assessment
+* Request
+    * Endpoint: GET/api/v1/school/5ecb08dfd2595416f0dc9975/assessments/5ecff0e920381a1ed88108a9
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment retrieved successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ecff0e920381a1ed88108a9",
+                "questions": [
+                    "5ecf7b9a525ab2125c2b97a1",
+                    "5ecfd2c904602111208fa6d8"
+                ],
+                "subject": "Economics",
+                "title": "Classwork",
+                "class": "SS2",
+                "category": "Classwork",
+                "term": 1,
+                "year": "2025",
+                "percentage": 0,
+                "school": "5ecb08dfd2595416f0dc9975",
+                "createdOn": "2020-05-28T17:12:09.000Z",
+                "__v": 3
+            }
+        }
+    ```    
+
+### Create Assessment
+* Request
+    * Endpoint: POST/api/v1/school/5ecb08dfd2595416f0dc9975/assessments
+    * Body: (application/json)
+    ```
+    {
+       "subject": "Chemistry",
+        "title": "Quiz",
+        "class": "SS1",
+        "category": "Quiz",
+        "questions": ["5ecf7b9a525ab2125c2b96fc", 
+            "5ecf7b9a525ab2125c2b9708", "5ecf7b9a525ab2125c2b970c",
+            "5ecf7b9a525ab2125c2b970e", "5ecf7b9a525ab2125c2b9719", 
+            "5ecf7b9a525ab2125c2b971b", 5ecf7b9a525ab2125c2b971e" 
+        ],
+        "term": "1",
+        "year": "2020",
+        "percentage": "10",
+        "school": "5ecb08dfd2595416f0dc9975"
+     }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment created successfully",
+            "results": 1,
+            "data": {
+                "questions": [
+                    "5ecf7b9a525ab2125c2b96fc",
+                    "5ecf7b9a525ab2125c2b9708",
+                    "5ecf7b9a525ab2125c2b970c",
+                    "5ecf7b9a525ab2125c2b970e",
+                    "5ecf7b9a525ab2125c2b9719",
+                    "5ecf7b9a525ab2125c2b971b",
+                    "5ecf7b9a525ab2125c2b971e"
+                ],
+                "_id": "5ed116aaaa3e3e21acf51f89",
+                "subject": "Chemistry",
+                "title": "Quiz",
+                "class": "SS1",
+                "category": "Quiz",
+                "term": 1,
+                "year": "2020",
+                "percentage": 10,
+                "school": "5ecb08dfd2595416f0dc9975",
+                "createdOn": "2020-05-29T14:05:30.000Z",
+                "__v": 0
+            }
+        }
+    ```
+
+### Update Assessment
+* Request
+    * Endpoint: PATCH/api/v1/school/5ecb08dfd2595416f0dc9975/assessments/5ed116aaaa3e3e21acf51f89
+    * Body: (application/json)
+    ```
+        {
+            "questions": [
+                "5ecf7b9a525ab2125c2b9726",
+                "5ecf7b9a525ab2125c2b9729"
+            ],
+            "category": "Exam"
+        }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed116aaaa3e3e21acf51f89",
+                "questions": [
+                    "5ecf7b9a525ab2125c2b96fc",
+                    "5ecf7b9a525ab2125c2b9708",
+                    "5ecf7b9a525ab2125c2b970c",
+                    "5ecf7b9a525ab2125c2b970e",
+                    "5ecf7b9a525ab2125c2b9719",
+                    "5ecf7b9a525ab2125c2b971b",
+                    "5ecf7b9a525ab2125c2b971e",
+                    "5ecf7b9a525ab2125c2b9726",
+                    "5ecf7b9a525ab2125c2b9729"
+                ],
+                "subject": "Chemistry",
+                "title": "Quiz",
+                "class": "SS1",
+                "category": "Exam",
+                "term": 1,
+                "year": "2020",
+                "percentage": 10,
+                "school": "5ecb08dfd2595416f0dc9975",
+                "createdOn": "2020-05-29T14:05:30.000Z",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Assessment
+
+* Request:
+    * Endpoint: DELETE/api/v1/school/5ecb08dfd2595416f0dc9975/assessments/5ed116aaaa3e3e21acf51f89
+  
+* Response:
+    * Status: 204 - No Content
