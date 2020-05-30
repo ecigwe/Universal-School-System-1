@@ -41,8 +41,8 @@ router.patch('/api/v1/update_my_password',
 router.use('/api/v1/users/admins', adminUsers);
 router.use('/api/v1/users/parents', parentRoutes);
 router.use('/api/v1/users', userRoutes);
-router.use('/api/v1/schools', schools);
 router.use('/api/v1/school', school);
+router.use('/api/v1/schools', schools);
 
 router.all('*', (request, response, next) => {
     return errorHandler(404, `Cannot find ${request.originalUrl} On This Server`);
