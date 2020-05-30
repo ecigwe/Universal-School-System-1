@@ -8,15 +8,17 @@ const classSchema = mongoose.Schema({
         trim: true,
     },
     formTeacher: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Staff'
     },
-    students: {
-        type: [mongoose.Types.ObjectId],
-        ref: 'Student'
-    },
-    prefect:{
-        type: mongoose.Types.ObjectId,
+    students: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Student'
+        }
+    ],
+    prefect: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'
     },
     term: {

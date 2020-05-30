@@ -44,9 +44,12 @@ const assessmentSchema = mongoose.Schema({
         trim: true
     },
 
-    questions: {
-        type: [mongoose.Types.ObjectId],
-    },
+    questions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Question'
+        }
+    ],
 
     percentage: {
         type: Number,
@@ -54,7 +57,7 @@ const assessmentSchema = mongoose.Schema({
         min: 0
     },
     school: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'School',
         required: [true, 'Please provide a school that owns this assessment']
     },
