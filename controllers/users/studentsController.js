@@ -34,4 +34,3 @@ exports.deleteStudentOfSchool = catchAsyncError(async (request, response, next) 
     studentOfSchool = await Student.findByIdAndDelete(request.params.student_id);
     return responseHandler(response, studentOfSchool, next, 204, 'Successfully deleted student\'s details', 1);
 });
-module.exports = StudentController;
