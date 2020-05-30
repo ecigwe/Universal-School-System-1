@@ -141,6 +141,24 @@ The administrators of the application have access to all the resources in the sy
 * A registered School-Administrator can delete the details of his school.
 * Only the application's administrators can see all the schools that are registered on the application.
 
+### Accessing Books
+* Only A Staff Of A School Can Add Books For That School.
+* Only A Staff Of A School Can Update A  Book For That School.
+* Only A Staff Of A School Can Delete A Book For That School.
+* Books For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent.  
+
+### Accessing Questions
+* Only A Staff Of A School Can Add Questions For That School.
+* Only A Staff Of A School Can Update A Question For That School.
+* Only A Staff Of A School Can Delete A Question For That School. 
+* Questions For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent.   
+
+### Accessing Assessments
+* Only A Staff Of A School Can Add Assessments For That School.
+* Only A Staff Of A School Can Update An Assessment For That School.
+* Only A Staff Of A School Can Delete An Assessment For That School. 
+* Questions For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent. 
+
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 

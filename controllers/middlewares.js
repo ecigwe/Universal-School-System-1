@@ -36,7 +36,7 @@ exports.checkUserRole = (...roles) => {
         if (request.user.category === 'Admin') return next();
 
         if (!roles.includes(request.user.role)) {
-            return errorHandler(403, 'You are forbidden from accessing this resource.');
+            return errorHandler(403, 'You are forbidden from performing this action.');
         }
         return next();
     }
@@ -46,7 +46,7 @@ exports.checkConnectionWithSchool = (request, response, next) => {
     if (request.user.category === 'Admin') return next();
 
     if (!request.user.school.equals(request.params.id)) {
-        return errorHandler(403, 'You are forbidden from accessing this resource.');
+        return errorHandler(403, 'You are forbidden from performing this action.');
     }
     return next();
 }
@@ -56,7 +56,7 @@ exports.checkCategory = (...category) => {
         if (request.user.category === 'Admin') return next();
 
         if (!category.includes(request.user.category)) {
-            return errorHandler(403, 'You are forbidden from accessing this resource.');
+            return errorHandler(403, 'You are forbidden from performing this action.');
         }
         return next();
     }
@@ -72,14 +72,14 @@ exports.restrictStudentData = catchAsyncError(async (request, response, next) =>
         request.student = student;
         return next();
     }
-    return errorHandler(403, 'You are forbidden from accessing this resource');
+    return errorHandler(403, 'You are forbidden from performing this action');
 });
 
 exports.confirmOwnership = (request, response, next) => {
     if (request.user.category === 'Admin') return next();
 
     if (request.user._id.equals(request.params.id)) return next();
-    return errorHandler(403, 'You are forbidden from interacting with this resource.');
+    return errorHandler(403, 'You are forbidden from performing this action.');
 }
 
 exports.restrictParentData = catchAsyncError(async (request, response, next) => {
@@ -97,7 +97,7 @@ exports.restrictParentData = catchAsyncError(async (request, response, next) => 
     ) {
         return next();
     }
-    return errorHandler(403, 'You are forbidden from interacting with this resource.');
+    return errorHandler(403, 'You are forbidden from performing this action.');
 });
 
 exports.restrictStaffInformation = catchAsyncError(async (request, response, next) => {
@@ -118,14 +118,14 @@ exports.restrictStaffInformation = catchAsyncError(async (request, response, nex
     ) {
         return next();
     }
-    return errorHandler(403, 'You are forbidden from interacting with this resource.');
+    return errorHandler(403, 'You are forbidden from performing this action.');
 });
 
 exports.restrictModificationOfStaffData = (request, response, next) => {
     if (request.user.category === 'Admin') return next();
 
     if (request.user._id.equals(request.params.staff_id)) return next();
-    return errorHandler(403, 'You are forbidden from interacting with this resource.');
+    return errorHandler(403, 'You are forbidden from performing this action.');
 }
 
 exports.restrictSchoolInformation = catchAsyncError(async (request, response, next) => {
@@ -149,5 +149,5 @@ exports.restrictSchoolInformation = catchAsyncError(async (request, response, ne
         return next();
     }
 
-    return errorHandler(403, 'You are forbidden from accessing this resource.');
+    return errorHandler(403, 'You are forbidden from performing this action.');
 });

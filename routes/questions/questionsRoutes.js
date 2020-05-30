@@ -1,23 +1,34 @@
 const express = require('express');
 const router = express.Router();
 const questionController = require('../../controllers/questions/questionController');
+const authHandler = require('../../controllers/authentication/authHandler');
+const middlewares = require('../../controllers/middlewares');
 
+router.use(authHandler.protect);
 
 router.route('/:id/questions')
-    .post(
+    .post(middlewares.checkIfSchoolStillExists,
+        middlewares.checkCategory('Staff'),
+        middlewares.checkConnectionWithSchool,
         questionController.createQuestion
     )
-    .get(
+    .get(middlewares.checkIfSchoolStillExists,
+        middlewares.restrictSchoolInformation,
         questionController.getAllQuestionsForASpecificSchool
     )
-    router.route('/:id/questions/:question_id')
-    .get(
+router.route('/:id/questions/:question_id')
+    .get(middlewares.checkIfSchoolStillExists,
+        middlewares.restrictSchoolInformation,
         questionController.findOneQuestionOfASpecificSchool
     )
-    .patch(
+    .patch(middlewares.checkIfSchoolStillExists,
+        middlewares.checkCategory('Staff'),
+        middlewares.checkConnectionWithSchool,
         questionController.updateQuestionOfASpecificSchool
     )
-    .delete(
+    .delete(middlewares.checkIfSchoolStillExists,
+        middlewares.checkCategory('Staff'),
+        middlewares.checkConnectionWithSchool,
         questionController.deleteQuestionOfASpecificSchool
     )
 
