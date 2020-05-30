@@ -30,13 +30,13 @@ const questions = JSON.parse(fs.readFileSync(`${__dirname}/questions.json`, 'utf
 const exportData = async () => {
     try {
         //await School.create(schools);
-        await Admin.create(admins);
+        //await Admin.create(admins);
         //await Parent.create(parents);
         //await Staff.create(staffs);
         //await Staff.create(staffsTwo);
         //await Student.create(students);
         //await Student.create(studentsTwo)
-        //await Question.create(questions);
+        await Question.create(questions);
         console.log('All exported.');
     } catch (error) {
         console.log(error);
