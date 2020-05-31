@@ -25,27 +25,10 @@ const questionSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please enter a question']
     },
-    options: {
-        type: {
-            a: {
-                type: String,
-                required: [true, 'Provide option a']
-
-            },
-            b: {
-                type: String,
-                required: [true, 'Provide option b']
-            },
-            c: {
-                type: String,
-                required: [true, 'Provide option c']
-            },
-            d: {
-                type: String,
-                required: [true, 'Provide option d']
-            }
-        }
-    },
+    options: [
+        //Each option is really just a string. Example : "a. Girl", "b. Boy", "c. Girl" and so on...
+        { type: String }
+    ],
     answer: {
         type: String,
         required: [true, 'Please provide an answer for this question']
