@@ -6,6 +6,7 @@ const classSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please, provide a name for this class'],
         trim: true,
+        unique: true
     },
     formTeacher: {
         type: mongoose.Schema.Types.ObjectId,
@@ -60,6 +61,10 @@ const classSchema = mongoose.Schema({
     },
     createdOn: {
         type: Date
+    },
+    lectureTimetable: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'LectureTimetable'
     }
 });
 
