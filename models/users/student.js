@@ -82,6 +82,10 @@ const studentSchema = mongoose.Schema({
     registrationDate: {
         type: Date
     },
+    studyTimetable: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'StudyTimetable'
+    },
     passwordChangedAt: { type: Date },
     verified: {
         type: Boolean,

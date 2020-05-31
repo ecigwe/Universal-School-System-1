@@ -136,6 +136,16 @@ From then on, the user can have access to any resource on the platform that is a
 * The details of a specific class can be updated.
 * The details of a specific class can be deleted. 
 
+### Personal Study Timetables
+To peform this kind of activity on the app, the registered student or staff who has verified his or her account phone number needs to be logged in.
+
+A student or a staff cannot create a new timetable, when he or she has an existing one. He or she would have to delete the current one to make way for the new. 
+
+* Every registered student or staff can create a personal timetable for studying.
+* Every registered student or staff can fetch their personal studying timetable.
+* Every registered student or staff can update their personal studying timetable.
+* Every registered student or staff can delete their personal studying timetable.
+
 ### Permissions For Accesssing Resources
 
 The administrators of the application have access to all the resources in the system.
@@ -192,6 +202,9 @@ The administrators of the application have access to all the resources in the sy
 * Only A Staff Of A School Can Update A Classroom For That School.
 * Only A Staff Of A School Can Delete A Classroom For That School. 
 * Classrooms For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent.
+
+### Accessing Study Timetables
+* A Student or a staff can interact only with the study timetable that he or she has created.
 
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
@@ -263,6 +276,12 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | POST/api/vi/schools/:id/classes                      | Creates a new class for a school                                           |
 | PATCH/api/vi/schools/:id/classes/:class_id           | Updates a specific class for a school                                      |
 | DELETE/api/vi/schools/:id/classes/:class_id          | Deletes a specific class for a school                                      |
+| POST/api/v1/users/me/study_timetable                 | Create a study timetable                                                   |
+| GET/api/v1/users/me/study_timetable                  | Fetch my study timetable                                                   |
+| PATCH/api/v1/users/me/study_timetable                | Update my study timetable                                                  |
+| DELETE/api/v1/users/me/study_timetable               | Delete my study timetable                                                  |
+
+
 
 
 ### Sample Requests and Responses From The API
@@ -340,6 +359,12 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Create Class](#create-class)
     - [Update Class](#update-class)
     - [Delete Class](#delete-class)
+
+- [Study Timetable](#study-timetable)
+    - [Create Timetable](#create-timetable)
+    - [Fetch Timetable](#fetch-timetable)
+    - [Update Timetable](#update-timetable)
+    - [Delete Timetable](#delete-timetable)
 
 ### Authenticate
 
@@ -2644,3 +2669,485 @@ Rest assured, the other category of users follow thesame pattern, with the excep
   
 * Response:
     * Status: 204 - No Content
+
+### Study Timetable
+
+### Create Timetable
+
+* Request:
+    * Endpoint: POST/api/v1/users/me/study_timetable
+    * Body: (application/json)
+     ```
+     {
+        "monday": [
+                {"subject": "Math", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "English", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "tuesday": [
+                {"subject": "Physics", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Chemistry", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "wednesday": [
+                {"subject": "Biology", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Agric", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "thursday": [
+                {"subject": "CRS", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Civic", "numOfStudyHours": "1 hour", "start": "6:30pm", "stop": "7:30pm"}
+            ],
+        "friday": [
+            {"subject": "Further Maths", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Government", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "saturday": [
+                {"subject": "Literature", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "English", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "sunday": [
+                {"subject": "Math", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Chemistry", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ]
+        }
+     ```
+* Response
+    * Status: 201 - created
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Your timetable has been successfully created",
+        "results": 1,
+        "data": {
+            "authorCategory": "Student",
+            "category": "Study",
+            "_id": "5ed3b246538ee0184cf8d6fd",
+            "monday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d6fe",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d6ff",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d700",
+                    "subject": "Physics",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d701",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d702",
+                    "subject": "Biology",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d703",
+                    "subject": "Agric",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d704",
+                    "subject": "CRS",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d705",
+                    "subject": "Civic",
+                    "numOfStudyHours": "1 hour",
+                    "start": "6:30pm",
+                    "stop": "7:30pm"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d706",
+                    "subject": "Further Maths",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d707",
+                    "subject": "Government",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "saturday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d708",
+                    "subject": "Literature",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d709",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "sunday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d70a",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d70b",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "authorUsername": "lawrenceayantola84",
+            "__v": 0
+        }
+    }
+    ```
+
+### Fetch Timetable
+
+* Request:
+    * Endpoint: GET/api/v1/users/me/study_timetable
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Your timetable has been successfully retrieved",
+        "results": 1,
+        "data": {
+            "authorCategory": "Student",
+            "category": "Study",
+            "_id": "5ed3b246538ee0184cf8d6fd",
+            "monday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d6fe",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d6ff",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d700",
+                    "subject": "Physics",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d701",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d702",
+                    "subject": "Biology",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d703",
+                    "subject": "Agric",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d704",
+                    "subject": "CRS",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d705",
+                    "subject": "Civic",
+                    "numOfStudyHours": "1 hour",
+                    "start": "6:30pm",
+                    "stop": "7:30pm"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d706",
+                    "subject": "Further Maths",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d707",
+                    "subject": "Government",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "saturday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d708",
+                    "subject": "Literature",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d709",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "sunday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d70a",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d70b",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "authorUsername": "lawrenceayantola84",
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Timetable
+* Request: 
+    * Endpoint PATCH/api/v1/users/me/study_timetable
+    * Body: (application/json)
+    ```
+    {
+        "tuesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d6fe",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d6ff",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "monday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d700",
+                    "subject": "Physics",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d701",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ]
+    }
+    ```
+
+* Response:
+    * Status: 200 - ok 
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Your timetable has been successfully updated",
+        "results": 1,
+        "data": {
+            "authorCategory": "Student",
+            "category": "Study",
+            "_id": "5ed3b246538ee0184cf8d6fd",
+            "monday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d700",
+                    "subject": "Physics",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d701",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d6fe",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d6ff",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d702",
+                    "subject": "Biology",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d703",
+                    "subject": "Agric",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d704",
+                    "subject": "CRS",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d705",
+                    "subject": "Civic",
+                    "numOfStudyHours": "1 hour",
+                    "start": "6:30pm",
+                    "stop": "7:30pm"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d706",
+                    "subject": "Further Maths",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d707",
+                    "subject": "Government",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "saturday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d708",
+                    "subject": "Literature",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d709",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "sunday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d70a",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d70b",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "authorUsername": "lawrenceayantola84",
+            "__v": 0
+        }
+    }
+    ```
+### Delete Timetable
+
+* Request:
+    * Endpoint: DELETE/api/v1/users/me/study_timetable
+  
+* Response:
+    * Status: 204 -  no content

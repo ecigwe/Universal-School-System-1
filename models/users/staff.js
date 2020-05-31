@@ -79,7 +79,11 @@ const staffSchema = mongoose.Schema({
         default: false
     },
     ResetToken: String,
-    ResetExpires: Date
+    ResetExpires: Date,
+    studyTimetable: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'StudyTimetable'
+    }
 });
 
 // staffSchema.pre('save', async function (next) {
