@@ -8,7 +8,10 @@ const parents = require('../routes/users/parents');
 const books = require('./books/booksRoutes');
 const questions = require('./questions/questionsRoutes');
 const assessments = require('./assessments/assessmentsRoutes');
+const results = require('./assessments/assessmentResultRoutes');
 const classes = require('./classes/classRoutes');
+const shelves = require('./shelf/shelfRoutes');
+const studentRecords = require('./studentRecord/recordsRoutes');
 
 const router = Router();
 
@@ -21,6 +24,9 @@ router.use(classes);
 router.use(books);
 router.use(questions);
 router.use(assessments);
+router.use(shelves);
+router.use(results);
+router.use(studentRecords);
 
 router.use(authHandler.protect);
 
