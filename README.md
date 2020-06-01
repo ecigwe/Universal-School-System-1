@@ -2726,3 +2726,161 @@ Rest assured, the other category of users follow thesame pattern, with the excep
   
 * Response:
     * Status: 204 - No Content
+
+### Assessment Results
+
+### Retrieve Assessment Results
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/assessment/results
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment results retrieved successfully",
+            "results": 3,
+            "data": [
+                {
+                    "_id": "5ed403202f73a32e40d9bf59",
+                    "subject": "Physics",
+                    "class": "SS1",
+                    "category": "Quiz",
+                    "term": 1,
+                    "year": "2020",
+                    "score": 10,
+                    "student": "5ed3c8623cddff32981887d4",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:18:56.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed40bdd467a6f2e64d466a7",
+                    "subject": "Basic Science",
+                    "class": "Basic1",
+                    "category": "Exam",
+                    "term": 3,
+                    "year": "2020",
+                    "score": 43,
+                    "student": "5ed3c8623cddff32981887d5",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:56:13.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed40c42467a6f2e64d466a9",
+                    "subject": "Biology",
+                    "class": "SS3",
+                    "category": "Exam",
+                    "term": 3,
+                    "year": "2022",
+                    "score": 53,
+                    "student": "5ed3c8623cddff32981887d9",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:57:54.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Retrieve Assessment Result
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/assessment/results
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment results retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ed403202f73a32e40d9bf59",
+                    "subject": "Physics",
+                    "class": "SS1",
+                    "category": "Quiz",
+                    "term": 1,
+                    "year": "2020",
+                    "score": 15,
+                    "student": "5ed3c8623cddff32981887d4",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:18:56.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed4040808ab323154d6a12d",
+                    "subject": "Physics",
+                    "class": "SS1",
+                    "category": "Quiz",
+                    "term": 1,
+                    "year": "2020",
+                    "score": 10,
+                    "student": "5ed3c8623cddff32981887d4",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:22:48.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Create Assessment Result
+* Request
+    * Endpoint: POST/api/v1/schools/5ecb08dfd2595416f0dc9977/student/assessment/results
+    * Body: (application/json)
+    ```
+        {
+            "subject": "Biology",
+            "class": "SS3",
+            "category": "Quiz",
+            "term": "3",
+            "year": "2020",
+            "score": 13,
+            "student": "5ed3c8623cddff32981887d4",
+            "isCA": true
+        }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+             "message": "Result saved successfully",
+             "results": 1,
+             "data": {
+                 "_id": "5ed4f0f9e3014c19c46af6f5",
+                 "subject": "Biology",
+                 "class": "SS3",
+                 "category": "Quiz",
+                 "term": 3,
+                 "year": "2020",
+                 "score": 13,
+                 "student": "5ed3c8623cddff32981887d4",
+                 "isCA": true,
+                 "createdOn": "2020-06-01T12:13:45.000Z",
+                 "school": "5ecb08dfd2595416f0dc9977",
+                "__v": 0
+            }
+        }
+    ``` 
+
+### Delete Assessment Result
+
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/assessment/results/5ed404d7bffb471b4c3d2e09
+  
+* Response:
+    * Status: 204 - No Content   
