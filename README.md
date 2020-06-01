@@ -356,8 +356,8 @@ This API has routes, each of which are dedicated to a single objective. The endp
 - [Student Records](#student-records)
     - [Retrieve Students Records](#retrieve-students-records)
     - [Retrieve Student Records](#retrieve-student-records)
-    - [Update Student Records](#Update-student-records)
-    - [Delete Student Records](#delete-student-records)
+    - [Update Student Record](#Update-student-record)
+    - [Delete Student Record](#delete-student-record)
 
 
 ### Authenticate
@@ -2884,3 +2884,197 @@ Rest assured, the other category of users follow thesame pattern, with the excep
   
 * Response:
     * Status: 204 - No Content   
+
+### Student Records
+
+### Retrieve Students Records
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/records
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Records retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ed40bdc467a6f2e64d466a6",
+                    "english": 23,
+                    "mathematics": 10,
+                    "government": 14,
+                    "englishliterature": 20,
+                    "physics": 16,
+                    "geography": 0,
+                    "agriculturalscience": 0,
+                    "economics": 0,
+                    "basicscience": 43,
+                    "biology": 0,
+                    "civic": 23,
+                    "basictechnology": 0,
+                    "socialstudies": 0,
+                    "computerscience": 0,
+                    "chemistry": 9,
+                    "class": "SS1",
+                    "term": 2,
+                    "year": "2017",
+                    "student": "5ed3c8623cddff32981887d4",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-31T19:56:12.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed40c42467a6f2e64d466a8",
+                    "english": 76,
+                    "mathematics": 55,
+                    "government": 61,
+                    "englishliterature": 70,
+                    "physics": 23,
+                    "geography": 42,
+                    "agriculturalscience": 15,
+                    "economics": 0,
+                    "basicscience": 0,
+                    "biology": 53,
+                    "civic": 0,
+                    "basictechnology": 0,
+                    "socialstudies": 0,
+                    "computerscience": 0,
+                    "chemistry": 39,
+                    "class": "SS3",
+                    "term": 3,
+                    "year": "2022",
+                    "student": "5ed3c8623cddff32981887d7",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-31T19:57:54.000Z",
+                    "__v": 0
+                }       
+            ]
+        }
+    ```    
+
+### Retrieve Student Records
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/records
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Records retrieved successfully",
+            "results": 3,
+            "data": [
+                {
+                    "_id": "5ed40bdc467a6f2e64d466a6",
+                    "english": 55,
+                    "mathematics": 71,
+                    "government": 0,
+                    "englishliterature": 0,
+                    "physics": 0,
+                    "geography": 0,
+                    "agriculturalscience": 0,
+                    "economics": 0,
+                    "basicscience": 43,
+                    "biology": 0,
+                    "civic": 34,
+                    "basictechnology": 44,
+                    "socialstudies": 80,
+                    "computerscience": 0,
+                    "chemistry": 0,
+                    "class": "Basic1",
+                    "term": 3,
+                    "year": "2016",
+                    "student": "5ed3c8623cddff32981887d4",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-31T19:56:12.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed40c42467a6f2e64d466a8",
+                    "english": 0,
+                    "mathematics": 0,
+                    "government": 0,
+                    "englishliterature": 0,
+                    "physics": 0,
+                    "geography": 0,
+                    "agriculturalscience": 0,
+                    "economics": 0,
+                    "basicscience": 0,
+                    "biology": 53,
+                    "civic": 0,
+                    "basictechnology": 0,
+                    "socialstudies": 0,
+                    "computerscience": 0,
+                    "chemistry": 0,
+                    "class": "SS3",
+                    "term": 3,
+                    "year": "2022",
+                    "student": "5ed3c8623cddff32981887d4",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-31T19:57:54.000Z",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Update Student Record 
+
+* Request
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/records/5ed40c42467a6f2e64d466a8
+    * Body: (application/json)
+    ```
+        {
+	        "biology": 76
+        }
+
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+           "status": "success",
+            "message": "Student record was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed40c42467a6f2e64d466a8",
+                "english": 0,
+                "mathematics": 0,
+                "government": 0,
+                "englishliterature": 0,
+                "physics": 0,
+                "geography": 0,
+                "agriculturalscience": 0,
+                "economics": 0,
+                "basicscience": 0,
+                "biology": 76,
+                "civic": 0,
+                "basictechnology": 0,
+                "socialstudies": 0,
+                "computerscience": 0,
+                "chemistry": 0,
+                "class": "SS3",
+                "term": 3,
+                "year": "2022",
+                "student": "5ed3c8623cddff32981887d4",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "createdOn": "2020-05-31T19:57:54.000Z",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Student Record
+
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/records/5ed403202f73a32e40d9bf58
+  
+* Response:
+    * Status: 204 - No Content
