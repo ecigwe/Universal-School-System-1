@@ -1,5 +1,6 @@
 const crypto = require('crypto');
 const School = require('../models/school/school');
+const Classroom = require('../models/classes/classRoom');
 const Parent = require('../models/users/parent');
 const Student = require('../models/users/student');
 const Admin = require('../models/users/admin');
@@ -36,6 +37,15 @@ exports.checkIfSchoolStillExists = catchAsyncError(async (request, response, nex
     //check if school exists and return an error if it does not exist
     const school = await School.findById(request.params.id);
     if (!school) return errorHandler(404, 'We could not find the information you requested.');
+    request.school = school;
+    return next();
+});
+
+exports.checkIfClassStillExists = catchAsyncError(async (request, response, next) => {
+    //check if class exists and return an error if it does not exist
+    const classroom = await Classroom.findById(request.params.class_id);
+    if (!classroom) return errorHandler(404, 'We could not find the information you requested.');
+    request.classroom = classroom;
     return next();
 });
 
@@ -158,6 +168,18 @@ exports.restrictSchoolInformation = catchAsyncError(async (request, response, ne
     }
 
     return errorHandler(403, 'You are forbidden from performing this action.');
+});
+
+exports.restrictClassInformation = catchAsyncError(async (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+
+    if (request.user.role === 'School-Administrator' || request.user.role === 'Principal' || 'Vice-Principal') return next();
+
+    if (request.user._id.equals(request.classroom.formTeacher)) return next();
+
+    if (request.user.class === request.classroom.title) return next();
+
+    return errorHandler(403, 'You are forbidden from accessing this resource.');
 });
 
 exports.preventPasswordUpdate = (request, response, next) => {

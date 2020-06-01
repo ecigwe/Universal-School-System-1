@@ -7,8 +7,9 @@ const router = Router({ mergeParams: true });
 router.use(authHandler.protect);
 router.use(middlewares.checkIfUserHasVerifiedAcct);
 
-router.post('/', middlewares.checkCategory('Staff'),
+router.get('/', middlewares.checkIfSchoolStillExists,
+    middlewares.checkUserRole('School-Administrator', 'Principal', 'Vice-Principal'),
     middlewares.checkConnectionWithSchool,
-    lectureTimetableController.createLectureTimetable);
+    lectureTimetableController.fetchAllLectureTimetables);
 
 module.exports = router;

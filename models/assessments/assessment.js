@@ -67,13 +67,7 @@ const assessmentSchema = mongoose.Schema({
 });
 
 
-assessmentSchema.index({ school: 1 });
-assessmentSchema.index({ subject: 1 });
-assessmentSchema.index({ class: 1 });
-assessmentSchema.index({ category: 1 });
-assessmentSchema.index({ term: 1 });
-assessmentSchema.index({ year: 1 });
-
+assessmentSchema.index({ school: 1, subject: 1, class: 1, category: 1, term: 1, year: 1 }, { unique: true });
 
 const Assessment = mongoose.model('Assessment', assessmentSchema);
 module.exports = Assessment;

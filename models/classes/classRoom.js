@@ -69,7 +69,7 @@ const classSchema = mongoose.Schema({
 });
 
 
-classSchema.index({ name: 1 });
+classSchema.index({ title: 1, school: 1 }, {unique: true});
 classSchema.index({ term: 1 });
 classSchema.index({ year: 1 });
 

@@ -6,16 +6,16 @@ const lectureTimetableSchema = mongoose.Schema({
         ref: 'School'
     },
     class: {
-        type: String,
-        required: [true, 'Every lecture timetable must be for a specific class']
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Classroom'
     },
-    form_teacher: {//username
-        type: String,
-        required: [true, 'Every class must have a form teacher. Please enter the username of the form teacher.']
+    form_teacher: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: 'Staff'
     },
-    class_prefect: {//username
-        type: String,
-        required: [true, 'Every class must have a prefect. Please enter the username of the class prefect.']
+    class_prefect: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: 'Student'
     },
     category: {
         type: String,
