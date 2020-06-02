@@ -12,12 +12,15 @@ const results = require('./assessments/assessmentResultRoutes');
 const classes = require('./classes/classRoutes');
 const shelves = require('./shelf/shelfRoutes');
 const studentRecords = require('./studentRecord/recordsRoutes');
+const teacherTimetableRoutes = require('./timetables/teacherTimetable');
 
 const router = Router();
 
 router.use('/:id/students', students);
 router.use('/:id/staff', staff);
 router.use('/:id/parents', parents);
+router.use('/:id/staff_timetables', teacherTimetableRoutes);
+
 
 
 router.use(classes);

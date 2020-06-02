@@ -9,20 +9,23 @@ class Timetable {
 
     static async createTimetable(req, res, next) {
         try {
-            
+            //only for staff who owns the account or schooladmin
             req.body.staffUsername = req.body.staffUsername || req.user.username;
             req.body.staffCategory = req.body.staffCategory || req.user.category;
             req.body.createdOn = Date();
-            req.body.school = req.user.school;
+            req.body.school = req.user.school || req.params.id;
+
+            let doc = req.user.username === req.body.staffUsername ? req.user :
+                await Staff.findOne({ 'username': req.body.staffUsername, 'school': req.params.id }).select({ 'teacherTimetable': 1 });
+
+            if (!doc) { return errorHandler(404, 'Can\'t find staff with specified username in this school') };
+            if (doc.teacherTimetable) { return errorHandler(409, 'Teacher timetable already exists for this staff') };
 
             const result = await TeacherTimetable.create({
                 ...req.body
             });
 
-            let doc = req.user.username === req.body.username ? req.user :
-                await Staff.findOne({ 'username': req.body.username }).select({ 'username': 1 });
-
-            doc.studyTimetable = result._id
+            doc.teacherTimetable = result._id
             await doc.save({ validateBeforeSave: false });
 
             return responseHandler(res, result, next, 201, 'Timetable created successfully', 1);
@@ -41,7 +44,7 @@ class Timetable {
     static async findOne(req, res, next) {
         const message1 = 'The timetable you are looking for was not found';
         const message2 = 'Timetable retrieved successfully';
-        const query = { '_id': req.params.timetable_id, 'school': req.params.id };
+        const query = { 'staffUsername': req.params.staff_username, 'school': req.params.id };
         return timetable.findOne(req, res, next, message1, message2, query);
 
     }
@@ -49,7 +52,7 @@ class Timetable {
     static async updateTeacherTimetable(req, res, next) {
         const message1 = 'The timetable you are looking for was not found';
         const message2 = 'Timetable updated successfully';
-        const query = { '_id': req.params.timetable_id, 'school': req.params.id };
+        const query = { 'staffUsername': req.params.staff_username, 'school': req.params.id };
         const { createdOn, ...updateData } = req.body;
         req.body = updateData;
         return timetable.update(req, res, next, message1, message2, query);
@@ -58,9 +61,9 @@ class Timetable {
     static async deleteTeacherTimetable(req, res, next) {
         const message1 = 'The timetable you are looking for was not found';
         const message2 = 'Timetable was deleted successfully';
-        const query = { '_id': req.params.timetable_id, 'school': req.params.id };
+        const query = { 'staffUsername': req.params.staff_username, 'school': req.params.id };
         return timetable.deleteOne(req, res, next, message1, message2, query);
     }
 }
 
-module.exports = bookController
+module.exports = Timetable;

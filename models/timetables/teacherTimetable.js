@@ -4,11 +4,13 @@ const validator = require('validator');
 const teacherTimetableSchema = mongoose.Schema({
     staffUsername: {
         type: String,
-        required: [true, 'Please input your username']
+        required: [true, 'Please input staff username for this timetable'],
+        ref: 'Staff'
     },
     staffCategory: {
         type: String,
         default: 'Staff',
+        enum: 'Staff'
     },
     category: {
         type: String,
@@ -24,11 +26,16 @@ const teacherTimetableSchema = mongoose.Schema({
     },
     monday: [
         {
+            class: {
+                type: String,
+                required: [true, 'Please provide the class to be taught within this period'],
+                enum: ['Basic 1', 'Basic 2', 'Basic 3', 'SS 1', 'SS 2', 'SS 3']
+            },
             subject: {
                 type: String,
                 required: [true, 'Please input a subject for this period.']
             },
-            durationInHours: {
+            amountOfLectureTime: {
                 type: String,
                 required: [true, 'Please specify the amount of time allocated for this period'],
 
@@ -45,11 +52,16 @@ const teacherTimetableSchema = mongoose.Schema({
     ],
     tuesday: [
         {
+            class: {
+                type: String,
+                required: [true, 'Please provide the class to be taught within this period'],
+                enum: ['Basic 1', 'Basic 2', 'Basic 3', 'SS 1', 'SS 2', 'SS 3']
+            },
             subject: {
                 type: String,
                 required: [true, 'Please input a subject for this period.']
             },
-            durationInHours: {
+            amountOfLectureTime: {
                 type: String,
                 required: [true, 'Please specify the amount of time allocated for this period'],
 
@@ -66,11 +78,16 @@ const teacherTimetableSchema = mongoose.Schema({
     ],
     wednesday: [
         {
+            class: {
+                type: String,
+                required: [true, 'Please provide the class to be taught within this period'],
+                enum: ['Basic 1', 'Basic 2', 'Basic 3', 'SS 1', 'SS 2', 'SS 3']
+            },
             subject: {
                 type: String,
                 required: [true, 'Please input a subject for this period.']
             },
-            durationInHours: {
+            amountOfLectureTime: {
                 type: String,
                 required: [true, 'Please specify the amount of time allocated for this period'],
 
@@ -87,11 +104,16 @@ const teacherTimetableSchema = mongoose.Schema({
     ],
     thursday: [
         {
+            class: {
+                type: String,
+                required: [true, 'Please provide the class to be taught within this period'],
+                enum: ['Basic 1', 'Basic 2', 'Basic 3', 'SS 1', 'SS 2', 'SS 3']
+            },
             subject: {
                 type: String,
                 required: [true, 'Please input a subject for this period.']
             },
-            durationInHours: {
+            amountOfLectureTime: {
                 type: String,
                 required: [true, 'Please specify the amount of time allocated for this period'],
 
@@ -108,11 +130,16 @@ const teacherTimetableSchema = mongoose.Schema({
     ],
     friday: [
         {
+            class: {
+                type: String,
+                required: [true, 'Please provide the class to be taught within this period'],
+                enum: ['Basic 1', 'Basic 2', 'Basic 3', 'SS 1', 'SS 2', 'SS 3']
+            },
             subject: {
                 type: String,
                 required: [true, 'Please input a subject for this period.']
             },
-            durationInHours: {
+            amountOfLectureTime: {
                 type: String,
                 required: [true, 'Please specify the amount of time allocated for this period'],
 
@@ -129,7 +156,8 @@ const teacherTimetableSchema = mongoose.Schema({
     ]
 });
 
-teacherTimetableSchema.index({ staffUsername: 1, staffCategory: 1 }, { unique: true });
+
+teacherTimetableSchema.index({ staffUsername: 1 }, { unique: true });
 teacherTimetableSchema.index({ school: 1 });
 const TeacherTimetable = mongoose.model('TeacherTimetable', teacherTimetableSchema);
 module.exports = TeacherTimetable;
