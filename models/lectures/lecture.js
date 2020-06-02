@@ -1,3 +1,5 @@
+const fs = require('fs');
+const { promisify } = require('util');
 const mongoose = require('mongoose');
 
 const lectureSchema = mongoose.Schema({
@@ -35,6 +37,18 @@ const lectureSchema = mongoose.Schema({
     linksToLearningResources: [
         { type: String }
     ]
+});
+
+lectureSchema.pre(/^findOneAndDelete/, async function (next) {
+    this.lecture = await this.findOne();
+    next();
+});
+
+lectureSchema.post(/^findOneAndDelete/, async function () {
+    const unlink = promisify(fs.unlink);
+    for (i = 0; i < this.lecture.materials.length; i++) {
+        await unlink(`${__dirname}/../../../Univeral-School-System/files/lectures/${this.lecture.materials[i]}`);
+    }
 });
 
 lectureSchema.index({ school: 1, class: 1, title: 1, subject: 1 }, { unique: true });

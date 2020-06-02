@@ -1,7 +1,39 @@
+const fs = require('fs');
+const { promisify } = require('util');
+const multer = require('multer');
+const slugify = require('slugify');
 const Lecture = require('../../models/lectures/lecture');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const responseHandler = require('../../utils/responseHandler');
+const AppError = require('../../utils/errorUtils/appError');
+
+const multerStorage = multer.diskStorage({
+    destination: (request, file, cb) => {
+        cb(null, 'files/lectures');
+    },
+    filename: (request, file, cb) => {
+        const ext = file.mimetype.split('/')[1];
+        cb(null, `lecture-${slugify(request.lecture.subject, { lower: true })}-${slugify(request.lecture.title, { lower: true })}-${request.user.username}-${Date.now()}.${ext}`);
+    }
+});
+
+const multerFilter = (request, file, cb) => {
+    if (file.mimetype.startsWith('audio') ||
+        file.mimetype.startsWith('video') ||
+        file.mimetype.startsWith('application')) {
+        cb(null, true);
+    } else {
+        cb(new AppError('Please upload only a video file or an audio file or an application file', 400), false)
+    }
+}
+
+const upload = multer({
+    storage: multerStorage,
+    fileFilter: multerFilter
+});
+
+exports.uploadLectureFiles = upload.array('materials', 10);
 
 exports.createLecture = catchAsyncError(async (request, response, next) => {
     request.body.school = request.params.id;
@@ -29,6 +61,13 @@ exports.fetchOneLectureForClass = catchAsyncError(async (request, response, next
 });
 
 exports.updateOneLectureForClass = catchAsyncError(async (request, response, next) => {
+    request.body.materials = request.lecture.materials;
+    if (request.files) {
+        for (i = 0; i < request.files.length; i++) {
+            request.body.materials.push(request.files[i].filename);
+        }
+    }
+
     request.body.teacher = request.user._id;
     const updatedLecture = await Lecture.findByIdAndUpdate(request.params.lecture_id, request.body, {
         new: true,
@@ -46,4 +85,24 @@ exports.deleteLecture = catchAsyncError(async (request, response, next) => {
     if (!deletedLecture) return errorHandler(404, 'We could not find the data you want to delete.');
 
     return responseHandler(response, deletedLecture, next, 204, 'Lecture successfully deleted', 1);
+});
+
+exports.deleteLectureResource = catchAsyncError(async (request, response, next) => {
+    for (i = 0; i < request.lecture.materials.length; i++) {
+        if (request.lecture.materials[i] === request.params.name) {
+            request.lecture.materials.splice(i, 1);
+            await request.lecture.save({ validateBeforeSave: false });
+
+            const unlink = promisify(fs.unlink);
+
+            await unlink(`${__dirname}/../../../Univeral-School-System/files/lectures/${request.params.name}`);
+
+            return response.status(200).json({
+                status: 'success',
+                message: 'Lecture resource successfully deleted.'
+            });
+        }
+    }
+
+    return errorHandler(404, 'The resource you want to delete does not exist.')
 });
