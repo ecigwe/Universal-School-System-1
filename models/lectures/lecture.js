@@ -17,6 +17,10 @@ const lectureSchema = mongoose.Schema({
         type: String,
         required: [true, 'Every lecture must have a title. Example: Basic Trigonometry']
     },
+    description: {
+        type: String,
+        required: [true, 'Please give a short description of this lecture']
+    },
     subject: {
         type: String,
         required: [true, 'Every lecture must be based on a particular subject. Example: Mathematics']
@@ -27,6 +31,9 @@ const lectureSchema = mongoose.Schema({
     },
     materials: [
         { type: String, required: [true, 'Please provide materials for this lecture, whether in audio, video or text document formats'] }
+    ],
+    linksToLearningResources: [
+        { type: String }
     ]
 });
 

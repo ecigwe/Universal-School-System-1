@@ -4,10 +4,14 @@ const classController = require('../../controllers/classes/classController');
 const lectureTimetableController = require('../../controllers/timetables/lectureTimetableController');
 const authHandler = require('../../controllers/authentication/authHandler');
 const middlewares = require('../../controllers/middlewares');
+const lectureRoutes = require('../lectures/lectures');
+
+router.use('/:id/classes/:class_id/lectures', lectureRoutes);
 
 router.use(authHandler.protect);
 router.use(middlewares.checkIfUserHasVerifiedAcct);
 
+//Classroom routes
 router.route('/:id/classes')
     .post(middlewares.checkIfSchoolStillExists,
         middlewares.checkUserRole('School-Administrator', 'Principal', 'Vice-Principal'),
@@ -39,8 +43,9 @@ router.route('/:id/classes/:class_id')
         middlewares.checkConnectionWithSchool,
         middlewares.checkIfClassStillExists,
         classController.deleteClassOfASpecificSchool
-    )
+    );
 
+//Lecture Timetables For Classrooms
 router.post('/:id/classes/:class_id/lecture_timetable',
     middlewares.checkIfSchoolStillExists,
     middlewares.checkUserRole('School-Administrator', 'Principal', 'Vice-Principal', 'Form-Teacher'),

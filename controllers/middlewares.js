@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const School = require('../models/school/school');
 const Classroom = require('../models/classes/classRoom');
+const Lecture = require('../models/lectures/lecture');
 const Parent = require('../models/users/parent');
 const Student = require('../models/users/student');
 const Admin = require('../models/users/admin');
@@ -178,6 +179,36 @@ exports.restrictClassInformation = catchAsyncError(async (request, response, nex
     if (request.user._id.equals(request.classroom.formTeacher)) return next();
 
     if (request.user.class === request.classroom.title) return next();
+
+    return errorHandler(403, 'You are forbidden from accessing this resource.');
+});
+
+exports.findLecture = catchAsyncError(async (request, response, next) => {
+    const lecture = await Lecture.findById(request.params.lecture_id);
+    request.lecture = lecture;
+    next();
+});
+
+exports.teachesTheSubjectToClass = (request, response, next) => {
+    if (((request.user.classes.includes(request.classroom.title)) &&
+        request.user.subjects.includes(request.body.subject)) ||
+        ((request.user.classes.includes(request.classroom.title)) &&
+            request.user.subjects.includes(request.lecture.subject))
+    ) return next();
+
+    return errorHandler(403, 'You are forbidden from performing this operation.');
+}
+
+exports.accessLectureNotes = catchAsyncError(async (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+
+    if (request.user.role === 'School-Administrator' || request.user.role === 'Principal' || 'Vice-Principal') return next();
+
+    if (request.user._id.equals(request.classroom.formTeacher)) return next();
+
+    if (request.user.class === request.classroom.title) return next();
+
+    if (request.user.classes.includes(request.classroom.title)) return next();
 
     return errorHandler(403, 'You are forbidden from accessing this resource.');
 });
