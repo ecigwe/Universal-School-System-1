@@ -51,7 +51,7 @@ class assessmentController {
         let query = { '_id': req.params.assessment_id, 'school': req.params.id };
         if (req.query.questions) {
             let field = 'questions' // name of field from which item is to be deleted
-             message2 = 'Question not found in current assessment';
+            message2 = 'Question not found in current assessment';
             return assessment.deleteArrayItem(req, res, next, message1, message2, query, field);
         }
         return assessment.deleteOne(req, res, next, message1, message2, query);

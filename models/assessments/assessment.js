@@ -63,6 +63,10 @@ const assessmentSchema = mongoose.Schema({
     },
     createdOn: {
         type: Date
+    },
+    accessibleToNonStaff: {
+        type: Boolean,
+        default: false
     }
 });
 
