@@ -50,14 +50,22 @@ router.route('/:lecture_id')
         lectureController.deleteLecture
     );
 
-router.delete('/:lecture_id/resource/:name',
-    middlewares.checkIfSchoolStillExists,
-    middlewares.checkIfClassStillExists,
-    middlewares.checkCategory('Staff'),
-    middlewares.checkConnectionWithSchool,
-    middlewares.findLecture,
-    middlewares.teachesTheSubjectToClass,
-    lectureController.deleteLectureResource
-);
+router.route('/:lecture_id/resource/:name')
+    .delete(
+        middlewares.checkIfSchoolStillExists,
+        middlewares.checkIfClassStillExists,
+        middlewares.checkCategory('Staff'),
+        middlewares.checkConnectionWithSchool,
+        middlewares.findLecture,
+        middlewares.teachesTheSubjectToClass,
+        lectureController.deleteLectureResource
+    )
+    .get(
+        middlewares.checkIfSchoolStillExists,
+        middlewares.checkIfClassStillExists,
+        middlewares.restrictSchoolInformation,
+        middlewares.accessLectureNotes,
+        lectureController.downloadLectureResource
+    );
 
 module.exports = router;

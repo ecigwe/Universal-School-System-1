@@ -185,6 +185,7 @@ exports.restrictClassInformation = catchAsyncError(async (request, response, nex
 
 exports.findLecture = catchAsyncError(async (request, response, next) => {
     const lecture = await Lecture.findById(request.params.lecture_id);
+    if (!lecture) return errorHandler(404, 'The lecture you are looking for could not be found!');
     request.lecture = lecture;
     next();
 });
@@ -195,7 +196,6 @@ exports.teachesTheSubjectToClass = (request, response, next) => {
         ((request.user.classes.includes(request.classroom.title)) &&
             request.user.subjects.includes(request.lecture.subject))
     ) return next();
-
     return errorHandler(403, 'You are forbidden from performing this operation.');
 }
 

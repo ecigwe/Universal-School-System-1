@@ -1,4 +1,6 @@
 const fs = require('fs');
+const path = require('path');
+const mime = require('node-mime');
 const { promisify } = require('util');
 const multer = require('multer');
 const slugify = require('slugify');
@@ -105,4 +107,16 @@ exports.deleteLectureResource = catchAsyncError(async (request, response, next) 
     }
 
     return errorHandler(404, 'The resource you want to delete does not exist.')
+});
+
+exports.downloadLectureResource = catchAsyncError(async (request, response, next) => {
+    const lectureFile = `${__dirname}/../../../Univeral-School-System/files/lectures/${request.params.name}`;
+    const lectureFilename = path.basename(lectureFile);
+    const lectureMimetype = mime.lookUpType(lectureFile);
+
+    response.setHeader('Content-disposition', 'attachment; filename=' + lectureFilename);
+    response.setHeader('Content-type', lectureMimetype);
+
+    const filestream = fs.createReadStream(lectureFile);
+    filestream.pipe(response);
 });
