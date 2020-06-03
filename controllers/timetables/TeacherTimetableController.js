@@ -32,7 +32,6 @@ class Timetable {
         } catch (error) {
             next(error);
         }
-
     }
 
     static async getAllTeachersTimetables(req, res, next) {
