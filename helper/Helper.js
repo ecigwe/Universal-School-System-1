@@ -61,7 +61,7 @@ class Helper {
         try {
             const updatedData = await this.collection.findOneAndUpdate(query, req.body, {
                 new: true,
-                runValidators: true
+                runValidators: false
             }).select(exclude).lean();
             if (!updatedData) return errorHandler(404, message1);
             return responseHandler(res, updatedData, next, 200, message2, 1);

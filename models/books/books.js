@@ -1,3 +1,5 @@
+const fs = require('fs');
+const { promisify } = require('util');
 const mongoose = require('mongoose');
 const validator = require('validator');
 
@@ -59,11 +61,17 @@ const bookSchema = mongoose.Schema({
     }
 });
 
-// bookSchema.pre('save',  function (next) {
-//     next();
-// });
-bookSchema.index({ school: 1 });
+bookSchema.pre(/^findOneAndDelete/, async function (next) {
+    this.book = await this.findOne();
+    next();
+});
 
+bookSchema.post(/^findOneAndDelete/, async function () {
+    const unlink = promisify(fs.unlink);
+    await unlink(`${__dirname}/../../../Univeral-School-System/files/books/${this.book.bookUrl}`);
+});
+
+bookSchema.index({ title: 1, author: 1, school: 1 }, { unique: true });
 
 const Book = mongoose.model('Book', bookSchema);
 module.exports = Book;
