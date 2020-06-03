@@ -45,11 +45,7 @@ const bookSchema = mongoose.Schema({
     },
 
     bookUrl: {
-        type: String,
-        validate: {
-            validator: value => validator.isURL(value, {}),
-            message: 'Please provide a valid url for book'
-        }
+        type: String
     },
 
     imageUrl: {
@@ -67,8 +63,10 @@ bookSchema.pre(/^findOneAndDelete/, async function (next) {
 });
 
 bookSchema.post(/^findOneAndDelete/, async function () {
-    const unlink = promisify(fs.unlink);
-    await unlink(`${__dirname}/../../../Univeral-School-System/files/books/${this.book.bookUrl}`);
+    if (this.book && this.book.bookUrl) {
+        const unlink = promisify(fs.unlink);
+        await unlink(`${__dirname}/../../../Univeral-School-System/files/books/${this.book.bookUrl}`);
+    }
 });
 
 bookSchema.index({ title: 1, author: 1, school: 1 }, { unique: true });

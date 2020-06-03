@@ -110,10 +110,19 @@ From then on, the user can have access to any resource on the platform that is a
 * There are different reset password endpoints for the application's administrators, school's staff officials, students and parents
 
 ### Books
+When a book is being created newly, no file should be uploaded.
+
+The file itself should be uploaded during the updating prcoess.
+
+When uploading a textbook file, the encoding type is multipart/form-data.
+
+Only pdf files are allowed.
+
 * Books can be added by individual schools.
 * Books added by a school can only be seen by the staff and students of the school.
 * Each school can update the details of any book which they added.
 * Each school could delete a specific book they created.
+* A school's books can be downloaded by anyone connected to the school.
 
 ### Questions
 * Questions can be addedd by staff of individual schools.
@@ -300,6 +309,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | GET/api/vi/schools/:id/books/:book_id                                           | Retrieves a single book for a school                                       |
 | POST/api/v1/schools/:id/books                                                   | Creates a new book for a school                                            |
 | PATCH/api/vi/schools/:id/books/:book_id                                         | Updates the details of a book for a school                                 |
+| GET/api/vi/schools/:id/books/:book_id/download                                  | Download a book                                                            |
 | DELETE/api/vi/schools/:id/books/:book_id                                        | Deltes a specific book for a school                                        |
 | GET/api/vi/schools/:id/questions                                                | Retrieves all the questions for a school                                   |
 | GET/api/vi/schools/:id/questions/:question_id                                   | Retrieves a single question fro a school                                   |
@@ -391,6 +401,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Create Book](#create-book)
     - [Update Book](#update-book)
     - [Delete Book](#delete-book)
+    - [Download Book](#download-book) 
 
 - [Questions](#questions)
     - [Retrieve Questions](#retrieve-questions)
@@ -1466,7 +1477,6 @@ A student cannot update his or her password using this endpoint. He or she must 
         "class":"Any",
         "category": "Novel",
         "price": 1200,
-        "bookUrl":"www.example.com/books",
         "imageUrl": "www.books.com/the-enchanted-wood.jpg"
     }
     ```
@@ -1486,7 +1496,6 @@ A student cannot update his or her password using this endpoint. He or she must 
             "author": "Enyd Blyton",
             "class": "Any",
             "category": "Novel",
-            "bookUrl": "www.example.com/books",
             "imageUrl": "www.books.com/the-enchanted-wood.jpg",
             "createdOn": "2020-05-29T09:54:00.000Z",
             "school": "5ecb08dfd2595416f0dc9975",
@@ -1498,11 +1507,12 @@ A student cannot update his or her password using this endpoint. He or she must 
  ### Update Book
 * Request
     * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9975/books/5ed0dbb8a9c89b2410fddb62
-    * Body: (application/json)
+    * Body: (multipart/form-data)
     ```
     {
-        "author": "E. Blyton",
-        "price": 1000
+        author: E. Blyton,
+        price: 1000,
+        bookUrl: the_enchanted_wood_novel_uploaded.pdf
     }
     ```
 
@@ -1521,7 +1531,7 @@ A student cannot update his or her password using this endpoint. He or she must 
                 "author": "E. Blyton",
                 "class": "Any",
                 "category": "Novel",
-                "bookUrl": "www.example.com/books",
+                "bookUrl": "the_enchanted_wood_novel_uploaded.pdf",
                 "imageUrl": "www.books.com/the-enchanted-wood.jpg",
                 "createdOn": "2020-05-29T09:54:00.000Z",
                 "school": "5ecb08dfd2595416f0dc9975",
@@ -1537,6 +1547,13 @@ A student cannot update his or her password using this endpoint. He or she must 
   
 * Response:
     * Status: 204 - No Content
+
+### Download Book
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9975/books/5ed0dbb8a9c89b2410fddb62/download
+  
+* Response:
+    * Status: 200 - success
 
 ### Retrieve Officials
 * Request:

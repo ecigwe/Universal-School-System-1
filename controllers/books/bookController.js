@@ -36,7 +36,7 @@ class bookController {
         const { createdOn, ...updateData } = req.body;
         req.body = updateData;
 
-        if (req.file) {
+        if (req.file && req.book.bookUrl) {
             const unlink = promisify(fs.unlink);
             await unlink(`${__dirname}/../../../Univeral-School-System/files/books/${req.book.bookUrl}`);
         }
