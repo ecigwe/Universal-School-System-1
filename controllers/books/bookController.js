@@ -2,10 +2,52 @@ const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 const mime = require('node-mime');
+const { google } = require('googleapis');
 const Helper = require('../../helper/Helper');
 const Book = require('../../models/books/books');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
+const credentials = require('../../credentials.json');
 const book = new Helper(Book);
+
+const scopes = [
+    'https://www.googleapis.com/auth/drive'
+];
+
+const auth = new google.auth.JWT(
+    credentials.client_email, null,
+    credentials.private_key, scopes
+);
+
+const drive = google.drive({ version: "v3", auth });
+
+//drive.files.list({}).then(res => res.data.files.map(file => console.log(file.id)));
+
+async function uploadTextbook(pathToFile, filename) {
+    const fileMetadata = {
+        'name': filename
+    }
+
+    const media = {
+        mimeType: 'application/pdf',
+        body: fs.createReadStream(pathToFile)
+    }
+
+    const uploadedBook = await drive.files.create({
+        resource: fileMetadata,
+        media: media,
+        fields: 'id'
+    });
+
+    const unlink = promisify(fs.unlink);
+    await unlink(pathToFile);
+
+    return uploadedBook.data;
+}
+
+
+async function deleteBook(bookId) {
+    await drive.files.delete({ fileId: bookId });
+}
 
 class bookController {
     static async createBook(req, res, next) {
@@ -36,12 +78,17 @@ class bookController {
         const { createdOn, ...updateData } = req.body;
         req.body = updateData;
 
-        if (req.file && req.book.bookUrl) {
-            const unlink = promisify(fs.unlink);
-            await unlink(`${__dirname}/../../../Univeral-School-System/files/books/${req.book.bookUrl}`);
+        if (req.file) {
+            const uploadedBookData = await uploadTextbook(`${__dirname}/../../../Univeral-School-System/files/books/${req.file.filename}`, req.file.filename);
+            if (!uploadedBookData) return errorHandler(500, 'The Book Was Not Uploaded!');
+
+            if (req.book.bookUrl) {
+                await deleteBook(req.book.bookUrl);
+            }
+
+            req.body.bookUrl = uploadedBookData.id;
         }
 
-        req.body.bookUrl = req.file.filename;
         return book.update(req, res, next, message1, message2, query);
     }
 
@@ -61,15 +108,15 @@ class bookController {
     }
 
     static async downloadBook(req, res, next) {
-        const bookFile = `${__dirname}/../../../Univeral-School-System/files/books/${req.book.bookUrl}`;
-        const bookFilename = path.basename(bookFile);
-        const bookMimetype = mime.lookUpType(bookFile);
+        const result = await drive.files.get({
+            fileId: req.book.bookUrl,
+            alt: 'media'
+        }, { responseType: 'stream' });
 
-        res.setHeader('Content-disposition', 'attachment; filename=' + bookFilename);
-        res.setHeader('Content-type', bookMimetype);
+        res.setHeader('Content-disposition', 'attachment; filename=' + 'textbook');
+        res.setHeader('Content-type', 'application/pdf');
 
-        const filestream = fs.createReadStream(bookFile);
-        filestream.pipe(res);
+        result.data.pipe(res);
     }
 }
 
