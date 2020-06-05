@@ -1,6 +1,19 @@
 const fs = require('fs');
 const { promisify } = require('util');
+const { google } = require('googleapis');
+const credentials = require('../../credentials.json');
 const mongoose = require('mongoose');
+
+const scopes = [
+    'https://www.googleapis.com/auth/drive'
+];
+
+const auth = new google.auth.JWT(
+    credentials.client_email, null,
+    credentials.private_key, scopes
+);
+
+const drive = google.drive({ version: "v3", auth });
 
 const lectureSchema = mongoose.Schema({
     school: {
@@ -45,9 +58,8 @@ lectureSchema.pre(/^findOneAndDelete/, async function (next) {
 });
 
 lectureSchema.post(/^findOneAndDelete/, async function () {
-    const unlink = promisify(fs.unlink);
     for (i = 0; i < this.lecture.materials.length; i++) {
-        await unlink(`${__dirname}/../../../Univeral-School-System/files/lectures/${this.lecture.materials[i]}`);
+        await drive.files.delete({ fileId: this.lecture.materials[i] });
     }
 });
 

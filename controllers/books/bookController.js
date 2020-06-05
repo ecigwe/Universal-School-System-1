@@ -7,6 +7,7 @@ const Helper = require('../../helper/Helper');
 const Book = require('../../models/books/books');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const credentials = require('../../credentials.json');
+const slugify = require('slugify');
 const book = new Helper(Book);
 
 const scopes = [
@@ -113,7 +114,7 @@ class bookController {
             alt: 'media'
         }, { responseType: 'stream' });
 
-        res.setHeader('Content-disposition', 'attachment; filename=' + 'textbook');
+        res.setHeader('Content-disposition', 'attachment; filename=' + `${slugify(req.book.title, { lower: true })}`);
         res.setHeader('Content-type', 'application/pdf');
 
         result.data.pipe(res);

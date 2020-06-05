@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const mime = require('node-mime');
+const { google } = require('googleapis');
+const credentials = require('../../credentials.json');
 const { promisify } = require('util');
 const multer = require('multer');
 const slugify = require('slugify');
@@ -37,6 +39,41 @@ const upload = multer({
 
 exports.uploadLectureFiles = upload.array('materials', 10);
 
+const scopes = [
+    'https://www.googleapis.com/auth/drive'
+];
+
+const auth = new google.auth.JWT(
+    credentials.client_email, null,
+    credentials.private_key, scopes
+);
+
+const drive = google.drive({ version: "v3", auth });
+
+//drive.files.list({}).then(res => res.data.files.map(file => console.log(file.id)));
+
+async function uploadLectureResources(pathToFile, filename, mimeType) {
+    const fileMetadata = {
+        'name': filename
+    }
+
+    const media = {
+        mimeType,
+        body: fs.createReadStream(pathToFile)
+    }
+
+    const uploadedLectureResource = await drive.files.create({
+        resource: fileMetadata,
+        media: media,
+        fields: 'id'
+    });
+
+    const unlink = promisify(fs.unlink);
+    await unlink(pathToFile);
+
+    return uploadedLectureResource.data;
+}
+
 exports.createLecture = catchAsyncError(async (request, response, next) => {
     request.body.school = request.params.id;
     request.body.class = request.params.class_id;
@@ -66,7 +103,8 @@ exports.updateOneLectureForClass = catchAsyncError(async (request, response, nex
     request.body.materials = request.lecture.materials;
     if (request.files) {
         for (i = 0; i < request.files.length; i++) {
-            request.body.materials.push(request.files[i].filename);
+            let uploadedLectureResourceData = await uploadLectureResources(`${__dirname}/../../../Univeral-School-System/files/lectures/${request.files[i].filename}`, request.files[i].filename, request.files[i].mimeType);
+            request.body.materials.push(uploadedLectureResourceData.id);
         }
     }
 
@@ -94,10 +132,7 @@ exports.deleteLectureResource = catchAsyncError(async (request, response, next) 
         if (request.lecture.materials[i] === request.params.name) {
             request.lecture.materials.splice(i, 1);
             await request.lecture.save({ validateBeforeSave: false });
-
-            const unlink = promisify(fs.unlink);
-
-            await unlink(`${__dirname}/../../../Univeral-School-System/files/lectures/${request.params.name}`);
+            await drive.files.delete({ fileId: request.params.name });
 
             return response.status(200).json({
                 status: 'success',
@@ -110,13 +145,24 @@ exports.deleteLectureResource = catchAsyncError(async (request, response, next) 
 });
 
 exports.downloadLectureResource = catchAsyncError(async (request, response, next) => {
-    const lectureFile = `${__dirname}/../../../Univeral-School-System/files/lectures/${request.params.name}`;
-    const lectureFilename = path.basename(lectureFile);
-    const lectureMimetype = mime.lookUpType(lectureFile);
+    const lectures = await drive.files.list({});
+    const lectureFiles = lectures.data.files;
 
-    response.setHeader('Content-disposition', 'attachment; filename=' + lectureFilename);
-    response.setHeader('Content-type', lectureMimetype);
+    let lectureFile;
+    for (i = 0; i < lectureFiles.length; i++) {
+        if (lectureFiles[i].id === request.params.name) {
+            lectureFile = lectureFiles[i];
+            i = lectureFiles.length;
+        }
+    }
 
-    const filestream = fs.createReadStream(lectureFile);
-    filestream.pipe(response);
+    const result = await drive.files.get({
+        fileId: request.params.name,
+        alt: 'media'
+    }, { responseType: 'stream' });
+
+    response.setHeader('Content-disposition', 'attachment; filename=' + lectureFile.name);
+    response.setHeader('Content-type', lectureFile.mimeType);
+
+    result.data.pipe(response);
 });
