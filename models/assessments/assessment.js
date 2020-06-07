@@ -44,9 +44,12 @@ const assessmentSchema = mongoose.Schema({
         trim: true
     },
 
-    questions: {
-        type: [mongoose.Types.ObjectId],
-    },
+    questions: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Question'
+        }
+    ],
 
     percentage: {
         type: Number,
@@ -54,23 +57,21 @@ const assessmentSchema = mongoose.Schema({
         min: 0
     },
     school: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'School',
         required: [true, 'Please provide a school that owns this assessment']
     },
     createdOn: {
         type: Date
+    },
+    accessibleToNonStaff: {
+        type: Boolean,
+        default: false
     }
 });
 
 
-assessmentSchema.index({ school: 1 });
-assessmentSchema.index({ subject: 1 });
-assessmentSchema.index({ class: 1 });
-assessmentSchema.index({ category: 1 });
-assessmentSchema.index({ term: 1 });
-assessmentSchema.index({ year: 1 });
-
+assessmentSchema.index({ school: 1, subject: 1, class: 1, category: 1, term: 1, year: 1 }, { unique: true });
 
 const Assessment = mongoose.model('Assessment', assessmentSchema);
 module.exports = Assessment;

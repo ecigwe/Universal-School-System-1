@@ -1,5 +1,20 @@
+const fs = require('fs');
+const { promisify } = require('util');
+const { google } = require('googleapis');
+const credentials = require('../../credentials.json');
 const mongoose = require('mongoose');
 const validator = require('validator');
+
+const scopes = [
+    'https://www.googleapis.com/auth/drive'
+];
+
+const auth = new google.auth.JWT(
+    credentials.client_email, null,
+    credentials.private_key, scopes
+);
+
+const drive = google.drive({ version: "v3", auth });
 
 const bookSchema = mongoose.Schema({
     title: {
@@ -43,11 +58,7 @@ const bookSchema = mongoose.Schema({
     },
 
     bookUrl: {
-        type: String,
-        validate: {
-            validator: value => validator.isURL(value, {}),
-            message: 'Please provide a valid url for book'
-        }
+        type: String
     },
 
     imageUrl: {
@@ -59,11 +70,18 @@ const bookSchema = mongoose.Schema({
     }
 });
 
-// bookSchema.pre('save',  function (next) {
-//     next();
-// });
-bookSchema.index({ school: 1 });
+bookSchema.pre(/^findOneAndDelete/, async function (next) {
+    this.book = await this.findOne();
+    next();
+});
 
+bookSchema.post(/^findOneAndDelete/, async function () {
+    if (this.book && this.book.bookUrl) {
+        await drive.files.delete({ fileId: this.book.bookUrl });
+    }
+});
+
+bookSchema.index({ title: 1, author: 1, school: 1 }, { unique: true });
 
 const Book = mongoose.model('Book', bookSchema);
 module.exports = Book;

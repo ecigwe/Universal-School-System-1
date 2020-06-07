@@ -50,7 +50,7 @@ exports.forgotPassword = catchAsyncError(async (request, response, next) => {
     const admin = await Admin.findOne({ phoneNumber: "+234" + phoneNumber });
     if (!admin) return errorHandler(404, 'There is no admin with that phone number.');
 
-    const resetToken = admin.createPasswordResetToken();
+    const resetToken = admin.createResetToken();
     await admin.save({ validateBeforeSave: false });
 
     await client.messages.create({
@@ -80,8 +80,8 @@ exports.resetPassword = catchAsyncError(async (request, response, next) => {
 
     admin.password = newPassword;
     admin.confirmPassword = confirmNewPassword;
-    admin.passwordResetToken = undefined;
-    admin.passwordResetExpires = undefined;
+    admin.ResetToken = undefined;
+    admin.ResetExpires = undefined;
     await admin.save();
     request.user = admin;
     response.statusCode = 200;

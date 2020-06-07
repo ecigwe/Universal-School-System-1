@@ -8,7 +8,8 @@
         "category": "Admin",
         "isAnAdmin": true,
         "password": "qwerty12345",
-        "confirmPassword": "qwerty12345"
+        "confirmPassword": "qwerty12345",
+        "verified": true
     },
     {
         "fullname": "Diai Immanuel Onyeka",
@@ -19,6 +20,7 @@
         "category": "Admin",
         "isAnAdmin": true,
         "password": "qwerty12345",
-        "confirmPassword": "qwerty12345"
+        "confirmPassword": "qwerty12345",
+        "verified": true
     }
 ]

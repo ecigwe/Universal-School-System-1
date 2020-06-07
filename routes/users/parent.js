@@ -5,10 +5,13 @@ const middlewares = require('../../controllers/middlewares');
 const router = Router();
 
 router.use(authHandler.protect);
+router.use(middlewares.checkIfUserHasVerifiedAcct);
 
 router.route('/:id')
     .get(middlewares.restrictParentData, parentController.getParent)
-    .patch(middlewares.confirmOwnership, parentController.updateParent)
+    .patch(middlewares.confirmOwnership,
+        middlewares.preventPasswordUpdate,
+        parentController.updateParent)
     .delete(middlewares.confirmOwnership, parentController.deleteParent);
 
 module.exports = router;

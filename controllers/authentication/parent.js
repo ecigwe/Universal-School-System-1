@@ -42,7 +42,7 @@ exports.forgotPassword = catchAsyncError(async (request, response, next) => {
     const parent = await Parent.findOne({ phoneNumber: "+234" + phoneNumber });
     if (!parent) return errorHandler(404, 'There is no parent with that phone number.');
 
-    const resetToken = parent.createPasswordResetToken();
+    const resetToken = parent.createResetToken();
     await parent.save({ validateBeforeSave: false });
 
     await client.messages.create({
@@ -72,8 +72,8 @@ exports.resetPassword = catchAsyncError(async (request, response, next) => {
 
     parent.password = newPassword;
     parent.confirmPassword = confirmNewPassword;
-    parent.passwordResetToken = undefined;
-    parent.passwordResetExpires = undefined;
+    parent.ResetToken = undefined;
+    parent.ResetExpires = undefined;
     await parent.save();
     request.user = parent;
     response.statusCode = 200;

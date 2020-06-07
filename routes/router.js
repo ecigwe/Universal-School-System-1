@@ -39,7 +39,7 @@ router.patch('/api/v1/update_my_password',
 //Plain users stuff
 router.use('/api/v1/users/admins', adminUsers);
 router.use('/api/v1/users/parents', parentRoutes);
-router.use('/api/v1/users', userRoutes);
+router.use('/api/v1/users/me', userRoutes);
 router.use('/api/v1/schools', schools);
 
 router.all('*', (request, response, next) => {

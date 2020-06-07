@@ -12,7 +12,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc997e",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Eketi Folake Okeke",
@@ -27,7 +28,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9981",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Esther Eketi Atanda",
@@ -42,7 +44,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9982",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Iniobong Aisha Obiwuru",
@@ -57,7 +60,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9983",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Amara Chikaodili Mohammed",
@@ -72,7 +76,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9984",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Ngozi Chikaodili Edet",
@@ -87,7 +92,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9985",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Amake Habbeeb George",
@@ -102,7 +108,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9986",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Wasiu Ngozi Obi",
@@ -117,7 +124,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9987",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Musa Ogechi Doyle",
@@ -132,7 +140,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9988",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Moses Emeka Onyebuchi",
@@ -147,7 +156,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9989",
-        "school": "5ecb08dfd2595416f0dc9977"
+        "school": "5ecb08dfd2595416f0dc9977",
+        "verified": true
     },
     {
         "fullname": "Victoria Teslim Nweke",
@@ -162,7 +172,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc998e",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Samson Ahmed Idika",
@@ -177,7 +188,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc998f",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Samuel Chikaodili Bbatunde",
@@ -192,7 +204,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9990",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Abuchi Emeka Ojerinde",
@@ -207,7 +220,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9991",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Grace Esther Adewole",
@@ -222,7 +236,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9992",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Chikaodili Amara Ikokwu",
@@ -237,7 +252,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9993",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Eketi Tunde Savage",
@@ -252,7 +268,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9995",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Toyin Ibukun Adewummi",
@@ -267,7 +284,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9996",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Bunmi Gbemisola Olamide",
@@ -282,7 +300,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9997",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Samson Toyin Adekanbi",
@@ -297,7 +316,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc999a",
-        "school": "5ecb08dfd2595416f0dc9976"
+        "school": "5ecb08dfd2595416f0dc9976",
+        "verified": true
     },
     {
         "fullname": "Amanda Monday Mbanefo",
@@ -312,7 +332,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc999d",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Daniel Amake Olasupo",
@@ -327,7 +348,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc999e",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Monday Chikaodili Tafawa",
@@ -342,7 +364,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc999f",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Godswill Folake Omotosho",
@@ -357,7 +380,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a0",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Aisha Chioma Nwafor",
@@ -372,7 +396,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a1",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Constance Adewale Abraham",
@@ -387,7 +412,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a2",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Grace Chinyere Mmuoma",
@@ -402,7 +428,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a3",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Daniel Ngozi Awirigwe",
@@ -417,7 +444,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a4",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Maria Maria Abdul",
@@ -432,7 +460,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a5",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Musa Moses Monday",
@@ -447,7 +476,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9980",
-        "school": "5ecb08dfd2595416f0dc9979"
+        "school": "5ecb08dfd2595416f0dc9979",
+        "verified": true
     },
     {
         "fullname": "Olasunkanmi Eketi Lawnson",
@@ -462,7 +492,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc998a",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Toyin Titilayo Akintunde",
@@ -477,7 +508,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc998b",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Echezona Ebuka Olanrewaju",
@@ -492,7 +524,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc998c",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Jumoke Chiamaka Omo-ojuile",
@@ -507,7 +540,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc998d",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Hannah Funsho Igwe",
@@ -522,7 +556,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9994",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Maria Amanda Aworinde",
@@ -537,7 +572,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9998",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Joseph Lawrence Okoli",
@@ -552,7 +588,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc9999",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Chikaodili Samson Cole",
@@ -567,7 +604,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc999b",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Yemi Moses Solarin",
@@ -582,7 +620,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc999c",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Hannah Ama Azeez",
@@ -597,7 +636,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a6",
-        "school": "5ecb08dfd2595416f0dc9975"
+        "school": "5ecb08dfd2595416f0dc9975",
+        "verified": true
     },
     {
         "fullname": "Azeez Folake Awolowo",
@@ -612,7 +652,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a7",
-        "school": "5ecb08dfd2595416f0dc9978"
+        "school": "5ecb08dfd2595416f0dc9978",
+        "verified": true
     },
     {
         "fullname": "Amanda Teslim Oputa",
@@ -627,7 +668,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a8",
-        "school": "5ecb08dfd2595416f0dc9978"
+        "school": "5ecb08dfd2595416f0dc9978",
+        "verified": true
     },
     {
         "fullname": "Ebuka Lawrence Effiong",
@@ -642,7 +684,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99a9",
-        "school": "5ecb08dfd2595416f0dc9978"
+        "school": "5ecb08dfd2595416f0dc9978",
+        "verified": true
     },
     {
         "fullname": "Kevin Mary Ebisi",
@@ -657,7 +700,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc99aa",
-        "school": "5ecb08dfd2595416f0dc9978"
+        "school": "5ecb08dfd2595416f0dc9978",
+        "verified": true
     },
     {
         "fullname": "Amanda Victoria Ayantola",
@@ -672,7 +716,8 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc997f",
-        "school": "5ecb08dfd2595416f0dc9978"
+        "school": "5ecb08dfd2595416f0dc9978",
+        "verified": true
     },
     {
         "fullname": "Amara Lawrence Babatunde",
@@ -687,6 +732,7 @@
         "password": "qwerty12345",
         "confirmPassword": "qwerty12345",
         "parent": "5ecb08e3d2595416f0dc997e",
-        "school": "5ecb08dfd2595416f0dc9978"
+        "school": "5ecb08dfd2595416f0dc9978",
+        "verified": true
     }
 ]

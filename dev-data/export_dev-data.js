@@ -29,14 +29,14 @@ const questions = JSON.parse(fs.readFileSync(`${__dirname}/questions.json`, 'utf
 
 const exportData = async () => {
     try {
-        //await School.create(schools);
-        //await Admin.create(admins);
-        //await Parent.create(parents);
-        //await Staff.create(staffs);
-        //await Staff.create(staffsTwo);
-        //await Student.create(students);
-        //await Student.create(studentsTwo)
+        await School.create(schools);
+        await Admin.create(admins);
+        await Parent.create(parents);
         await Question.create(questions);
+        await Staff.create(staffs);
+        await Staff.create(staffsTwo);
+        await Student.create(students);
+        await Student.create(studentsTwo)
         console.log('All exported.');
     } catch (error) {
         console.log(error);
@@ -52,6 +52,7 @@ const removeData = async () => {
         await Staff.deleteMany({});
         await Student.deleteMany({});
         //await User.deleteMany({});
+        await Question.deleteMany({});
         console.log('All Deleted!');
     } catch (error) {
         console.log(error);

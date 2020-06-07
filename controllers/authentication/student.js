@@ -2,6 +2,8 @@ const Student = require('../../models/users/student');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
 const shelfController = require('../shelf/shelfController');
+const twilio = require('twilio');
+const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 exports.register = catchAsyncError(async (request, response, next) => {
     const newStudent = await Student.create({
@@ -46,7 +48,7 @@ exports.forgotPassword = catchAsyncError(async (request, response, next) => {
     const student = await Student.findOne({ phoneNumber: "+234" + phoneNumber });
     if (!student) return errorHandler(404, 'There is no student with that phone number.');
 
-    const resetToken = student.createPasswordResetToken();
+    const resetToken = student.createResetToken();
     await student.save({ validateBeforeSave: false });
 
     await client.messages.create({
@@ -76,8 +78,8 @@ exports.resetPassword = catchAsyncError(async (request, response, next) => {
 
     student.password = newPassword;
     student.confirmPassword = confirmNewPassword;
-    student.passwordResetToken = undefined;
-    student.passwordResetExpires = undefined;
+    student.ResetToken = undefined;
+    student.ResetExpires = undefined;
     await student.save();
     request.user = student;
     response.statusCode = 200;

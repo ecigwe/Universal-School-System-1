@@ -1,16 +1,15 @@
 const { Router } = require('express');
-const parentController = require('../../controllers/users/parentsController');
+const lectureTimetableController = require('../../controllers/timetables/lectureTimetableController');
 const authHandler = require('../../controllers/authentication/authHandler');
 const middlewares = require('../../controllers/middlewares');
 const router = Router({ mergeParams: true });
 
 router.use(authHandler.protect);
 router.use(middlewares.checkIfUserHasVerifiedAcct);
-router.use(middlewares.checkIfSchoolStillExists);
 
-router.get('/',
-    middlewares.checkCategory('Staff'),
+router.get('/', middlewares.checkIfSchoolStillExists,
+    middlewares.checkUserRole('School-Administrator', 'Principal', 'Vice-Principal'),
     middlewares.checkConnectionWithSchool,
-    parentController.getAllParents);
+    lectureTimetableController.fetchAllLectureTimetables);
 
 module.exports = router;

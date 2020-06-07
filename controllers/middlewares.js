@@ -1,8 +1,13 @@
+const crypto = require('crypto');
 const School = require('../models/school/school');
+const Classroom = require('../models/classes/classRoom');
+const Lecture = require('../models/lectures/lecture');
 const Parent = require('../models/users/parent');
 const Student = require('../models/users/student');
+const Admin = require('../models/users/admin');
 const catchAsyncError = require('../utils/errorUtils/catchAsyncError');
 const errorHandler = require('../utils/errorUtils/errorHandler');
+const sendVerificationCode = require('../utils/authenticationUtilities/sendVerificationCode');
 
 exports.checkIfSchoolExists = catchAsyncError(async (request, response, next) => {
     const { schoolName, schoolAddress } = request.body;
@@ -24,10 +29,24 @@ exports.checkIfParentIsRegistered = catchAsyncError(async (request, response, ne
     return next();
 });
 
+exports.checkIfUserHasVerifiedAcct = (request, response, next) => {
+    if (!request.user.verified) return errorHandler(403, 'You have not verified your account. Please verify your phone number.');
+    next();
+}
+
 exports.checkIfSchoolStillExists = catchAsyncError(async (request, response, next) => {
     //check if school exists and return an error if it does not exist
     const school = await School.findById(request.params.id);
     if (!school) return errorHandler(404, 'We could not find the information you requested.');
+    request.school = school;
+    return next();
+});
+
+exports.checkIfClassStillExists = catchAsyncError(async (request, response, next) => {
+    //check if class exists and return an error if it does not exist
+    const classroom = await Classroom.findById(request.params.class_id);
+    if (!classroom) return errorHandler(404, 'We could not find the information you requested.');
+    request.classroom = classroom;
     return next();
 });
 
@@ -150,4 +169,90 @@ exports.restrictSchoolInformation = catchAsyncError(async (request, response, ne
     }
 
     return errorHandler(403, 'You are forbidden from performing this action.');
+});
+
+exports.restrictClassInformation = catchAsyncError(async (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+
+    if (request.user.role === 'School-Administrator' || request.user.role === 'Principal' || 'Vice-Principal') return next();
+
+    if (request.user._id.equals(request.classroom.formTeacher)) return next();
+
+    if (request.user.class === request.classroom.title) return next();
+
+    return errorHandler(403, 'You are forbidden from accessing this resource.');
+});
+
+exports.findLecture = catchAsyncError(async (request, response, next) => {
+    const lecture = await Lecture.findById(request.params.lecture_id);
+    if (!lecture) return errorHandler(404, 'The lecture you are looking for could not be found!');
+    request.lecture = lecture;
+    next();
+});
+
+exports.teachesTheSubjectToClass = (request, response, next) => {
+    if (((request.user.classes.includes(request.classroom.title)) &&
+        request.user.subjects.includes(request.body.subject)) ||
+        ((request.user.classes.includes(request.classroom.title)) &&
+            request.user.subjects.includes(request.lecture.subject))
+    ) return next();
+    return errorHandler(403, 'You are forbidden from performing this operation.');
+}
+
+exports.accessLectureNotes = catchAsyncError(async (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+
+    if (request.user.role === 'School-Administrator' || request.user.role === 'Principal' || 'Vice-Principal') return next();
+
+    if (request.user._id.equals(request.classroom.formTeacher)) return next();
+
+    if (request.user.class === request.classroom.title) return next();
+
+    if (request.user.classes.includes(request.classroom.title)) return next();
+
+    return errorHandler(403, 'You are forbidden from accessing this resource.');
+});
+
+exports.preventPasswordUpdate = (request, response, next) => {
+    if (request.body.password || request.body.confirmPassword) {
+        return errorHandler('400', 'You can\'t update a password here. Please go to the section designated for updating passwords.');
+    }
+    next();
+}
+
+exports.sendCodeToverifyAccount = catchAsyncError(async (request, response, next) => {
+    let user = request.user;
+    const verificationCode = user.createResetToken();
+    await user.save({ validateBeforeSave: false });
+    await sendVerificationCode(user, verificationCode);
+    return response.status(200).json({
+        status: 'Success',
+        message: 'Your verification code has been sent to your mobile phone as a text message',
+        verificationCode
+    });
+});
+
+exports.verifyAccount = catchAsyncError(async (request, response, next) => {
+    let user;
+
+    const verificationCode = request.body.verificationCode;
+    if (!verificationCode) return errorHandler(400, 'Please provide the verification code sent to your phone number.');
+
+    const hashedVerificationCode = crypto.createHash('sha256').update(verificationCode).digest('hex');
+
+    if (request.user.category === 'Admin') user = await Admin.findOne({ ResetToken: hashedVerificationCode, ResetExpires: { $gt: Date.now() } });
+    if (request.user.category === 'Staff') user = await Staff.findOne({ ResetToken: hashedVerificationCode, ResetExpires: { $gt: Date.now() } });
+    if (request.user.category === 'Parent') user = await Parent.findOne({ ResetToken: hashedVerificationCode, ResetExpires: { $gt: Date.now() } });
+    if (request.user.category === 'Student') user = await Student.findOne({ ResetToken: hashedVerificationCode, ResetExpires: { $gt: Date.now() } });
+
+    if (!user) return errorHandler(400, 'Your verification Code Is Either Invalid Or Has Expired!');
+
+    user.ResetToken = undefined;
+    user.ResetExpires = undefined;
+    user.verified = true;
+    await user.save({ validateBeforeSave: false });
+    return response.status(200).json({
+        status: 'Success',
+        message: 'Your account has been successfully verified.'
+    });
 });
