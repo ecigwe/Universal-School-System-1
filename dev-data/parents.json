@@ -8,7 +8,8 @@
         "username": "chinyerebabatunde",
         "phoneNumber": "+2347069416777",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9981",
@@ -19,7 +20,8 @@
         "username": "ibukunokeke",
         "phoneNumber": "+2347069716879",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9982",
@@ -30,7 +32,8 @@
         "username": "musaatanda",
         "phoneNumber": "+2349069816913",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9983",
@@ -41,7 +44,8 @@
         "username": "amakeobiwuru",
         "phoneNumber": "+2348169916947",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9984",
@@ -52,7 +56,8 @@
         "username": "jumokemohammed",
         "phoneNumber": "+2347070016981",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9985",
@@ -63,7 +68,8 @@
         "username": "yemiedet",
         "phoneNumber": "+2347070117015",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9986",
@@ -74,7 +80,8 @@
         "username": "esthergeorge",
         "phoneNumber": "+2348170217049",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9987",
@@ -85,7 +92,8 @@
         "username": "chinyereobi",
         "phoneNumber": "+2348170317083",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9988",
@@ -96,7 +104,8 @@
         "username": "sophiadoyle",
         "phoneNumber": "+2349070417117",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9989",
@@ -107,7 +116,8 @@
         "username": "mondayonyebuchi",
         "phoneNumber": "+2348170517151",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc998e",
@@ -118,7 +128,8 @@
         "username": "emekanweke",
         "phoneNumber": "+2349071017321",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc998f",
@@ -129,7 +140,8 @@
         "username": "toyinidika",
         "phoneNumber": "+2347071117355",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9990",
@@ -140,7 +152,8 @@
         "username": "jumokebbatunde",
         "phoneNumber": "+2349071217389",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9991",
@@ -151,7 +164,8 @@
         "username": "abubakarojerinde",
         "phoneNumber": "+2347071317423",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9992",
@@ -162,7 +176,8 @@
         "username": "aishaadewole",
         "phoneNumber": "+2347071417457",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9993",
@@ -173,7 +188,8 @@
         "username": "mondayikokwu",
         "phoneNumber": "+2349071517491",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9995",
@@ -184,7 +200,8 @@
         "username": "mariasavage",
         "phoneNumber": "+2348171717559",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9996",
@@ -195,7 +212,8 @@
         "username": "chinyereadewummi",
         "phoneNumber": "+2347071817593",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9997",
@@ -206,7 +224,8 @@
         "username": "danielolamide",
         "phoneNumber": "+2348171917627",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc999a",
@@ -217,7 +236,8 @@
         "username": "godswilladekanbi",
         "phoneNumber": "+2348172217729",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc999d",
@@ -228,7 +248,8 @@
         "username": "lawrencembanefo",
         "phoneNumber": "+2347072517831",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc999e",
@@ -239,7 +260,8 @@
         "username": "jumokeolasupo",
         "phoneNumber": "+2347072617865",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc999f",
@@ -250,7 +272,8 @@
         "username": "musatafawa",
         "phoneNumber": "+2347072717899",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a0",
@@ -261,7 +284,8 @@
         "username": "echezonaomotosho",
         "phoneNumber": "+2347072817933",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a1",
@@ -272,7 +296,8 @@
         "username": "imaobongnwafor",
         "phoneNumber": "+2348172917967",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a2",
@@ -283,7 +308,8 @@
         "username": "mosesabraham",
         "phoneNumber": "+2349073018001",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a3",
@@ -294,7 +320,8 @@
         "username": "ngozimmuoma",
         "phoneNumber": "+2349073118035",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a4",
@@ -305,7 +332,8 @@
         "username": "amaawirigwe",
         "phoneNumber": "+2347073218069",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a5",
@@ -316,7 +344,8 @@
         "username": "mosesabdul",
         "phoneNumber": "+2347073318103",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9980",
@@ -327,7 +356,8 @@
         "username": "iniobongmonday",
         "phoneNumber": "+2348169616845",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc998a",
@@ -338,7 +368,8 @@
         "username": "yemilawnson",
         "phoneNumber": "+2347070617185",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc998b",
@@ -349,7 +380,8 @@
         "username": "mariaakintunde",
         "phoneNumber": "+2348170717219",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc998c",
@@ -360,7 +392,8 @@
         "username": "anthonyolanrewaju",
         "phoneNumber": "+2347070817253",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc998d",
@@ -371,7 +404,8 @@
         "username": "abuchiomo-ojuile",
         "phoneNumber": "+2347070917287",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9994",
@@ -382,7 +416,8 @@
         "username": "sundayigwe",
         "phoneNumber": "+2349071617525",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9998",
@@ -393,7 +428,8 @@
         "username": "gboyegaaworinde",
         "phoneNumber": "+2348172017661",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc9999",
@@ -404,7 +440,8 @@
         "username": "anthonyokoli",
         "phoneNumber": "+2349072117695",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc999b",
@@ -415,7 +452,8 @@
         "username": "danielcole",
         "phoneNumber": "+2347072317763",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc999c",
@@ -426,7 +464,8 @@
         "username": "chikaodilisolarin",
         "phoneNumber": "+2348172417797",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a6",
@@ -437,7 +476,8 @@
         "username": "ebukaazeez",
         "phoneNumber": "+2348173418137",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a7",
@@ -448,7 +488,8 @@
         "username": "johnawolowo",
         "phoneNumber": "+2349073518171",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a8",
@@ -459,7 +500,8 @@
         "username": "amaraoputa",
         "phoneNumber": "+2347073618205",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99a9",
@@ -470,7 +512,8 @@
         "username": "johneffiong",
         "phoneNumber": "+2349073718239",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc99aa",
@@ -481,7 +524,8 @@
         "username": "adewaleebisi",
         "phoneNumber": "+2349073818273",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     },
     {
         "_id": "5ecb08e3d2595416f0dc997f",
@@ -492,6 +536,7 @@
         "username": "wasiuayantola",
         "phoneNumber": "+2349069516811",
         "password": "test1234",
-        "confirmPassword": "test1234"
+        "confirmPassword": "test1234",
+        "verified": true
     }
 ]

@@ -22,6 +22,10 @@ const handleTokenExpiredError = () => {
     return new AppError('You have been logged out of the application, please login again.', 401);
 }
 
+const handleFileNotFoundError = () => {
+    return new AppError('The file you intended to delete does not exist', 400);
+}
+
 const sendErrorInDevMode = (error, request, response) => {
     return response.status(error.statusCode).json({
         status: error.status,
@@ -58,6 +62,7 @@ const globalErrorHandler = (error, request, response, next) => {
         if (err.name === 'ValidationError') err = handleValidationError(err);
         if (err.name === 'JsonWebTokenError') err = handleJwtError();
         if (err.name === 'TokenExpiredError') err = handleTokenExpiredError();
+        if (err.code === 'ENOENT') err = handleFileNotFoundError();
         return sendErrorInProdMode(err, request, response); //Send Well Crafted Error To Our Clients
     }
 }

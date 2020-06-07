@@ -6,17 +6,20 @@ const classSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please, provide a name for this class'],
         trim: true,
+        unique: true
     },
     formTeacher: {
-        type: mongoose.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Staff'
     },
-    students: {
-        type: [mongoose.Types.ObjectId],
-        ref: 'Student'
-    },
-    prefect:{
-        type: mongoose.Types.ObjectId,
+    students: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Student'
+        }
+    ],
+    prefect: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Student'
     },
     term: {
@@ -58,11 +61,15 @@ const classSchema = mongoose.Schema({
     },
     createdOn: {
         type: Date
+    },
+    lectureTimetable: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'LectureTimetable'
     }
 });
 
 
-classSchema.index({ name: 1 });
+classSchema.index({ title: 1, school: 1 }, {unique: true});
 classSchema.index({ term: 1 });
 classSchema.index({ year: 1 });
 

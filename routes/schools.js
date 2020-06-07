@@ -9,12 +9,14 @@ const books = require('./books/booksRoutes');
 const questions = require('./questions/questionsRoutes');
 const assessments = require('./assessments/assessmentsRoutes');
 const classes = require('./classes/classRoutes');
+const lectureTimetableRoutes = require('./timetables/lectures');
 
 const router = Router();
 
 router.use('/:id/students', students);
 router.use('/:id/staff', staff);
 router.use('/:id/parents', parents);
+router.use('/:id/lecture_timetables', lectureTimetableRoutes);
 
 
 router.use(classes);
@@ -23,6 +25,7 @@ router.use(questions);
 router.use(assessments);
 
 router.use(authHandler.protect);
+router.use(middlewares.checkIfUserHasVerifiedAcct);
 
 router.route('/')
     .post(

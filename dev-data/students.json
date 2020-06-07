@@ -12,7 +12,9 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9981",
-    "school": "5ecb08dfd2595416f0dc9978"
+    "school": "5ecb08dfd2595416f0dc9978",
+    "verified": true,
+    "studyTimetable": "5ed3d0094f59050e5097861d"
   },
   {
     "fullname": "Rita Habbeeb Atanda",
@@ -27,7 +29,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9982",
-    "school": "5ecb08dfd2595416f0dc9978"
+    "school": "5ecb08dfd2595416f0dc9978",
+    "verified": true
   },
   {
     "fullname": "Sophia Chikaodili Obiwuru",
@@ -42,7 +45,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9983",
-    "school": "5ecb08dfd2595416f0dc9978"
+    "school": "5ecb08dfd2595416f0dc9978",
+    "verified": true
   },
   {
     "fullname": "Kevin Samson Mohammed",
@@ -57,7 +61,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9984",
-    "school": "5ecb08dfd2595416f0dc9978"
+    "school": "5ecb08dfd2595416f0dc9978",
+    "verified": true
   },
   {
     "fullname": "Eketi Habbeeb Edet",
@@ -72,7 +77,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9985",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Mary Maria George",
@@ -87,7 +93,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9986",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Constance Funsho Obi",
@@ -102,7 +109,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9987",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Tunde Grace Doyle",
@@ -117,7 +125,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9988",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Amake Daniel Onyebuchi",
@@ -132,7 +141,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9989",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Sarah Tunde Nweke",
@@ -147,7 +157,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc998e",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Mary Amara Idika",
@@ -162,7 +173,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc998f",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Moses John Bbatunde",
@@ -177,7 +189,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9990",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Chiamaka Anthony Ojerinde",
@@ -192,7 +205,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9991",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Yemi Chikaodili Adewole",
@@ -207,7 +221,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9992",
-    "school": "5ecb08dfd2595416f0dc997a"
+    "school": "5ecb08dfd2595416f0dc997a",
+    "verified": true
   },
   {
     "fullname": "Toyin Chiamaka Ikokwu",
@@ -222,7 +237,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9993",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Samson Lawrence Savage",
@@ -237,7 +253,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9995",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Sarah Temidayo Adewummi",
@@ -252,7 +269,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9996",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Chinyere Funsho Olamide",
@@ -267,7 +285,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9997",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Chikaodili Matthew Adekanbi",
@@ -282,7 +301,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc999a",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Amanda Ngozi Mbanefo",
@@ -297,7 +317,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc999d",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Yemi Ibukun Olasupo",
@@ -312,7 +333,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc999e",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Matthew Emeka Tafawa",
@@ -327,7 +349,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc999f",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Godswill Victoria Omotosho",
@@ -342,7 +365,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a0",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Rita Imaobong Nwafor",
@@ -357,7 +381,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a1",
-    "school": "5ecb08dfd2595416f0dc997b"
+    "school": "5ecb08dfd2595416f0dc997b",
+    "verified": true
   },
   {
     "fullname": "Funsho Umaru Abraham",
@@ -372,7 +397,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a2",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Echezona Ogechi Mmuoma",
@@ -387,7 +413,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a3",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Ebuka Adewale Awirigwe",
@@ -402,7 +429,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a4",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Ahmed Emeka Abdul",
@@ -417,7 +445,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a5",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Anthony Obi Monday",
@@ -432,7 +461,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9980",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Moses Moses Lawnson",
@@ -447,7 +477,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc998a",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Teslim Chioma Akintunde",
@@ -462,7 +493,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc998b",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Victoria Toyin Olanrewaju",
@@ -477,7 +509,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc998c",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Yemi Matthew Omo-ojuile",
@@ -492,7 +525,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc998d",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Olasunkanmi Abubakar Igwe",
@@ -507,7 +541,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9994",
-    "school": "5ecb08dfd2595416f0dc997d"
+    "school": "5ecb08dfd2595416f0dc997d",
+    "verified": true
   },
   {
     "fullname": "Emeka Amanda Aworinde",
@@ -522,7 +557,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9998",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Amara Gboyega Okoli",
@@ -537,7 +573,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc9999",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Chiamaka Samuel Cole",
@@ -552,7 +589,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc999b",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Aisha Teslim Solarin",
@@ -567,7 +605,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc999c",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Samson Temidayo Azeez",
@@ -582,7 +621,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a6",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Folake Daniel Awolowo",
@@ -597,7 +637,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a7",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Sarah Sarah Oputa",
@@ -612,7 +653,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a8",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Chioma Umaru Effiong",
@@ -627,7 +669,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99a9",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Musa Obi Ebisi",
@@ -642,7 +685,8 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc99aa",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   },
   {
     "fullname": "Lawrence Emmanuel Ayantola",
@@ -657,6 +701,7 @@
     "password": "qwerty12345",
     "confirmPassword": "qwerty12345",
     "parent": "5ecb08e3d2595416f0dc997f",
-    "school": "5ecb08dfd2595416f0dc997c"
+    "school": "5ecb08dfd2595416f0dc997c",
+    "verified": true
   }
 ]

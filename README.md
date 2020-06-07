@@ -50,6 +50,16 @@ This API consists of the features indicated below:
 * A single person cannot be registered twice for one collection. For instance, a teacher who is already registered, cannot register again as a teacher, but can register as a parent.
 * Logged in Users can update their password, anytime they like, especially if their current password is compromised.
   
+### Notice
+
+When a user registers with the platform, the user must verify the phone number that was used in the creation of the account.
+
+To achieve this, the logged in user must make a get request to the */api/v1/users/me/verification_code/* endpoint to get a verification code.
+
+The logged in user, then makes a post request with the verification code to the */api/v1/users/me/verify_my_account/* endpoint to verify his or her account.
+
+From then on, the user can have access to any resource on the platform that is accessible to users with verified accounts.
+
 ### Staff Roles
 * A school staff can either be a principal or a vice-principal or a teacher or a form-teacher or a bursar.
 * If you do not specify your role, the default is teacher. 
@@ -100,10 +110,19 @@ This API consists of the features indicated below:
 * There are different reset password endpoints for the application's administrators, school's staff officials, students and parents
 
 ### Books
+When a book is being created newly, no file should be uploaded.
+
+The file itself should be uploaded during the updating prcoess.
+
+When uploading a textbook file, the encoding type is multipart/form-data.
+
+Only pdf files are allowed.
+
 * Books can be added by individual schools.
 * Books added by a school can only be seen by the staff and students of the school.
 * Each school can update the details of any book which they added.
 * Each school could delete a specific book they created.
+* A school's books can be downloaded by anyone connected to the school.
 
 ### Questions
 * Questions can be addedd by staff of individual schools.
@@ -120,11 +139,47 @@ This API consists of the features indicated below:
 * Assessments added by a school can be deleted by staff of the school.
 
 ### Classrooms
-* Every school is can create classes.
+* Every school can create classes.
 * The different classes that make up a school can be retrieved.
 * The details of a sepcific class can be seen.
 * The details of a specific class can be updated.
 * The details of a specific class can be deleted. 
+
+### Lecture Timetables
+* Every school can create a lecture timetable for each class that make up the school.
+* All the lecture timetables that make up a school can be retrieved.
+* The lecture timetable of a sepcific class can be seen.
+* The details of the lecture timetable of a specific class can be updated.
+* The details of the lecture timetable of a  specific class can be deleted.
+
+### Personal Study Timetables
+To peform this kind of activity on the app, the registered student or staff who has verified his or her account phone number needs to be logged in.
+
+A student or a staff cannot create a new timetable, when he or she has an existing one. He or she would have to delete the current one to make way for the new. 
+
+* Every registered student or staff can create a personal timetable for studying.
+* Every registered student or staff can fetch their personal studying timetable.
+* Every registered student or staff can update their personal studying timetable.
+* Every registered student or staff can delete their personal studying timetable. 
+
+### Lectures
+* Class teachers can create lectures for the class(es) they teach on their subjects of expertise.
+
+* Class Lectures can be created, retrieved, updated and deleted.
+
+* When a lecture is created, the resources (audio lecture, video lecture and notes) are not uploaded initially.
+
+* When the lecture has been created, the lecture can now be updated by uploading the lecture resources. 
+
+* During the updating process the encoding type is not json. The encoding type in use is, **multipart/form-data**.
+
+* Multiple lecture resources can be uploaded.
+
+* A lecture resource can be deleted.
+
+* A Lecture resource can be downloaded.
+
+* When a lecture is deleted, all the resources associated with the lecture will be deleted from the server file system.
 
 ### Permissions For Accesssing Resources
 
@@ -178,79 +233,118 @@ The administrators of the application have access to all the resources in the sy
 * Assessments For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent. 
 
 ### Accessing Classrooms
-* Only A Staff Of A School Can Add Classrooms For That School.
-* Only A Staff Of A School Can Update A Classroom For That School.
-* Only A Staff Of A School Can Delete A Classroom For That School. 
-* Classrooms For A School Can Be Accessed By The School's Staff Officials, The Students And The Student's Parent.
+* Only The Administrator, Principal or Vice-Principal Of A School Can Add Classrooms For That School.
+* Only The Administrator, Principal or Vice-Principal or The Class Form Teacher Of A School Can Update A Classroom For That School.
+* Only The Administrator, Principal or Vice-Principal Of A School Can Delete A Classroom For That School. 
+* All the Classrooms Of A School Can Be Accessed By The Administrator, Principal or Vice-Principal Of That School.
+* The Details Of A Specific Classroom Can Be Seen By The School Administrator, Principal, Vice-Principal, The Classroom Form Teacher, The Class Students. 
+
+### Accessing Study Timetables
+* A Student or a staff can interact only with the study timetable that he or she has created.
+
+### Accessing Lecture Timetables
+* Only A School Administrator or Principal or Vice-Principal or Class Form Teacher Can Create A Lecture Timetable For A Class.
+* Only A School Administrator or Principal or Vice-Principal or Class Form Teacher Can Update A Lecture Timetable For A Class.
+* Only A School Administrator or Principal or Vice-Principal or Class Form Teacher Can Delete A Lecture Timetable For A Class.
+* All The Lecture Timetables Pertaninig to A School Can Be Accessed By The Administrator, Principal or Vice-Principal Of That School.
+* The Details Of A Specific Lecture Timetable Can Be Seen By The School Administrator, Principal, Vice-Principal, The Classroom Form Teacher and The Class Students. 
+
+### Accessing Lectures
+* To access lectures, you need to have a verified account and you must be logged in.
+* Class teachers can create, update and delete lectures for the classes and subjects that they teach.
+* Class teachers can delete any uploaded lecture resource (audio, video, document) if they teach that subject.
+* A class's lecture resources can be accessed by the students and teachers of that class.
 
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
 
-| Endpoint                                             | Function                                                                   |
-| ---------------------------------------------------- | -------------------------------------------------------------------------- |
-| GET/                                                 | Check to ensure that the api can be accessed                               |
-| GET/api/v1/schools                                   | Retrieve all the registered schools                                        |
-| POST/api/v1/schools                                  | Register a new school                                                      |
-| GET/api/v1/schools/:id                               | Retrieve a specific school                                                 |
-| PATCH/api/v1/schools/:id                             | Update a specific school                                                   |
-| DELETE/api/v1/schools/:id                            | Delete a specific school                                                   |
-| POST/api/v1/student/register                         | Register a student                                                         |
-| POST/api/v1/student/login                            | Login a student                                                            |
-| GET/api/v1/logout                                    | Logout a user                                                              |
-| POST/api/v1/parent/register                          | Register a parent                                                          |
-| POST/api/v1/parent/login                             | Login a parent                                                             |
-| POST/api/v1/staff/register                           | Register a staff                                                           |
-| POST/api/v1/staff/login                              | Login a staff                                                              |
-| POST/api/v1/admin/register                           | Register an admin                                                          |
-| POST/api/v1/admin/login                              | Login an admin                                                             |
-| GET/api/v1/users/admins                              | See all the administrators                                                 |
-| GET/api/v1/users/admins/:id                          | See a specific administrator                                               |
-| PATCH/api/v1/users/admins/:id                        | Update a specific administrator                                            |
-| DELETE/api/v1/users/admins/:id                       | Delete an administrator                                                    |
-| PATCH/api/v1/update_my_password                      | Update logged in user's password                                           |
-| GET/api/v1/schools/:id/students                      | See all the students of a school                                           |
-| GET/api/v1/schools/:id/students/:student_id          | See a single school's student's data                                       |
-| PATCH/api/v1/schools/:id/students/:student_id        | Update a single school's student's data                                    |
-| DELETE/api/v1/schools/:id/students/:student_id       | Delete a single school's student's data                                    |
-| GET/api/v1/schools/:id/staff                         | See all the staff of a school                                              |
-| GET/api/v1/schools/:id/staff/:staff_id               | See a single school's staff official's data                                |
-| PATCH/api/v1/schools/:id/staff/:staff_id             | Update a single school's staff official's data                             |
-| DELETE/api/v1/schools/:id/staff/:staff_id            | Delete a single school's staff official's data                             |
-| GET/api/v1/schools/:id/parents                       | Retrieve all the parents whose children are students of the school         |
-| GET/api/v1/users/parents/:id                         | Retrieve the details of a single parent                                    |
-| PATCH/api/v1/users/parents/:id                       | Update a specific parent                                                   |
-| DELETE/api/v1/users/parents/:id                      | Delete a parent from the platform                                          |
-| POST/api/v1/admin/forgot_password                    | An Admin user forgets his password and recieves a reset code               |
-| PATCH/api/v1/admin/reset_password                    | An Admin user is finally able to reset his password                        |
-| POST/api/v1/staff/forgot_password                    | An Staff of a school forgets his or her password and recieves a reset code |
-| PATCH/api/v1/staff/reset_password                    | A Staff official is finally able to reset his or her password              |
-| POST/api/v1/student/forgot_password                  | A Student forgets his or her password and recieves a reset code            |
-| PATCH/api/v1/student/reset_password                  | A Student is finally able to reset his or her password                     |
-| POST/api/v1/parent/forgot_password                   | A Parent forgets his or her password and recieves a reset code             |
-| PATCH/api/v1/parent/reset_password                   | A Parent is finally able to reset his or her password                      |
-| GET/api/v1/users/me                                  | A logged in user can see their information                                 |
-| PATCH/api/v1/users/me                                | A logged in user can update their data                                     |
-| DELETE/api/v1/users/me                               | A logged in user can delete their data                                     |
-| GET/api/v1/schools/:id/books                         | Retrieves all the books for a school                                       |
-| GET/api/vi/schools/:id/books/:book_id                | Retrieves a single book for a school                                       |
-| POST/api/v1/schools/:id/books                        | Creates a new book for a school                                            |
-| PATCH/api/vi/schools/:id/books/:book_id              | Updates the details of a book for a school                                 |
-| DELETE/api/vi/schools/:id/books/:book_id             | Deltes a specific book for a school                                        |
-| GET/api/vi/schools/:id/questions                     | Retrieves all the questions for a school                                   |
-| GET/api/vi/schools/:id/questions/:question_id        | Retrieves a single question fro a school                                   |
-| POST/api/vi/schools/:id/questions                    | Creates a new question for a school                                        |
-| PATCH/api/vi/schools/:id/questions/:question_id      | Updates a specific question for a school                                   |
-| DELETE/api/vi/schools/:id/questions/:question_id     | Deltes a specific question for a school                                    |
-| GET/api/vi/schools/:id/assessments                   | Retrieves all assessments for a school                                     |
-| GET/api/vi/schools/:id/assessments/:assessment_id    | Retrieves a specifc assessment for a school                                |
-| POST/api/vi/schools/:id/assessments                  | Creates a new assessment for a school                                      |
-| PATCH/api/vi/schools/:id/assessments/:assessment_id  | Updates a specific assessment for a school                                 |
-| DELETE/api/vi/schools/:id/assessments/:assessment_id | Deletes a specific assessment for a school                                 |
-| GET/api/v1/schools/:id/classes                       | Retrieves all classes for a school                                         |
-| GET/api/vi/schools/:id/classes/:class_id             | Retrieves a specifc class for a school                                     |
-| POST/api/vi/schools/:id/classes                      | Creates a new class for a school                                           |
-| PATCH/api/vi/schools/:id/classes/:class_id           | Updates a specific class for a school                                      |
-| DELETE/api/vi/schools/:id/classes/:class_id          | Deletes a specific class for a school                                      |
+| Endpoint                                                                        | Function                                                                   |
+| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| GET/                                                                            | Check to ensure that the api can be accessed                               |
+| GET/api/v1/schools                                                              | Retrieve all the registered schools                                        |
+| POST/api/v1/schools                                                             | Register a new school                                                      |
+| GET/api/v1/schools/:id                                                          | Retrieve a specific school                                                 |
+| PATCH/api/v1/schools/:id                                                        | Update a specific school                                                   |
+| DELETE/api/v1/schools/:id                                                       | Delete a specific school                                                   |
+| POST/api/v1/student/register                                                    | Register a student                                                         |
+| POST/api/v1/student/login                                                       | Login a student                                                            |
+| GET/api/v1/logout                                                               | Logout a user                                                              |
+| POST/api/v1/parent/register                                                     | Register a parent                                                          |
+| POST/api/v1/parent/login                                                        | Login a parent                                                             |
+| POST/api/v1/staff/register                                                      | Register a staff                                                           |
+| POST/api/v1/staff/login                                                         | Login a staff                                                              |
+| POST/api/v1/admin/register                                                      | Register an admin                                                          |
+| POST/api/v1/admin/login                                                         | Login an admin                                                             |
+| GET/api/v1/users/me/verification_code                                           | Get Verification Code                                                      |
+| POST/api/v1/users/me/verify_my_account                                          | Verification Of Account With Verification Code                             |
+| GET/api/v1/users/admins                                                         | See all the administrators                                                 |
+| GET/api/v1/users/admins/:id                                                     | See a specific administrator                                               |
+| PATCH/api/v1/users/admins/:id                                                   | Update a specific administrator                                            |
+| DELETE/api/v1/users/admins/:id                                                  | Delete an administrator                                                    |
+| PATCH/api/v1/update_my_password                                                 | Update logged in user's password                                           |
+| GET/api/v1/schools/:id/students                                                 | See all the students of a school                                           |
+| GET/api/v1/schools/:id/students/:student_id                                     | See a single school's student's data                                       |
+| PATCH/api/v1/schools/:id/students/:student_id                                   | Update a single school's student's data                                    |
+| DELETE/api/v1/schools/:id/students/:student_id                                  | Delete a single school's student's data                                    |
+| GET/api/v1/schools/:id/staff                                                    | See all the staff of a school                                              |
+| GET/api/v1/schools/:id/staff/:staff_id                                          | See a single school's staff official's data                                |
+| PATCH/api/v1/schools/:id/staff/:staff_id                                        | Update a single school's staff official's data                             |
+| DELETE/api/v1/schools/:id/staff/:staff_id                                       | Delete a single school's staff official's data                             |
+| GET/api/v1/schools/:id/parents                                                  | Retrieve all the parents whose children are students of the school         |
+| GET/api/v1/users/parents/:id                                                    | Retrieve the details of a single parent                                    |
+| PATCH/api/v1/users/parents/:id                                                  | Update a specific parent                                                   |
+| DELETE/api/v1/users/parents/:id                                                 | Delete a parent from the platform                                          |
+| POST/api/v1/admin/forgot_password                                               | An Admin user forgets his password and recieves a reset code               |
+| PATCH/api/v1/admin/reset_password                                               | An Admin user is finally able to reset his password                        |
+| POST/api/v1/staff/forgot_password                                               | An Staff of a school forgets his or her password and recieves a reset code |
+| PATCH/api/v1/staff/reset_password                                               | A Staff official is finally able to reset his or her password              |
+| POST/api/v1/student/forgot_password                                             | A Student forgets his or her password and recieves a reset code            |
+| PATCH/api/v1/student/reset_password                                             | A Student is finally able to reset his or her password                     |
+| POST/api/v1/parent/forgot_password                                              | A Parent forgets his or her password and recieves a reset code             |
+| PATCH/api/v1/parent/reset_password                                              | A Parent is finally able to reset his or her password                      |
+| GET/api/v1/users/me                                                             | A logged in user can see their information                                 |
+| PATCH/api/v1/users/me                                                           | A logged in user can update their data                                     |
+| DELETE/api/v1/users/me                                                          | A logged in user can delete their data                                     |
+| GET/api/v1/schools/:id/books                                                    | Retrieves all the books for a school                                       |
+| GET/api/vi/schools/:id/books/:book_id                                           | Retrieves a single book for a school                                       |
+| POST/api/v1/schools/:id/books                                                   | Creates a new book for a school                                            |
+| PATCH/api/vi/schools/:id/books/:book_id                                         | Updates the details of a book for a school                                 |
+| GET/api/vi/schools/:id/books/:book_id/download                                  | Download a book                                                            |
+| DELETE/api/vi/schools/:id/books/:book_id                                        | Deltes a specific book for a school                                        |
+| GET/api/vi/schools/:id/questions                                                | Retrieves all the questions for a school                                   |
+| GET/api/vi/schools/:id/questions/:question_id                                   | Retrieves a single question fro a school                                   |
+| POST/api/vi/schools/:id/questions                                               | Creates a new question for a school                                        |
+| PATCH/api/vi/schools/:id/questions/:question_id                                 | Updates a specific question for a school                                   |
+| DELETE/api/vi/schools/:id/questions/:question_id                                | Deltes a specific question for a school                                    |
+| GET/api/vi/schools/:id/assessments                                              | Retrieves all assessments for a school                                     |
+| GET/api/vi/schools/:id/assessments/:assessment_id                               | Retrieves a specifc assessment for a school                                |
+| POST/api/vi/schools/:id/assessments                                             | Creates a new assessment for a school                                      |
+| PATCH/api/vi/schools/:id/assessments/:assessment_id                             | Updates a specific assessment for a school                                 |
+| DELETE/api/vi/schools/:id/assessments/:assessment_id                            | Deletes a specific assessment for a school                                 |
+| GET/api/v1/schools/:id/classes                                                  | Retrieves all classes for a school                                         |
+| GET/api/vi/schools/:id/classes/:class_id                                        | Retrieves a specifc class for a school                                     |
+| POST/api/vi/schools/:id/classes                                                 | Creates a new class for a school                                           |
+| PATCH/api/vi/schools/:id/classes/:class_id                                      | Updates a specific class for a school                                      |
+| DELETE/api/vi/schools/:id/classes/:class_id                                     | Deletes a specific class for a school                                      |
+| POST/api/v1/users/me/study_timetable                                            | Create a study timetable                                                   |
+| GET/api/v1/users/me/study_timetable                                             | Fetch my study timetable                                                   |
+| PATCH/api/v1/users/me/study_timetable                                           | Update my study timetable                                                  |
+| DELETE/api/v1/users/me/study_timetable                                          | Delete my study timetable                                                  |
+| POST/api/v1/schools/:id/classes/:class_id/lecture_timetable                     | Create a lecture timetable for a specific class                            |
+| GET/api/v1/schools/:id/classes/lecture_timetables                               | Retrieve all the lecture timetables for every class in a particular school |
+| GET/api/v1/schools/:id/classes/:class_id/lecture_timetable                      | Retrieve the lecture timetable for a specific class                        |
+| PATCH/api/v1/schools/:id/classes/:class_id/lecture_timetable                    | Update the lecture timetable for a specific class                          |
+| DELETE/api/v1/schools/:id/classes/:class_id/lecture_timetable                   | Delete the lecture timetable for a specific class                          |
+| POST/api/v1/schools/:id/classes/:class_id/lectures                              | Create lecture for a class                                                 |
+| GET/api/v1/schools/:id/classes/:class_id/lectures                               | Retrieve all the lectures for a class                                      |
+| GET/api/v1/schools/:id/classes/:class_id/lectures/:lecture_id                   | Retrieve a specific lecture for a specific class                           |
+| PATCH/api/v1/schools/:id/classes/:class_id/lectures/:lecture_id                 | Update a specific lecture for a specific class                             |
+| DELETE/api/v1/schools/:id/classes/:class_id/lectures/:lecture_id                | Delete a specific lecture for a specific class                             |
+| GET/api/v1/schools/:id/classes/:class_id/lectures/:lecture_id/resource/:name    | Download a specific lecture resource                                       |
+| DELETE/api/v1/schools/:id/classes/:class_id/lectures/:lecture_id/resource/:name | Delete a specific lecture resource                                         |
+
+
+
 
 
 ### Sample Requests and Responses From The API
@@ -263,6 +357,8 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Login Student](#login-student)
     - [Register Staff](#register-staff)
     - [Login Staff](#login-staff)
+    - [Verification Code](#verification-code)
+    - [Verify Account](#verify-account)
     - [Logout](#logout)
     - [Update Password](#update-password)
 
@@ -305,6 +401,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Create Book](#create-book)
     - [Update Book](#update-book)
     - [Delete Book](#delete-book)
+    - [Download Book](#download-book) 
 
 - [Questions](#questions)
     - [Retrieve Questions](#retrieve-questions)
@@ -326,6 +423,28 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Create Class](#create-class)
     - [Update Class](#update-class)
     - [Delete Class](#delete-class)
+
+- [Study Timetable](#study-timetable)
+    - [Create Timetable](#create-timetable)
+    - [Fetch Timetable](#fetch-timetable)
+    - [Update Timetable](#update-timetable)
+    - [Delete Timetable](#delete-timetable)
+
+- [Lecture Timetable](#lecture-timetable)
+    - [Create Lecture Timetable](#create-lecture-timetable)
+    - [Fetch All Timetables](#fetch-all-timetables)
+    - [Fetch Lecture Timetable](#fetch-lecture-timetable)
+    - [Update Lecture Timetable](#update-lecture-timetable)
+    - [Delete Lecture Timetable](#delete-lecture-timetable)
+
+- [Lectures](lectures)
+    - [Create Lecture](#create-lecture)
+    - [Get Lectures](#get-lectures)
+    - [Get Lecture](#get-lecture)
+    - [Update Lecture](#update-lecture)
+    - [Delete Lecture](#delete-lecture)
+    - [Download Lecture Resource](#download-lecture-resource)
+    - [Delete Lecture Resource](#delete-lecture-resource)
 
 ### Authenticate
 
@@ -688,6 +807,46 @@ A staff cannot be connected to a school when they do not provide the school name
     }
     ```
 
+### Verification Code
+
+Only for registered users who are logged in and have not verified their accounts.
+
+* Request:
+    * Endpoint: GET/api/v1/users/me/verification_code
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+     ```
+     {
+        "status": "Success",
+        "message": "Your verification code has been sent to your mobile phone as a text message",
+        "verificationCode": "e33b8d"
+    }
+     ```
+
+### Verify Account
+
+Only for registered and logged in users who have not yet verified their phone numbers and have recieved a verification code on their mobile phone in a text message.
+
+* Request:
+    * Endpoint: POST/api/v1/users/me/verify_my_account
+    * Body: (application/json)
+     ```
+     {
+        "verificationCode": "e33b8d"
+    }
+     ```
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+     ```
+     {
+        "status": "Success",
+        "message": "Your account has been successfully verified."
+    }
+     ```
+
 ### Logout
 * Request
     * Endpoint: GET/api/v1/logout
@@ -967,6 +1126,8 @@ Only for users who are logged in.
 
 ### Update Admin
 
+An admin cannot update his or her password using this endpoint. He or she must use the update_my_password endpoint.
+
 * Request:
     * Endpoint: PATCH/api/v1/users/admins/5ec92d57d94fa51314fddfbd
     * Body: (application/json)
@@ -1189,6 +1350,9 @@ Only for users who are logged in.
     ```
 
 ### Update Student
+
+A student cannot update his or her password using this endpoint. He or she must use the update_my_password endpoint.
+
 * Request: 
     * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/students/5ecc155fdd53ff1604ef823a
     * Body: (application/json):
@@ -1313,7 +1477,6 @@ Only for users who are logged in.
         "class":"Any",
         "category": "Novel",
         "price": 1200,
-        "bookUrl":"www.example.com/books",
         "imageUrl": "www.books.com/the-enchanted-wood.jpg"
     }
     ```
@@ -1333,7 +1496,6 @@ Only for users who are logged in.
             "author": "Enyd Blyton",
             "class": "Any",
             "category": "Novel",
-            "bookUrl": "www.example.com/books",
             "imageUrl": "www.books.com/the-enchanted-wood.jpg",
             "createdOn": "2020-05-29T09:54:00.000Z",
             "school": "5ecb08dfd2595416f0dc9975",
@@ -1345,11 +1507,12 @@ Only for users who are logged in.
  ### Update Book
 * Request
     * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9975/books/5ed0dbb8a9c89b2410fddb62
-    * Body: (application/json)
+    * Body: (multipart/form-data)
     ```
     {
-        "author": "E. Blyton",
-        "price": 1000
+        author: E. Blyton,
+        price: 1000,
+        bookUrl: the_enchanted_wood_novel_uploaded.pdf
     }
     ```
 
@@ -1368,7 +1531,7 @@ Only for users who are logged in.
                 "author": "E. Blyton",
                 "class": "Any",
                 "category": "Novel",
-                "bookUrl": "www.example.com/books",
+                "bookUrl": "the_enchanted_wood_novel_uploaded.pdf",
                 "imageUrl": "www.books.com/the-enchanted-wood.jpg",
                 "createdOn": "2020-05-29T09:54:00.000Z",
                 "school": "5ecb08dfd2595416f0dc9975",
@@ -1384,6 +1547,13 @@ Only for users who are logged in.
   
 * Response:
     * Status: 204 - No Content
+
+### Download Book
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9975/books/5ed0dbb8a9c89b2410fddb62/download
+  
+* Response:
+    * Status: 200 - success
 
 ### Retrieve Officials
 * Request:
@@ -1574,6 +1744,7 @@ Only for users who are logged in.
     ```
 
 ### Retrieve Staff
+
 * Request:
     * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9976/staff/5ecc14f1dd53ff1604ef81e2
     
@@ -1608,6 +1779,9 @@ Only for users who are logged in.
     ```
 
 ### Update Staff
+
+A staff cannot update his or her password using this endpoint. He or she must use the update_my_password endpoint.
+
 * Request:
     * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9976/staff/5ecc14f1dd53ff1604ef81e2
     * Body: (application/json)
@@ -1972,6 +2146,9 @@ Find all the parents whose children are students in a particular school.
     ```
 
 ### Update Parent
+
+A parent cannot update his or her password using this endpoint. He or she  must use the update_my_password endpoint.
+
 * Request:
     * Endpoint: PATCH/api/v1/users/parents/5ecb08e3d2595416f0dc9984
     * Body: (application/json)
@@ -2046,6 +2223,9 @@ You must be logged in to see your information
 ### Update Me
 
 You must be logged in to be able to update your information
+
+Logged in users cannot update their password using this endpoint. They must use the update_my_password endpoint.
+
 
 * Request:
     * Endpoint: PATCH/api/v1/users/me
@@ -2575,3 +2755,1185 @@ Rest assured, the other category of users follow thesame pattern, with the excep
   
 * Response:
     * Status: 204 - No Content
+
+### Study Timetable
+
+### Create Timetable
+
+* Request:
+    * Endpoint: POST/api/v1/users/me/study_timetable
+    * Body: (application/json)
+     ```
+     {
+        "monday": [
+                {"subject": "Math", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "English", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "tuesday": [
+                {"subject": "Physics", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Chemistry", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "wednesday": [
+                {"subject": "Biology", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Agric", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "thursday": [
+                {"subject": "CRS", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Civic", "numOfStudyHours": "1 hour", "start": "6:30pm", "stop": "7:30pm"}
+            ],
+        "friday": [
+            {"subject": "Further Maths", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Government", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "saturday": [
+                {"subject": "Literature", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "English", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ],
+        "sunday": [
+                {"subject": "Math", "numOfStudyHours": "1 hour", "start": "5pm", "stop": "6pm"},
+                {"subject": "Chemistry", "numOfStudyHours": "1 hour", "start": "7pm", "stop": "8pm"}
+            ]
+        }
+     ```
+* Response
+    * Status: 201 - created
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Your timetable has been successfully created",
+        "results": 1,
+        "data": {
+            "authorCategory": "Student",
+            "category": "Study",
+            "_id": "5ed3b246538ee0184cf8d6fd",
+            "monday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d6fe",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d6ff",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d700",
+                    "subject": "Physics",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d701",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d702",
+                    "subject": "Biology",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d703",
+                    "subject": "Agric",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d704",
+                    "subject": "CRS",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d705",
+                    "subject": "Civic",
+                    "numOfStudyHours": "1 hour",
+                    "start": "6:30pm",
+                    "stop": "7:30pm"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d706",
+                    "subject": "Further Maths",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d707",
+                    "subject": "Government",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "saturday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d708",
+                    "subject": "Literature",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d709",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "sunday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d70a",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d70b",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "authorUsername": "lawrenceayantola84",
+            "__v": 0
+        }
+    }
+    ```
+
+### Fetch Timetable
+
+* Request:
+    * Endpoint: GET/api/v1/users/me/study_timetable
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Your timetable has been successfully retrieved",
+        "results": 1,
+        "data": {
+            "authorCategory": "Student",
+            "category": "Study",
+            "_id": "5ed3b246538ee0184cf8d6fd",
+            "monday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d6fe",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d6ff",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d700",
+                    "subject": "Physics",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d701",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d702",
+                    "subject": "Biology",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d703",
+                    "subject": "Agric",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d704",
+                    "subject": "CRS",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d705",
+                    "subject": "Civic",
+                    "numOfStudyHours": "1 hour",
+                    "start": "6:30pm",
+                    "stop": "7:30pm"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d706",
+                    "subject": "Further Maths",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d707",
+                    "subject": "Government",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "saturday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d708",
+                    "subject": "Literature",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d709",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "sunday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d70a",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d70b",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "authorUsername": "lawrenceayantola84",
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Timetable
+* Request: 
+    * Endpoint PATCH/api/v1/users/me/study_timetable
+    * Body: (application/json)
+    ```
+    {
+        "tuesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d6fe",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d6ff",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "monday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d700",
+                    "subject": "Physics",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d701",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ]
+    }
+    ```
+
+* Response:
+    * Status: 200 - ok 
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Your timetable has been successfully updated",
+        "results": 1,
+        "data": {
+            "authorCategory": "Student",
+            "category": "Study",
+            "_id": "5ed3b246538ee0184cf8d6fd",
+            "monday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d700",
+                    "subject": "Physics",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d701",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d6fe",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d6ff",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d702",
+                    "subject": "Biology",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d703",
+                    "subject": "Agric",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d704",
+                    "subject": "CRS",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d705",
+                    "subject": "Civic",
+                    "numOfStudyHours": "1 hour",
+                    "start": "6:30pm",
+                    "stop": "7:30pm"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d706",
+                    "subject": "Further Maths",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d707",
+                    "subject": "Government",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "saturday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d708",
+                    "subject": "Literature",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d709",
+                    "subject": "English",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "sunday": [
+                {
+                    "_id": "5ed3b246538ee0184cf8d70a",
+                    "subject": "Math",
+                    "numOfStudyHours": "1 hour",
+                    "start": "5pm",
+                    "stop": "6pm"
+                },
+                {
+                    "_id": "5ed3b246538ee0184cf8d70b",
+                    "subject": "Chemistry",
+                    "numOfStudyHours": "1 hour",
+                    "start": "7pm",
+                    "stop": "8pm"
+                }
+            ],
+            "authorUsername": "lawrenceayantola84",
+            "__v": 0
+        }
+    }
+    ```
+### Delete Timetable
+
+* Request:
+    * Endpoint: DELETE/api/v1/users/me/study_timetable
+  
+* Response:
+    * Status: 204 -  no content
+
+### Lecture Timetable
+
+### Create Lecture Timetable
+* Request:
+    * Endpoint: POST/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/lecture_timetable
+    * Body: (application/json)
+    ```
+        {
+        "monday": [
+            {"subject": "Biology", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am", "tutor": "bukolaayantola18"},
+            {"subject": "Basic Technology", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm", "tutor": "bukolaayantola18"}
+            ],
+        "tuesday": [
+            {"subject": "Chemistry", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am", "tutor": "godswillafolabi76"},
+            {"subject": "Chemistry", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm", "tutor": "godswillafolabi76"}
+            ],
+        "wednesday": [
+            {"subject": "Hausa Language", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am", "tutor": "amaraokoli25"},
+            {"subject": "Mathematics", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm", "tutor": "amaraokoli25"}
+            ],
+        "thursday": [
+            {"subject": "Physics", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am", "tutor": "amakemmuoma15"},
+            {"subject": "Physics", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm", "tutor": "amakemmuoma15"}
+            ],
+        "friday": [
+            {"subject": "Accounting", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am", "tutor": "bbatundeobasola39"},
+            {"subject": "Accounting", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm", "tutor": "bbatundeobasola39"}
+        ]
+    }
+    ```
+
+* Response:
+    * Status: 201 - created
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Lecture Timetable Created Successfully",
+        "results": 1,
+        "data": {
+            "category": "Lecture",
+            "_id": "5ed503919d420d1d3849a07a",
+            "monday": [
+                {
+                    "_id": "5ed503919d420d1d3849a07b",
+                    "subject": "Biology",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "bukolaayantola18"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a07c",
+                    "subject": "Basic Technology",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "bukolaayantola18"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed503929d420d1d3849a07d",
+                    "subject": "Chemistry",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "godswillafolabi76"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a07e",
+                    "subject": "Chemistry",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "godswillafolabi76"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed503929d420d1d3849a07f",
+                    "subject": "Hausa Language",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "amaraokoli25"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a080",
+                    "subject": "Mathematics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "amaraokoli25"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed503929d420d1d3849a081",
+                    "subject": "Physics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "amakemmuoma15"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a082",
+                    "subject": "Physics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "amakemmuoma15"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed503929d420d1d3849a083",
+                    "subject": "Accounting",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "bbatundeobasola39"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a084",
+                    "subject": "Accounting",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "bbatundeobasola39"
+                }
+            ],
+            "school": "5ecb08dfd2595416f0dc9977",
+            "class": "5ed503549d420d1d3849a079",
+            "form_teacher": "5ed2baf8ca1dbc1d6c0095d8",
+            "class_prefect": "5ed2bbf7ca1dbc1d6c00962e",
+            "__v": 0
+        }
+    }
+    ```
+
+### Fetch All Timetables
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/lecture_timetables
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved all the lecture timetables for your school",
+        "results": 1,
+        "data": [
+            {
+                "category": "Lecture",
+                "_id": "5ed503919d420d1d3849a07a",
+                "monday": [
+                    {
+                        "_id": "5ed503919d420d1d3849a07b",
+                        "subject": "Biology",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am",
+                        "tutor": "bukolaayantola18"
+                    },
+                    {
+                        "_id": "5ed503929d420d1d3849a07c",
+                        "subject": "Basic Technology",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm",
+                        "tutor": "bukolaayantola18"
+                    }
+                ],
+                "tuesday": [
+                    {
+                        "_id": "5ed503929d420d1d3849a07d",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am",
+                        "tutor": "godswillafolabi76"
+                    },
+                    {
+                        "_id": "5ed503929d420d1d3849a07e",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm",
+                        "tutor": "godswillafolabi76"
+                    }
+                ],
+                "wednesday": [
+                    {
+                        "_id": "5ed503929d420d1d3849a07f",
+                        "subject": "Hausa Language",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am",
+                        "tutor": "amaraokoli25"
+                    },
+                    {
+                        "_id": "5ed503929d420d1d3849a080",
+                        "subject": "Mathematics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm",
+                        "tutor": "amaraokoli25"
+                    }
+                ],
+                "thursday": [
+                    {
+                        "_id": "5ed503929d420d1d3849a081",
+                        "subject": "Physics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am",
+                        "tutor": "amakemmuoma15"
+                    },
+                    {
+                        "_id": "5ed503929d420d1d3849a082",
+                        "subject": "Physics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm",
+                        "tutor": "amakemmuoma15"
+                    }
+                ],
+                "friday": [
+                    {
+                        "_id": "5ed503929d420d1d3849a083",
+                        "subject": "Accounting",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am",
+                        "tutor": "bbatundeobasola39"
+                    },
+                    {
+                        "_id": "5ed503929d420d1d3849a084",
+                        "subject": "Accounting",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm",
+                        "tutor": "bbatundeobasola39"
+                    }
+                ],
+                "school": "5ecb08dfd2595416f0dc9977",
+                "class": "5ed503549d420d1d3849a079",
+                "form_teacher": "5ed2baf8ca1dbc1d6c0095d8",
+                "class_prefect": "5ed2bbf7ca1dbc1d6c00962e",
+                "__v": 0
+            }
+        ]
+    }
+    ```
+
+### Fetch Lecture Timetable
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/lecture_timetable
+
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved the lecture timetable for this class.",
+        "results": 1,
+        "data": {
+            "category": "Lecture",
+            "_id": "5ed503919d420d1d3849a07a",
+            "monday": [
+                {
+                    "_id": "5ed503919d420d1d3849a07b",
+                    "subject": "Biology",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "bukolaayantola18"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a07c",
+                    "subject": "Basic Technology",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "bukolaayantola18"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed503929d420d1d3849a07d",
+                    "subject": "Chemistry",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "godswillafolabi76"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a07e",
+                    "subject": "Chemistry",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "godswillafolabi76"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed503929d420d1d3849a07f",
+                    "subject": "Hausa Language",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "amaraokoli25"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a080",
+                    "subject": "Mathematics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "amaraokoli25"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed503929d420d1d3849a081",
+                    "subject": "Physics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "amakemmuoma15"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a082",
+                    "subject": "Physics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "amakemmuoma15"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed503929d420d1d3849a083",
+                    "subject": "Accounting",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "bbatundeobasola39"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a084",
+                    "subject": "Accounting",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "bbatundeobasola39"
+                }
+            ],
+            "school": "5ecb08dfd2595416f0dc9977",
+            "class": "5ed503549d420d1d3849a079",
+            "form_teacher": "5ed2baf8ca1dbc1d6c0095d8",
+            "class_prefect": "5ed2bbf7ca1dbc1d6c00962e",
+            "__v": 0
+        }
+    }
+    ```
+
+### Update Lecture Timetable
+* Request: 
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/lecture_timetable
+    * Body: (application/json)
+    ```
+    {
+        "tuesday": [
+                {
+                    "_id": "5ed4118f065a93196873ef92",
+                    "subject": "Biology",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "bukolaayantola18"
+                },
+                {
+                    "_id": "5ed4118f065a93196873ef93",
+                    "subject": "Basic Technology",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "bukolaayantola18"
+                }
+            ],
+            "monday": [
+                {
+                    "_id": "5ed4118f065a93196873ef94",
+                    "subject": "Chemistry",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "godswillafolabi76"
+                },
+                {
+                    "_id": "5ed4118f065a93196873ef95",
+                    "subject": "Chemistry",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "godswillafolabi76"
+                }
+            ]
+    }
+    ```
+* Response:
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully updated the lecture timetable for this class.",
+        "results": 1,
+        "data": {
+            "category": "Lecture",
+            "_id": "5ed503919d420d1d3849a07a",
+            "monday": [
+                {
+                    "_id": "5ed4118f065a93196873ef94",
+                    "subject": "Chemistry",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "godswillafolabi76"
+                },
+                {
+                    "_id": "5ed4118f065a93196873ef95",
+                    "subject": "Chemistry",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "godswillafolabi76"
+                }
+            ],
+            "tuesday": [
+                {
+                    "_id": "5ed4118f065a93196873ef92",
+                    "subject": "Biology",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "bukolaayantola18"
+                },
+                {
+                    "_id": "5ed4118f065a93196873ef93",
+                    "subject": "Basic Technology",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "bukolaayantola18"
+                }
+            ],
+            "wednesday": [
+                {
+                    "_id": "5ed503929d420d1d3849a07f",
+                    "subject": "Hausa Language",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "amaraokoli25"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a080",
+                    "subject": "Mathematics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "amaraokoli25"
+                }
+            ],
+            "thursday": [
+                {
+                    "_id": "5ed503929d420d1d3849a081",
+                    "subject": "Physics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "amakemmuoma15"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a082",
+                    "subject": "Physics",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "amakemmuoma15"
+                }
+            ],
+            "friday": [
+                {
+                    "_id": "5ed503929d420d1d3849a083",
+                    "subject": "Accounting",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "8am",
+                    "stop": "10am",
+                    "tutor": "bbatundeobasola39"
+                },
+                {
+                    "_id": "5ed503929d420d1d3849a084",
+                    "subject": "Accounting",
+                    "amountOfLectureTime": "2 hours",
+                    "start": "11am",
+                    "stop": "1pm",
+                    "tutor": "bbatundeobasola39"
+                }
+            ],
+            "school": "5ecb08dfd2595416f0dc9977",
+            "class": "5ed503549d420d1d3849a079",
+            "form_teacher": "5ed2baf8ca1dbc1d6c0095d8",
+            "class_prefect": "5ed2bbf7ca1dbc1d6c00962e",
+            "__v": 0
+        }
+    }
+    ```
+### Delete Lecture Timetable
+* Request: 
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/lecture_timetable
+
+* Response: 
+    * Status: 204 - no content
+
+### Lectures
+
+### Create Lecture
+* Request
+    * Endpoint: POST/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed6342c00bcd51aac488490/lectures
+    * Body: (application/json)
+    ```
+    {
+        "title": "Basic Greetings",
+        "subject": "Hausa Language",
+        "description": "This lecture introduces you to the basic terminologies used in greeting people with the Hausa Language.",
+        "studyDuration": "2 hours",
+        "linksToLearningResources": ["www.hausa.com", "www.hausalanguage.com"]
+    }
+    ```
+* Response
+    * Status: 201 - created
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Lecture Created Successfully",
+        "results": 1,
+        "data": {
+            "materials": [],
+            "linksToLearningResources": [
+                "www.hausa.com",
+                "www.hausalanguage.com"
+            ],
+            "_id": "5ed794b97d836d156c2d7264",
+            "title": "Basic Greetings",
+            "subject": "Hausa Language",
+            "description": "This lecture introduces you to the basic terminologies used in greeting people with the Hausa Language.",
+            "studyDuration": "2 hours",
+            "school": "5ecb08dfd2595416f0dc9977",
+            "class": "5ed6342c00bcd51aac488490",
+            "teacher": "5ed2baf8ca1dbc1d6c0095d6",
+            "__v": 0
+        }
+    }
+    ```
+
+### Get Lectures
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed6342c00bcd51aac488490/lectures
+
+* Response
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved all the lectures for your class",
+        "results": 1,
+        "data": [
+            {
+                "materials": [],
+                "linksToLearningResources": [
+                    "www.hausa.com",
+                    "www.hausalanguage.com"
+                ],
+                "_id": "5ed794b97d836d156c2d7264",
+                "title": "Basic Greetings",
+                "subject": "Hausa Language",
+                "description": "This lecture introduces you to the basic terminologies used in greeting people with the Hausa Language.",
+                "studyDuration": "2 hours",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "class": "5ed6342c00bcd51aac488490",
+                "teacher": "5ed2baf8ca1dbc1d6c0095d6",
+                "__v": 0
+            }
+        ]
+    }
+    ```
+
+### Get Lecture
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed6342c00bcd51aac488490/lectures/5ed794b97d836d156c2d7264
+
+* Response
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Successfully retrieved the lectures you requested",
+        "results": 1,
+        "data": [
+            {
+                "materials": [],
+                "linksToLearningResources": [
+                    "www.hausa.com",
+                    "www.hausalanguage.com"
+                ],
+                "_id": "5ed794b97d836d156c2d7264",
+                "title": "Basic Greetings",
+                "subject": "Hausa Language",
+                "description": "This lecture introduces you to the basic terminologies used in greeting people with the Hausa Language.",
+                "studyDuration": "2 hours",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "class": "5ed6342c00bcd51aac488490",
+                "teacher": "5ed2baf8ca1dbc1d6c0095d6",
+                "__v": 0
+            }
+        ]
+    }
+    ```
+
+### Update Lecture
+* Request
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed6342c00bcd51aac488490/lectures/5ed794b97d836d156c2d7264
+    * Body: (multipart/form-data)
+    ```
+    {
+        subject: 'Hausa Language',
+        materials: ["2 files selected"]
+    }
+    ```
+* Response
+    * Status: 200 - ok
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Lecture successfully updated",
+        "results": 1,
+        "data": {
+            "materials": [
+                "lecture-hausa-language-basic-greetings-amaraokoli25-1591187368539.mpeg",
+                "lecture-hausa-language-basic-greetings-amaraokoli25-1591187370559.mp4"
+            ],
+            "linksToLearningResources": [
+                "www.hausa.com",
+                "www.hausalanguage.com"
+            ],
+            "_id": "5ed794b97d836d156c2d7264",
+            "title": "Basic Greetings",
+            "subject": "Hausa Language",
+            "description": "This lecture introduces you to the basic terminologies used in greeting people with the Hausa Language.",
+            "studyDuration": "2 hours",
+            "school": "5ecb08dfd2595416f0dc9977",
+            "class": "5ed6342c00bcd51aac488490",
+            "teacher": "5ed2baf8ca1dbc1d6c0095d6",
+            "__v": 0
+        }
+    }
+    ```
+
+### Delete Lecture
+* Request
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed6342c00bcd51aac488490/lectures/5ed6363a00bcd51aac488491/
+
+* Response
+    * Status: 204 - no content
+
+### Download Lecture Resource
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed6342c00bcd51aac488490/lectures/5ed6363a00bcd51aac488491/resource/lecture-hausa-language-basic-greetings-amaraokoli25-1591178701339.mpeg
+
+* Response
+    * Status: 200 - ok
+     
+### Delete Lecture Resource
+* Request
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed6342c00bcd51aac488490/lectures/5ed6363a00bcd51aac488491/resource/lecture-hausa-language-basic-greetings-amaraokoli25-1591178701339.mpeg
+
+* Response
+    * Status: 204 - no content

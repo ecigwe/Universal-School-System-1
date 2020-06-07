@@ -73,7 +73,17 @@ const staffSchema = mongoose.Schema({
     registrationDate: {
         type: Date
     },
-    passwordChangedAt: { type: Date }
+    passwordChangedAt: { type: Date },
+    verified: {
+        type: Boolean,
+        default: false
+    },
+    ResetToken: String,
+    ResetExpires: Date,
+    studyTimetable: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'StudyTimetable'
+    }
 });
 
 // staffSchema.pre('save', async function (next) {
@@ -126,11 +136,11 @@ staffSchema.methods.passwordChangedAfterIssuingOfToken = function (TokenIssuedAt
     return false;
 }
 
-staffSchema.methods.createPasswordResetToken = function () {
+staffSchema.methods.createResetToken = function () {
     const resetToken = crypto.randomBytes(3).toString('hex');
 
-    this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
-    this.passwordResetExpires = Date.now() + (1000 * 60 * 5); //Reset token expires in 5 minutes
+    this.ResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+    this.ResetExpires = Date.now() + (1000 * 60 * 5); //Reset token expires in 5 minutes
 
     return resetToken;
 }

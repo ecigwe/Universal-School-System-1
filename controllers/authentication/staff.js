@@ -1,6 +1,8 @@
 const Staff = require('../../models/users/staff');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
+const twilio = require('twilio');
+const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
 exports.register = catchAsyncError(async (request, response, next) => {
     const newStaff = await Staff.create({
@@ -44,7 +46,7 @@ exports.forgotPassword = catchAsyncError(async (request, response, next) => {
     const staff = await Staff.findOne({ phoneNumber: "+234" + phoneNumber });
     if (!staff) return errorHandler(404, 'There is no staff with that phone number.');
 
-    const resetToken = staff.createPasswordResetToken();
+    const resetToken = staff.createResetToken();
     await staff.save({ validateBeforeSave: false });
 
     await client.messages.create({
@@ -74,8 +76,8 @@ exports.resetPassword = catchAsyncError(async (request, response, next) => {
 
     staff.password = newPassword;
     staff.confirmPassword = confirmNewPassword;
-    staff.passwordResetToken = undefined;
-    staff.passwordResetExpires = undefined;
+    staff.ResetToken = undefined;
+    staff.ResetExpires = undefined;
     await staff.save();
     request.user = staff;
     response.statusCode = 200;
