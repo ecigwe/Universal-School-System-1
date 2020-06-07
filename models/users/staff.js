@@ -74,16 +74,21 @@ const staffSchema = mongoose.Schema({
         type: Date
     },
     passwordChangedAt: { type: Date },
+
+    studyTimetable: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'StudyTimetable'
+    },
+    teacherTimetable: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'TeacherTimetable'
+    },
     verified: {
         type: Boolean,
         default: false
     },
     ResetToken: String,
     ResetExpires: Date,
-    studyTimetable: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'StudyTimetable'
-    }
 });
 
 // staffSchema.pre('save', async function (next) {
@@ -144,6 +149,11 @@ staffSchema.methods.createResetToken = function () {
 
     return resetToken;
 }
+
+staffSchema.pre('deleteOne', async function(next) {
+    
+    next();    
+});
 
 staffSchema.index({ school: 1 });
 

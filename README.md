@@ -342,10 +342,27 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | DELETE/api/v1/schools/:id/classes/:class_id/lectures/:lecture_id                | Delete a specific lecture for a specific class                             |
 | GET/api/v1/schools/:id/classes/:class_id/lectures/:lecture_id/resource/:name    | Download a specific lecture resource                                       |
 | DELETE/api/v1/schools/:id/classes/:class_id/lectures/:lecture_id/resource/:name | Delete a specific lecture resource                                         |
-
-
-
-
+| GET/api/v1/schools/:id/student/:student_id/shelves                              | Retrieves all the books on a user's shelf                                  |
+| GET/api/v1/schools/:id/student/:student_id/shelves/:book_id                     | Retrieves a single book from a user's shelf                                |
+| PATCH/api/v1/schools/:id/student/:student_id/shelves                            | Adds a book to a user's shelf                                              |
+| DELETE/api/v1/schools/:id/student/:student_id/shelves                           | Deletes a user's shelf                                                     |
+| GET/api/v1/schools/:id/student/assessment/results                               | Retrieves the assessment results of a school                               |
+| GET/api/v1/schools/:id/student/student_id/assessment/results                    | Retrieves the assessment results of a particular student in a school       |
+| POST/api/v1/schools/:id/student/assessment/results                              | Creates and assessment result of a student                                 |
+| DELETE/api/v1/schools/:id/student/:student_id/assessment/                       | Deltes an assessment result of a student                                   |
+| results/result_id                                                               |                                                                            |
+| GET//api/v1/schools/:id/student/records                                         | Retrieves all student records for a school                                 |
+| GET/api/v1/schools/:id/student/:student_id/records                              | Retrieves all records for a student                                        |
+| PATCH/api/v1/schools/:id/student/:student_id/records/record_id                  | Updates a specific record for a specific studnet                           |
+| DELETE/api/v1/schools/:id/student/:student_id/records/                          | Deltes an assessment result of a student                                   |
+| record_id                                                                       |                                                                            |
+| GET/api/v1/schools/:id/staff_timetables                                         | Retrieves timetables of every teacher in a school                          |
+| GET/api/v1/schools/:id/staff_timetables/staff/:staff_username                   | Retrieves timetable of a specific teacher in a school                      |
+| POST/api/v1/schools/:id/staff_timetables                                        | Creates a new timetable for a teacher in a school                          |
+| PATCH/api/v1/schools/:id/staff_timetables/staff/                                | Updates existing timetable for a teacher in a school                       |
+| :staff_username                                                                 |                                                                            |
+| DELETE/api/v1/schools/:id/staff_timetables/staff/                               | Deletes timetable of a teacher in a school                                 |
+| :staff_username                                                                 |
 
 ### Sample Requests and Responses From The API
 - [Authenticate](#authenticate)
@@ -423,6 +440,31 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Create Class](#create-class)
     - [Update Class](#update-class)
     - [Delete Class](#delete-class)
+
+- [Shelves](#shelves)
+    - [Retrieve Shelf Books](#retrieve-shelf-books)
+    - [Retrieve Shelf Book](#retrieve-shelf-book)
+    - [Add Books To Shelf](#add-books-to-shelf)
+    - [Delete Shelf](#delete-shelf)
+
+- [Assessment Results](#assessment-results)
+    - [Retrieve Assessment Results](#retrieve-assessment-results)
+    - [Retrieve Assessment Result](#retrieve-assessment-result)
+    - [Create Assessment Result](#create-assessment-result)
+    - [Delete Assessment Result](#delete-assessment-result)
+
+- [Student Records](#student-records)
+    - [Retrieve Students Records](#retrieve-students-records)
+    - [Retrieve Student Records](#retrieve-student-records)
+    - [Update Student Record](#Update-student-record)
+    - [Delete Student Record](#delete-student-record)
+
+- [Teacher Timetables](#Teacher-timetables)
+    - [Retrieve Teachers Timetables](#retrieve-teachers-timetables)
+    - [Retrieve Teacher Timetable](#retrieve-teacher-timetable)
+    - [Create Teacher Timetable](#create-teacher-timetable)
+    - [Update Teacher Timetable](#Update-teacher-timetable)
+    - [Delete Teacher Timetable](#delete-teacher-timetable)
 
 - [Study Timetable](#study-timetable)
     - [Create Timetable](#create-timetable)
@@ -2756,6 +2798,808 @@ Rest assured, the other category of users follow thesame pattern, with the excep
 * Response:
     * Status: 204 - No Content
 
+
+### Shelves
+
+### Retrieve Shelf Books
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/shelves
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Books retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ed3cb11c5c8c71a30b02235",
+                    "price": 1500,
+                    "title": "Comprehensive Mathematics",
+                    "author": "Kinta Kunte",
+                    "class": "SS 3",
+                    "category": "Textbook",
+                    "bookUrl": "www.example.com/books",
+                    "imageUrl": "www.books.com/book.jpg",
+                    "createdOn": "2020-05-31T15:19:45.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed3cba8c5c8c71a30b02237",
+                    "price": 3000,
+                    "title": "Essential Social Studies",
+                    "author": "P Okoye",
+                    "class": "Basic 2",
+                    "category": "Textbook",
+                    "bookUrl": "www.example.com/books",
+                    "imageUrl": "www.books.com/book.jpg",
+                    "createdOn": "2020-05-31T15:22:16.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Retrieve Shelf Book
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/shelves/5ed3cba8c5c8c71a30b02237
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+           "status": "success",
+            "message": "Book retrieved successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed3cba8c5c8c71a30b02237",
+                "price": 3000,
+                "title": "Essential Social Studies",
+                "author": "P Okoye",
+                "class": "Basic 2",
+                "category": "Textbook",
+                "bookUrl": "www.example.com/books",
+                "imageUrl": "www.books.com/book.jpg",
+                "createdOn": "2020-05-31T15:22:16.000Z",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "__v": 0
+            }
+        }
+    ```
+
+### Add Books To Shelf 
+
+* Request
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/shelves
+    * Body: (application/json)
+    ```
+        {
+        	"books": ["5ed3cb11c5c8c71a30b02235", "5ed3cb54c5c8c71a30b02236", "5ed3cba8c5c8c71a30b02237"]
+        }
+
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Shelf was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed3c8633cddff32981887d5",
+                "books": [
+                    "5ed3cb11c5c8c71a30b02235",
+                    "5ed3cba8c5c8c71a30b02237",
+                    "5ed3cb54c5c8c71a30b02236"
+                ],
+                "student": "5ed3c8623cddff32981887d4",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "createdOn": "2020-05-31T15:08:19.000Z",
+                "__v": 1
+            }
+        }
+    ```
+
+### Delete Shelf
+
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/shelves
+  
+* Response:
+    * Status: 204 - No Content
+
+### Assessment Results
+
+### Retrieve Assessment Results
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/assessment/results
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment results retrieved successfully",
+            "results": 3,
+            "data": [
+                {
+                    "_id": "5ed403202f73a32e40d9bf59",
+                    "subject": "Physics",
+                    "class": "SS1",
+                    "category": "Quiz",
+                    "term": 1,
+                    "year": "2020",
+                    "score": 10,
+                    "student": "5ed3c8623cddff32981887d4",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:18:56.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed40bdd467a6f2e64d466a7",
+                    "subject": "Basic Science",
+                    "class": "Basic1",
+                    "category": "Exam",
+                    "term": 3,
+                    "year": "2020",
+                    "score": 43,
+                    "student": "5ed3c8623cddff32981887d5",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:56:13.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed40c42467a6f2e64d466a9",
+                    "subject": "Biology",
+                    "class": "SS3",
+                    "category": "Exam",
+                    "term": 3,
+                    "year": "2022",
+                    "score": 53,
+                    "student": "5ed3c8623cddff32981887d9",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:57:54.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Retrieve Assessment Result
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/assessment/results
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Assessment results retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ed403202f73a32e40d9bf59",
+                    "subject": "Physics",
+                    "class": "SS1",
+                    "category": "Quiz",
+                    "term": 1,
+                    "year": "2020",
+                    "score": 15,
+                    "student": "5ed3c8623cddff32981887d4",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:18:56.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed4040808ab323154d6a12d",
+                    "subject": "Physics",
+                    "class": "SS1",
+                    "category": "Quiz",
+                    "term": 1,
+                    "year": "2020",
+                    "score": 10,
+                    "student": "5ed3c8623cddff32981887d4",
+                    "isCA": true,
+                    "createdOn": "2020-05-31T19:22:48.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Create Assessment Result
+* Request
+    * Endpoint: POST/api/v1/schools/5ecb08dfd2595416f0dc9977/student/assessment/results
+    * Body: (application/json)
+    ```
+        {
+            "subject": "Biology",
+            "class": "SS3",
+            "category": "Quiz",
+            "term": "3",
+            "year": "2020",
+            "score": 13,
+            "student": "5ed3c8623cddff32981887d4",
+            "isCA": true
+        }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+             "message": "Result saved successfully",
+             "results": 1,
+             "data": {
+                 "_id": "5ed4f0f9e3014c19c46af6f5",
+                 "subject": "Biology",
+                 "class": "SS3",
+                 "category": "Quiz",
+                 "term": 3,
+                 "year": "2020",
+                 "score": 13,
+                 "student": "5ed3c8623cddff32981887d4",
+                 "isCA": true,
+                 "createdOn": "2020-06-01T12:13:45.000Z",
+                 "school": "5ecb08dfd2595416f0dc9977",
+                "__v": 0
+            }
+        }
+    ``` 
+
+### Delete Assessment Result
+
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/assessment/results/5ed404d7bffb471b4c3d2e09
+  
+* Response:
+    * Status: 204 - No Content   
+
+### Student Records
+
+### Retrieve Students Records
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/records
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Records retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ed40bdc467a6f2e64d466a6",
+                    "english": 23,
+                    "mathematics": 10,
+                    "government": 14,
+                    "englishliterature": 20,
+                    "physics": 16,
+                    "geography": 0,
+                    "agriculturalscience": 0,
+                    "economics": 0,
+                    "basicscience": 43,
+                    "biology": 0,
+                    "civic": 23,
+                    "basictechnology": 0,
+                    "socialstudies": 0,
+                    "computerscience": 0,
+                    "chemistry": 9,
+                    "class": "SS1",
+                    "term": 2,
+                    "year": "2017",
+                    "student": "5ed3c8623cddff32981887d4",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-31T19:56:12.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed40c42467a6f2e64d466a8",
+                    "english": 76,
+                    "mathematics": 55,
+                    "government": 61,
+                    "englishliterature": 70,
+                    "physics": 23,
+                    "geography": 42,
+                    "agriculturalscience": 15,
+                    "economics": 0,
+                    "basicscience": 0,
+                    "biology": 53,
+                    "civic": 0,
+                    "basictechnology": 0,
+                    "socialstudies": 0,
+                    "computerscience": 0,
+                    "chemistry": 39,
+                    "class": "SS3",
+                    "term": 3,
+                    "year": "2022",
+                    "student": "5ed3c8623cddff32981887d7",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-31T19:57:54.000Z",
+                    "__v": 0
+                }       
+            ]
+        }
+    ```    
+
+### Retrieve Student Records
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/records
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Records retrieved successfully",
+            "results": 3,
+            "data": [
+                {
+                    "_id": "5ed40bdc467a6f2e64d466a6",
+                    "english": 55,
+                    "mathematics": 71,
+                    "government": 0,
+                    "englishliterature": 0,
+                    "physics": 0,
+                    "geography": 0,
+                    "agriculturalscience": 0,
+                    "economics": 0,
+                    "basicscience": 43,
+                    "biology": 0,
+                    "civic": 34,
+                    "basictechnology": 44,
+                    "socialstudies": 80,
+                    "computerscience": 0,
+                    "chemistry": 0,
+                    "class": "Basic1",
+                    "term": 3,
+                    "year": "2016",
+                    "student": "5ed3c8623cddff32981887d4",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-31T19:56:12.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed40c42467a6f2e64d466a8",
+                    "english": 0,
+                    "mathematics": 0,
+                    "government": 0,
+                    "englishliterature": 0,
+                    "physics": 0,
+                    "geography": 0,
+                    "agriculturalscience": 0,
+                    "economics": 0,
+                    "basicscience": 0,
+                    "biology": 53,
+                    "civic": 0,
+                    "basictechnology": 0,
+                    "socialstudies": 0,
+                    "computerscience": 0,
+                    "chemistry": 0,
+                    "class": "SS3",
+                    "term": 3,
+                    "year": "2022",
+                    "student": "5ed3c8623cddff32981887d4",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-05-31T19:57:54.000Z",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Update Student Record 
+
+* Request
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/records/5ed40c42467a6f2e64d466a8
+    * Body: (application/json)
+    ```
+        {
+	        "biology": 76
+        }
+
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+           "status": "success",
+            "message": "Student record was updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed40c42467a6f2e64d466a8",
+                "english": 0,
+                "mathematics": 0,
+                "government": 0,
+                "englishliterature": 0,
+                "physics": 0,
+                "geography": 0,
+                "agriculturalscience": 0,
+                "economics": 0,
+                "basicscience": 0,
+                "biology": 76,
+                "civic": 0,
+                "basictechnology": 0,
+                "socialstudies": 0,
+                "computerscience": 0,
+                "chemistry": 0,
+                "class": "SS3",
+                "term": 3,
+                "year": "2022",
+                "student": "5ed3c8623cddff32981887d4",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "createdOn": "2020-05-31T19:57:54.000Z",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Student Record
+
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/student/5ed3c8623cddff32981887d4/records/5ed403202f73a32e40d9bf58
+  
+* Response:
+    * Status: 204 - No Content
+
+### Teacher Timetables
+
+### Retrieve Teacher Timetables
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/staff_timetables
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Teachers timetables retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5ed630dc09f59502d873e07f",
+                    "staffCategory": "Staff",
+                    "category": "Teaching",
+                    "staffUsername": "amakemmuoma15",
+                    "monday": [
+                        {
+                            "_id": "5ed630dc09f59502d873e080",
+                            "class": "SS 2",
+                            "subject": "Chemistry",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed630dc09f59502d873e081",
+                            "class": "Basic 3",
+                            "subject": "Basic Science",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "11am",
+                            "stop": "1pm"
+                        }
+                    ],
+                    "tuesday": [
+                        {
+                            "_id": "5ed630dc09f59502d873e082",
+                            "class": "SS 1",
+                            "subject": "Chemistry",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed630dc09f59502d873e083",
+                            "class": "SS 1",
+                            "subject": "Chemistry",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "1pm",
+                            "stop": "3pm"
+                        }
+                    ],
+                    "wednesday": [
+                        {
+                            "_id": "5ed630dc09f59502d873e084",
+                            "class": "SS 3",
+                            "subject": "Chemistry",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed630dc09f59502d873e085",
+                            "class": "Basic 3",
+                            "subject": "Basic Science",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "11am",
+                            "stop": "1pm"
+                        }
+                    ],
+                    "thursday": [
+                        {
+                            "_id": "5ed630dc09f59502d873e086",
+                            "class": "Basic 3",
+                            "subject": "Basic Science",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed630dc09f59502d873e087",
+                            "class": "SS 3",
+                            "subject": "Chemistry",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "11am",
+                            "stop": "1pm"
+                        }
+                    ],
+                    "friday": [
+                        {
+                            "_id": "5ed630dc09f59502d873e088",
+                            "class": "SS 3",
+                            "subject": "Chemistry",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed630dc09f59502d873e089",
+                            "class": "SS 2",
+                            "subject": "Chemistry",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "11am",
+                            "stop": "1pm"
+                        }
+                    ],
+                    "createdOn": "2020-06-02T10:58:36.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                },
+                {
+                    "_id": "5ed63309fc12e82bb0b3ed46",
+                    "staffCategory": "Staff",
+                    "category": "Teaching",
+                    "staffUsername": "samuelbbatunde14",
+                    "monday": [
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed47",
+                            "class": "SS 2",
+                            "subject": "Mathematics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed48",
+                            "class": "SS 3",
+                            "subject": "Physics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "11am",
+                            "stop": "1pm"
+                        }
+                    ],
+                    "tuesday": [
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed49",
+                            "class": "SS 1",
+                            "subject": "Mathematics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed4a",
+                            "class": "SS 2",
+                            "subject": "Physics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "1pm",
+                            "stop": "3pm"
+                        }
+                    ],
+                    "wednesday": [
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed4b",
+                            "class": "SS 3",
+                            "subject": "Mathematics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed4c",
+                            "class": "Basic 3",
+                            "subject": "Mathematics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "11am",
+                            "stop": "1pm"
+                        }
+                    ],
+                    "thursday": [
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed4d",
+                            "class": "Basic 3",
+                            "subject": "Mathematics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed4e",
+                            "class": "SS 3",
+                            "subject": "Physics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "11am",
+                            "stop": "1pm"
+                        }
+                    ],
+                    "friday": [
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed4f",
+                            "class": "SS 3",
+                            "subject": "Mathematics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "8am",
+                            "stop": "10am"
+                        },
+                        {
+                            "_id": "5ed63309fc12e82bb0b3ed50",
+                            "class": "SS 2",
+                            "subject": "Mathematics",
+                            "amountOfLectureTime": "2 hours",
+                            "start": "11am",
+                            "stop": "1pm"
+                        }
+                    ],
+                    "createdOn": "2020-06-02T11:07:53.000Z",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Retrieve Teacher Timetable
+
+* Request
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/staff_timetables/staff/amakemmuoma15
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Timetable retrieved successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed630dc09f59502d873e07f",
+                "staffCategory": "Staff",
+                "category": "Teaching",
+                "staffUsername": "amakemmuoma15",
+                "monday": [
+                    {
+                        "_id": "5ed630dc09f59502d873e080",
+                        "class": "SS 2",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e081",
+                        "class": "Basic 3",
+                        "subject": "Basic Science",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                        }
+                    ],
+                "tuesday": [
+                        { 
+                        "_id": "5ed630dc09f59502d873e082",
+                        "class": "SS 1",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e083",
+                        "class": "SS 1",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "1pm",
+                        "stop": "3pm"
+                      }
+                  ],
+                "wednesday": [
+                    {
+                        "_id": "5ed630dc09f59502d873e084",
+                        "class": "SS 3",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e085",
+                        "class": "Basic 3",
+                        "subject": "Basic Science",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+              "thursday": [
+                    {
+                        "_id": "5ed630dc09f59502d873e086",
+                        "class": "Basic 3",
+                        "subject": "Basic Science",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e087",
+                        "class": "SS 3",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                     }
+                 ],
+             "friday": [
+                    {
+                        "_id": "5ed630dc09f59502d873e088",
+                        "class": "SS 3",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e089",
+                        "class": "SS 2",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+            "createdOn": "2020-06-02T10:58:36.000Z",
+            "school": "5ecb08dfd2595416f0dc9977",
+            "__v": 0
+              }
+          }
+      ```
 ### Study Timetable
 
 ### Create Timetable
@@ -3411,24 +4255,25 @@ Rest assured, the other category of users follow thesame pattern, with the excep
                         "start": "11am",
                         "stop": "1pm",
                         "tutor": "bukolaayantola18"
+
                     }
                 ],
                 "tuesday": [
                     {
-                        "_id": "5ed503929d420d1d3849a07d",
-                        "subject": "Chemistry",
+                      "_id": "5ed503929d420d1d3849a083",
+                        "subject": "Accounting",
                         "amountOfLectureTime": "2 hours",
                         "start": "8am",
                         "stop": "10am",
-                        "tutor": "godswillafolabi76"
+                        "tutor": "bbatundeobasola39"
                     },
                     {
-                        "_id": "5ed503929d420d1d3849a07e",
-                        "subject": "Chemistry",
+                        "_id": "5ed503929d420d1d3849a084",
+                        "subject": "Accounting",
                         "amountOfLectureTime": "2 hours",
                         "start": "11am",
                         "stop": "1pm",
-                        "tutor": "godswillafolabi76"
+                        "tutor": "bbatundeobasola39"
                     }
                 ],
                 "wednesday": [
@@ -3467,22 +4312,22 @@ Rest assured, the other category of users follow thesame pattern, with the excep
                         "tutor": "amakemmuoma15"
                     }
                 ],
-                "friday": [
-                    {
-                        "_id": "5ed503929d420d1d3849a083",
-                        "subject": "Accounting",
+          "friday": [
+                      {
+                        "_id": "5ed503929d420d1d3849a07d",
+                        "subject": "Chemistry",
                         "amountOfLectureTime": "2 hours",
                         "start": "8am",
                         "stop": "10am",
-                        "tutor": "bbatundeobasola39"
+                        "tutor": "godswillafolabi76"
                     },
                     {
-                        "_id": "5ed503929d420d1d3849a084",
-                        "subject": "Accounting",
+                        "_id": "5ed503929d420d1d3849a07e",
+                        "subject": "Chemistry",
                         "amountOfLectureTime": "2 hours",
                         "start": "11am",
                         "stop": "1pm",
-                        "tutor": "bbatundeobasola39"
+                        "tutor": "godswillafolabi76"
                     }
                 ],
                 "school": "5ecb08dfd2595416f0dc9977",
@@ -3494,6 +4339,278 @@ Rest assured, the other category of users follow thesame pattern, with the excep
         ]
     }
     ```
+### Create Teacher Timetable
+* Request
+    * Endpoint: POST/api/v1/schools/5ecb08dfd2595416f0dc9977/staff_timetables
+    * Body: (application/json)
+    ```
+        {
+            "staffUsername": "samuelbbatunde14",
+	        "staffCategory": "Staff",
+	        "monday": [
+	        	{	"class": "SS 2", "subject": "Mathematics", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am"},
+	        	{"class": "SS 3", "subject": "Physics", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm"}
+	        	],
+	        "tuesday": [
+	        	{"class": "SS 1","subject": "Mathematics", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am"},
+	        	{"class": "SS 2", "subject": "Physics", "amountOfLectureTime": "2 hours", "start": "1pm", "stop": "3pm"}
+	        	],
+	        "wednesday": [
+	        	{"class": "SS 3", "subject": "Mathematics", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am"},
+	        	{"class": "Basic 3", "subject": "Mathematics", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm"}
+	        	],
+	        "thursday": [
+	        	{"class": "Basic 3", "subject": "Mathematics", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am"},
+	        	{"class": "SS 3", "subject": "Physics", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm"}
+	        	],
+	        "friday": [
+	        	{"class": "SS 3", "subject": "Mathematics", "amountOfLectureTime": "2 hours", "start": "8am", "stop": "10am"},
+	        	{"class": "SS 2","subject": "Mathematics", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm"}
+	        ]
+        }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Timetable created successfully",
+            "results": 1,
+            "data": {
+                "staffCategory": "Staff",
+                "category": "Teaching",
+                "_id": "5ed63309fc12e82bb0b3ed46",
+                "staffUsername": "samuelbbatunde14",
+                "monday": [
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed47",
+                        "class": "SS 2",
+                        "subject": "Mathematics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed48",
+                        "class": "SS 3",
+                        "subject": "Physics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+                "tuesday": [
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed49",
+                        "class": "SS 1",
+                        "subject": "Mathematics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed4a",
+                        "class": "SS 2",
+                        "subject": "Physics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "1pm",
+                        "stop": "3pm"
+                    }
+                ],
+                "wednesday": [
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed4b",
+                        "class": "SS 3",
+                        "subject": "Mathematics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed4c",
+                        "class": "Basic 3",
+                        "subject": "Mathematics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+                "thursday": [
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed4d",
+                        "class": "Basic 3",
+                        "subject": "Mathematics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed4e",
+                        "class": "SS 3",
+                        "subject": "Physics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+                "friday": [
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed4f",
+                        "class": "SS 3",
+                        "subject": "Mathematics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed63309fc12e82bb0b3ed50",
+                        "class": "SS 2",
+                        "subject": "Mathematics",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+                "createdOn": "2020-06-02T11:07:53.000Z",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "__v": 0
+            }
+        }
+    ``` 
+
+### Update Teacher Timetable
+
+* Request
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/staff_timetables/staff/amakemmuoma15
+    * Body: (application/json)
+    ```
+        {
+            "monday": [
+		        {	"class": "SS 2", "subject": "Chemistry", "amountOfLectureTime": "1 hour", "start": "8am", "stop": "9am"},
+		        {"class": "SS 3", "subject": "Chemistry", "amountOfLectureTime": "2 hours", "start": "11am", "stop": "1pm"}
+		    ]
+        }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Timetable updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5ed630dc09f59502d873e07f",
+                "staffCategory": "Staff",
+                "category": "Teaching",
+                "staffUsername": "amakemmuoma15",
+                "monday": [
+                    {
+                        "_id": "5ed63635d8463b05e41ae9e6",
+                        "class": "SS 2",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "1 hour",
+                        "start": "8am",
+                        "stop": "9am"
+                    },
+                    {
+                        "_id": "5ed63635d8463b05e41ae9e7",
+                        "class": "SS 3",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+                "tuesday": [
+                    {
+                        "_id": "5ed630dc09f59502d873e082",
+                        "class": "SS 1",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e083",
+                        "class": "SS 1",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "1pm",
+                        "stop": "3pm"
+                    }
+                ],
+                "wednesday": [
+                    {
+                        "_id": "5ed630dc09f59502d873e084",
+                        "class": "SS 3",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e085",
+                        "class": "Basic 3",
+                        "subject": "Basic Science",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+                "thursday": [
+                    {
+                        "_id": "5ed630dc09f59502d873e086",
+                        "class": "Basic 3",
+                        "subject": "Basic Science",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e087",
+                        "class": "SS 3",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+                "friday": [
+                    {
+                        "_id": "5ed630dc09f59502d873e088",
+                        "class": "SS 3",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "8am",
+                        "stop": "10am"
+                    },
+                    {
+                        "_id": "5ed630dc09f59502d873e089",
+                        "class": "SS 2",
+                        "subject": "Chemistry",
+                        "amountOfLectureTime": "2 hours",
+                        "start": "11am",
+                        "stop": "1pm"
+                    }
+                ],
+                "createdOn": "2020-06-02T10:58:36.000Z",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Teacher Timetable
+
+* Request:
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/staff_timetables/staff/amakemmuoma15
+  
+* Response:
+    * Status: 204 - No Content        
 
 ### Fetch Lecture Timetable
 * Request:

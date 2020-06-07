@@ -1,6 +1,7 @@
 const Student = require('../../models/users/student');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
+const shelfController = require('../shelf/shelfController');
 const twilio = require('twilio');
 const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
@@ -19,6 +20,7 @@ exports.register = catchAsyncError(async (request, response, next) => {
         registrationDate: new Date(Date.now())
     });
     request.user = newStudent;
+    await shelfController.createShelf(newStudent, next)
     response.statusCode = 201;
     return next();
 });

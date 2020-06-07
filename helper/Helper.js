@@ -85,7 +85,7 @@ class Helper {
 
     async deleteArrayItem(req, res, next, message1, message2, query, field) {
         try {
-            const document = await this.collection.findById(query);
+            const document = await this.collection.findOne(query);
             if (!document) return errorHandler(404, message1);
 
             let num = document[field].indexOf(req.query[field]);
