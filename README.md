@@ -28,6 +28,8 @@ The following steps must be undertaken in order for the code of this project to 
      TWILIO_ACCOUNT_SID
      TWILIO_AUTH_TOKEN
      TWILIO_PHONE_NUMBER
+     PAYSTACK_SECRET
+     SUBSCRIPTION_AMOUNT
 6. Start the server, using the command **npm start**.
 7. Congratulations, your api should be up and running.
 ```
