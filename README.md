@@ -363,6 +363,27 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | :staff_username                                                                 |                                                                            |
 | DELETE/api/v1/schools/:id/staff_timetables/staff/                               | Deletes timetable of a teacher in a school                                 |
 | :staff_username                                                                 |
+| POST/api/v1/payments/schools/:id/account_details                                | Creates payment details for a specific school                              |
+| GET/api/v1/payments/schools/account_details                                     | Retrieves account details of all schools                                   |
+| GET/api/v1/payments/schools/:id/account_details                                 | Retrieves account details of a school                                      |
+| PATCH/api/v1/payments/schools/:id/account_details                               | Updates account details of a specific school                               |
+| DELETE/api/v1/payments/schools/:id/account_details                              | Deletes account details of a specific school                               |
+| POST/api/v1/payments/complete                                                   | Verifies payment                                                           |
+| GET/api/v1/payments/schools/reciepts                                            | Retrieves subscription reciepts for all schools                            |
+| GET/api/v1/payments/schools/reciepts                                            | Retrieves subscription reciepts for a school                               |
+| DELETE/api/v1/payments/schools/:id/reciepts                                     | Deltes a specific subscription reciepts for a school                       |
+| /:reciept_id                                                                    |                                                                            |
+| GET/api/v1/payments/schools/:id/students/reciepts                               | Retrieves all students fees reciepts for a school                          |
+| GET/api/v1/payments/schools/:id/students/:student_id                            | Retrieves fees reciepts for a student                                      |
+| /reciepts                                                                       |                                                                            |
+| DELETE/api/v1/payments/schools/:id/students                                     | Deletes a specific fees reciept of a student                               |
+| /student_id/reciepts/:reciept_id                                                |                                                                            |
+| GET/api/v1/payments/schools/:id/students                                        | Retrieves reciprts for items purchased by a student                        |
+| /:student_id/items/reciepts                                                     |                                                                            |
+| GET/api/v1/payments/schools/:id/students                                        | Retrieves a reciept for a specific item purchased by a student             |
+| /:student_id/items/item_id/reciepts                                             |                                                                            |
+| DELETE/api/v1/payments/schools/:id/students                                     | Deletes reciept for a specific purchase by a student                       |
+| /:student_id/items/reciepts/:reciept_id                                         |
 
 ### Sample Requests and Responses From The API
 - [Authenticate](#authenticate)
@@ -487,6 +508,31 @@ This API has routes, each of which are dedicated to a single objective. The endp
     - [Delete Lecture](#delete-lecture)
     - [Download Lecture Resource](#download-lecture-resource)
     - [Delete Lecture Resource](#delete-lecture-resource)
+
+- [Account Details](#account-details)
+    - [Retrieve Accounts Details](#retrieve-accounts-details)
+    - [Retrieve Account Details](#retrieve-account-details)
+    - [Create Account Details](#create-account-details)
+    - [Update Account Details](#update-account-details)
+    - [Delete Account Details](#delete-account-details)
+
+- [Payment Verification](#payment-verification)
+    - [Verify Payment](#verify-payment)
+
+- [Subscription Reciepts](#subscription-reciepts)
+    - [Retrieve Subscriptions Reciepts](#retrieve-subscriptions-reciepts)
+    - [Retrieve Subscription Reciept](#retrieve-subscription-reciept)
+    - [Delete Subscription Reciept](#delete-subscription-reciept)
+
+- [Fees Reciepts](#fees-reciepts)
+    - [Retrieve Fees Reciepts](#retrieve-fees-reciepts)
+    - [Retrieve Fee Reciept](#retrieve-fee-reciept)
+    - [Delete Fee Reciept](#delete-fee-reciept)
+
+- [Purchase Reciepts](#purchase-reciepts)
+    - [Retrieve Purchase Reciepts](#retrieve-purchase-reciepts)
+    - [Retrieve Purchase Reciept](#retrieve-purchase-reciept)
+    - [Delete Purchase Reciept](#delete-purchase-reciept)
 
 ### Authenticate
 
@@ -5054,3 +5100,502 @@ Rest assured, the other category of users follow thesame pattern, with the excep
 
 * Response
     * Status: 204 - no content
+
+### Account Details
+
+### Retrieve Accounts Details
+* Request
+    * Endpoint: GET/api/v1/payments/schools/account_details
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Payment details retrieved successfully",
+            "results": 3,
+            "data": [
+                {
+                    "_id": "5eda91a9916331219c6a91e7",
+                    "name": "Hopebay College",
+                    "email": "hopebay@yahoo.com",
+                    "SECRET_KEY": "sk_test_6ce39339bd6e5bed6ac66509cc14731f9630744b",
+                    "amount_payable": 70000,
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "createdOn": "2020-06-05T18:40:41.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5eda9240916331219c6a91e9",
+                    "name": "Community High School Ojo",
+                    "email": "community-high@yahoo.com",
+                    "SECRET_KEY": "sk_test_6ce39339bd6e5bed6ac66509cc14731f9630744b",
+                    "amount_payable": 30000,
+                    "school": "5ecb08dfd2595416f0dc9976",
+                    "createdOn": "2020-06-05T18:43:12.000Z",
+                    "__v": 0
+                },
+                {
+                    "_id": "5edcb96cba5b6c32fcee76de",
+                    "name": "Meadow Academy",
+                    "email": "info@meadowacademy.org",
+                    "SECRET_KEY": "sk_test_6ce39339bd6e5bed6ac66509cc14731f9630744b",
+                    "amount_payable": 30000,
+                    "school": "5ecb08dfd2595416f0dc9979",
+                    "createdOn": "2020-06-07T09:54:52.000Z",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+### Retrieve Account Details
+* Request
+    * Endpoint: GET/api/v1/payments/schools/5ecb08dfd2595416f0dc9979/account_details
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Payment details retrieved successfully",
+            "results": 1,
+            "data": {
+                "_id": "5edcb96cba5b6c32fcee76de",
+                "name": "Meadow Academy",
+                "email": "info@meadowacademy.org",
+                "SECRET_KEY": "sk_test_6ce39339bd6e5bed6ac66509cc14731f9630744b",
+                "amount_payable": 30000,
+                "school": "5ecb08dfd2595416f0dc9979",
+                "createdOn": "2020-06-07T09:54:52.000Z",
+                "__v": 0
+            }
+        }
+    ```    
+
+### Create Account Details
+* Request
+    * Endpoint: POST/api/v1/payments/schools/5ecb08dfd2595416f0dc9979/account_details
+    * Body: (application/json)
+    ```
+        {
+           
+            "name": "Meadow Academy",
+	        "email": "info@meadowacademy.org",
+	        "SECRET_KEY": "sk_test_6ce39339bd6e5bed6ac66509cc14731f9630744b",
+	        "amount_payable": 30000
+        }
+    ```
+
+* Response
+    * Status: 201 - Created
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Payment details created successfully",
+            "results": 1,
+            "data": {
+                "_id": "5edcb96cba5b6c32fcee76de",
+                "name": "Meadow Academy",
+                "email": "info@meadowacademy.org",
+                "SECRET_KEY": "sk_test_6ce39339bd6e5bed6ac66509cc14731f9630744b",
+                "amount_payable": 30000,
+                "school": "5ecb08dfd2595416f0dc9979",
+                "createdOn": "2020-06-07T09:54:52.000Z",
+                "__v": 0
+            }
+        }
+    ```    
+
+### Update Account Details
+* Request
+    * Endpoint: PATCH/api/v1/payments/schools/5ecb08dfd2595416f0dc9979/account_details
+    * Body: (application/json)
+    ```
+        {
+	        "email": "hello@meadowacademy.edu"
+        }
+    ```
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Payment details updated successfully",
+            "results": 1,
+            "data": {
+                "_id": "5edcb96cba5b6c32fcee76de",
+                "name": "Meadow Academy",
+	            "email": "hello@meadowacademy.edu",
+                "SECRET_KEY": "sk_test_6ce39339bd6e5bed6ac66509cc14731f9630744b",
+                "amount_payable": 30000,
+                "school": "5ecb08dfd2595416f0dc9979",
+                "createdOn": "2020-06-07T09:54:52.000Z",
+                "__v": 0
+            }
+        }
+    ```
+
+### Delete Account Details
+
+* Request:
+    * Endpoint: DELETE/api/v1/payments/schools/5ecb08dfd2595416f0dc9979/account_details
+  
+* Response:
+    * Status: 204 - No Content
+
+
+### Payment Verification
+
+### Verify Payment
+
+* Before Verification
+    * Endpoint: POST/https://api.paystack.co/transaction/initialize
+    * Metadata:
+
+    ```
+        Subscriptions
+        {
+            "amount": 3000,
+            "paymentFor": "Subscription",
+            "email": "hopebay@yahoo.com"
+        }
+    ```
+    ```
+        Student Fees
+        {   "name": "Amanda Gboyega Babatunde",
+            "email": "amandababatunde@hotmail.com",
+            "paymentFor": "Fees",
+            "term": 1,
+            "class": "Basic 3",
+            "school_name": "Hopebay College",
+            "id": "5ecb1917ef9ab21050ca1f7b"
+        }
+    ```
+    ```
+        Item Purchase
+        {   
+            "email": "amandababatunde@hotmail.com",
+            "itemName": "Comprehensive Mathematics",
+            "itemId": "5ed3cb11c5c8c71a30b02235",
+            "id":"5ecb1917ef9ab21050ca1f7b"
+        }
+    ```
+
+* Request
+    * Endpoint: POST/api/v1/payments/complete?trxref=owgh4pe95e&reference=owgh4pe95e
+    * Body:
+    ```
+        {
+            "paymentFor": "Subscription",
+            "school": "5ecb08dfd2595416f0dc9977"
+        }  
+    ```
+
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+
+    ```
+        {
+            "status": "success",
+            "message": "Successful",
+            "results": 1,
+            "data": {
+                "amount": 50000000,
+                "requested_amount": 50000000,
+                "status": "success",
+                "_id": "5edd011a6252a70fd4a50074",
+                "name": "Hopebay College",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "email": "hopebay@yahoo.com",
+                "paymentFor": "Subscription",
+                "createdOn": "2020-06-07T15:00:41.000Z",
+                "reference": "54gchax14t",
+                "__v": 0
+            }
+        }
+    ```
+
+
+
+
+
+
+### Subscription Reciepts
+
+### Retrieve Subscriptions Reciepts
+* Request
+    * Endpoint: GET/api/v1/payments/schools/reciepts
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Reciepts retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5edcb96cba5b6c32fcee76de",
+                    "amount": 2000000000,
+                    "requested_amount": 50000000,
+                    "status": "success",
+                    "name": "Meadow Academy",
+                    "school": "5ecb08dfd2595416f0dc9979",
+                    "email": "hello@meadowacademy.edu",
+                    "paymentFor": "Subscription",
+                    "createdOn": "2020-06-05T16:44:13.000Z",
+                    "__v": 0,
+                    "reference": "w37fhpjp9f"
+                },
+                {
+                    "_id": "5edbb03de84ec0319c471f66",
+                    "amount": 50000000,
+                    "requested_amount": 50000000,
+                    "status": "success",
+                    "name": "Hopebay College",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "email": "hopebay@yahoo.com",
+                    "paymentFor": "Subscription",
+                    "createdOn": "2020-06-06T15:03:25.000Z",
+                    "reference": "54gchax14t",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+### Retrieve Subscription Reciept
+* Request
+    * Endpoint: GET/api/v1/payments/schools/5ecb08dfd2595416f0dc9977/reciepts
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Reciepts retrieved successfully",
+            "results": 1,
+            "data": [
+                {
+                    "_id": "5edbb03de84ec0319c471f66",
+                    "amount": 50000000,
+                    "requested_amount": 50000000,
+                    "status": "success",
+                    "name": "Hopebay College",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "email": "hopebay@yahoo.com",
+                    "paymentFor": "Subscription",
+                    "createdOn": "2020-06-06T15:03:25.000Z",
+                    "reference": "54gchax14t",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+    
+### Delete Subscription Reciept
+
+* Request:
+    * Endpoint: DELETE/api/v1/payments/schools/5ecb08dfd2595416f0dc9977/reciepts/5eda765dc0141131345b13c9
+  
+* Response:
+    * Status: 204 - No Content
+  
+
+### Fees Reciepts
+
+### Retrieve Fees Reciepts
+* Request
+    * Endpoint: GET/api/v1/payments/schools/5ecb08dfd2595416f0dc9977/students/reciepts
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Reciepts retrieved successfully",
+            "results": 2,
+            "data": [
+                {
+                    "_id": "5eda92fe06a6d11834d6af5f",
+                    "amount": 7000000,
+                    "requested_amount": 7000000,
+                    "status": "success",
+                    "fullname": "Amanda Gboyega Babatunde",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "email": "amandababatunde@hotmail.com",
+                    "paymentFor": "Fees",
+                    "school_name": "Hopebay College",
+                    "student": "5ecb1917ef9ab21050ca1f7b",
+                    "term": 1,
+                    "year": "2020",
+                    "class": "Basic 3",
+                    "createdOn": "2020-06-05T18:46:22.000Z",
+                    "__v": 0,
+                    "reference": "y3zw4jv8hn"
+                },
+                {
+                    "_id": "5edbbb3acb7a8f1388205391",
+                    "amount": 7000000,
+                    "requested_amount": 7000000,
+                    "status": "success",
+                    "fullname": "Amanda Gboyega Babatunde",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "email": "amandababatunde@hotmail.com",
+                    "school_name": " College",
+                    "paymentFor": "Fees",
+                    "student": "5ecb1917ef9ab21050ca1f7b",
+                    "term": 1,
+                    "year": "2020",
+                    "class": "Basic 3",
+                    "createdOn": "2020-06-06T15:50:17.000Z",
+                    "reference": "chuayof7zi",
+                    "__v": 0
+                }
+            ]
+        }
+    ``` 
+   
+### Retrieve Fee Reciept
+* Request
+    * Endpoint: GET/api/v1/payments/schools/5ecb08dfd2595416f0dc9977/students/5ecb1917ef9ab21050ca1f7b/reciepts
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+           "status": "success",
+            "message": "Reciepts retrieved successfully",
+            "results": 1,
+            "data": [
+                {
+                    "_id": "5eda92fe06a6d11834d6af5f",
+                    "amount": 7000000,
+                    "requested_amount": 7000000,
+                    "status": "success",
+                    "fullname": "Amanda Gboyega Babatunde",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "email": "amandababatunde@hotmail.com",
+                    "paymentFor": "Fees",
+                    "school_name": "Hopebay College",
+                    "student": "5ecb1917ef9ab21050ca1f7b",
+                    "term": 1,
+                    "year": "2020",
+                    "class": "Basic 3",
+                    "createdOn": "2020-06-05T18:46:22.000Z",
+                    "__v": 0,
+                    "reference": "y3zw4jv8hn"
+                }
+            ]
+        }
+    ```    
+
+    
+### Delete Fee Reciept
+
+* Request:
+    * Endpoint: DELETE/api/v1/payments/schools/5ecb08dfd2595416f0dc9977/students/5ecb1917ef9ab21050ca1f7b/reciepts/5eda92fe06a6d11834d6af5f
+  
+* Response:
+    * Status: 204 - No Content
+
+
+### Purchase Reciepts
+
+### Retrieve Purchase Reciepts
+* Request
+    * Endpoint: GET/api/v1/payments/schools/5ecb08dfd2595416f0dc9977/items/reciepts
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Reciepts retrieved successfully",
+            "results": 3,
+            "data": [
+                {
+                    "_id": "5edaa64f4204aa2184a103e2",
+                    "amount": 150000,
+                    "requested_amount": 150000,
+                    "status": "success",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "student": "5ecb1917ef9ab21050ca1f7b",
+                    "email": "amandababatunde@hotmail.com",
+                    "paymentFor": "Comprehensive Mathematics",
+                    "itemId": "5ed3cb11c5c8c71a30b02235",
+                    "createdOn": "2020-06-05T20:08:47.000Z",
+                    "__v": 0,
+                    "reference": "p9pq5uks3l"
+                },
+                {
+                    "_id": "5edbc047993b0b1aec38ac17",
+                    "amount": 150000,
+                    "requested_amount": 150000,
+                    "status": "success",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "student": "5ecb1917ef9ab21050ca1f7b",
+                    "email": "amandababatunde@hotmail.com",
+                    "paymentFor": "Comprehensive Mathematics",
+                    "itemId": "5ed3cb11c5c8c71a30b02235",
+                    "createdOn": "2020-06-06T16:11:51.000Z",
+                    "reference": "owgh4pe95e",
+                    "__v": 0
+                }
+            ]
+        }
+    ``` 
+   
+### Retrieve Purchase Reciept
+
+* Request
+    * Endpoint: GET/api/v1/payments/schools/5ecb08dfd2595416f0dc9977/students/5ecb1917ef9ab21050ca1f7b/items/reciepts
+
+* Response
+    * Status: 200 - OK
+    * Body: (application/json)
+    ```
+        {
+            "status": "success",
+            "message": "Reciept retrieved successfully",
+            "results": 1,
+            "data": [
+                {
+                    "_id": "5edbc047993b0b1aec38ac17",
+                    "amount": 150000,
+                    "requested_amount": 150000,
+                    "status": "success",
+                    "school": "5ecb08dfd2595416f0dc9977",
+                    "student": "5ecb1917ef9ab21050ca1f7b",
+                    "email": "amandababatunde@hotmail.com",
+                    "paymentFor": "Comprehensive Mathematics",
+                    "itemId": "5ed3cb11c5c8c71a30b02235",
+                    "createdOn": "2020-06-06T16:11:51.000Z",
+                    "reference": "owgh4pe95e",
+                    "__v": 0
+                }
+            ]
+        }
+    ```    
+
+    
+### Delete Purchase Reciept
+
+* Request:
+    * Endpoint: DELETE/api/v1/payments/schools/5ecb08dfd2595416f0dc9977/students/5ecb1917ef9ab21050ca1f7b/items/reciepts/5edaa64f4204aa2184a103e2
+  
+* Response:
+    * Status: 204 - No Content
