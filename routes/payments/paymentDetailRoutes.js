@@ -10,27 +10,28 @@ router.use(middlewares.checkIfUserHasVerifiedAcct);
 router.route('/schools/:id/account_details')
     .post(
         middlewares.checkIfSchoolStillExists,
+        middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
-        // check if user is school administrator
         PaymentDetailsController.createPaymentDetails
     )
     .get(
         middlewares.checkIfSchoolStillExists,
+        middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
         PaymentDetailsController.getASchoolPaymentDetails
     )
     .patch(
         middlewares.checkIfSchoolStillExists,
+        middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
-        // check if user is school administrator
         PaymentDetailsController.updatePaymentDetails
 
     )
 
     .delete(
         middlewares.checkIfSchoolStillExists,
+        middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
-        // check if user is school administrator
         PaymentDetailsController.deletePaymentDetails
     )
 

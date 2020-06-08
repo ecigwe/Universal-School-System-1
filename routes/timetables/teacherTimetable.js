@@ -5,31 +5,38 @@ const middlewares = require('../../controllers/middlewares');
 const router = Router({ mergeParams: true });
 
 router.use(authHandler.protect);
-//router.use(middlewares.checkIfUserHasVerifiedAcct);
+router.use(middlewares.checkIfUserHasVerifiedAcct);
 
 router.route('/')
     .post(
+        middlewares.checkIfSchoolStillExists,
         middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,
         TeacherTimetableController.createTimetable
     )
     .get(
-        middlewares.checkCategory('Staff'),
+        middlewares.checkIfSchoolStillExists,
+        middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
         TeacherTimetableController.getAllTeachersTimetables
     );
 
 router.route('/staff/:staff_username')
     .get(
+        middlewares.checkIfSchoolStillExists,
         middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,
         TeacherTimetableController.findOne
     )
-    .patch(middlewares.checkCategory('Staff'),
+    .patch(
+        middlewares.checkIfSchoolStillExists,
+        middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,
         TeacherTimetableController.updateTeacherTimetable
     )
-    .delete(middlewares.checkCategory('Staff'),
+    .delete(
+        middlewares.checkIfSchoolStillExists,
+        middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,
         TeacherTimetableController.deleteTeacherTimetable
     );

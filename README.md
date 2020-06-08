@@ -183,6 +183,47 @@ A student or a staff cannot create a new timetable, when he or she has an existi
 
 * When a lecture is deleted, all the resources associated with the lecture will be deleted from the server file system.
 
+### Payments
+* Schools Can Make Payments in The Form of Subscriptions to Use The Platform.
+* Schools Can Submit Their Account Details To The Company.
+* The Account Details Of All The Schools Can Be Seen.
+* The Account Details Of A Specific School Can Be Seen.
+* A School's Account Details Can Be Deleted From The App.
+* When Payments Are Made Through The App, Each Transaction Must Be Verified.
+* All The Subscription Receipts Of A School Can Be Retrieved.
+* A Specific Subscription Reciept Of A School  Can Be Retrieved.
+* A Specific Subscription Reciept Of A School Can Be Deleted.
+* All The Reciepts Of Students School Fees Payments Can Be Seen.
+* A Specific Reciept Of A Student School Fee Payment Can Be Seen.
+* A Specific Reciept Of A Student School Fee Payment Can Be Deleted.
+* The Reciepts Of Items Purchased By A Student Can Be Retrieved.
+* The Reciept Of An Item Purchased By A Student Can Be Retrieved. 
+* The Reciept Of An Item Purchased By A Student Can Be Deleted.
+
+### Shelf
+* Students Can Add Books To Their Bookshelf
+* Students Can See All The Books On Their Bookshelf.
+* Students Can See A Book On Their Bookshelf.
+* Students Can Delete A Book From Their Bookshelf.  
+
+### Students Assessments Results
+* Assessments Results Can Be Created For Each Student.
+* All The Assessments Results For All The Students In A School Can Be Seen.
+* An Assessment Result For A Student In A School Can Be Seen.
+* An Assessment Result For A Student In A School Can Be Deleted.  
+
+### Students Records
+* Academic Records Can Be Updated For Each Student.
+* All The Academic Records For All The Students In A School Can Be Seen.
+* An Academic Record For A Student In A School Can Be Seen.
+* An Academic Record For A Student In A School Can Be Deleted.  
+
+### Teachers Timetable
+* Every Teacher In A School Can Have A Teaching Timetable
+* The Teaching Timetables Of Every Teacher In A School Can Be Retrieved.
+* The Teaching Timetable Of A Specific Teacher In A School Can Be Retrieved.
+* The Teaching Timetable Of A Specific Teacher In A School Can Be Deleted.
+
 ### Permissions For Accesssing Resources
 
 The administrators of the application have access to all the resources in the system.
@@ -256,6 +297,41 @@ The administrators of the application have access to all the resources in the sy
 * Class teachers can create, update and delete lectures for the classes and subjects that they teach.
 * Class teachers can delete any uploaded lecture resource (audio, video, document) if they teach that subject.
 * A class's lecture resources can be accessed by the students and teachers of that class.
+
+### Accessing Teaching Timetables
+* Staff Officials Of A School Can Create Their Teaching Timetable
+* The School Administrator Can Fetch All The Teachers Teaching Timetable.
+* Staff Officials Of A School Can See, Update and Delete Their Teaching Timetable. 
+
+### Accessing Assessments Results
+* Staff Officials Of A School Can Create, Retrieve and Delete Assessments Results For Students Of That School.
+* Students (and Their Parents) Can See Only Their Own Assessments Results.
+
+### Accessing Student Records
+* The Staff Officials Of A School Can See All The Academic Records Of All Their Students.
+* Students, Their Parents and Their Teachers Can See All The Academic Records Of The Student.
+* The Staff Officials Of A School Can Update The Academic Records Of Specific Students.
+* The School Administrator Can Delete The Academic Records Of Specific Students In His Or Her School.  
+
+### Accessing Payments
+* Only School Administrators Can Submit, Retrieve, Update And Delete Their School's Payment Information.
+* An Administrator Of The Company/Platform Can See All The Payment Details Of Every School.
+* Any logged in user who has verified their account on the app can make payments.
+* Students or Their Parents Can Pay School Fees To and Purchase Items From Their Respective Schools.
+* Only The App Administrators Can See All The Subscription Payment Receipts For All The Schools.
+* Only The App Administrators Can Delete A School's Subscription Payment Receipt. 
+* Only School Administrators Can See The Subscription Payment Receipts For Their School.
+* All The Staff Officials Of A School Can See All Their Students School Fees Receipts.
+* Students, Their Parents, and Their Teachers Can See The Student's School Fees Receipts.
+* Only The Platform's Administrators Can Delete A Student Receipt.
+* Students, Their Parents, and Their Teachers Can See The Student's Receipts For Any Item Purchased.
+* Only The Platform's Administrators Can Delete A Student Receipt For Any Item Purchased.
+ 
+### Accessing Book Shelves
+* A Student Can See Their Book Shelf
+* A Student Can Update Their Book Shelf
+* A Student Can Delete Their Book Shelf
+* A Student Can Get A Book From Their Book Shelf
 
 ### Each API Endpoint And Their Purpose
 This API has routes, each of which are dedicated to a single objective. The endpoints make use of HTTP response codes to indicate the API status and errors.
@@ -348,15 +424,15 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | GET/api/v1/schools/:id/student/:student_id/shelves/:book_id                     | Retrieves a single book from a user's shelf                                |
 | PATCH/api/v1/schools/:id/student/:student_id/shelves                            | Adds a book to a user's shelf                                              |
 | DELETE/api/v1/schools/:id/student/:student_id/shelves                           | Deletes a user's shelf                                                     |
-| GET/api/v1/schools/:id/student/assessment/results                               | Retrieves the assessment results of a school                               |
+| GET/api/v1/schools/:id/student/assessment/results                               | Retrieves the assessment results of all the students of a  school          |
 | GET/api/v1/schools/:id/student/student_id/assessment/results                    | Retrieves the assessment results of a particular student in a school       |
-| POST/api/v1/schools/:id/student/assessment/results                              | Creates and assessment result of a student                                 |
-| DELETE/api/v1/schools/:id/student/:student_id/assessment/                       | Deltes an assessment result of a student                                   |
+| POST/api/v1/schools/:id/student/assessment/results                              | Creates the assessment result of a student                                 |
+| DELETE/api/v1/schools/:id/student/:student_id/assessment/                       | Deltes the assessment result of a student                                  |
 | results/result_id                                                               |                                                                            |
-| GET//api/v1/schools/:id/student/records                                         | Retrieves all student records for a school                                 |
-| GET/api/v1/schools/:id/student/:student_id/records                              | Retrieves all records for a student                                        |
-| PATCH/api/v1/schools/:id/student/:student_id/records/record_id                  | Updates a specific record for a specific studnet                           |
-| DELETE/api/v1/schools/:id/student/:student_id/records/                          | Deltes an assessment result of a student                                   |
+| GET//api/v1/schools/:id/student/records                                         | Retrieves all the student records for a school                             |
+| GET/api/v1/schools/:id/student/:student_id/records                              | Retrieves all records for a single student                                 |
+| PATCH/api/v1/schools/:id/student/:student_id/records/record_id                  | Updates the record for a specific student                                  |
+| DELETE/api/v1/schools/:id/student/:student_id/records/                          | Deletes the assessment result of a student                                 |
 | record_id                                                                       |                                                                            |
 | GET/api/v1/schools/:id/staff_timetables                                         | Retrieves timetables of every teacher in a school                          |
 | GET/api/v1/schools/:id/staff_timetables/staff/:staff_username                   | Retrieves timetable of a specific teacher in a school                      |
@@ -380,7 +456,7 @@ This API has routes, each of which are dedicated to a single objective. The endp
 | /reciepts                                                                       |                                                                            |
 | DELETE/api/v1/payments/schools/:id/students                                     | Deletes a specific fees reciept of a student                               |
 | /student_id/reciepts/:reciept_id                                                |                                                                            |
-| GET/api/v1/payments/schools/:id/students                                        | Retrieves reciprts for items purchased by a student                        |
+| GET/api/v1/payments/schools/:id/students                                        | Retrieves reciepts for items purchased by a student                        |
 | /:student_id/items/reciepts                                                     |                                                                            |
 | GET/api/v1/payments/schools/:id/students                                        | Retrieves a reciept for a specific item purchased by a student             |
 | /:student_id/items/item_id/reciepts                                             |                                                                            |

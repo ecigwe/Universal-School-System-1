@@ -6,6 +6,7 @@ const middlewares = require('../../controllers/middlewares');
 
 //Except for /complete, all other routes are for testing
 router.use(authHandler.protect);
+router.use(middlewares.checkIfUserHasVerifiedAcct);
 
 router.post(
     '/subscription',
@@ -19,10 +20,16 @@ router.post(
 
 router.post(
     '/fees/schools/:id/student/:student_id',
+    middlewares.checkIfSchoolStillExists,
+    middlewares.restrictSchoolInformation,
+    middlewares.restrictStudentData,
     PaymentController.makePayment
 )
 router.post(
     '/purchase/schools/:id/student/:student_id',
+    middlewares.checkIfSchoolStillExists,
+    middlewares.restrictSchoolInformation,
+    middlewares.restrictStudentData,
     PaymentController.makePayment
 )
 
