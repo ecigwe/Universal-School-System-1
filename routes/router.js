@@ -4,6 +4,7 @@ const student = require('./authentication/student');
 const parent = require('./authentication/parent');
 const staff = require('./authentication/staff');
 const admin = require('./authentication/admin');
+const payments = require('./payments/payments');
 const adminUsers = require('./users/admins');
 const parentRoutes = require('./users/parent');
 const authHandler = require('../controllers/authentication/authHandler');
@@ -41,6 +42,7 @@ router.use('/api/v1/users/admins', adminUsers);
 router.use('/api/v1/users/parents', parentRoutes);
 router.use('/api/v1/users/me', userRoutes);
 router.use('/api/v1/schools', schools);
+router.use('/api/v1/payments', payments);
 
 router.all('*', (request, response, next) => {
     return errorHandler(404, `Cannot find ${request.originalUrl} On This Server`);
