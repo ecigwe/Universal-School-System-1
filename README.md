@@ -5359,12 +5359,14 @@ Please note that the names of the uploaded lecture materials might look differen
         }
     ```
     ```
-        Item Purchase
+        Item Purchases
         {   
             "email": "amandababatunde@hotmail.com",
             "itemName": "Comprehensive Mathematics",
             "itemId": "5ed3cb11c5c8c71a30b02235",
-            "id":"5ecb1917ef9ab21050ca1f7b"
+            "id":"5ecb1917ef9ab21050ca1f7b",
+            "itemCategory": "Books",
+
         }
     ```
 

@@ -3,6 +3,8 @@ const request = require('request');
 const SchoolReciept = require('../../models/payments/schoolReciepts');
 const StudentReciept = require('../../models/payments/studentReciepts');
 const ItemReciept = require('../../models/payments/itemReciept');
+const Reference = require('../../models/paymentReferenceCodes/referenceCodes');
+const Books = require('../../models/books/books');
 const payment = require('../../helper/payments')(request);
 const paystack = require('../../helper/verifyPayment');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
@@ -50,7 +52,7 @@ class PaymentController {
                 }
 
                 secret = 'Bearer ' + accountDetails.SECRET_KEY;
-                let amount = parseFloat(accountDetails.amount_payable) * 100;
+                let amount = parseFloat(200) * 100;
                 let metadata = {
                     paymentFor,
                     email: req.body.email,
@@ -77,17 +79,18 @@ class PaymentController {
                     student: req.params.student_id,
                     email: req.body.email,
                     paymentFor: req.body.itemName,
-                    itemId: req.body.itemId,
+                    itemId: req.body.itemId + '',
                     createdOn: Date()
                 };
 
 
                 secret = 'Bearer ' + accountDetails.SECRET_KEY;
-                let amount = parseFloat(1500) * 100;
+                let amount = parseFloat(15000) * 100;
                 let metadata = {
                     itemId: `${req.body.itemId}`,
                     email: req.body.email,
                     id: req.body.id,
+                    itemCategory: req.body.itemCategory,
                     itemName: req.body.itemName,
                 };
 
@@ -112,47 +115,61 @@ class PaymentController {
 
     static async verifyPayment(req, res, next) {
         try {
+            const refCode = await Reference.findOne({ 'reference': req.query.reference.trim() }).lean()
+            if (refCode) {
+                return errorHandler(403, 'This payment reference code has already been used.');
+            }
             const types = ['Subscription']
             const ref = req.query.reference;
             let secret = 'Bearer ' + process.env.PAYSTACK_SECRET;
-
+            let fees;
+            // Later in production, we should test if reference codes are tied to specific API secret.
             if (!types.includes(req.body.paymentFor)) {
                 const accountDetails = await paymentDetails.findOne({ 'school': req.body.school }).lean();
 
                 if (!accountDetails || (accountDetails && !accountDetails.SECRET_KEY)) {
                     return errorHandler(404, 'Cannot find your school\'s account details');
                 }
+                fees = accountDetails.amount_payable;
                 secret = 'Bearer ' + accountDetails.SECRET_KEY;
             }
 
             const response = await paystack.verifyPayment(ref, secret, next);
             const verified = response.data;
 
-            if (verified.data.status === 'success') {
-                return PaymentController.saveReciept(res, next, verified)
+            if (verified.data && verified.data.status === 'success') {
 
-            } else return responseHandler(res, null, next, 200, response.data.gateway_response, 1);
+                await Reference.create({
+                    reference: ref.trim(),
+                    createdOn: Date()
+                });
+                return PaymentController.saveReciept(res, next, verified, fees)
 
+            } else {
+                const message = verified.data ? verified.data.gateway_response : verified.message;
+                return responseHandler(res, null, next, 200, message, 1);
+            }
         } catch (error) {
             console.log(error);
             next(error);
         }
     }
 
-    static async saveReciept(res, next, response) {
+    static async saveReciept(res, next, response, fees = null) {
         try {
             const { requested_amount, status, reference, amount } = response.data;
             let cur = { status, reference, amount, requested_amount };
-            console.log(response.data.metadata)
-            const { id, itemId, school, email, paymentFor, name, school_name, term, class: cls } = response.data.metadata
+            const { id, itemId, school, email, paymentFor, name, school_name, itemCategory, term, class: cls } = response.data.metadata
 
             if (paymentFor === 'Subscription') {
+                if (amount < (process.env.SUBSCRIPTION_AMOUNT * 100)) {
+                    return errorHandler(403, 'Your payment is below the subscription amount');
+                }
                 let exSchool = await School.findOne({ 'email': email.trim().toLowerCase() });
-                console.log(exSchool);
                 const recieptData = { name: exSchool.name, school: school, email, paymentFor, createdOn: Date(), ...cur };
                 exSchool.isSubscribed = true;
                 const [updatedSchool, newReciept] = await Promise.all([
-                    exSchool.save(),
+                    exSchool.save({ validateBeforeSave: false }),
                     SchoolReciept.create({
                         ...recieptData
                     })]);
@@ -163,8 +180,11 @@ class PaymentController {
                 return responseHandler(res, newReciept, next, 200, response.data.gateway_response, 1);
 
             } else if (paymentFor === 'Fees') {
+                if (amount < (fees * 100)) {
+                    return errorHandler(403, 'Your payment is below the fees required by your school. Please contact your school administration');
+                }
                 const student = await Student.findOne({ '_id': id }).lean();
-                if (!student) return errorHandler(404, 'Student Not found')
+                if (!student) return errorHandler(404, 'Student not found')
 
                 const recieptData = {
                     fullname: student.fullname, school: student.school, email, school_name, paymentFor, student: id, term,
@@ -177,8 +197,20 @@ class PaymentController {
                 return responseHandler(res, newReciept, next, 200, response.data.gateway_response, 1);
 
             } else {
+                const itemCategories = { Books: Books };
+                let price;
+
+                if (itemCategory) {
+                    const item = await itemCategories[itemCategory].findOne({ '_id': itemId }).select({ 'price': 1 }).lean();
+                    price = item.price;
+                }
+                
+                if (price && amount < (price * 100)) {
+                    return errorHandler(403, 'Amount paid is below price of item');
+                }
                 const { itemName: paymentFor } = response.data.metadata;
                 const student = await Student.findOne({ '_id': id }).lean();
+
 
                 const recieptData = { school: student.school, student: id, email, paymentFor, itemId, createdOn: Date(), ...cur };
 
