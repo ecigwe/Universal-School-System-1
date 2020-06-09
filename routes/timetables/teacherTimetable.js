@@ -21,6 +21,7 @@ router.route('/')
         TeacherTimetableController.getAllTeachersTimetables
     );
 
+//Later on staff will be able to interact with only their own teaching timetable
 router.route('/staff/:staff_username')
     .get(
         middlewares.checkIfSchoolStillExists,

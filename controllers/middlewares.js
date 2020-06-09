@@ -5,9 +5,16 @@ const Lecture = require('../models/lectures/lecture');
 const Parent = require('../models/users/parent');
 const Student = require('../models/users/student');
 const Admin = require('../models/users/admin');
+const Staff = require('../models/users/staff');
 const catchAsyncError = require('../utils/errorUtils/catchAsyncError');
 const errorHandler = require('../utils/errorUtils/errorHandler');
 const sendVerificationCode = require('../utils/authenticationUtilities/sendVerificationCode');
+
+exports.provideSchoolDetails = (request, response, next) => {
+    const { schoolName, schoolAddress } = request.body;
+    if (!schoolName || !schoolAddress) return errorHandler(400, 'Please provide the correct name and address of your school');
+    return next();
+}
 
 exports.checkIfSchoolExists = catchAsyncError(async (request, response, next) => {
     const { schoolName, schoolAddress } = request.body;

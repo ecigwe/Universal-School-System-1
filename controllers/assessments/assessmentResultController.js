@@ -34,7 +34,7 @@ class assessmentResultController {
             }
             req.body.createdOn = Date();
             req.body.school = req.params.id;
-            return assessmentResult.create(req, res, next, 'Result saved successfully');
+            return await assessmentResult.create(req, res, next, 'Result saved successfully');
 
         } catch (error) {
             next(error);
@@ -42,32 +42,39 @@ class assessmentResultController {
     }
 
     static async getAllAssessmentResultsOfASchool(req, res, next) {
-        const message = 'Assessment results retrieved successfully';
+        try {
+            const message = 'Assessment results retrieved successfully';
 
-        const category = req.query.category ? { 'category': req.query.category } : {};
-        const cls = req.query.class ? { 'class': req.query.class } : {};
-        const subject = req.query.subject ? { 'subject': req.query.subject } : {};
-        const term = req.query.term ? { 'term': req.query.term } : {};
-        const year = req.query.year ? { 'year': req.query.year } : {};
-        let query = { 'school': req.params.id, ...category, ...cls, ...subject, ...term, ...year };
+            const category = req.query.category ? { 'category': req.query.category } : {};
+            const cls = req.query.class ? { 'class': req.query.class } : {};
+            const subject = req.query.subject ? { 'subject': req.query.subject } : {};
+            const term = req.query.term ? { 'term': req.query.term } : {};
+            const year = req.query.year ? { 'year': req.query.year } : {};
+            let query = { 'school': req.params.id, ...category, ...cls, ...subject, ...term, ...year };
 
-        return assessmentResult.findAll(req, res, next, message, query);
+            return await assessmentResult.findAll(req, res, next, message, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     static async findAssessmentResultsOfAStudent(req, res, next) {
-        const message1 = 'Assessment results retrieved successfully';
+        try {
+            const message1 = 'Assessment results retrieved successfully';
 
-        const category = req.query.category ? { 'category': req.query.category } : {};
-        const cls = req.query.class ? { 'class': req.query.class } : {};
-        const subject = req.query.subject ? { 'subject': req.query.subject } : {};
-        const term = req.query.term ? { 'term': req.query.term } : {};
-        const year = req.query.year ? { 'year': req.query.year } : {};
-        const school = req.params.id
-        const student = req.params.student_id
-        let query = { 'school': school, 'student': student, ...category, ...cls, ...subject, ...term, ...year };
+            const category = req.query.category ? { 'category': req.query.category } : {};
+            const cls = req.query.class ? { 'class': req.query.class } : {};
+            const subject = req.query.subject ? { 'subject': req.query.subject } : {};
+            const term = req.query.term ? { 'term': req.query.term } : {};
+            const year = req.query.year ? { 'year': req.query.year } : {};
+            const school = req.params.id
+            const student = req.params.student_id
+            let query = { 'school': school, 'student': student, ...category, ...cls, ...subject, ...term, ...year };
 
-        return assessmentResult.findAll(req, res, next, message1, query);
-
+            return await assessmentResult.findAll(req, res, next, message1, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     // static async updateAssessmentResultOfAStudent(req, res, next) {
@@ -93,10 +100,14 @@ class assessmentResultController {
     // }
 
     static async deleteAssessmentResultOfAStudent(req, res, next) {
-        let message1 = 'Assessment result not found';
-        let message2 = 'Assessment result was deleted successfully';
-        let query = { '_id': req.params.result_id, 'school': req.params.id, 'student': req.params.student_id };
-        return assessmentResult.deleteOne(req, res, next, message1, message2, query);
+        try {
+            let message1 = 'Assessment result not found';
+            let message2 = 'Assessment result was deleted successfully';
+            let query = { '_id': req.params.result_id, 'school': req.params.id, 'student': req.params.student_id };
+            return await assessmentResult.deleteOne(req, res, next, message1, message2, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 }
 

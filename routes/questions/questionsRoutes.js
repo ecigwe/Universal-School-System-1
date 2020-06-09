@@ -13,15 +13,19 @@ router.route('/:id/questions')
         middlewares.checkConnectionWithSchool,
         questionController.createQuestion
     )
+    //Later on students will be granted access only on a specified condition
     .get(middlewares.checkIfSchoolStillExists,
         middlewares.restrictSchoolInformation,
         questionController.getAllQuestionsForASpecificSchool
-    )
+    );
+
+//Later on students will be granted access only on a specified condition
 router.route('/:id/questions/:question_id')
     .get(middlewares.checkIfSchoolStillExists,
         middlewares.restrictSchoolInformation,
         questionController.findOneQuestionOfASpecificSchool
     )
+    //Later on, staff will be able to modify and delete only the questions that they created.
     .patch(middlewares.checkIfSchoolStillExists,
         middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,
@@ -31,7 +35,7 @@ router.route('/:id/questions/:question_id')
         middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,
         questionController.deleteQuestionOfASpecificSchool
-    )
+    );
 
 
 module.exports = router;

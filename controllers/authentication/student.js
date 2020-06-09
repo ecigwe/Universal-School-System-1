@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const Student = require('../../models/users/student');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
@@ -20,7 +21,9 @@ exports.register = catchAsyncError(async (request, response, next) => {
         registrationDate: new Date(Date.now())
     });
     request.user = newStudent;
-    await shelfController.createShelf(newStudent, next)
+    const shelf = await shelfController.createShelf(newStudent, next);
+    request.user.bookshelf = shelf._id;
+    await request.user.save({validateBeforeSave: false});
     response.statusCode = 201;
     return next();
 });
@@ -71,8 +74,8 @@ exports.resetPassword = catchAsyncError(async (request, response, next) => {
     const hashedResetCode = crypto.createHash('sha256').update(resetCode).digest('hex');
 
     const student = await Student.findOne({
-        passwordResetToken: hashedResetCode,
-        passwordResetExpires: { $gt: Date.now() }
+        ResetToken: hashedResetCode,
+        ResetExpires: { $gt: Date.now() }
     });
     if (!student) return errorHandler(400, 'Your Reset Code Is Either Invailid Or Has Expired!');
 

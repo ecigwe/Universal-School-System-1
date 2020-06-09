@@ -5,7 +5,7 @@ const teacherTimetableSchema = mongoose.Schema({
     staffUsername: {
         type: String,
         required: [true, 'Please input staff username for this timetable'],
-        ref: 'Staff'
+        unique: true
     },
     staffCategory: {
         type: String,
@@ -156,8 +156,6 @@ const teacherTimetableSchema = mongoose.Schema({
     ]
 });
 
-
-teacherTimetableSchema.index({ staffUsername: 1 }, { unique: true });
 teacherTimetableSchema.index({ school: 1 });
 const TeacherTimetable = mongoose.model('TeacherTimetable', teacherTimetableSchema);
 module.exports = TeacherTimetable;

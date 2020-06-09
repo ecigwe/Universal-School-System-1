@@ -2,7 +2,6 @@ const responseHandler = require('../utils/responseHandler');
 const errorHandler = require('../utils/errorUtils/errorHandler');
 const School = require('../models/school/school');
 
-
 class SchoolController {
 
     /**
@@ -17,6 +16,9 @@ class SchoolController {
     static async createSchool(req, res, next) {
         try {
             const registeredOn = Date();
+
+            if (req.body.isSubscribed) req.body.isSubscribed = false; //Only when payment is made can a school be subscribed
+            if (req.body.phoneNumber) req.body.phoneNumber = "+234" + req.body.phoneNumber;
 
             const school = new School({
                 ...req.body, registeredOn

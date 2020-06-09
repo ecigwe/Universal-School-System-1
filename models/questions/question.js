@@ -65,6 +65,8 @@ const questionSchema = mongoose.Schema({
     }
 });
 
+//Later on, we need to make room for preventing duplicate questions
+
 questionSchema.index({ school: 1 });
 questionSchema.index({ subject: 1 });
 questionSchema.index({ class: 1 });

@@ -14,14 +14,10 @@ const itemRecieptSchema = mongoose.Schema({
     },
 
     email: {
+        //Later on , emails will be sent to the payees email address
         type: String,
-        required: [true, 'Please provide the email associated with your account'],
-        validate: {
-            validator: value => {
-                return validator.isEmail(value)
-            },
-            message: 'Please provide a valid email address',
-        },
+        required: [true, 'Please provide the email address associated with your account'],
+        validate: [validator.isEmail, 'Please provide a valid email address'],
         lowercase: true,
         trim: true
     },
@@ -51,6 +47,8 @@ const itemRecieptSchema = mongoose.Schema({
         type: Date
     }
 })
+
+//Later on, we need to make room for preventing duplicate receipts
 
 itemRecieptSchema.index({ school: 1 });
 itemRecieptSchema.index({ student: 1 });

@@ -7,11 +7,12 @@ const shelfSchema = mongoose.Schema({
         required: [true, 'Please provide the id of the shelf owner'],
         ref: 'Student'
     },
-    books: {
-        type: [mongoose.Types.ObjectId],
-        default: []
-
-    },
+    books: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Book'
+        }
+    ],
 
     school: {
         type: mongoose.Schema.Types.ObjectId,
@@ -23,8 +24,7 @@ const shelfSchema = mongoose.Schema({
     }
 });
 
-shelfSchema.index({ school: 1 });
-shelfSchema.index({ student: 1 });
+shelfSchema.index({ school: 1, student: 1 }, { unique: true });
 
 
 const Shelf = mongoose.model('Shelf', shelfSchema);

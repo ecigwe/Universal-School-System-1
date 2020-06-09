@@ -7,6 +7,7 @@ const middlewares = require('../../controllers/middlewares');
 const router = express.Router();
 
 router.post('/register',
+    middlewares.provideSchoolDetails,
     middlewares.checkIfSchoolExists,
     //middlewares.checkIfParentIsRegistered,
     student.register,

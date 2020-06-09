@@ -73,8 +73,8 @@ exports.resetPassword = catchAsyncError(async (request, response, next) => {
     const hashedResetCode = crypto.createHash('sha256').update(resetCode).digest('hex');
 
     const admin = await Admin.findOne({
-        passwordResetToken: hashedResetCode,
-        passwordResetExpires: { $gt: Date.now() }
+        ResetToken: hashedResetCode,
+        ResetExpires: { $gt: Date.now() }
     });
     if (!admin) return errorHandler(400, 'Your Reset Code Is Either Invailid Or Has Expired!');
 

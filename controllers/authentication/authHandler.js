@@ -25,7 +25,7 @@ exports.protect = catchAsyncError(async (request, response, next) => {
     if (decodedToken.category === 'Student') theCurrentUser = await Student.findById(decodedToken.id);
     if (decodedToken.category === 'Staff') theCurrentUser = await Staff.findById(decodedToken.id);
 
-    if (!theCurrentUser) return errorHandler(401, `This ${decodedToken.category} no longer has an account with this platform.`);
+    if (!theCurrentUser) return errorHandler(401, `This user no longer has an account with this platform.`);
 
     if (theCurrentUser.passwordChangedAfterIssuingOfToken(decodedToken.iat)) return errorHandler(401, `You changed your password recently. Please login again.`);
 

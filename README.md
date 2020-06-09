@@ -5119,6 +5119,9 @@ Rest assured, the other category of users follow thesame pattern, with the excep
     ```
 
 ### Update Lecture
+
+Please note that the names of the uploaded lecture materials might look different when you are interacting with the API. It should be noted however, that it does not matter. All you need to do is follow the pattern specified here.
+
 * Request
     * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed6342c00bcd51aac488490/lectures/5ed794b97d836d156c2d7264
     * Body: (multipart/form-data)

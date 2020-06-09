@@ -22,6 +22,7 @@ const studentRecieptSchema = mongoose.Schema({
         ref: 'Student'
     },
     email: {
+        //Later on , emails will be sent to the payees email address
         type: String,
         required: [true, 'Please provide the email associated with your account'],
         validate: {
@@ -67,6 +68,8 @@ const studentRecieptSchema = mongoose.Schema({
         type: Date
     }
 })
+
+//Later on, we need to make room for preventing duplicate receipts
 
 studentRecieptSchema.index({ school: 1 });
 studentRecieptSchema.index({ student: 1 });

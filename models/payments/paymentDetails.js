@@ -9,6 +9,7 @@ const paymentDetailsSchema = mongoose.Schema({
     },
 
     email: {
+        //Later on , emails will be sent to the payees email address
         type: String,
         required: [true, 'Please provide the email associated with this school'],
         unique: [true, 'This email already exists!'],
@@ -40,6 +41,8 @@ const paymentDetailsSchema = mongoose.Schema({
         type: Date
     }
 });
+
+//Later on, we need to make room for preventing duplicate payment details
 
 paymentDetailsSchema.index({ school: 1 });
 paymentDetailsSchema.index({ email: 1 });

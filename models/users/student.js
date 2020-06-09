@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
@@ -92,7 +93,11 @@ const studentSchema = mongoose.Schema({
         default: false
     },
     ResetToken: String,
-    ResetExpires: Date
+    ResetExpires: Date,
+    bookshelf: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Shelf'
+    }
 });
 
 // studentSchema.pre('save', async function (next) {

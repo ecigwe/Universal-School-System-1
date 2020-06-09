@@ -11,6 +11,7 @@ router.use(middlewares.checkIfUserHasVerifiedAcct);
 router.route('/:id/student/records')
     .get(
         middlewares.checkIfSchoolStillExists,
+        //School admins and form teachers are the only staff that should see the records of their students
         middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,
         recordController.getAllStudentRecordsForAspecificSchool
@@ -23,6 +24,7 @@ router.route('/:id/student/:student_id/records')
     );
 router.route('/:id/student/:student_id/records/:record_id')
     .patch(
+        //Only the school admin and the student's form teacher should have this ability
         middlewares.checkIfSchoolStillExists,
         middlewares.checkUserRole('Staff'),
         middlewares.checkConnectionWithSchool,

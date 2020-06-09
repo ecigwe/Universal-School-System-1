@@ -65,6 +65,7 @@ const resultSchema = mongoose.Schema({
     }
 });
 
+//Later on, we need to make room for preventing duplicate assessments results
 
 resultSchema.index({ school: 1 });
 resultSchema.index({ subject: 1 });

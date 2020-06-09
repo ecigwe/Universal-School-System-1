@@ -9,12 +9,12 @@ class shelfController {
     static async createShelf(student, next) {
         try {
             let createdOn = Date();
-            await Shelf.create({
+            const shelf = await Shelf.create({
                 student: student._id,
                 school: student.school,
                 createdOn
             });
-            return;
+            return shelf;
         } catch (error) {
             next(error);
         }
@@ -63,32 +63,40 @@ class shelfController {
             next(error);
         }
     }
-    
+
 
     static async updateShelf(req, res, next) { //Function will be updated in the future to add single book
-        const message1 = 'Shelf not found';
-        const message2 = 'Shelf was updated successfully';
+        try {
+            const message1 = 'Shelf not found';
+            const message2 = 'Shelf was updated successfully';
 
-        const query = { 'school': req.params.id, 'student': req.params.student_id };
-        let { books } = req.body;
+            const query = { 'school': req.params.id, 'student': req.params.student_id };
+            let { books } = req.body;
 
-        books = { $addToSet: { books: [...books] } };
-        books = { ...books };
+            books = { $addToSet: { books: [...books] } };
+            books = { ...books };
 
-        req.body = books;
-        return shelf.update(req, res, next, message1, message2, query);
+            req.body = books;
+            return await shelf.update(req, res, next, message1, message2, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     static async deleteShelf(req, res, next) {
-        let message1 = 'Shelf not found';
-        let message2 = 'Shelf was deleted successfully';
-        let query = { 'student': req.params.student_id, 'school': req.params.id };
-        if (req.query.books) {
-            let field = 'books' // name of field from which item is to be deleted
-            message2 = 'Book was not found on this shelf';
-            return shelf.deleteArrayItem(req, res, next, message1, message2, query, field);
+        try {
+            let message1 = 'Shelf not found';
+            let message2 = 'Shelf was deleted successfully';
+            let query = { 'student': req.params.student_id, 'school': req.params.id };
+            if (req.query.books) {
+                let field = 'books' // name of field from which item is to be deleted
+                message2 = 'Book was not found on this shelf';
+                return await shelf.deleteArrayItem(req, res, next, message1, message2, query, field);
+            }
+            return await shelf.deleteOne(req, res, next, message1, message2, query);
+        } catch (error) {
+            return next(error);
         }
-        return shelf.deleteOne(req, res, next, message1, message2, query);
     }
 }
 

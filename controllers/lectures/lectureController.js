@@ -145,6 +145,8 @@ exports.deleteLectureResource = catchAsyncError(async (request, response, next) 
 });
 
 exports.downloadLectureResource = catchAsyncError(async (request, response, next) => {
+    //Later on, a more efficient method will be implemented. 
+    //Currently, we are looping through potentially all the existing uploaded files
     const lectures = await drive.files.list({});
     const lectureFiles = lectures.data.files;
 

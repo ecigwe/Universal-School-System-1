@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const Parent = require('../../models/users/parent');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const catchAsyncError = require('../../utils/errorUtils/catchAsyncError');
@@ -65,8 +66,8 @@ exports.resetPassword = catchAsyncError(async (request, response, next) => {
     const hashedResetCode = crypto.createHash('sha256').update(resetCode).digest('hex');
 
     const parent = await Parent.findOne({
-        passwordResetToken: hashedResetCode,
-        passwordResetExpires: { $gt: Date.now() }
+        ResetToken: hashedResetCode,
+        ResetExpires: { $gt: Date.now() }
     });
     if (!parent) return errorHandler(400, 'Your Reset Code Is Either Invailid Or Has Expired!');
 

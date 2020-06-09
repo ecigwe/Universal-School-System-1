@@ -21,7 +21,7 @@ class RecieptsController {
 
             let query = { 'school': req.params.id, ...item, ...student, ...term, ...year, ...cls };
 
-            return this.collection.findAll(req, res, next, message, query);
+            return await this.collection.findAll(req, res, next, message, query);
         } catch (error) {
             next(error);
         }
@@ -32,7 +32,7 @@ class RecieptsController {
             const message = 'Reciepts retrieved successfully';
             const school = req.params.id ? { 'school': req.params.id } : {};
             let query = { ...school };
-            return this.collection.findAll(req, res, next, message, query);
+            return await this.collection.findAll(req, res, next, message, query);
 
         } catch (error) {
             next(error);
@@ -43,9 +43,9 @@ class RecieptsController {
             let message1 = 'Reciept not found';
             let message2 = 'Reciept was deleted successfully';
             const student = req.params.student_id ? { 'student': req.params.student_id } : {};
-            
+
             let query = { '_id': req.params.reciept_id, 'school': req.params.id, ...student };
-            return this.collection.deleteOne(req, res, next, message1, message2, query);
+            return await this.collection.deleteOne(req, res, next, message1, message2, query);
         } catch (error) {
             next(error);
         }

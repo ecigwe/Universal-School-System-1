@@ -24,32 +24,48 @@ class PaymentDetailsController {
     }
 
     static async getAllSchoolsPaymentDetails(req, res, next) {
-        const message = 'Payment details retrieved successfully';
-        const query = {};
-        return payment_details.findAll(req, res, next, message, query);
+        try {
+            const message = 'Payment details retrieved successfully';
+            const query = {};
+            return await payment_details.findAll(req, res, next, message, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     static async getASchoolPaymentDetails(req, res, next) {
-        const message1 = 'The payment details you are looking for has not been created';
-        const message2 = 'Payment details retrieved successfully';
-        const query = { 'school': req.params.id };
-        return payment_details.findOne(req, res, next, message1, message2, query);
+        try {
+            const message1 = 'The payment details you are looking for has not been created';
+            const message2 = 'Payment details retrieved successfully';
+            const query = { 'school': req.params.id };
+            return await payment_details.findOne(req, res, next, message1, message2, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     static async updatePaymentDetails(req, res, next) {
-        const message1 = 'The payment details you are looking for has not been created';
-        const message2 = 'Payment details was updated successfully';
-        const query = { 'school': req.params.id };
-        const { createdOn, recipient_code, ...updateData } = req.body;
-        req.body = updateData;
-        return payment_details.update(req, res, next, message1, message2, query);
+        try {
+            const message1 = 'The payment details you are looking for has not been created';
+            const message2 = 'Payment details was updated successfully';
+            const query = { 'school': req.params.id };
+            const { createdOn, recipient_code, ...updateData } = req.body;
+            req.body = updateData;
+            return await payment_details.update(req, res, next, message1, message2, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     static async deletePaymentDetails(req, res, next) {
-        const message1 = 'Payment details not found';
-        const message2 = 'Payment details was deleted successfully';
-        const query = { 'school': req.params.id };
-        return payment_details.deleteOne(req, res, next, message1, message2, query);
+        try {
+            const message1 = 'Payment details not found';
+            const message2 = 'Payment details was deleted successfully';
+            const query = { 'school': req.params.id };
+            return await payment_details.deleteOne(req, res, next, message1, message2, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 }
 

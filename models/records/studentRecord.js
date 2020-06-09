@@ -41,7 +41,7 @@ const recordSchema = mongoose.Schema({
         max: 100,
         default: 0
     },
-    
+
     mathematics: {
         type: Number,
         min: 0,
@@ -127,6 +127,8 @@ const recordSchema = mongoose.Schema({
         default: 0
     }
 });
+
+//Later on, we need to make room for preventing duplicate student records
 
 recordSchema.index({ class: 1 });
 recordSchema.index({ term: 1 });

@@ -15,6 +15,7 @@ router.route('/:id/student/assessment/results')
         resultController.createAssessmentResult
     )
     .get(
+        //Later on staff should get only the assessment results they created
         middlewares.checkIfSchoolStillExists,
         middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,
@@ -30,6 +31,7 @@ router.route('/:id/student/:student_id/assessment/results')
 
 router.route('/:id/student/:student_id/assessment/results/:result_id')
     .delete(
+        //Later on staff should delete only the assessment results they created
         middlewares.checkIfSchoolStillExists,
         middlewares.checkCategory('Staff'),
         middlewares.checkConnectionWithSchool,

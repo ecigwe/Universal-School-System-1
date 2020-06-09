@@ -8,56 +8,72 @@ const responseHandler = require('../../utils/responseHandler');
 class studentRecordsController {
     static async createRecord(data, next) {
         try {
-            await StudentRecord.create({
+            const record = await StudentRecord.create({
                 ...data
             });
 
-            return;
+            return record;
         } catch (error) {
             next(error);
         }
     }
 
     static async getAllStudentRecordsForAspecificSchool(req, res, next) {
-        const message = 'Records retrieved successfully';
+        try {
+            const message = 'Records retrieved successfully';
 
-        const cls = req.query.class ? { 'name': req.query.class } : {};
-        const term = req.query.term ? { 'term': req.query.term } : {};
-        const year = req.query.year ? { 'year': req.query.year } : {};
+            const cls = req.query.class ? { 'name': req.query.class } : {};
+            const term = req.query.term ? { 'term': req.query.term } : {};
+            const year = req.query.year ? { 'year': req.query.year } : {};
 
-        let query = { 'school': req.params.id, ...cls, ...term, ...year };
+            let query = { 'school': req.params.id, ...cls, ...term, ...year };
 
-        return record.findAll(req, res, next, message, query);
+            return await record.findAll(req, res, next, message, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     static async getAStudentRecordsForAspecificStudent(req, res, next) {
-        const message = 'Student records retrieved successfully';
+        try {
+            const message = 'Student records retrieved successfully';
 
-        const cls = req.query.class ? { 'name': req.query.class } : {};
-        const term = req.query.term ? { 'term': req.query.term } : {};
-        const year = req.query.year ? { 'year': req.query.year } : {};
-        const student = req.params.student_id;
+            const cls = req.query.class ? { 'name': req.query.class } : {};
+            const term = req.query.term ? { 'term': req.query.term } : {};
+            const year = req.query.year ? { 'year': req.query.year } : {};
+            const student = req.params.student_id;
 
-        let query = { 'school': req.params.id, 'student': student, ...cls, ...term, ...year };
+            let query = { 'school': req.params.id, 'student': student, ...cls, ...term, ...year };
 
-        return record.findAll(req, res, next, message, query);
+            return await record.findAll(req, res, next, message, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     static async updateAStudentRecord(req, res, next) {
-        const message1 = 'Student record not found';
-        const message2 = 'Student record was updated successfully';
-        const query = { '_id': req.params.record_id, 'school': req.params.id, 'student': req.params.student_id };
-        const { createdOn, ...updateData } = req.body;
-        req.body = updateData;
-        return record.update(req, res, next, message1, message2, query);
+        try {
+            const message1 = 'Student record not found';
+            const message2 = 'Student record was updated successfully';
+            const query = { '_id': req.params.record_id, 'school': req.params.id, 'student': req.params.student_id };
+            const { createdOn, ...updateData } = req.body;
+            req.body = updateData;
+            return await record.update(req, res, next, message1, message2, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 
     static async deleteAStudentRecord(req, res, next) {
-        const message1 = 'Student record not found';
-        const message2 = 'Student record was deleted successfully';
-        const query = { '_id': req.params.record_id, 'school': req.params.id, 'student': req.params.student_id };
+        try {
+            const message1 = 'Student record not found';
+            const message2 = 'Student record was deleted successfully';
+            const query = { '_id': req.params.record_id, 'school': req.params.id, 'student': req.params.student_id };
 
-        return record.deleteOne(req, res, next, message1, message2, query);
+            return await record.deleteOne(req, res, next, message1, message2, query);
+        } catch (error) {
+            return next(error);
+        }
     }
 }
 
