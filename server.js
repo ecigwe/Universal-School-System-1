@@ -8,9 +8,48 @@ process.on('uncaughtException', (error) => {//Programing Errors Outside Of Expre
 });
 
 require('dotenv').config();
+const http = require('http');
 const app = require('./app');
+const formatMessage = require('./utils/chats/formatMessage');
+const { userJoin, getCurrentUser, userLeave, getRoomUsers } = require('./utils/chats/users');
 
-const server = app.listen(process.env.PORT || 8080, () => {
+const server = http.createServer(app);
+const socketio = require('socket.io');
+const io = socketio(server);
+
+const botName = 'Universal School System';
+
+io.on('connection', socket => {
+    socket.on('joinRoom', theUser => {
+        const user = userJoin(socket.id, theUser.username, theUser.room);
+
+        socket.join(user.room);
+
+        socket.emit('message', formatMessage(botName, 'Welcome!'));
+
+        socket.broadcast.to(user.room).emit('message', formatMessage(botName, `${user.username} has joined the chat.`))
+
+        io.to(user.room).emit('roomUsers', { room: user.room, users: getRoomUsers(user.room) });
+    });
+
+    socket.on('chatMessage', message => {
+        const user = getCurrentUser(socket.id);
+
+        io.to(user.room).emit('message', formatMessage(user.username, message));
+    });
+
+    socket.on('disconnect', () => {
+        const user = userLeave(socket.id);
+        if (user && user.username) {
+            io.to(user.room).emit('message', formatMessage(botName, `${user.username} has left the chat`));
+
+            io.to(user.room).emit('roomUsers', { room: user.room, users: getRoomUsers(user.room) });
+
+        }
+    });
+});
+
+server.listen(process.env.PORT || 8080, () => {
     console.log('Server is running on port 8080');
 });
 

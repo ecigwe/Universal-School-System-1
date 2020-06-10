@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -19,6 +20,8 @@ mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true
 }).then(con => console.log(`Connected to ${con.connections[0].name} Database successfully`))
     .catch(error => { return console.log(error); });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 app.options('*', cors());
