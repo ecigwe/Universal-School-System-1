@@ -14,6 +14,7 @@ const shelves = require('./shelf/shelfRoutes');
 const studentRecords = require('./studentRecord/recordsRoutes');
 const teacherTimetableRoutes = require('./timetables/teacherTimetable');
 const lectureTimetableRoutes = require('./timetables/lectures');
+const zoomRoutes = require('./zoom/zoomRoutes');
 
 const router = Router();
 
@@ -22,6 +23,7 @@ router.use('/:id/staff', staff);
 router.use('/:id/parents', parents);
 router.use('/:id/staff_timetables', teacherTimetableRoutes);
 router.use('/:id/lecture_timetables', lectureTimetableRoutes);
+router.use('/:id/lectures', zoomRoutes);
 
 router.use(classes);
 router.use(books);
