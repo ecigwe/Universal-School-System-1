@@ -31,32 +31,35 @@ router.use(shelves);
 router.use(results);
 router.use(studentRecords);
 
-router.use(authHandler.protect);
-router.use(middlewares.checkIfUserHasVerifiedAcct);
-
 router.route('/')
     .post(
+        authHandler.protect,
+        middlewares.checkIfUserHasVerifiedAcct,
         middlewares.checkUserRole('School-Administrator'),
         SchoolController.createSchool
     )
     .get(
-        middlewares.checkCategory('Admin'),
+        // middlewares.checkCategory('Admin'),
         SchoolController.getAllSchools
     );
 
 router.route('/:id')
     .get(
-        middlewares.checkIfSchoolStillExists,
-        middlewares.restrictSchoolInformation,
+        // middlewares.checkIfSchoolStillExists,
+        // middlewares.restrictSchoolInformation,
         SchoolController.getSchool
     )
     .patch(
+        authHandler.protect,
+        middlewares.checkIfUserHasVerifiedAcct,
         middlewares.checkIfSchoolStillExists,
         middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
         SchoolController.updateSchool
     )
     .delete(
+        authHandler.protect,
+        middlewares.checkIfUserHasVerifiedAcct,
         middlewares.checkIfSchoolStillExists,
         middlewares.checkUserRole('School-Administrator'),
         middlewares.checkConnectionWithSchool,
