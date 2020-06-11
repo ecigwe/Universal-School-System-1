@@ -29,6 +29,13 @@ const {
     getGroupMembers
 } = require('./utils/chats/group');
 
+const {
+    joinSchoolPta,
+    getPtaMember,
+    leavePtaChat,
+    getAllPtaMembers
+} = require('./utils/chats/pta');
+
 const server = http.createServer(app);
 const socketio = require('socket.io');
 const io = socketio(server);
@@ -125,6 +132,37 @@ io.on('connection', socket => {
                 io.to(groupMember.group).emit('message', formatMessage(botName, `${groupMember.username} has left the chat`));
 
                 io.to(groupMember.group).emit('groupMembers', { group: groupMember.group, groupMembers: getGroupMembers(groupMember.group) });
+            }
+        });
+    });
+
+    // Parents Teachers Association Chat
+    socket.on('joinPta', theMember => {
+        const member = joinSchoolPta(socket.id, theMember.username, theMember.schoolPta);
+
+        socket.join(member.schoolPta);
+
+        socket.emit('message', formatMessage(botName, 'Welcome!'));
+
+        socket.broadcast.to(member.schoolPta).emit('message', formatMessage(botName, `${member.username} has joined the chat.`))
+
+        io.to(member.schoolPta).emit('schoolPtaMembers', { schoolPta: member.schoolPta, schoolPtaMembers: getAllPtaMembers(member.schoolPta) });
+
+        //chatting in the PTA forum
+        socket.on('chatMessage', message => {
+            const member = getPtaMember(socket.id);
+
+            io.to(member.schoolPta).emit('message', formatMessage(member.username, message));
+        });
+
+        //Disconnect member from pta forum
+        socket.on('disconnect', () => {
+            const member = leavePtaChat(socket.id);
+
+            if (member && member.schoolPta) {
+                io.to(member.schoolPta).emit('message', formatMessage(botName, `${member.username} has left the chat`));
+
+                io.to(member.schoolPta).emit('schoolPtaMembers', { schoolPta: member.schoolPta, schoolPtaMembers: getAllPtaMembers(member.schoolPta) });
             }
         });
     });
