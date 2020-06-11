@@ -17,20 +17,6 @@ const lectureTimetableRoutes = require('./timetables/lectures');
 
 const router = Router();
 
-router.use('/:id/students', students);
-router.use('/:id/staff', staff);
-router.use('/:id/parents', parents);
-router.use('/:id/staff_timetables', teacherTimetableRoutes);
-router.use('/:id/lecture_timetables', lectureTimetableRoutes);
-
-router.use(classes);
-router.use(books);
-router.use(questions);
-router.use(assessments);
-router.use(shelves);
-router.use(results);
-router.use(studentRecords);
-
 router.route('/')
     .post(
         authHandler.protect,
@@ -66,6 +52,18 @@ router.route('/:id')
         SchoolController.deleteSchool
     );
 
+router.use('/:id/students', students);
+router.use('/:id/staff', staff);
+router.use('/:id/parents', parents);
+router.use('/:id/staff_timetables', teacherTimetableRoutes);
+router.use('/:id/lecture_timetables', lectureTimetableRoutes);
 
+router.use(classes);
+router.use(books);
+router.use(questions);
+router.use(assessments);
+router.use(shelves);
+router.use(results);
+router.use(studentRecords);
 
 module.exports = router;
