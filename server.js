@@ -22,6 +22,13 @@ const { studentJoin,
     studentLeave,
     getClassroomStudents } = require('./utils/chats/classroomStudents');
 
+const {
+    groupMemberJoin,
+    getCurrentGroupMember,
+    groupMemberLeave,
+    getGroupMembers
+} = require('./utils/chats/group');
+
 const server = http.createServer(app);
 const socketio = require('socket.io');
 const io = socketio(server);
@@ -87,6 +94,37 @@ io.on('connection', socket => {
                 io.to(student.classroom).emit('message', formatMessage(botName, `${student.username} has left the chat`));
 
                 io.to(student.classroom).emit('classroomStudents', { classroom: student.classroom, students: getClassroomStudents(student.classroom) });
+            }
+        });
+    });
+
+    //Group Chat
+    socket.on('joinGroup', theGroupMember => {
+        const groupMember = groupMemberJoin(socket.id, theGroupMember.username, theGroupMember.group);
+
+        socket.join(groupMember.group);
+
+        socket.emit('message', formatMessage(botName, 'Welcome!'));
+
+        socket.broadcast.to(groupMember.group).emit('message', formatMessage(botName, `${groupMember.username} has joined the chat.`))
+
+        io.to(groupMember.group).emit('groupMembers', { group: groupMember.group, groupMembers: getGroupMembers(groupMember.group) });
+
+        //Chatting in the group 
+        socket.on('chatMessage', message => {
+            const groupMember = getCurrentGroupMember(socket.id);
+
+            io.to(groupMember.group).emit('message', formatMessage(groupMember.username, message));
+        });
+
+        //Disconnect member from the group
+        socket.on('disconnect', () => {
+            const groupMember = groupMemberLeave(socket.id)
+
+            if (groupMember && groupMember.group) {
+                io.to(groupMember.group).emit('message', formatMessage(botName, `${groupMember.username} has left the chat`));
+
+                io.to(groupMember.group).emit('groupMembers', { group: groupMember.group, groupMembers: getGroupMembers(groupMember.group) });
             }
         });
     });
