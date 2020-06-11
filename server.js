@@ -47,6 +47,17 @@ io.on('connection', socket => {
 
             io.to(user.school).emit('message', formatMessage(user.username, message));
         });
+
+        //Disconnect user from general school chat
+        socket.on('disconnect', () => {
+            const user = userLeave(socket.id);
+
+            if (user && user.school) {
+                io.to(user.school).emit('message', formatMessage(botName, `${user.username} has left the chat`));
+
+                io.to(user.school).emit('schoolUsers', { school: user.school, users: getSchoolUsers(user.school) });
+            }
+        });
     });
 
     //Classroom Chat
@@ -67,29 +78,17 @@ io.on('connection', socket => {
 
             io.to(student.classroom).emit('message', formatMessage(student.username, message));
         });
-    });
-
-    socket.on('disconnect', () => {
-        const user = userLeave(socket.id);
-        let student;
-
-        if (!user) student = studentLeave(socket.id)
-
-        console.log(user, student);
-
-        //Disconnect user from general school chat
-        if (user && user.school) {
-            io.to(user.school).emit('message', formatMessage(botName, `${user.username} has left the chat`));
-
-            io.to(user.school).emit('schoolUsers', { school: user.school, users: getSchoolUsers(user.school) });
-        }
 
         //Disconnect student from general classroom chat
-        if (student && student.classroom) {
-            io.to(student.classroom).emit('message', formatMessage(botName, `${student.username} has left the chat`));
+        socket.on('disconnect', () => {
+            const student = studentLeave(socket.id)
 
-            io.to(student.classroom).emit('classroomStudents', { classroom: student.classroom, students: getClassroomStudents(student.classroom) });
-        }
+            if (student && student.classroom) {
+                io.to(student.classroom).emit('message', formatMessage(botName, `${student.username} has left the chat`));
+
+                io.to(student.classroom).emit('classroomStudents', { classroom: student.classroom, students: getClassroomStudents(student.classroom) });
+            }
+        });
     });
 });
 

@@ -18,7 +18,7 @@ exports.provideSchoolDetails = (request, response, next) => {
 
 exports.checkIfSchoolExists = catchAsyncError(async (request, response, next) => {
     const { schoolName, schoolAddress } = request.body;
-    if (!schoolName || !schoolAddress) return next(); /* return errorHandler(400, 'Please provide the correct name and address of your school');*/
+    if (!schoolName && !schoolAddress) return next(); /* return errorHandler(400, 'Please provide the correct name and address of your school');*/
 
     const school = await School.findOne({ name: schoolName, address: schoolAddress });
     if (!school) return errorHandler(400, 'Your school is not yet registered on this platform.');
