@@ -1,7 +1,7 @@
 let users = [];
 
-function userJoin(id, username, room) {
-    const user = { id, username, room }
+function userJoin(id, username, school) {
+    const user = { id, username, school }
 
     users.push(user);
 
@@ -19,8 +19,8 @@ function userLeave(id) {
     return user[0];
 }
 
-function getRoomUsers(room) {
-    return users.filter(user => user.room === room);
+function getSchoolUsers(school) {
+    return users.filter(user => user.school === school);
 }
 
-module.exports = { userJoin, getCurrentUser, userLeave, getRoomUsers }
+module.exports = { userJoin, getCurrentUser, userLeave, getSchoolUsers }
