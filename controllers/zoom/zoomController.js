@@ -3,9 +3,10 @@ const responseHandler = require('../../utils/responseHandler');
 const errorHandler = require('../../utils/errorUtils/errorHandler');
 const jwt = require('jsonwebtoken');
 const rp = require('request-promise');
+const Admin = require('../../models/users/admin');
+const Staff = require('../../models/users/staff');
 
-
-
+const categories = {Admin: Admin, Staff: Staff};
 const payload = {
     iss: process.env.ZOOM_API_KEY,
     exp: ((new Date()).getTime() + 5000)
@@ -19,7 +20,7 @@ class Zoom {
         const options = {
             method, uri, qs: { status: 'active' }, auth: { 'bearer': token },
             headers: {
-                'User-Agent': 'Zoom-api-Jwt-Request',
+                //'User-Agent': 'Zoom-api-Jwt-Request',
                 'content-type': 'application/json'
             },
             body,
