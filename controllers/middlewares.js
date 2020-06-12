@@ -9,6 +9,7 @@ const Staff = require('../models/users/staff');
 const catchAsyncError = require('../utils/errorUtils/catchAsyncError');
 const errorHandler = require('../utils/errorUtils/errorHandler');
 const sendVerificationCode = require('../utils/authenticationUtilities/sendVerificationCode');
+const Schoolchat = require('../models/chats/school');
 
 exports.provideSchoolDetails = (request, response, next) => {
     const { schoolName, schoolAddress } = request.body;
@@ -263,3 +264,28 @@ exports.verifyAccount = catchAsyncError(async (request, response, next) => {
         message: 'Your account has been successfully verified.'
     });
 });
+
+exports.preventUpdatingOfSpecialChatFields = (request, response, next) => {
+    if (request.body.username) delete request.body.username;
+    if (request.body.time) delete request.body.time;
+    if (request.body.school) delete request.body.school;
+    if (request.body.userCategory) delete request.body.userCategory;
+    if (request.body.userRole) delete request.body.userRole;
+    if (request.body.userId) delete request.body.userId;
+    return next();
+}
+
+exports.retrieveChat = catchAsyncError(async (request, response, next) => {
+    const chat = await Schoolchat.findById(request.params.chat_id);
+    if (!chat) return errorHandler(404, 'Chat Not Found');
+    request.chat = chat;
+    return next();
+});
+
+exports.restrictChatModification = (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+    if (request.user.category === 'School-Administrator' || request.user.role === 'Principal' || request.user.role === 'Vice-Principal') return next();
+    if (request.user._id.equals(request.chat.userId)) return next();
+
+    return errorHandler(403, 'You are not allowed to perform this action.');
+}
