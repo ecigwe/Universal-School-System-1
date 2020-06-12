@@ -36,6 +36,13 @@ const {
     getAllPtaMembers
 } = require('./utils/chats/pta');
 
+const {
+    individualJoin,
+    getCurrentIndividual,
+    individualLeave,
+    getchatMembers
+} = require('./utils/chats/individuals')
+
 const server = http.createServer(app);
 const socketio = require('socket.io');
 const io = socketio(server);
@@ -163,6 +170,37 @@ io.on('connection', socket => {
                 io.to(member.schoolPta).emit('message', formatMessage(botName, `${member.username} has left the chat`));
 
                 io.to(member.schoolPta).emit('schoolPtaMembers', { schoolPta: member.schoolPta, schoolPtaMembers: getAllPtaMembers(member.schoolPta) });
+            }
+        });
+    });
+
+    // Chat Between Two Individuals
+    socket.on('joinChat', theIndividual => {
+        const individual = individualJoin(socket.id, theIndividual.username, theIndividual.chatId);
+
+        socket.join(individual.chatId);
+
+        socket.emit('message', formatMessage(botName, 'Welcome!'));
+
+        socket.broadcast.to(individual.chatId).emit('message', formatMessage(botName, `${individual.username} has joined the chat.`))
+
+        io.to(individual.chatId).emit('chatMembers', { chatId: individual.chatId, individuals: getchatMembers(individual.chatId) });
+
+        //chatting between only two persons
+        socket.on('chatMessage', message => {
+            const individual = getCurrentIndividual(socket.id);
+
+            io.to(individual.chatId).emit('message', formatMessage(individual.username, message));
+        });
+
+        //Disconnect individual from one on one chat
+        socket.on('disconnect', () => {
+            const individual = individualLeave(socket.id);
+
+            if (individual && individual.chatId) {
+                io.to(individual.chatId).emit('message', formatMessage(botName, `${individual.username} has left the chat`));
+
+                io.to(individual.chatId).emit('chatMembers', { chatId: individual.chatId, individuals: getchatMembers(individual.chatId) });
             }
         });
     });
