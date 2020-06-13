@@ -210,3 +210,198 @@ Only logged in individuals who are connected to the school can send messages to 
 
 * Response
     * Status: 204 - no content
+
+
+## Classroom Chat Forum
+Each classroom in a school has it's own chat forum, mainly for the purpose of connecting the classroom teachers and students.
+
+Only students and teachers of the classroom can be a member of the classroom's chat forum.
+
+Only members of the classroom forum, can see the classroom's conversations.
+
+When a message is sent to the classroom forum, the message is saved to the database for backup purposes.
+
+The messages of a classroom forum can be retrieved, updated and destroyed.
+
+Only the creator of a message in the classroom forum, the class Form-Teacher and the school management (School-Administrator, Principal and Vice-Principal) have the right to update and delete the message.
+
+Only logged in individuals who are connected to the classroom can send messages to that class forum.
+
+## Web Socket Events Workflow For General School Chat Forum
+* A socket connection is established, once a user is on a views(User Interface) meant for chatting.
+  
+* The client needs to emit a **joinClassroom** event, along with the user's details which should contain his or her username and classroom (unique classId).
+* The data being sent from client to server needs to look like this: {username: "myUsername": classroom: "5ed503549d420d1d3849a079"} 
+* Immediately, the user is added to the classroom forum.
+  
+* Next, a **message** event, is emitted from the server to the client in order to display a welcome message to the user who just joined the forum.
+* The data being sent looks like this: {username: "Universal School System", text: "welcome", time: "5:05 PM"}
+ 
+* Following this, another **message** event is emitted from the server to all the clients in the forum in order to display a message to everyone except the new client that the user has just joined the chat.
+* The data being sent looks like this: {username: "Universal School System", text: "myUsername has joined the chat", time: "7:15 PM"}
+
+* Then, a **classroomStudents** event is emitted from the server to the client, sending along the classroom id and the usernames of all the people who are in the classroom forum. The purpose of this is to display this information on the user interface.
+* The data being sent looks like this: {classroom: "5ed503549d420d1d3849a079", students: ["myUsername", "anotherUsername", "stillAnotherUsername"]}
+
+* When a user sends a message to the forum, the **chatMessage** event is emitted from the client to the server, along with a message variable.
+* The message variable contains data like this: "Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.".
+
+* Then a **message** event is again emitted from the server to the client, in order to display the message to everyone in the forum.
+* The data being sent looks like this: {username: "bukolaayantola18", text: "Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.", time: "8:20 AM"}
+
+* When a user leaves the forum, a **disconnect** event is received on the server.
+ 
+* Then a **message** event is emitted from the server to the client in order to alert everyone that the user has left the chat.
+* The data being sent looks like this: {username: "Universal School System", text: "myUsername has left the chat", time: "9:40 PM"}
+
+* Finally a **classroomStudents** event is emitted from the server to the client in order to refresh and update the list of people who are currently chatting in the forum.
+* The data being sent looks like this: {classroom: "5ed503549d420d1d3849a079", students: ["anotherUsername", "stillAnotherUsername"]} 
+
+
+## CRUD Operations: Sample API Requests and Responses For Classroom Forum Chats
+
+## Create Message:
+
+* Request
+    * Endpoint: POST/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats
+    * Body(application/json)
+    ```
+    {
+        "text": "Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any."
+    }
+    ``` 
+
+* Response
+    * Status: 201 - created
+    * Body: (application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Message Saved!",
+        "results": 1,
+        "data": {
+            "_id": "5ee4c2469d276c1638e4720b",
+            "text": "Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.",
+            "username": "godswillafolabi76",
+            "time": "2020-06-13T12:10:46.850Z",
+            "school": "5ecb08dfd2595416f0dc9977",
+            "userCategory": "Staff",
+            "userRole": "Vice-Principal",
+            "userId": "5ed2baf8ca1dbc1d6c0095d5",
+            "classId": "5ed503549d420d1d3849a079",
+            "__v": 0
+        }
+    }
+    ``` 
+
+## Retrieve Messages
+
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats
+
+* Response:
+    * Status: 200 - ok
+    * Body(application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Messages Retrieved Successfully!",
+        "results": 2,
+        "data": [
+            {
+                "_id": "5ee4cb3e668ef404bcf67dff",
+                "text": "Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.",
+                "username": "godswillafolabi76",
+                "time": "2020-06-13T12:49:02.174Z",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "userCategory": "Staff",
+                "userRole": "Vice-Principal",
+                "userId": "5ed2baf8ca1dbc1d6c0095d5",
+                "classId": "5ed503549d420d1d3849a079",
+                "__v": 0
+            },
+            {
+                "_id": "5ee4cb73668ef404bcf67e00",
+                "text": "I just finished mastering the latest lecture resource on advanced trigonometry. It was an enlightening study.",
+                "username": "wasiuedet9",
+                "time": "2020-06-13T12:49:55.238Z",
+                "school": "5ecb08dfd2595416f0dc9977",
+                "userCategory": "Student",
+                "userRole": "Student",
+                "userId": "5ed2bbf7ca1dbc1d6c009635",
+                "classId": "5ed503549d420d1d3849a079",
+                "__v": 0
+            }
+        ]
+    }
+    ```
+
+## Retrieve Message
+
+* Request:
+    * Endpoint: GET/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats/5ee4cb3e668ef404bcf67dff
+
+* Response
+    * Status: 200 - ok
+    * Body(application/json)
+    ```
+    {
+        "status": "success",
+        "message": "Message Retrieved Successfully",
+        "results": 1,
+        "data": {
+            "_id": "5ee4cb3e668ef404bcf67dff",
+            "text": "Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.",
+            "username": "godswillafolabi76",
+            "time": "2020-06-13T12:49:02.174Z",
+            "school": "5ecb08dfd2595416f0dc9977",
+            "userCategory": "Staff",
+            "userRole": "Vice-Principal",
+            "userId": "5ed2baf8ca1dbc1d6c0095d5",
+            "classId": "5ed503549d420d1d3849a079",
+            "__v": 0
+        }
+    }
+    ``` 
+
+## Update Message
+
+* Request
+    * Endpoint: PATCH/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats/5ee4cb3e668ef404bcf67dff
+    * Body(application/json)
+    ```
+    {
+        "text": "Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any. There will be a test on this lecture on Wednesday."
+    }
+    ``` 
+
+* Response
+    * Status: 200 - ok
+    * Body(application/json)
+    ```
+    {
+    "status": "success",
+    "message": "Message Updated Successfully",
+    "results": 1,
+    "data": {
+        "_id": "5ee4cb3e668ef404bcf67dff",
+        "text": "Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any. There will be a test on this lecture on Wednesday.",
+        "username": "godswillafolabi76",
+        "time": "2020-06-13T12:49:02.174Z",
+        "school": "5ecb08dfd2595416f0dc9977",
+        "userCategory": "Staff",
+        "userRole": "Vice-Principal",
+        "userId": "5ed2baf8ca1dbc1d6c0095d5",
+        "classId": "5ed503549d420d1d3849a079",
+        "__v": 0
+    }
+}
+    ```
+
+## Delete Message
+
+* Request
+    * Endpoint: DELETE/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats/5ee4cb3e668ef404bcf67dff
+
+* Response
+    * Status: 204 - no content

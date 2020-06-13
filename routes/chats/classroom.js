@@ -19,12 +19,12 @@ router.route('/:chat_id')
     .get(classroomChatController.getOneChat)
     .patch(
         middlewares.preventUpdatingOfSpecialChatFields,
-        middlewares.retrieveChat,
+        middlewares.retrieveClassroomChat,
         middlewares.restrictChatModification,
         classroomChatController.updateOneChat
     )
     .delete(
-        middlewares.retrieveChat,
+        middlewares.retrieveClassroomChat,
         middlewares.restrictChatModification,
         classroomChatController.deleteOneChat
     );

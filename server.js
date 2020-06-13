@@ -81,6 +81,7 @@ io.on('connection', socket => {
         });
     });
 
+    //Later on, we will need a more generic name rather than students because a classroom involves both teachers and students
     //Classroom Chat
     socket.on('joinClassroom', theStudent => {
         const student = studentJoin(socket.id, theStudent.username, theStudent.classroom);

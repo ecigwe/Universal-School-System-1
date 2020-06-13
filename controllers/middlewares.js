@@ -10,6 +10,7 @@ const catchAsyncError = require('../utils/errorUtils/catchAsyncError');
 const errorHandler = require('../utils/errorUtils/errorHandler');
 const sendVerificationCode = require('../utils/authenticationUtilities/sendVerificationCode');
 const Schoolchat = require('../models/chats/school');
+const Classroomchat = require('../models/chats/classroom');
 
 exports.provideSchoolDetails = (request, response, next) => {
     const { schoolName, schoolAddress } = request.body;
@@ -286,20 +287,27 @@ exports.preventUpdatingOfSpecialChatFields = (request, response, next) => {
     if (request.body.userCategory) delete request.body.userCategory;
     if (request.body.userRole) delete request.body.userRole;
     if (request.body.userId) delete request.body.userId;
+    if (request.body.classId) delete request.body.classId;
     return next();
 }
 
-exports.retrieveChat = catchAsyncError(async (request, response, next) => {
-    const chat = await Schoolchat.findById(request.params.chat_id);
-    if (!chat) return errorHandler(404, 'Chat Not Found');
-    request.chat = chat;
-    return next();
-});
+function retrieveChat(chatModel) {
+    return catchAsyncError(async (request, response, next) => {
+        const chat = await chatModel.findById(request.params.chat_id);
+        if (!chat) return errorHandler(404, 'Chat Not Found');
+        request.chat = chat;
+        next();
+    });
+}
+exports.retrieveSchoolChat = retrieveChat(Schoolchat);
+
+exports.retrieveClassroomChat = retrieveChat(Classroomchat);
 
 exports.restrictChatModification = (request, response, next) => {
     if (request.user.category === 'Admin') return next();
     if (request.user.category === 'School-Administrator' || request.user.role === 'Principal' || request.user.role === 'Vice-Principal') return next();
     if (request.user._id.equals(request.chat.userId)) return next();
+    if (request.classroom && request.user._id.equals(request.classroom.formTeacher)) return next();
 
     return errorHandler(403, 'You are not allowed to perform this action.');
 }
