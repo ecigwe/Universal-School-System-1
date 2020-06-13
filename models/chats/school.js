@@ -19,12 +19,6 @@ const schoolChatSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId
     }
-    // },
-    // class: String,
-    // classId: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'Classroom'
-    // }
 });
 
 module.exports = mongoose.model('Schoolchat', schoolChatSchema);

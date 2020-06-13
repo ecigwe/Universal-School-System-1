@@ -280,7 +280,7 @@ The administrators of the application have access to all the resources in the sy
 * Only The Administrator, Principal or Vice-Principal or The Class Form Teacher Of A School Can Update A Classroom For That School.
 * Only The Administrator, Principal or Vice-Principal Of A School Can Delete A Classroom For That School. 
 * All the Classrooms Of A School Can Be Accessed By The Administrator, Principal or Vice-Principal Of That School.
-* The Details Of A Specific Classroom Can Be Seen By The School Administrator, Principal, Vice-Principal, The Classroom Form Teacher, The Class Students. 
+* The Details Of A Specific Classroom Can Be Seen By The School Administrator, Principal, Vice-Principal, The Classroom Form Teacher, The Class Teachers and The Class Students. 
 
 ### Accessing Study Timetables
 * A Student or a staff can interact only with the study timetable that he or she has created.
@@ -290,7 +290,7 @@ The administrators of the application have access to all the resources in the sy
 * Only A School Administrator or Principal or Vice-Principal or Class Form Teacher Can Update A Lecture Timetable For A Class.
 * Only A School Administrator or Principal or Vice-Principal or Class Form Teacher Can Delete A Lecture Timetable For A Class.
 * All The Lecture Timetables Pertaninig to A School Can Be Accessed By The Administrator, Principal or Vice-Principal Of That School.
-* The Details Of A Specific Lecture Timetable Can Be Seen By The School Administrator, Principal, Vice-Principal, The Classroom Form Teacher and The Class Students. 
+* The Details Of A Specific Lecture Timetable Can Be Seen By The School Administrator, Principal, Vice-Principal, The Classroom Form Teacher, The Class Teachers and The Class Students. 
 
 ### Accessing Lectures
 * To access lectures, you need to have a verified account and you must be logged in.

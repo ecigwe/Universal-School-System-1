@@ -182,13 +182,27 @@ exports.restrictSchoolInformation = catchAsyncError(async (request, response, ne
 exports.restrictClassInformation = catchAsyncError(async (request, response, next) => {
     if (request.user.category === 'Admin') return next();
 
-    if (request.user.role === 'School-Administrator' || request.user.role === 'Principal' || 'Vice-Principal') return next();
+    if (request.user.role === 'School-Administrator' || request.user.role === 'Principal' || request.user.role === 'Vice-Principal') return next();
 
     if (request.user._id.equals(request.classroom.formTeacher)) return next();
 
     if (request.user.class === request.classroom.title) return next();
 
     return errorHandler(403, 'You are forbidden from accessing this resource.');
+});
+
+exports.giveTeachersAccessToClassroom = catchAsyncError(async (request, response, next) => {
+    if (request.user.category === 'Admin') return next();
+
+    if (request.user.role === 'School-Administrator' || request.user.role === 'Principal' || request.user.role === 'Vice-Principal') return next();
+
+    if (request.user._id.equals(request.classroom.formTeacher)) return next();
+
+    if (request.user.class === request.classroom.title) return next();
+
+    if (request.user.classes && request.user.classes.includes(request.classroom.title)) return next();
+
+    return errorHandler(403, 'You are forbidden from performing this action.');
 });
 
 exports.findLecture = catchAsyncError(async (request, response, next) => {

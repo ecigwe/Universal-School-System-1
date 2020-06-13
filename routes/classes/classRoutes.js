@@ -5,8 +5,10 @@ const lectureTimetableController = require('../../controllers/timetables/lecture
 const authHandler = require('../../controllers/authentication/authHandler');
 const middlewares = require('../../controllers/middlewares');
 const lectureRoutes = require('../lectures/lectures');
+const classroomChats = require('../chats/classroom');
 
 router.use('/:id/classes/:class_id/lectures', lectureRoutes);
+router.use('/:id/classes/:class_id/chats', classroomChats);
 
 router.use(authHandler.protect);
 router.use(middlewares.checkIfUserHasVerifiedAcct);
@@ -28,7 +30,7 @@ router.route('/:id/classes/:class_id')
     .get(middlewares.checkIfSchoolStillExists,
         middlewares.restrictSchoolInformation,
         middlewares.checkIfClassStillExists,
-        middlewares.restrictClassInformation,
+        middlewares.giveTeachersAccessToClassroom,
         classController.findAClassOfASpecificSchool
     )
     .patch(middlewares.checkIfSchoolStillExists,
@@ -58,7 +60,7 @@ router.route('/:id/classes/:class_id/lecture_timetable')
     .get(middlewares.checkIfSchoolStillExists,
         middlewares.restrictSchoolInformation,
         middlewares.checkIfClassStillExists,
-        middlewares.restrictClassInformation,
+        middlewares.giveTeachersAccessToClassroom,
         lectureTimetableController.fetchLectureTimetableForSingleClass)
     .patch(middlewares.checkIfSchoolExists,
         middlewares.checkUserRole('School-Administrator', 'Principal', 'Vice-Principal', 'Form-Teacher'),
