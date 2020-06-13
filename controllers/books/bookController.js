@@ -22,7 +22,7 @@ const auth = new google.auth.JWT(
 
 const drive = google.drive({ version: "v3", auth });
 
-drive.files.list({}).then(res => res.data.files.map(file => console.log(file)));
+//drive.files.list({}).then(res => res.data.files.map(file => console.log(file.id)));
 
 async function uploadTextbook(bufferResult, filename) {
     const fileMetadata = {

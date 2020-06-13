@@ -1,4 +1,5 @@
 const fs = require('fs');
+const stream = require('stream');
 const path = require('path');
 const mime = require('node-mime');
 const { google } = require('googleapis');
@@ -12,15 +13,15 @@ const errorHandler = require('../../utils/errorUtils/errorHandler');
 const responseHandler = require('../../utils/responseHandler');
 const AppError = require('../../utils/errorUtils/appError');
 
-const multerStorage = multer.diskStorage({
-    destination: (request, file, cb) => {
-        cb(null, 'files/lectures');
-    },
-    filename: (request, file, cb) => {
-        const ext = file.mimetype.split('/')[1];
-        cb(null, `lecture-${slugify(request.lecture.subject, { lower: true })}-${slugify(request.lecture.title, { lower: true })}-${request.user.username}-${Date.now()}.${ext}`);
-    }
-});
+// const multerStorage = multer.diskStorage({
+//     destination: (request, file, cb) => {
+//         cb(null, 'files/lectures');
+//     },
+//     filename: (request, file, cb) => {
+//         const ext = file.mimetype.split('/')[1];
+//         cb(null, `lecture-${slugify(request.lecture.subject, { lower: true })}-${slugify(request.lecture.title, { lower: true })}-${request.user.username}-${Date.now()}.${ext}`);
+//     }
+// });
 
 const multerFilter = (request, file, cb) => {
     if (file.mimetype.startsWith('audio') ||
@@ -33,7 +34,7 @@ const multerFilter = (request, file, cb) => {
 }
 
 const upload = multer({
-    storage: multerStorage,
+    storage: multer.memoryStorage(),
     fileFilter: multerFilter
 });
 
@@ -50,16 +51,16 @@ const auth = new google.auth.JWT(
 
 const drive = google.drive({ version: "v3", auth });
 
-//drive.files.list({}).then(res => res.data.files.map(file => console.log(file.id)));
+drive.files.list({}).then(res => res.data.files.map(file => console.log(file)));
 
-async function uploadLectureResources(pathToFile, filename, mimeType) {
+async function uploadLectureResources(bufferResult, filename, mimeType) {
     const fileMetadata = {
         'name': filename
     }
 
     const media = {
         mimeType,
-        body: fs.createReadStream(pathToFile)
+        body: bufferResult
     }
 
     const uploadedLectureResource = await drive.files.create({
@@ -68,8 +69,8 @@ async function uploadLectureResources(pathToFile, filename, mimeType) {
         fields: 'id'
     });
 
-    const unlink = promisify(fs.unlink);
-    await unlink(pathToFile);
+    // const unlink = promisify(fs.unlink);
+    // await unlink(pathToFile);
 
     return uploadedLectureResource.data;
 }
@@ -84,11 +85,15 @@ exports.createLecture = catchAsyncError(async (request, response, next) => {
 });
 
 exports.fetchAllLecturesForClass = catchAsyncError(async (request, response, next) => {
-    let query = request.query || { class: request.params.class_id };
+    let query = { class: request.params.class_id };
+
+    const queryPropsArr = Object.entries(request.query);
+
+    if (queryPropsArr.length !== 0) query = request.query;
 
     const lectures = await Lecture.find(query);
 
-    if (request.query && !lectures.length) return errorHandler(404, 'Your Search Query Does Not Match Any Entries!');
+    if (!lectures.length) return errorHandler(404, 'We could not find what you are looking for!');
 
     return responseHandler(response, lectures, next, 200, 'Successfully retrieved all the lectures for your class', lectures.length);
 });
@@ -103,7 +108,11 @@ exports.updateOneLectureForClass = catchAsyncError(async (request, response, nex
     request.body.materials = request.lecture.materials;
     if (request.files) {
         for (i = 0; i < request.files.length; i++) {
-            let uploadedLectureResourceData = await uploadLectureResources(`${__dirname}/../../../Univeral-School-System/files/lectures/${request.files[i].filename}`, request.files[i].filename, request.files[i].mimeType);
+            const fileObject = request.files[i];
+            const bufferStream = new stream.PassThrough();
+            const bufferResult = bufferStream.end(fileObject.buffer);
+
+            let uploadedLectureResourceData = await uploadLectureResources(bufferResult, request.files[i].originalname, request.files[i].mimetype);
             request.body.materials.push(uploadedLectureResourceData.id);
         }
     }
