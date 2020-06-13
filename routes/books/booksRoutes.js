@@ -5,20 +5,20 @@ const bookController = require('../../controllers/books/bookController')
 const authHandler = require('../../controllers/authentication/authHandler');
 const middlewares = require('../../controllers/middlewares');
 const AppError = require('../../utils/errorUtils/appError');
-const slugify = require('slugify');
+//const slugify = require('slugify');
 
-const multerStorage = multer.diskStorage({
-    destination: (request, file, cb) => {
-        cb(null, 'files/books');
-    },
-    filename: (request, file, cb) => {
-        const ext = file.mimetype.split('/')[1];
-        cb(null, `book-${slugify(request.book.title, { lower: true })}-${request.book.school}-${Date.now()}.${ext}`);
-    }
-});
+// const multerStorage = multer.diskStorage({
+//     destination: (request, file, cb) => {
+//         cb(null, 'files/books');
+//     },
+//     filename: (request, file, cb) => {
+//         const ext = file.mimetype.split('/')[1];
+//         cb(null, `book-${slugify(request.book.title, { lower: true })}-${request.book.school}-${Date.now()}.${ext}`);
+//     }
+// });
 
 const multerFilter = (request, file, cb) => {
-    if (file.mimetype.startsWith('application')) {
+    if (file.mimetype === 'application/pdf') {
         cb(null, true);
     } else {
         cb(new AppError('Please only pdf documents are allowed.', 400), false)
@@ -26,7 +26,7 @@ const multerFilter = (request, file, cb) => {
 }
 
 const upload = multer({
-    storage: multerStorage,
+    storage: multer.memoryStorage(),
     fileFilter: multerFilter
 });
 

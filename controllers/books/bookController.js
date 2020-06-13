@@ -1,4 +1,5 @@
 const fs = require('fs');
+const stream = require('stream');
 const path = require('path');
 const { promisify } = require('util');
 const mime = require('node-mime');
@@ -21,16 +22,16 @@ const auth = new google.auth.JWT(
 
 const drive = google.drive({ version: "v3", auth });
 
-//drive.files.list({}).then(res => res.data.files.map(file => console.log(file.id)));
+drive.files.list({}).then(res => res.data.files.map(file => console.log(file)));
 
-async function uploadTextbook(pathToFile, filename) {
+async function uploadTextbook(bufferResult, filename) {
     const fileMetadata = {
         'name': filename
     }
 
     const media = {
         mimeType: 'application/pdf',
-        body: fs.createReadStream(pathToFile)
+        body: bufferResult
     }
 
     const uploadedBook = await drive.files.create({
@@ -39,8 +40,8 @@ async function uploadTextbook(pathToFile, filename) {
         fields: 'id'
     });
 
-    const unlink = promisify(fs.unlink);
-    await unlink(pathToFile);
+    // const unlink = promisify(fs.unlink);
+    // await unlink(pathToFile);
 
     return uploadedBook.data;
 }
@@ -92,7 +93,11 @@ class bookController {
             req.body = updateData;
 
             if (req.file) {
-                const uploadedBookData = await uploadTextbook(`${__dirname}/../../../Univeral-School-System/files/books/${req.file.filename}`, req.file.filename);
+                let fileObject = req.file;
+                let bufferStream = new stream.PassThrough();
+                const bufferResult = bufferStream.end(fileObject.buffer);
+
+                const uploadedBookData = await uploadTextbook(bufferResult, slugify(req.book.title, { lower: true }));
                 if (!uploadedBookData) return errorHandler(500, 'The Book Was Not Uploaded!');
 
                 if (req.book.bookUrl) {
