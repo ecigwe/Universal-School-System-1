@@ -15,14 +15,23 @@ const zoomUserSchema = mongoose.Schema({
         required: [true, 'Please provide the email associated with this user account'],
         unique: true
     },
+    name: {
+        type: String,
+        required: [true, 'Please provide the name associated with this user account'],
+        unique: true
+    },
     category: {
         type: String,
         required: [true, 'Please provide user category']
     },
-    role: {
-        type: String,
-        required: [true, 'Please provide a role for this user']
+    type: {
+        type: Number,
+        required: [true, 'Please provide the user account type']
+    },
+    createdOn: {
+        type: Date
     }
 });
-zoomUserSchema.index({ user: 1, email: 1 }, { unique: true })
+zoomUserSchema.index({ user: 1, email: 1 }, { unique: true });
+zoomUserSchema.index({ userId: 1 }, { unique: true });
 module.exports = mongoose.model('ZoomUser', zoomUserSchema);
