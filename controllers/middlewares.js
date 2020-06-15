@@ -11,6 +11,7 @@ const errorHandler = require('../utils/errorUtils/errorHandler');
 const sendVerificationCode = require('../utils/authenticationUtilities/sendVerificationCode');
 const Schoolchat = require('../models/chats/school');
 const Classroomchat = require('../models/chats/classroom');
+const Group = require('../models/groups/groups');
 
 exports.provideSchoolDetails = (request, response, next) => {
     const { schoolName, schoolAddress } = request.body;
@@ -291,6 +292,15 @@ exports.preventUpdatingOfSpecialChatFields = (request, response, next) => {
     return next();
 }
 
+exports.preventUpdatingOfSpecialGroupFields = (request, response, next) => {
+    if (request.body.admin) delete request.body.admin;
+    if (request.body.createdAt) delete request.body.createdAt;
+    if (request.body.school) delete request.body.school;
+    if (request.body._id) delete request.body._id;
+    if (request.body.members) delete request.body.members;
+    return next();
+}
+
 function retrieveChat(chatModel) {
     return catchAsyncError(async (request, response, next) => {
         const chat = await chatModel.findById(request.params.chat_id);
@@ -311,3 +321,51 @@ exports.restrictChatModification = (request, response, next) => {
 
     return errorHandler(403, 'You are not allowed to perform this action.');
 }
+
+exports.restrictAccessToGroup = catchAsyncError(async (request, response, next) => {
+    const group = await Group.findById(request.params.group_id);
+
+    if (!group) return errorHandler(404, 'We could not find what you are looking for!');
+
+    request.group = group;
+
+    if (request.user.category === 'Admin') return next();
+    if (request.user.category === 'School-Administrator' || request.user.role === 'Principal' || request.user.role === 'Vice-Principal') return next();
+
+    const groupMembers = group.members;
+
+    for (i = 0; i < groupMembers.length; i++) {
+        if (
+            (JSON.stringify(groupMembers[i].memberId) === JSON.stringify(request.user._id)) &&
+            (groupMembers[i].memberUsername === request.user.username) &&
+            (groupMembers[i].memberCategory === request.user.category)
+        ) {
+            return next();
+        }
+    }
+
+    return errorHandler(403, 'You are forbidden from accessing this resource.');
+});
+
+exports.restrictModificationOfGroup = catchAsyncError(async (request, response, next) => {
+    const group = await Group.findById(request.params.group_id);
+
+    if (!group) return errorHandler(404, 'We could not find what you are looking for!');
+
+    request.group = group;
+
+    if (request.user.category === 'Admin') return next();
+    if (request.user.category === 'School-Administrator' || request.user.role === 'Principal' || request.user.role === 'Vice-Principal') return next();
+
+    const groupAdmin = group.admin;
+
+    if (
+        (groupAdmin.id.equals(request.user._id)) &&
+        (groupAdmin.username === request.user.username) &&
+        (groupAdmin.category === request.user.category)
+    ) {
+        return next();
+    }
+
+    return errorHandler(403, 'You are forbidden from performing this action.');
+});

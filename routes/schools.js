@@ -15,6 +15,7 @@ const studentRecords = require('./studentRecord/recordsRoutes');
 const teacherTimetableRoutes = require('./timetables/teacherTimetable');
 const lectureTimetableRoutes = require('./timetables/lectures');
 const schoolChatRoute = require('./chats/school');
+const groupRoutes = require('./groups.js/groupRoutes');
 
 const router = Router();
 
@@ -25,6 +26,8 @@ router.use('/:id/staff_timetables', teacherTimetableRoutes);
 router.use('/:id/lecture_timetables', lectureTimetableRoutes);
 
 router.use('/:id/chats', schoolChatRoute);
+
+router.use('/:id/groups', groupRoutes);
 
 router.use(classes);
 router.use(books);
