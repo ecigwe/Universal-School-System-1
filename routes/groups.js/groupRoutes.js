@@ -29,6 +29,10 @@ router.route('/:group_id')
         middlewares.preventUpdatingOfSpecialGroupFields,
         middlewares.restrictModificationOfGroup,
         groupController.updateGroup
+    )
+    .delete(
+        middlewares.restrictModificationOfGroup,
+        groupController.deleteGroup
     );
 
 router.route('/:group_id/add_new_member')
@@ -37,5 +41,13 @@ router.route('/:group_id/add_new_member')
         middlewares.restrictModificationOfGroup,
         groupController.addNewMember
     );
+
+router.delete('/:group_id/remove_member',
+    middlewares.restrictModificationOfGroup,
+    groupController.removeMember);
+
+router.delete('/:group_id/remove_myself',
+    middlewares.restrictAccessToGroup,
+    groupController.removeMyself);
 
 module.exports = router

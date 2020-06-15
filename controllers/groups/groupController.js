@@ -8,6 +8,7 @@ const Staff = require('../../models/users/staff');
 exports.createGroup = catchAsyncError(async (request, response, next) => {
     const newGroup = await Group.create({
         name: request.body.name,
+        description: request.body.description,
         school: request.params.id,
         members: [{
             memberId: request.user._id,
@@ -83,4 +84,45 @@ exports.addNewMember = catchAsyncError(async (request, response, next) => {
     }
 
     return errorHandler(400, "The person you want to add is not qualified to be in this group. Only staff and students of your school are allowed to join this group.")
+});
+
+exports.removeMember = catchAsyncError(async (request, response, next) => {
+    const { memberUsername, memberCategory } = request.query;
+    if (!memberUsername || !memberCategory) return errorHandler(400, "Please provide the member's username and category in the query string.");
+
+    const groupMembers = request.group.members
+
+    const groupMember = (groupMember) => groupMember.memberUsername === memberUsername && groupMember.memberCategory === memberCategory;
+
+    const memberIndex = groupMembers.findIndex(groupMember);
+
+    if (memberIndex === -1) return errorHandler(404, "The person you want to delete is not a member of your group!");
+
+    request.group.members.splice(memberIndex, 1);
+    const group = await request.group.save();
+
+    return responseHandler(response, group, next, 200, 'Member Removed Successfully', 1);
+});
+
+exports.removeMyself = catchAsyncError(async (request, response, next) => {
+    const groupMembers = request.group.members
+
+    const groupMember = (groupMember) => groupMember.memberUsername === request.user.username && groupMember.memberCategory === request.user.category;
+
+    const memberIndex = groupMembers.findIndex(groupMember);
+
+    if (memberIndex === -1) return errorHandler(404, "You are not a member of this group!");
+
+    request.group.members.splice(memberIndex, 1);
+    const group = await request.group.save();
+
+    return responseHandler(response, null, next, 200, 'You are no longer a member of this group.', null);
+});
+
+exports.deleteGroup = catchAsyncError(async (request, response, next) => {
+    const deletedGroup = await Group.findByIdAndDelete(request.params.group_id);
+
+    if (!deletedGroup) return errorHandler(400, "The group you want to delete does not exist.");
+
+    return responseHandler(response, deletedGroup, next, 204, 'Group deleted!.', 1);
 });

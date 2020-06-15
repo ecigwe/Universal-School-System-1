@@ -9,6 +9,10 @@ const groupSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please provide a name for this group.']
     },
+    description: {
+        type: String,
+        required: [true, 'Every group must have a description.']
+    },
     members: [
         {
             memberId: { type: mongoose.Schema.Types.ObjectId },

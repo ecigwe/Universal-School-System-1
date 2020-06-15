@@ -1,0 +1,2158 @@
+{
+	"info": {
+		"_postman_id": "1f77e278-c093-4b89-8eab-9b348deaea98",
+		"name": "Chat",
+		"description": "This collection consists of endpoints relating to the chat feature of the universal school system.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "School",
+			"item": [
+				{
+					"name": "Add A New Message To School Chat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"I officially welcome you all to a new term. Hope you're all ready for a new round of academic activities? This term holds great promise for all of us.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"chats"
+							]
+						},
+						"description": "This endpoint is where new messages should be submitted to for them to be saved in the database. \r\nThis route is meant for saving the chat information of a specific school."
+					},
+					"response": [
+						{
+							"name": "Add A New Message To School Chat",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"I officially welcome you all to a new term. Hope you're all ready for a new round of academic activities? This term holds great promise for all of us.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"chats"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "998"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Jun 2020 13:22:09 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1591970600"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "451"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c3-GCKy+5gR9qeFCiUBHIX9ftbiwcg\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Message Saved!\",\n    \"results\": 1,\n    \"data\": {\n        \"_id\": \"5ee381872e0f06116c10b4a2\",\n        \"text\": \"I officially welcome you all to a new term. Hope you're all ready for a new round of academic activities? This term holds great promise for all of us.\",\n        \"username\": \"bukolaayantola18\",\n        \"time\": \"2020-06-12T13:22:15.314Z\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"userCategory\": \"Staff\",\n        \"userRole\": \"Principal\",\n        \"userId\": \"5ed2baf8ca1dbc1d6c0095d4\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Retrieve School Chats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"chats"
+							]
+						},
+						"description": "This endpoint can be used to retrieve all the chat messages of a particular school."
+					},
+					"response": [
+						{
+							"name": "Retrieve School Chats",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"chats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Jun 2020 15:29:19 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1591979336"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"444-z7fK28bDVjp/t8zUHgiWOUSm48s\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Messages Retrieved Successfully!\",\n    \"results\": 3,\n    \"data\": [\n        {\n            \"_id\": \"5ee381872e0f06116c10b4a2\",\n            \"text\": \"I officially welcome you all to a new term. Hope you're all ready for a new round of academic activities? This term holds great promise for all of us.\",\n            \"username\": \"bukolaayantola18\",\n            \"time\": \"2020-06-12T13:22:15.314Z\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"userCategory\": \"Staff\",\n            \"userRole\": \"Principal\",\n            \"userId\": \"5ed2baf8ca1dbc1d6c0095d4\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"5ee39a9c2e0f06116c10b4a3\",\n            \"text\": \"I am fully pumped up for a new school session.\",\n            \"username\": \"amandababatunde68\",\n            \"time\": \"2020-06-12T15:09:16.583Z\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"userCategory\": \"Student\",\n            \"userRole\": \"Student\",\n            \"userId\": \"5ed2bbf7ca1dbc1d6c00962e\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"5ee39bb72e0f06116c10b4a4\",\n            \"text\": \"I am grateful to the school staff for taking good care of my children throughout the last school session.\",\n            \"username\": \"chinyerebabatunde\",\n            \"time\": \"2020-06-12T15:13:59.323Z\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"userCategory\": \"Parent\",\n            \"userRole\": \"Parent\",\n            \"userId\": \"5ecb08e3d2595416f0dc997e\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Retrieve Specific School Chat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats/5ee381872e0f06116c10b4a2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"chats",
+								"5ee381872e0f06116c10b4a2"
+							]
+						},
+						"description": "This endpoint can be used to receive a specific school chat."
+					},
+					"response": [
+						{
+							"name": "Retrieve Specific School Chat",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats/5ee381872e0f06116c10b4a2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"chats",
+										"5ee381872e0f06116c10b4a2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Jun 2020 15:42:00 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1591980112"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "467"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d3-JyHLkBnfKTuO0uiixZCcoQFjmv4\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Message Retrieved Successfully\",\n    \"results\": 1,\n    \"data\": {\n        \"_id\": \"5ee381872e0f06116c10b4a2\",\n        \"text\": \"I officially welcome you all to a new term. Hope you're all ready for a new round of academic activities? This term holds great promise for all of us.\",\n        \"username\": \"bukolaayantola18\",\n        \"time\": \"2020-06-12T13:22:15.314Z\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"userCategory\": \"Staff\",\n        \"userRole\": \"Principal\",\n        \"userId\": \"5ed2baf8ca1dbc1d6c0095d4\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Specific School Chat",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"I welcome you all to a new session.\",\r\n    \"username\": \"my_username\",\r\n    \"userRole\": \"Student\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats/5ee381872e0f06116c10b4a2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"chats",
+								"5ee381872e0f06116c10b4a2"
+							]
+						},
+						"description": "This endpoint can be used to update a specific chat of a school. "
+					},
+					"response": [
+						{
+							"name": "Update Specific School Chat",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"I welcome you all to a new session.\",\r\n    \"username\": \"my_username\",\r\n    \"userRole\": \"Student\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats/5ee381872e0f06116c10b4a2",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"chats",
+										"5ee381872e0f06116c10b4a2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 12 Jun 2020 16:45:09 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1591983884"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "350"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15e-1pY+gGCpvCDzxcPchMfWIQ5fXGQ\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Message Updated Successfully\",\n    \"results\": 1,\n    \"data\": {\n        \"_id\": \"5ee381872e0f06116c10b4a2\",\n        \"text\": \"I welcome you all to a new session.\",\n        \"username\": \"bukolaayantola18\",\n        \"time\": \"2020-06-12T13:22:15.314Z\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"userCategory\": \"Staff\",\n        \"userRole\": \"Principal\",\n        \"userId\": \"5ed2baf8ca1dbc1d6c0095d4\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete School Chat",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/chats/5ee381872e0f06116c10b4a2",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"chats",
+								"5ee381872e0f06116c10b4a2"
+							]
+						},
+						"description": "This endpoint can be used to delete a specific chat of a school."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder consists of endpoints relating to performing CRUD operations on chats and messages for schools.",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Classroom",
+			"item": [
+				{
+					"name": "Create A Classroom Chat Message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"classes",
+								"5ed503549d420d1d3849a079",
+								"chats"
+							]
+						},
+						"description": "This endpoint can be used by classrrom students and teachers to backup their chats or messages."
+					},
+					"response": [
+						{
+							"name": "Create A Classroom Chat Message",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"classes",
+										"5ed503549d420d1d3849a079",
+										"chats"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "991"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jun 2020 12:10:46 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592052128"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "480"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e0-XqPK49WrmxfkPbRqacfFPq4rMMk\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Message Saved!\",\n    \"results\": 1,\n    \"data\": {\n        \"_id\": \"5ee4c2469d276c1638e4720b\",\n        \"text\": \"Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.\",\n        \"username\": \"godswillafolabi76\",\n        \"time\": \"2020-06-13T12:10:46.850Z\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"userCategory\": \"Staff\",\n        \"userRole\": \"Vice-Principal\",\n        \"userId\": \"5ed2baf8ca1dbc1d6c0095d5\",\n        \"classId\": \"5ed503549d420d1d3849a079\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get The Chats Of A Classroom",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"classes",
+								"5ed503549d420d1d3849a079",
+								"chats"
+							]
+						},
+						"description": "This endpoint can be used to retrieve the chats of a specific classroom in a school."
+					},
+					"response": [
+						{
+							"name": "Get The Chats Of A Classroom",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"classes",
+										"5ed503549d420d1d3849a079",
+										"chats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "997"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jun 2020 14:38:48 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592062414"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "875"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"36b-DxMi6i/Jde9simtYK43QkzX14VY\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Messages Retrieved Successfully!\",\n    \"results\": 2,\n    \"data\": [\n        {\n            \"_id\": \"5ee4cb3e668ef404bcf67dff\",\n            \"text\": \"Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.\",\n            \"username\": \"godswillafolabi76\",\n            \"time\": \"2020-06-13T12:49:02.174Z\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"userCategory\": \"Staff\",\n            \"userRole\": \"Vice-Principal\",\n            \"userId\": \"5ed2baf8ca1dbc1d6c0095d5\",\n            \"classId\": \"5ed503549d420d1d3849a079\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"5ee4cb73668ef404bcf67e00\",\n            \"text\": \"I just finished mastering the latest lecture resource on advanced trigonometry. It was an enlightening study.\",\n            \"username\": \"wasiuedet9\",\n            \"time\": \"2020-06-13T12:49:55.238Z\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"userCategory\": \"Student\",\n            \"userRole\": \"Student\",\n            \"userId\": \"5ed2bbf7ca1dbc1d6c009635\",\n            \"classId\": \"5ed503549d420d1d3849a079\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Specific Chat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats/5ee4cb3e668ef404bcf67dff",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"classes",
+								"5ed503549d420d1d3849a079",
+								"chats",
+								"5ee4cb3e668ef404bcf67dff"
+							]
+						},
+						"description": "This endpoint can be used to get a specific chat from a classroom in a school."
+					},
+					"response": [
+						{
+							"name": "Get Specific Chat",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats/5ee4cb3e668ef404bcf67dff",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"classes",
+										"5ed503549d420d1d3849a079",
+										"chats",
+										"5ee4cb3e668ef404bcf67dff"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "992"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jun 2020 14:44:28 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592062414"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "496"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1f0-EbCaNTJOBFaHfcmNgc6o9aG6Rbs\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Message Retrieved Successfully\",\n    \"results\": 1,\n    \"data\": {\n        \"_id\": \"5ee4cb3e668ef404bcf67dff\",\n        \"text\": \"Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any.\",\n        \"username\": \"godswillafolabi76\",\n        \"time\": \"2020-06-13T12:49:02.174Z\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"userCategory\": \"Staff\",\n        \"userRole\": \"Vice-Principal\",\n        \"userId\": \"5ed2baf8ca1dbc1d6c0095d5\",\n        \"classId\": \"5ed503549d420d1d3849a079\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Classroom Chat",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\": \"Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any. There will be a test on this lecture on Wednesday.\",\r\n    \"username\": \"godswillafolabi76\",\r\n        \"time\": \"2020-06-13T12:49:02.174Z\",\r\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\r\n        \"userCategory\": \"Student\",\r\n        \"userRole\": \"Principal\",\r\n        \"userId\": \"5ed2baf8ca1dbc1d6c0095d5\",\r\n        \"classId\": \"5ed503549d420d1d3849a079\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats/5ee4cb3e668ef404bcf67dff",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"classes",
+								"5ed503549d420d1d3849a079",
+								"chats",
+								"5ee4cb3e668ef404bcf67dff"
+							]
+						},
+						"description": "This endpoint can be used to update the specific chat of a classroom in a school."
+					},
+					"response": [
+						{
+							"name": "Update Classroom Chat",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"text\": \"Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any. There will be a test on this lecture on Wednesday.\",\r\n    \"username\": \"godswillafolabi76\",\r\n        \"time\": \"2020-06-13T12:49:02.174Z\",\r\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\r\n        \"userCategory\": \"Student\",\r\n        \"userRole\": \"Principal\",\r\n        \"userId\": \"5ed2baf8ca1dbc1d6c0095d5\",\r\n        \"classId\": \"5ed503549d420d1d3849a079\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats/5ee4cb3e668ef404bcf67dff",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"classes",
+										"5ed503549d420d1d3849a079",
+										"chats",
+										"5ee4cb3e668ef404bcf67dff"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "996"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Jun 2020 15:17:21 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592064869"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "545"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"221-LOVHX6Ye+0Vnzy4WUmn2Eza3qJM\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Message Updated Successfully\",\n    \"results\": 1,\n    \"data\": {\n        \"_id\": \"5ee4cb3e668ef404bcf67dff\",\n        \"text\": \"Hey everyone. I have uploaded a lecture resource for you all. Please ensure to master the material and give me feedback if you have any. There will be a test on this lecture on Wednesday.\",\n        \"username\": \"godswillafolabi76\",\n        \"time\": \"2020-06-13T12:49:02.174Z\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"userCategory\": \"Staff\",\n        \"userRole\": \"Vice-Principal\",\n        \"userId\": \"5ed2baf8ca1dbc1d6c0095d5\",\n        \"classId\": \"5ed503549d420d1d3849a079\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete A Classroom Chat",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/classes/5ed503549d420d1d3849a079/chats/5ee4cb3e668ef404bcf67dff",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"classes",
+								"5ed503549d420d1d3849a079",
+								"chats",
+								"5ee4cb3e668ef404bcf67dff"
+							]
+						},
+						"description": "This endpoint can be used to delete a specific chat in a classroom of a school."
+					},
+					"response": []
+				}
+			],
+			"description": "This folder consits of endpoints relating to chat activities for classroom students and teachers.",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Create Group",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Biology Research Assignment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups"
+							]
+						},
+						"description": "Use this endpoint to create groups in a school."
+					},
+					"response": [
+						{
+							"name": "Create Group",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Biology Research Assignment\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"groups"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jun 2020 00:41:53 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592184966"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "467"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d3-9VJPE97H3sPIrYTcPF0aqmbuiVY\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"New Group Created Successfully!\",\n    \"results\": 1,\n    \"data\": {\n        \"_id\": \"5ee6c3d22f837f1e2c39c475\",\n        \"name\": \"Biology Research Assignment\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"members\": [\n            {\n                \"_id\": \"5ee6c3d22f837f1e2c39c476\",\n                \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"memberUsername\": \"wasiuedet9\",\n                \"memberCategory\": \"Student\"\n            }\n        ],\n        \"createdAt\": \"2020-06-15T00:41:54.136Z\",\n        \"admin\": {\n            \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n            \"username\": \"wasiuedet9\",\n            \"category\": \"Student\"\n        },\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "English Research Assignment",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Use this endpoint to retrieve multiple groups in a school.\r\n\r\nYou can also filter the school groups by their names."
+					},
+					"response": [
+						{
+							"name": "Get All Groups",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"groups"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "English Research Assignment",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jun 2020 00:46:34 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592185570"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "834"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"342-0s8w0mauCLOzHP46rZRQjIeN0xw\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successful\",\n    \"results\": 2,\n    \"data\": [\n        {\n            \"admin\": {\n                \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"username\": \"wasiuedet9\",\n                \"category\": \"Student\"\n            },\n            \"_id\": \"5ee6c3d22f837f1e2c39c475\",\n            \"name\": \"Biology Research Assignment\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"members\": [\n                {\n                    \"_id\": \"5ee6c3d22f837f1e2c39c476\",\n                    \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                    \"memberUsername\": \"wasiuedet9\",\n                    \"memberCategory\": \"Student\"\n                }\n            ],\n            \"createdAt\": \"2020-06-15T00:41:54.136Z\",\n            \"__v\": 0\n        },\n        {\n            \"admin\": {\n                \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"username\": \"wasiuedet9\",\n                \"category\": \"Student\"\n            },\n            \"_id\": \"5ee6c42a2f837f1e2c39c477\",\n            \"name\": \"Chemistry Research Assignment\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"members\": [\n                {\n                    \"_id\": \"5ee6c42a2f837f1e2c39c478\",\n                    \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                    \"memberUsername\": \"wasiuedet9\",\n                    \"memberCategory\": \"Student\"\n                }\n            ],\n            \"createdAt\": \"2020-06-15T00:43:22.703Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get My Groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/my_groups",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups",
+								"my_groups"
+							]
+						},
+						"description": "You can use this endpoint to see the groups that you belong to in a school."
+					},
+					"response": [
+						{
+							"name": "Get My Groups",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/my_groups",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"groups",
+										"my_groups"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "998"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jun 2020 00:55:39 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592186095"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "834"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"342-0s8w0mauCLOzHP46rZRQjIeN0xw\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successful\",\n    \"results\": 2,\n    \"data\": [\n        {\n            \"admin\": {\n                \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"username\": \"wasiuedet9\",\n                \"category\": \"Student\"\n            },\n            \"_id\": \"5ee6c3d22f837f1e2c39c475\",\n            \"name\": \"Biology Research Assignment\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"members\": [\n                {\n                    \"_id\": \"5ee6c3d22f837f1e2c39c476\",\n                    \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                    \"memberUsername\": \"wasiuedet9\",\n                    \"memberCategory\": \"Student\"\n                }\n            ],\n            \"createdAt\": \"2020-06-15T00:41:54.136Z\",\n            \"__v\": 0\n        },\n        {\n            \"admin\": {\n                \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"username\": \"wasiuedet9\",\n                \"category\": \"Student\"\n            },\n            \"_id\": \"5ee6c42a2f837f1e2c39c477\",\n            \"name\": \"Chemistry Research Assignment\",\n            \"school\": \"5ecb08dfd2595416f0dc9977\",\n            \"members\": [\n                {\n                    \"_id\": \"5ee6c42a2f837f1e2c39c478\",\n                    \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                    \"memberUsername\": \"wasiuedet9\",\n                    \"memberCategory\": \"Student\"\n                }\n            ],\n            \"createdAt\": \"2020-06-15T00:43:22.703Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Specific Group",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups",
+								"5ee6c3d22f837f1e2c39c475"
+							]
+						},
+						"description": "Use this endpoint to retrieve the details of a specific group in a school."
+					},
+					"response": [
+						{
+							"name": "Get Specific Group",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"groups",
+										"5ee6c3d22f837f1e2c39c475"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jun 2020 01:39:06 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592188735"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "464"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d0-P3DYFuqsDjkyAmy4glF0eNmUeBo\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successfully Retrieved Group\",\n    \"results\": 1,\n    \"data\": {\n        \"admin\": {\n            \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n            \"username\": \"wasiuedet9\",\n            \"category\": \"Student\"\n        },\n        \"_id\": \"5ee6c3d22f837f1e2c39c475\",\n        \"name\": \"Biology Research Assignment\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"members\": [\n            {\n                \"_id\": \"5ee6c3d22f837f1e2c39c476\",\n                \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"memberUsername\": \"wasiuedet9\",\n                \"memberCategory\": \"Student\"\n            }\n        ],\n        \"createdAt\": \"2020-06-15T00:41:54.136Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Group Name",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"Mathematics Research Assignment\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups",
+								"5ee6c3d22f837f1e2c39c475"
+							]
+						},
+						"description": "Use this endpoint to update the name of a group."
+					},
+					"response": [
+						{
+							"name": "Update Group Name",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"Mathematics Research Assignment\"\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"groups",
+										"5ee6c3d22f837f1e2c39c475"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "998"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jun 2020 02:19:28 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592191045"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "466"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d2-FqluPOCXydMARYUXRJ0aRWlRpPY\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successfully Updated Group\",\n    \"results\": 1,\n    \"data\": {\n        \"admin\": {\n            \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n            \"username\": \"wasiuedet9\",\n            \"category\": \"Student\"\n        },\n        \"_id\": \"5ee6c3d22f837f1e2c39c475\",\n        \"name\": \"Mathematics Research Assignment\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"members\": [\n            {\n                \"_id\": \"5ee6c3d22f837f1e2c39c476\",\n                \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"memberUsername\": \"wasiuedet9\",\n                \"memberCategory\": \"Student\"\n            }\n        ],\n        \"createdAt\": \"2020-06-15T00:41:54.136Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Add New Member To Group",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"memberUsername\": \"musageorge72\",\r\n\"memberCategory\": \"Student\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475/add_new_member",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups",
+								"5ee6c3d22f837f1e2c39c475",
+								"add_new_member"
+							]
+						},
+						"description": "Administrators can use this endpoint to add new member to their groups."
+					},
+					"response": [
+						{
+							"name": "Add New Member To Group",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"memberUsername\": \"musageorge72\",\r\n\"memberCategory\": \"Student\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475/add_new_member",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"groups",
+										"5ee6c3d22f837f1e2c39c475",
+										"add_new_member"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "998"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jun 2020 02:46:58 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592192741"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "598"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"256-y9JWnct/gJNCqejSJfreeIXlppg\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Successfully Updated Group\",\n    \"results\": 1,\n    \"data\": {\n        \"admin\": {\n            \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n            \"username\": \"wasiuedet9\",\n            \"category\": \"Student\"\n        },\n        \"_id\": \"5ee6c3d22f837f1e2c39c475\",\n        \"name\": \"Mathematics Research Assignment\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"members\": [\n            {\n                \"_id\": \"5ee6c3d22f837f1e2c39c476\",\n                \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"memberUsername\": \"wasiuedet9\",\n                \"memberCategory\": \"Student\"\n            },\n            {\n                \"_id\": \"5ee6e1236923fa1daceae87f\",\n                \"memberId\": \"5ed2bbf7ca1dbc1d6c009636\",\n                \"memberUsername\": \"musageorge72\",\n                \"memberCategory\": \"Student\"\n            }\n        ],\n        \"createdAt\": \"2020-06-15T00:41:54.136Z\",\n        \"__v\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Member From Group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475/remove_member?memberUsername=musageorge72&memberCategory=Student",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups",
+								"5ee6c3d22f837f1e2c39c475",
+								"remove_member"
+							],
+							"query": [
+								{
+									"key": "memberUsername",
+									"value": "musageorge72"
+								},
+								{
+									"key": "memberCategory",
+									"value": "Student"
+								}
+							]
+						},
+						"description": "Use this endpoint to delete one of your group members."
+					},
+					"response": [
+						{
+							"name": "Delete Member From Group",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475/remove_member?memberUsername=musageorge72&memberCategory=Student",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"groups",
+										"5ee6c3d22f837f1e2c39c475",
+										"remove_member"
+									],
+									"query": [
+										{
+											"key": "memberUsername",
+											"value": "musageorge72"
+										},
+										{
+											"key": "memberCategory",
+											"value": "Student"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jun 2020 14:43:48 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592235820"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "467"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1d3-1qA5KMZTdeni88Q44rJLs5VVLFU\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"Member Removed Successfully\",\n    \"results\": 1,\n    \"data\": {\n        \"admin\": {\n            \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n            \"username\": \"wasiuedet9\",\n            \"category\": \"Student\"\n        },\n        \"_id\": \"5ee6c3d22f837f1e2c39c475\",\n        \"name\": \"Mathematics Research Assignment\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"members\": [\n            {\n                \"_id\": \"5ee6c3d22f837f1e2c39c476\",\n                \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"memberUsername\": \"wasiuedet9\",\n                \"memberCategory\": \"Student\"\n            }\n        ],\n        \"createdAt\": \"2020-06-15T00:41:54.136Z\",\n        \"__v\": 2\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Remove Me From Group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475/remove_myself",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups",
+								"5ee6c3d22f837f1e2c39c475",
+								"remove_myself"
+							],
+							"query": [
+								{
+									"key": "memberUsername",
+									"value": "musageorge72",
+									"disabled": true
+								},
+								{
+									"key": "memberCategory",
+									"value": "Student",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Members of a group can use this endpoint to remove themselves from the group."
+					},
+					"response": [
+						{
+							"name": "Remove Me From Group",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475/remove_myself",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"schools",
+										"5ecb08dfd2595416f0dc9977",
+										"groups",
+										"5ee6c3d22f837f1e2c39c475",
+										"remove_myself"
+									],
+									"query": [
+										{
+											"key": "memberUsername",
+											"value": "musageorge72",
+											"disabled": true
+										},
+										{
+											"key": "memberCategory",
+											"value": "Student",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-DNS-Prefetch-Control",
+									"value": "off"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "SAMEORIGIN"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=15552000; includeSubDomains"
+								},
+								{
+									"key": "X-Download-Options",
+									"value": "noopen"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "1000"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "999"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 15 Jun 2020 14:54:37 GMT"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1592236457"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "481"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1e1-h59Y2Ci+q6q3MSm60OGU1JEY26I\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"success\",\n    \"message\": \"You are no longer a member of this group.\",\n    \"results\": 1,\n    \"data\": {\n        \"admin\": {\n            \"id\": \"5ed2bbf7ca1dbc1d6c009635\",\n            \"username\": \"wasiuedet9\",\n            \"category\": \"Student\"\n        },\n        \"_id\": \"5ee6c3d22f837f1e2c39c475\",\n        \"name\": \"Mathematics Research Assignment\",\n        \"school\": \"5ecb08dfd2595416f0dc9977\",\n        \"members\": [\n            {\n                \"_id\": \"5ee6c3d22f837f1e2c39c476\",\n                \"memberId\": \"5ed2bbf7ca1dbc1d6c009635\",\n                \"memberUsername\": \"wasiuedet9\",\n                \"memberCategory\": \"Student\"\n            }\n        ],\n        \"createdAt\": \"2020-06-15T00:41:54.136Z\",\n        \"__v\": 4\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete Group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/api/v1/schools/5ecb08dfd2595416f0dc9977/groups/5ee6c3d22f837f1e2c39c475/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"schools",
+								"5ecb08dfd2595416f0dc9977",
+								"groups",
+								"5ee6c3d22f837f1e2c39c475",
+								""
+							]
+						},
+						"description": "A group administrator can use this endpoint to delete their group."
+					},
+					"response": []
+				}
+			],
+			"description": "Students and teachers should be able to create groups for things like group assignments, group projects and other things of a collaborative nature. These groups can then form the basis of group chats.\r\n\r\nEssentially, before a group chat can happen, the group must first exist.",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
